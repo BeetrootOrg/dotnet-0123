@@ -1,0 +1,8 @@
+﻿namespace ConsoleApp.Tests
+{
+    public class TestSerializeModel
+    {
+        public int Value1 { get; init; }
+        public string Value2 { get; init; }
+    }
+}
