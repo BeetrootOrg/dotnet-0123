@@ -1,0 +1,8 @@
+dotnet --version
+
+dotnet new sln
+dotnet new console
+dotnet sln add TestRepository12384.csproj
+dotnet new gitignore
+
+dotnet run
