@@ -130,3 +130,7 @@ Console.WriteLine($"Truncate={Math.Truncate(42.0)}");
 Console.WriteLine($"Truncate={Math.Truncate(-42.2)}");
 Console.WriteLine($"Truncate={Math.Truncate(-42.6)}");
 
+Console.WriteLine($"Pow={Math.Pow(9,4)}");
+Console.WriteLine($"9^4={(9^4)}"); //NOT POW
+Console.WriteLine($"Pow={Math.Pow(1.3,2.5)}");
+
