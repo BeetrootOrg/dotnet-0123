@@ -5,7 +5,7 @@ int c = a + b;
 Console.WriteLine(a + b);
 Console.WriteLine(c);
 
-a += b;
+a += b; // the same as a = a + b
 Console.WriteLine(a);
 
 Console.WriteLine(6 / 3);
@@ -160,3 +160,52 @@ string s1 = "Hello, Dima";
 Console.WriteLine(s1);
 
 Console.WriteLine($"3 * PI = {3 * Math.PI}");
+
+// 0 -> 0
+// 1 -> 1
+// 2 -> 10
+// 3 -> 11
+// 4 -> 100
+// 5 -> 101
+// 6 -> 110
+// 7 -> 111
+// 8 -> 1000
+// ...
+// 255 -> 11111111
+// 256 -> 100000000
+
+// 6&4 -> 110&100=100 -> 4
+Console.WriteLine("BYTE AND");
+Console.WriteLine($"6&4={6 & 4}");
+
+// 6&5 -> 110&101=100 -> 4
+Console.WriteLine($"6&5={6 & 5}");
+
+// 8&4 -> 1000&0100=0000 -> 0
+Console.WriteLine($"8&4={8 & 4}");
+
+// 6|4 -> 110|100=110 -> 6
+Console.WriteLine("BYTE OR");
+Console.WriteLine($"6|4={6 | 4}");
+
+// 6|5 -> 110|101=111 -> 7
+Console.WriteLine($"6|5={6 | 5}");
+
+// 8|4 -> 1000|0100=1100 -> 12
+Console.WriteLine($"8|4={8 | 4}");
+
+// 6^4 -> 110^100=010 -> 2
+Console.WriteLine("BYTE XOR");
+Console.WriteLine($"6^4={6 ^ 4}");
+
+// 6^5 -> 110^101=011 -> 3
+Console.WriteLine($"6^5={6 ^ 5}");
+
+// 8^4 -> 1000^0100=1100 -> 12
+Console.WriteLine($"8^4={8 ^ 4}");
+
+// 3<<2 -> 0011<<2 -> 1100 -> 12
+Console.WriteLine($"3<<2={3 << 2}");
+
+// 3>>1 -> 0011>>1 -> 1 -> 1
+Console.WriteLine($"3>>1={3 >> 1}");
