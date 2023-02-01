@@ -66,6 +66,10 @@ Console.WriteLine($"false and true = {false || true}");
 Console.WriteLine($"true and false = {true || false}");
 Console.WriteLine($"false and false = {false || false}");
 
+Console.WriteLine("NOT");
+Console.WriteLine($"NOT true = {!true}");
+Console.WriteLine($"NOT false = {!false}");
+
 Console.WriteLine("COMPARISON");
 int i1 = 42;
 int i2 = 42;
