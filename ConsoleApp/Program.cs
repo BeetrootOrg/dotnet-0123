@@ -74,3 +74,13 @@ Console.WriteLine($"i1 == i2 = {i1 == i2}");
 Console.WriteLine($"i1 == i3 = {i1 == i3}");
 Console.WriteLine($"i1 != i2 = {i1 != i2}");
 Console.WriteLine($"i1 != i3 = {i1 != i3}");
+
+Console.WriteLine($"i1 > i2 = {i1 > i2}");
+Console.WriteLine($"i1 >= i2 = {i1 >= i2}");
+Console.WriteLine($"i1 < i2 = {i1 < i2}");
+Console.WriteLine($"i1 <= i2 = {i1 <= i2}");
+
+Console.WriteLine($"i1 > i3 = {i1 > i3}");
+Console.WriteLine($"i1 >= i3 = {i1 >= i3}");
+Console.WriteLine($"i1 < i3 = {i1 < i3}");
+Console.WriteLine($"i1 <= i3 = {i1 <= i3}");
