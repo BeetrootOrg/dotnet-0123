@@ -100,3 +100,33 @@ Console.WriteLine("INT/FLOAT");
 float n3=7.0F;
 int n4=6;
 Console.WriteLine(n3/n4);
+
+Console.WriteLine("INCREMERNT/DECREMENT");
+int inc=42;
+Console.WriteLine($"++i={++inc}");
+Console.WriteLine($"i++={inc++}");
+Console.WriteLine($"i={inc}");
+Console.WriteLine($"--i={--inc}");
+Console.WriteLine($"i--={inc--}");
+Console.WriteLine($"i={inc}");
+
+Console.WriteLine("MATH");
+Console.WriteLine($"ABS={Math.Abs(-51)}");
+Console.WriteLine($"ABS={Math.Abs(51)}");
+Console.WriteLine($"ABS={Math.Abs(-42.2)}");
+Console.WriteLine($"Round={Math.Round(42.0)}");
+Console.WriteLine($"Round={Math.Round(42.2)}");
+Console.WriteLine($"Round={Math.Round(42.6)}");
+
+Console.WriteLine($"Ceiling={Math.Ceiling(42.0)}");
+Console.WriteLine($"Ceiling={Math.Ceiling(42.2)}");
+Console.WriteLine($"Ceiling={Math.Ceiling(42.6)}");
+
+Console.WriteLine($"Floor={Math.Floor(42.0)}");
+Console.WriteLine($"Floor={Math.Floor(42.2)}");
+Console.WriteLine($"Floor={Math.Floor(42.6)}");
+
+Console.WriteLine($"Truncate={Math.Truncate(42.0)}");
+Console.WriteLine($"Truncate={Math.Truncate(-42.2)}");
+Console.WriteLine($"Truncate={Math.Truncate(-42.6)}");
+
