@@ -107,3 +107,41 @@ Console.WriteLine($"inc = {inc}");
 Console.WriteLine($"--inc = {--inc}");
 Console.WriteLine($"inc-- = {inc--}");
 Console.WriteLine($"inc = {inc}");
+
+Console.WriteLine("MATH");
+Console.WriteLine($"ABS(51) = {Math.Abs(51)}");
+Console.WriteLine($"ABS(-42.2) = {Math.Abs(-42.2)}");
+
+Console.WriteLine($"ROUND(42) = {Math.Round(42.0)}");
+Console.WriteLine($"ROUND(42.2) = {Math.Round(42.2)}");
+Console.WriteLine($"ROUND(42.6) = {Math.Round(42.6)}");
+
+Console.WriteLine($"CEILING(42) = {Math.Ceiling(42.0)}");
+Console.WriteLine($"CEILING(42.2) = {Math.Ceiling(42.2)}");
+Console.WriteLine($"CEILING(42.6) = {Math.Ceiling(42.6)}");
+
+Console.WriteLine($"FLOOR(42) = {Math.Floor(42.0)}");
+Console.WriteLine($"FLOOR(42.2) = {Math.Floor(42.2)}");
+Console.WriteLine($"FLOOR(42.6) = {Math.Floor(42.6)}");
+
+Console.WriteLine($"TRUNCATE(42) = {Math.Truncate(42.0)}");
+Console.WriteLine($"TRUNCATE(42.2) = {Math.Truncate(42.2)}");
+Console.WriteLine($"TRUNCATE(42.6) = {Math.Truncate(42.6)}");
+
+Console.WriteLine("NEGATIVE NUMBERS");
+
+Console.WriteLine($"ROUND(-42) = {Math.Round(-42.0)}");
+Console.WriteLine($"ROUND(-42.2) = {Math.Round(-42.2)}");
+Console.WriteLine($"ROUND(-42.6) = {Math.Round(-42.6)}");
+
+Console.WriteLine($"CEILING(-42) = {Math.Ceiling(-42.0)}");
+Console.WriteLine($"CEILING(-42.2) = {Math.Ceiling(-42.2)}");
+Console.WriteLine($"CEILING(-42.6) = {Math.Ceiling(-42.6)}");
+
+Console.WriteLine($"FLOOR(-42) = {Math.Floor(-42.0)}");
+Console.WriteLine($"FLOOR(-42.2) = {Math.Floor(-42.2)}");
+Console.WriteLine($"FLOOR(-42.6) = {Math.Floor(-42.6)}");
+
+Console.WriteLine($"TRUNCATE(-42) = {Math.Truncate(-42.0)}");
+Console.WriteLine($"TRUNCATE(-42.2) = {Math.Truncate(-42.2)}");
+Console.WriteLine($"TRUNCATE(-42.6) = {Math.Truncate(-42.6)}");
