@@ -209,3 +209,9 @@ Console.WriteLine($"3<<2={3 << 2}");
 
 // 3>>1 -> 0011>>1 -> 1 -> 1
 Console.WriteLine($"3>>1={3 >> 1}");
+
+const int c1 = 5;
+Console.WriteLine(c1);
+
+// ERROR BELOW
+// c1 = 6; 
