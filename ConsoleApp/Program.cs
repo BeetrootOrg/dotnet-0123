@@ -147,5 +147,11 @@ Console.WriteLine($"TRUNCATE(-42.2) = {Math.Truncate(-42.2)}");
 Console.WriteLine($"TRUNCATE(-42.6) = {Math.Truncate(-42.6)}");
 
 Console.WriteLine($"POW(9, 4) = {Math.Pow(9, 4)}");
+Console.WriteLine($"POW(i1, i2) = {Math.Pow(i1, i2)}");
 Console.WriteLine($"9^4 = {9 ^ 4}"); // NOT THE SAME AS POW!
 Console.WriteLine($"POW(1.3, 2.5) = {Math.Pow(1.3, 2.5)}");
+
+// x^2+3*x+5
+int x = 5;
+Console.WriteLine($"x^2+3*x+5={(x * x) + (3 * x) + 5}"); // PREFERABLE IF POSSIBLE
+Console.WriteLine($"x^2+3*x+5={Math.Pow(x, 2) + (3 * x) + 5}");
