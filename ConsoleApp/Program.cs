@@ -155,3 +155,8 @@ Console.WriteLine($"POW(1.3, 2.5) = {Math.Pow(1.3, 2.5)}");
 int x = 5;
 Console.WriteLine($"x^2+3*x+5={(x * x) + (3 * x) + 5}"); // PREFERABLE IF POSSIBLE
 Console.WriteLine($"x^2+3*x+5={Math.Pow(x, 2) + (3 * x) + 5}");
+
+string s1 = "Hello, Dima";
+Console.WriteLine(s1);
+
+Console.WriteLine($"3 * PI = {3 * Math.PI}");
