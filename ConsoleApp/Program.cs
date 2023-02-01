@@ -98,3 +98,12 @@ Console.WriteLine("INT / FLOAT");
 float n3 = 6.0F;
 int n4 = 7;
 Console.WriteLine(n3 / n4);
+
+Console.WriteLine("INCREMENT/DECREMENT");
+int inc = 42;
+Console.WriteLine($"++inc = {++inc}");
+Console.WriteLine($"inc++ = {inc++}");
+Console.WriteLine($"inc = {inc}");
+Console.WriteLine($"--inc = {--inc}");
+Console.WriteLine($"inc-- = {inc--}");
+Console.WriteLine($"inc = {inc}");
