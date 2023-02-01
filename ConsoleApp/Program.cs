@@ -145,3 +145,7 @@ Console.WriteLine($"FLOOR(-42.6) = {Math.Floor(-42.6)}");
 Console.WriteLine($"TRUNCATE(-42) = {Math.Truncate(-42.0)}");
 Console.WriteLine($"TRUNCATE(-42.2) = {Math.Truncate(-42.2)}");
 Console.WriteLine($"TRUNCATE(-42.6) = {Math.Truncate(-42.6)}");
+
+Console.WriteLine($"POW(9, 4) = {Math.Pow(9, 4)}");
+Console.WriteLine($"9^4 = {9 ^ 4}"); // NOT THE SAME AS POW!
+Console.WriteLine($"POW(1.3, 2.5) = {Math.Pow(1.3, 2.5)}");
