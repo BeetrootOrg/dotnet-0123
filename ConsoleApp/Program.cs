@@ -5,6 +5,8 @@ int c=a+b;
 
 Console.WriteLine(a+b);
 Console.WriteLine(c);
+a=a+b;
+Console.WriteLine(a);
 
 Console.WriteLine(@"RESULT OF /");
 Console.WriteLine(6/3);
@@ -44,3 +46,43 @@ Console.WriteLine(6M/3M);
 Console.WriteLine(7M/3M);
 Console.WriteLine(8M/3M);
 Console.WriteLine(9M/3M);
+
+bool b1=true;
+bool b2=false;
+
+Console.WriteLine(b1);
+Console.WriteLine(b2);
+
+Console.WriteLine("AND");
+Console.WriteLine(b1 && b2);
+Console.WriteLine($"true and true {true && true}");
+Console.WriteLine($"false and true {false && true}");
+Console.WriteLine($"true and false {true && false}");
+Console.WriteLine($"false and false {false && false}");
+
+Console.WriteLine("OR");
+Console.WriteLine(b1 || b2);
+Console.WriteLine($"true or true {true || true}");
+Console.WriteLine($"false or true {false || true}");
+Console.WriteLine($"true or false {true || false}");
+Console.WriteLine($"false or false {false || false}");
+
+Console.WriteLine("COMPARISONE");
+int l1=42;
+int l2=42;
+int l3=43;
+
+Console.WriteLine($"l1=l2 {l1==l2}");
+Console.WriteLine($"l1=l3 {l1==l3}");
+Console.WriteLine($"l1!=l2 {l1!=l2}");
+Console.WriteLine($"l1!=l3 {l1!=l3}");
+
+Console.WriteLine($"l1>=l2 {l1>=l2}");
+Console.WriteLine($"l1<=l2 {l1<=l2}");
+Console.WriteLine($"l1>l2 {l1>l2}");
+Console.WriteLine($"l1<l2 {l1<l2}");
+
+Console.WriteLine($"l1>=l3 {l1>=l3}");
+Console.WriteLine($"l1<=l3 {l1<=l3}");
+Console.WriteLine($"l1>l3 {l1>l3}");
+Console.WriteLine($"l1<l3 {l1<l3}");
