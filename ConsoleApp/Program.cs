@@ -86,3 +86,17 @@ Console.WriteLine($"l1>=l3 {l1>=l3}");
 Console.WriteLine($"l1<=l3 {l1<=l3}");
 Console.WriteLine($"l1>l3 {l1>l3}");
 Console.WriteLine($"l1<l3 {l1<l3}");
+
+Console.WriteLine("COMBINATION");
+Console.WriteLine($"b1 || b2 || (l1>=l3 && l2<=l1)={b1 || b2 || (l1>=l3 && l2<=l1)}");
+
+decimal n1=7.0M;
+float n2=6.0F;
+Console.WriteLine("DECIMAL/FLOAT");
+Console.WriteLine(6.0M/(decimal)7.0F);
+Console.WriteLine((float)n1/n2);
+
+Console.WriteLine("INT/FLOAT");
+float n3=7.0F;
+int n4=6;
+Console.WriteLine(n3/n4);
