@@ -84,3 +84,17 @@ Console.WriteLine($"i1 > i3 = {i1 > i3}");
 Console.WriteLine($"i1 >= i3 = {i1 >= i3}");
 Console.WriteLine($"i1 < i3 = {i1 < i3}");
 Console.WriteLine($"i1 <= i3 = {i1 <= i3}");
+
+Console.WriteLine("COMBINATION");
+Console.WriteLine($"b1 || b2 || (i1 >= i3 && i2 <= i1) = {b1 || b2 || (i1 >= i3 && i2 <= i1)}");
+
+Console.WriteLine("DECIMAL / FLOAT");
+decimal n1 = 7.0M;
+float n2 = 6.0F;
+Console.WriteLine(n1 / (decimal)n2);
+Console.WriteLine((float)n1 / n2);
+
+Console.WriteLine("INT / FLOAT");
+float n3 = 6.0F;
+int n4 = 7;
+Console.WriteLine(n3 / n4);
