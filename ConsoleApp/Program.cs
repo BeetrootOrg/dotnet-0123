@@ -1,25 +1,22 @@
-﻿int a = 42;
-int b = 41;
-int c = a + b;
-Console.WriteLine(a + b);
-Console.WriteLine(c);
+﻿String s1 = "Hello world!";
+Console.WriteLine(s1);
+double d = 12.2;
+double d1 = 12.2;
+Console.WriteLine(d);
+decimal dl = 2.0M;
+Console.WriteLine(dl);
+float f = 12.2F;
+Console.WriteLine(f);
+Console.WriteLine($"d == f = {d == f}");
+Console.WriteLine($"d != f = {d != f}");
+Console.WriteLine($"d ==d1 = {d ==d1}");
 
-Console.WriteLine(6 / 3);
-Console.WriteLine(7 / 3);
-Console.WriteLine(8 / 3);
-Console.WriteLine(9 / 3);
 
-Console.WriteLine("Result of %");
-Console.WriteLine(6 % 3);
-Console.WriteLine(7 % 3);
-Console.WriteLine(8 % 3);
-Console.WriteLine(9 % 3);
-
-Console.WriteLine("COMPARISON");
-int i1 = 42;
-int i2 = 42;
-int i3 = 43;
-Console.WriteLine($"i1 == i2 = {i1 == i2}");
-Console.WriteLine($"i1 == i3 = {i1 == i3}");
-Console.WriteLine($"i1 != i2 = {i1 != i2}");
-Console.WriteLine($"i1 != i3 = {i1 != i3}");
+int x = 2;
+Console.WriteLine($"-6*x^3+5*x^2-10*x+15 = {-6 * Math.Pow(x, 3) + 5 * (x * x) - (10 * x) + 15}");
+Console.WriteLine($"abs(x)*sin(x) = {Math.Abs(x) * Math.Sin(x)}");   
+Console.WriteLine($"2*pi*x = {2 * Math.PI * x}");
+double x1 = 19.9;
+double y1 = 7.8;
+Console.WriteLine($"max(x, y) = {Math.Max(x1, y1)}");
+ 
