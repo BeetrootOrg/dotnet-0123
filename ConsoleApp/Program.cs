@@ -27,8 +27,8 @@ Console.WriteLine($"x={x} y={y}.  max(x, y)={Math.Max(x,(int)y)}");
 
 Console.WriteLine("Extra");
 DateTime today=DateTime.Now;
-int newyear=new DateTime(2023,12,32).DayOfYear;
-int x1=newyear-y1;
+int newyear=(new DateTime(2023,12,31)).DayOfYear;
 int y1=today.DayOfYear;
+int x1=newyear-y1;
 Console.WriteLine($"days left to New Year {x1}");
 Console.WriteLine($"days passed from New Year {y1}");
