@@ -21,3 +21,10 @@ System.Console.WriteLine($"abs(x)*sin(x)={Math.Abs(x)*Math.Sin(x)}");
 System.Console.WriteLine($"2*pi*x={2*Math.PI*x}");
 System.Console.WriteLine($"max(x, y)={Math.Max(x,y)}");
 
+System.Console.WriteLine("Datetime task");
+DateTime DayToday = DateTime.Today;
+DateTime NewYear2023 = new DateTime(2023, 1, 1, 0, 0, 0);
+DateTime NewYear2024 = new DateTime(2024, 1, 1, 0, 0, 0);
+System.Console.WriteLine($"{(NewYear2024-DayToday).Days} days left to New Year");
+System.Console.WriteLine($"{(DayToday-NewYear2023).Days} days passed from New Year");
+
