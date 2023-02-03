@@ -64,3 +64,22 @@ for (int i = 1; i <= 10; ++i)
 }
 
 Console.WriteLine($"Mul from 1 to 10 is equal to {mul}");
+
+mul = 1;
+int j = 1;
+while (j <= 10)
+{
+    mul *= j++;
+}
+
+Console.WriteLine($"Mul from 1 to 10 is equal to {mul}");
+
+// for (;;)
+// {
+//     Console.WriteLine("INFINITE LOOP");
+// }
+
+// while (true)
+// {
+//     Console.WriteLine("INFINITE LOOP");
+// }
