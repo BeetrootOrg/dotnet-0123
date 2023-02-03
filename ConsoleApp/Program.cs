@@ -20,3 +20,14 @@ double x1 = 19.9;
 double y1 = 7.8;
 Console.WriteLine($"max(x, y) = {Math.Max(x1, y1)}");
  
+ Console.WriteLine("Extra task");
+ DateTime Today =  DateTime.Now;
+ DateTime DateNewYear = new DateTime(2023, 31, 12);
+ DateTime DateYear = new DateTime(2022, 31, 12);
+ TimeSpan  DaysLeft =  DateNewYear - Today ;
+ TimeSpan  DaysPassed = Today - DateYear;
+ Console.WriteLine("{DaysLeft}");
+ Console.WriteLine("{DaysPassed}");
+
+
+
