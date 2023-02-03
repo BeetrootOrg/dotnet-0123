@@ -126,3 +126,16 @@ for (int i = 0; i <= 42; i++)
 }
 
 Console.WriteLine($"Sum from 0 to 42 is {sum}");
+
+sum = 0;
+for (int i = 0; i <= 42; i++)
+{
+    if (i % 2 == 1)
+    {
+        continue;
+    }
+
+    sum += i;
+}
+
+Console.WriteLine($"Sum of even from 0 to 42 is {sum}");
