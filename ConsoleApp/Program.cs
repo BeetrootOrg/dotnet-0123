@@ -26,8 +26,8 @@ Console.WriteLine($"max(x, y) = {Math.Max(x1, y1)}");
  DateTime DateYear = new DateTime(2022, 31, 12);
  TimeSpan  DaysLeft =  DateNewYear - Today ;
  TimeSpan  DaysPassed = Today - DateYear;
- Console.WriteLine("{DaysLeft}");
- Console.WriteLine("{DaysPassed}");
+ Console.WriteLine($"days left to New Year = {DaysLeft}");
+ Console.WriteLine($"days passed from New Year = {DaysPassed}");
 
 
 
