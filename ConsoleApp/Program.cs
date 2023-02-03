@@ -218,3 +218,15 @@ Console.WriteLine(dateTime4.TimeOfDay);
 
 Console.WriteLine("DATETIME COMPARISON");
 Console.WriteLine(dateTime4 > dateTime2);
+
+DateOnly dateOnly1 = new DateOnly();
+DateOnly dateOnly2 = new DateOnly(2023, 2, 3);
+
+Console.WriteLine(dateOnly1);
+Console.WriteLine(dateOnly2);
+
+TimeOnly timeOnly1 = new TimeOnly();
+TimeOnly timeOnly2 = new TimeOnly(12, 13, 15, 152, 467);
+
+Console.WriteLine(timeOnly1);
+Console.WriteLine(timeOnly2);
