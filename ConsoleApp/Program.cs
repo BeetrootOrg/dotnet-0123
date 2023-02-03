@@ -208,3 +208,10 @@ Console.WriteLine(timeSpan1);
 Console.WriteLine(timeSpan2);
 
 Console.WriteLine(dateTime4 + timeSpan2);
+
+Console.WriteLine(dateTime4.Month);
+Console.WriteLine(dateTime4.Day);
+Console.WriteLine(dateTime4.Date);
+Console.WriteLine(dateTime4.DayOfWeek);
+Console.WriteLine(dateTime4.DayOfYear);
+Console.WriteLine(dateTime4.TimeOfDay);
