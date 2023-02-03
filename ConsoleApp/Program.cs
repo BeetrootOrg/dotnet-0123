@@ -149,3 +149,17 @@ for (int i = 0; i < 10; i++)
 
     Console.WriteLine("NEW EXECUTION");
 }
+
+Console.WriteLine("PLEASE ENTER THE VALUE:");
+string input = Console.ReadLine();
+Console.WriteLine($"You've entered '{input}'");
+
+Console.WriteLine("Please enter number #1:");
+input = Console.ReadLine();
+int num1 = int.Parse(input);
+
+Console.WriteLine("Please enter number #2:");
+input = Console.ReadLine();
+int num2 = int.Parse(input);
+
+Console.WriteLine($"Sum of 2 numbers is {num1 + num2}");
