@@ -22,15 +22,15 @@ Console.WriteLine("next operation");
 Console.WriteLine("SWITCH/CASE");
 switch (name)
 {
-case "Dima":
-    Console.WriteLine("Hi, Dima");
-    break;
-case "dima":
-    Console.WriteLine("Hi, dima");
-    break;
-default:
-    Console.WriteLine("Hi, not Dima");
-    break;
+    case "Dima":
+        Console.WriteLine("Hi, Dima");
+        break;
+    case "dima":
+        Console.WriteLine("Hi, dima");
+        break;
+    default:
+        Console.WriteLine("Hi, not Dima");
+        break;
 }
 
 int a = 10;
@@ -38,9 +38,9 @@ int b = (a == 10 ? 15 : 20); // if (a == 10) { b = 15 } else { b = 20 }
 Console.WriteLine(b);
 
 // POSSIBLE BUT NOT PREFERABLE
-if (a == 10) 
-    b = 15; 
-else 
+if (a == 10)
+    b = 15;
+else
     b = 20;
 
 Console.WriteLine("NUMBERS FROM 0 TO 9");
@@ -89,7 +89,7 @@ j = 1;
 do
 {
     mul *= j++;
-} while(j <= 10);
+} while (j <= 10);
 
 Console.WriteLine($"Mul from 1 to 10 is equal to {mul}");
 
@@ -101,7 +101,7 @@ while (false)
 do
 {
     Console.WriteLine("ONLY ONCE");
-} while(false);
+} while (false);
 
 sum = 0;
 for (int i = 0; i <= 42; i += 2)
