@@ -175,3 +175,8 @@ else
 {
     Console.WriteLine($"You entered shit");
 }
+
+Console.WriteLine("Please enter number #4 (decimal):");
+input = Console.ReadLine();
+decimal d1 = decimal.Parse(input);
+Console.WriteLine($"You entered number {d1}");
