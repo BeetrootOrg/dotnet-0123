@@ -139,3 +139,13 @@ for (int i = 0; i <= 42; i++)
 }
 
 Console.WriteLine($"Sum of even from 0 to 42 is {sum}");
+
+for (int i = 0; i < 10; i++)
+{
+    if (i == 5)
+    {
+        break;
+    }
+
+    Console.WriteLine("NEW EXECUTION");
+}
