@@ -151,21 +151,22 @@ for (int i = 0; i < 10; i++)
 }
 
 Console.WriteLine("PLEASE ENTER THE VALUE:");
-string input = Console.ReadLine();
+string input = "42";
+// string input = Console.ReadLine();
 Console.WriteLine($"You've entered '{input}'");
 
 Console.WriteLine("Please enter number #1:");
-input = Console.ReadLine();
+// input = Console.ReadLine();
 int num1 = int.Parse(input);
 
 Console.WriteLine("Please enter number #2:");
-input = Console.ReadLine();
+// input = Console.ReadLine();
 int num2 = int.Parse(input);
 
 Console.WriteLine($"Sum of 2 numbers is {num1 + num2}");
 
 Console.WriteLine("Please enter number #3:");
-input = Console.ReadLine();
+// input = Console.ReadLine();
 bool success = int.TryParse(input, out int num3);
 if (success)
 {
@@ -177,11 +178,33 @@ else
 }
 
 Console.WriteLine("Please enter number #4 (decimal):");
-input = Console.ReadLine();
+// input = Console.ReadLine();
 decimal d1 = decimal.Parse(input);
 Console.WriteLine($"You entered number {d1}");
 
 Console.WriteLine("Please enter number #5:");
-input = Console.ReadLine();
+// input = Console.ReadLine();
 int num5 = Convert.ToInt32(input);
 Console.WriteLine($"You entered number {num5}");
+
+DateTime dateTime1 = new DateTime();
+Console.WriteLine(dateTime1);
+
+DateTime dateTime2 = new DateTime(2023, 2, 2);
+DateTime dateTime3 = new DateTime(2023, 2, 2, 20, 23, 00);
+
+Console.WriteLine(dateTime2);
+Console.WriteLine(dateTime3);
+
+DateTime dateTime4 = DateTime.Now;
+Console.WriteLine(dateTime4);
+
+Console.WriteLine(dateTime4 - dateTime2);
+
+TimeSpan timeSpan1 = new TimeSpan();
+TimeSpan timeSpan2 = new TimeSpan(10, 5, 15);
+
+Console.WriteLine(timeSpan1);
+Console.WriteLine(timeSpan2);
+
+Console.WriteLine(dateTime4 + timeSpan2);
