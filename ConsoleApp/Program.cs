@@ -32,3 +32,13 @@ default:
     Console.WriteLine("Hi, not Dima");
     break;
 }
+
+int a = 10;
+int b = (a == 10 ? 15 : 20); // if (a == 10) { b = 15 } else { b = 20 }
+Console.WriteLine(b);
+
+// POSSIBLE BUT NOT PREFERABLE
+if (a == 10) 
+    b = 15; 
+else 
+    b = 20;
