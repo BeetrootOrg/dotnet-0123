@@ -56,3 +56,11 @@ for (int i = 0; i <= 10; ++i)
 }
 
 Console.WriteLine($"Sum from 0 to 10 is equal to {sum}");
+
+var mul = 1;
+for (int i = 1; i <= 10; ++i)
+{
+    mul *= i; // 1 * 1 * 2 * 3 ... * 8 * 9 * 10
+}
+
+Console.WriteLine($"Mul from 1 to 10 is equal to {mul}");
