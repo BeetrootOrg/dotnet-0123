@@ -83,3 +83,46 @@ Console.WriteLine($"Mul from 1 to 10 is equal to {mul}");
 // {
 //     Console.WriteLine("INFINITE LOOP");
 // }
+
+mul = 1;
+j = 1;
+do
+{
+    mul *= j++;
+} while(j <= 10);
+
+Console.WriteLine($"Mul from 1 to 10 is equal to {mul}");
+
+while (false)
+{
+    Console.WriteLine("NEVER INSIDE");
+}
+
+do
+{
+    Console.WriteLine("ONLY ONCE");
+} while(false);
+
+sum = 0;
+for (int i = 0; i <= 42; i += 2)
+{
+    sum += i;
+}
+
+Console.WriteLine($"Sum of even from 0 to 42 is {sum}");
+
+sum = 0;
+for (int i = 1; i <= 42; i += 2)
+{
+    sum += i;
+}
+
+Console.WriteLine($"Sum of odd from 0 to 42 is {sum}");
+
+sum = 0;
+for (int i = 0; i <= 42; i++)
+{
+    sum += i;
+}
+
+Console.WriteLine($"Sum from 0 to 42 is {sum}");
