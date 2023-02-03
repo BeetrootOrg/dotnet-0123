@@ -163,3 +163,15 @@ input = Console.ReadLine();
 int num2 = int.Parse(input);
 
 Console.WriteLine($"Sum of 2 numbers is {num1 + num2}");
+
+Console.WriteLine("Please enter number #3:");
+input = Console.ReadLine();
+bool success = int.TryParse(input, out int num3);
+if (success)
+{
+    Console.WriteLine($"You entered number {num3}");
+}
+else
+{
+    Console.WriteLine($"You entered shit");
+}
