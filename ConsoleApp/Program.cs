@@ -215,3 +215,6 @@ Console.WriteLine(dateTime4.Date);
 Console.WriteLine(dateTime4.DayOfWeek);
 Console.WriteLine(dateTime4.DayOfYear);
 Console.WriteLine(dateTime4.TimeOfDay);
+
+Console.WriteLine("DATETIME COMPARISON");
+Console.WriteLine(dateTime4 > dateTime2);
