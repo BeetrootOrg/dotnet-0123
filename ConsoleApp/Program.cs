@@ -42,3 +42,9 @@ if (a == 10)
     b = 15; 
 else 
     b = 20;
+
+Console.WriteLine("NUMBERS FROM 0 TO 9");
+for (int i = 0; i < 10; ++i)
+{
+    Console.WriteLine(i);
+}
