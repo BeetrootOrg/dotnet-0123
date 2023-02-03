@@ -180,3 +180,8 @@ Console.WriteLine("Please enter number #4 (decimal):");
 input = Console.ReadLine();
 decimal d1 = decimal.Parse(input);
 Console.WriteLine($"You entered number {d1}");
+
+Console.WriteLine("Please enter number #5:");
+input = Console.ReadLine();
+int num5 = Convert.ToInt32(input);
+Console.WriteLine($"You entered number {num5}");
