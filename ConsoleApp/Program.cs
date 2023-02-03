@@ -99,7 +99,7 @@ System.Console.WriteLine("enter b:");
 input = Console.ReadLine();
 int num2 = int.Parse(input);
 System.Console.WriteLine(num1+num2);
-*/
+
 
 //convert try parse
  string input = Console.ReadLine();
@@ -118,3 +118,23 @@ System.Console.WriteLine(num1+num2);
  input = Console.ReadLine();
  int num5 = Convert.ToInt32(input);
  System.Console.WriteLine($"enter number {num5}");
+
+*/
+
+ //Datetime
+DateTime dateTime1 = new DateTime();
+System.Console.WriteLine(dateTime1);
+DateTime dateTime2 = new DateTime(2023,2,2);
+DateTime dateTime3 = new DateTime(2023,2,2,20,32,0);
+DateTime dateTime4 = DateTime.Now;
+System.Console.WriteLine(dateTime4-dateTime2);
+TimeSpan timeSpan1 = new TimeSpan();
+TimeSpan timeSpan2 = new TimeSpan(10,5,14);
+System.Console.WriteLine(timeSpan1);
+System.Console.WriteLine(timeSpan2);
+System.Console.WriteLine(dateTime3+timeSpan2);
+System.Console.WriteLine(dateTime4.DayOfWeek);
+System.Console.WriteLine(dateTime4.TimeOfDay);
+System.Console.WriteLine(dateTime4.Month);
+System.Console.WriteLine("datetime comprassion");
+System.Console.WriteLine(dateTime4>dateTime2);
