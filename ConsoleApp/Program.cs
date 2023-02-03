@@ -18,7 +18,7 @@ Console.WriteLine((double)6.0M/(double)7.0F*db);
 Console.WriteLine((float)n1/n2);
 
 int x=30;
-Console.WriteLine($"-6*x^3+5*x^2-10*x+15, where x {x}={Math.Pow(-6*x,3)+5*x*5*x-10*x+15}");
+Console.WriteLine($"-6*x^3+5*x^2-10*x+15, where x {x}={-6*Math.Pow(x,3)+5*x*x-10*x+15}");
 double rad=Math.PI/4;
 Console.WriteLine($"x={rad} abs(x)*sin(x)={Math.Abs(rad)*Math.Sin(rad)}");
 float y=-14;
