@@ -31,7 +31,7 @@ for (int i = 0;i<10;++i){
     Console.WriteLine(i);
 }
 
-System.Console.WriteLine("sum 1..10");
+Console.WriteLine("sum 1..10");
 
 var sum = 0;
 for (int i = 0;i<=10;++i){
@@ -88,17 +88,17 @@ for (int i = 0; i < 10; i++)
     {
         break;
     }
-    System.Console.WriteLine("new execution");
+    Console.WriteLine("new execution");
 }
 
 //convert int.Parse
-/*System.Console.WriteLine("enter a:");
+/*Console.WriteLine("enter a:");
 string input = Console.ReadLine();
 int num1 = int.Parse(input);
-System.Console.WriteLine("enter b:");
+Console.WriteLine("enter b:");
 input = Console.ReadLine();
 int num2 = int.Parse(input);
-System.Console.WriteLine(num1+num2);
+Console.WriteLine(num1+num2);
 
 
 //convert try parse
@@ -106,35 +106,40 @@ System.Console.WriteLine(num1+num2);
  bool success = int.TryParse(input,out int num3);
  if (success)
  {
-    System.Console.WriteLine($"you enter {num3}");
+    Console.WriteLine($"you enter {num3}");
  }
  else
  {
-    System.Console.WriteLine("you enter wrong");
+    Console.WriteLine("you enter wrong");
  }
 
  //convert Convert
 
  input = Console.ReadLine();
  int num5 = Convert.ToInt32(input);
- System.Console.WriteLine($"enter number {num5}");
+ Console.WriteLine($"enter number {num5}");
 
 */
 
  //Datetime
 DateTime dateTime1 = new DateTime();
-System.Console.WriteLine(dateTime1);
+Console.WriteLine(dateTime1);
 DateTime dateTime2 = new DateTime(2023,2,2);
 DateTime dateTime3 = new DateTime(2023,2,2,20,32,0);
 DateTime dateTime4 = DateTime.Now;
-System.Console.WriteLine(dateTime4-dateTime2);
+Console.WriteLine(dateTime4-dateTime2);
 TimeSpan timeSpan1 = new TimeSpan();
 TimeSpan timeSpan2 = new TimeSpan(10,5,14);
-System.Console.WriteLine(timeSpan1);
-System.Console.WriteLine(timeSpan2);
-System.Console.WriteLine(dateTime3+timeSpan2);
-System.Console.WriteLine(dateTime4.DayOfWeek);
-System.Console.WriteLine(dateTime4.TimeOfDay);
-System.Console.WriteLine(dateTime4.Month);
-System.Console.WriteLine("datetime comprassion");
-System.Console.WriteLine(dateTime4>dateTime2);
+Console.WriteLine(timeSpan1);
+Console.WriteLine(timeSpan2);
+Console.WriteLine(dateTime3+timeSpan2);
+Console.WriteLine(dateTime4.DayOfWeek);
+Console.WriteLine(dateTime4.TimeOfDay);
+Console.WriteLine(dateTime4.Month);
+Console.WriteLine("datetime comprassion");
+Console.WriteLine(dateTime4>dateTime2);
+
+DateOnly dateOnly1 = new DateOnly();
+DateOnly dateOnly2 = new DateOnly(2023,1,1);
+Console.WriteLine(dateOnly1);
+Console.WriteLine(dateOnly2);
