@@ -18,3 +18,17 @@ else
 }
 
 Console.WriteLine("next operation");
+
+Console.WriteLine("SWITCH/CASE");
+switch (name)
+{
+case "Dima":
+    Console.WriteLine("Hi, Dima");
+    break;
+case "dima":
+    Console.WriteLine("Hi, dima");
+    break;
+default:
+    Console.WriteLine("Hi, not Dima");
+    break;
+}
