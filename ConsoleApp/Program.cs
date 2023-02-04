@@ -165,4 +165,39 @@ int x = 5;
 
 Console.WriteLine($"x^2 + 3x + 5 = {Math.Pow (x, 2) + 3*x + 5}");
 
+Console.WriteLine("Byte AND");
+// 6 & 4 => 110 & 100 => 100 =>4
+// 6 & 5 => 110 & 101 => 100 =>4
+Console.WriteLine($"6 & 4 = {6&4}");
+Console.WriteLine($"6 & 5 = {6&5}");
+Console.WriteLine($"8 & 4 = {8&4}");
+
+
+Console.WriteLine("Byte OR");
+// "або" |
+// 6 | 4 => 110 | 100 => 110 =>6
+// 6 | 5 => 110 | 101 => 111 =>7
+// 8 | 4 => 1000 | 0100 => 1100 =>12
+Console.WriteLine($"6 | 4 = {6|4}");
+Console.WriteLine($"6 | 5 = {6|5}");
+Console.WriteLine($"8 | 4 = {8|4}");
+
+
+Console.WriteLine("Byte XOR");
+// "виключення" -- вертає одиницю, якщо значення бітів різні
+// 6 ^ 4 => 110 ^ 100 => 010 =>2
+// 6 ^ 5 => 110 ^ 101 => 011 =>3
+// 8 ^ 4 => 1000 ^ 0100 => 1100 =>12
+Console.WriteLine($"6 ^ 4 = {6^4}");
+Console.WriteLine($"6 ^ 5 = {6^5}");
+Console.WriteLine($"8 ^ 4 = {8^4}");
+
+Console.WriteLine("Оператори зміщення");
+//  зміщують біти вправо, або вліво
+//  3<<2 => 0011<<2 => 1100 =>12
+Console.WriteLine($"3<<2 = {3<<2}");
+
+//  3>>1 => 0011>1 => 0001 =>1
+Console.WriteLine($"3>>1 = {3>>1}");
+
 
