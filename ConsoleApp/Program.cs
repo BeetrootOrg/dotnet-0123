@@ -49,6 +49,7 @@ Console.WriteLine (9 / 3.0M);
 
 */
 
+/*
 bool b1 = true;
 bool b2 = false;
 
@@ -115,3 +116,43 @@ Console.WriteLine ($"inc = {inc}");
 Console.WriteLine ($"--inc = {--inc}");
 Console.WriteLine ($"inc-- = {inc--}");
 Console.WriteLine ($"inc = {inc}");
+
+*/
+
+Console.WriteLine("MATH");
+Console.WriteLine($"ABS = {Math.Abs(-42.2)}"); 
+
+Console.WriteLine($"Round (42) = {Math.Round(42.0)}");
+Console.WriteLine($"Round (42.2) = {Math.Round(42.2)}");
+Console.WriteLine($"Round (42.6) = {Math.Round(42.6)}");
+
+Console.WriteLine($"Ceiling (42) = {Math.Ceiling(42.0)}");
+Console.WriteLine($"Ceiling (42.2) = {Math.Ceiling(42.2)}");
+Console.WriteLine($"Ceiling (42.6) = {Math.Ceiling(42.6)}");
+
+Console.WriteLine($"Floor (42) = {Math.Floor(42.0)}");
+Console.WriteLine($"Floor (42.2) = {Math.Floor(42.2)}");
+Console.WriteLine($"Floor (42.6) = {Math.Floor(42.6)}");
+
+Console.WriteLine($"Truncate (42) = {Math.Truncate(42.0)}");
+Console.WriteLine($"Truncate (42.2) = {Math.Truncate(42.2)}");
+Console.WriteLine($"Truncate (42.6) = {Math.Truncate(42.6)}");
+
+
+Console.WriteLine("NEGATIVE");
+
+Console.WriteLine($"Round (-42) = {Math.Round(-42.0)}");
+Console.WriteLine($"Round (-42.2) = {Math.Round(-42.2)}");
+Console.WriteLine($"Round (-42.6) = {Math.Round(-42.6)}");
+
+Console.WriteLine($"Ceiling (-42) = {Math.Ceiling(-42.0)}");
+Console.WriteLine($"Ceiling (-42.2) = {Math.Ceiling(-42.2)}");
+Console.WriteLine($"Ceiling (-42.6) = {Math.Ceiling(-42.6)}");
+
+Console.WriteLine($"Floor (-42) = {Math.Floor(-42.0)}");
+Console.WriteLine($"Floor (-42.2) = {Math.Floor(-42.2)}");
+Console.WriteLine($"Floor (-42.6) = {Math.Floor(-42.6)}");
+
+Console.WriteLine($"Truncate (-42) = {Math.Truncate(-42.0)}");
+Console.WriteLine($"Truncate (-42.2) = {Math.Truncate(-42.2)}");
+Console.WriteLine($"Truncate (-42.6) = {Math.Truncate(-42.6)}");
