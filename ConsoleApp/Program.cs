@@ -61,3 +61,21 @@ Console.WriteLine($"true and true = {true && true}");
 Console.WriteLine($"true and false = {true && false}");
 Console.WriteLine($"false and true = {false && true}");
 Console.WriteLine($"false and false = {false  && false}");
+
+
+Console.WriteLine("'OR'");
+Console.WriteLine(b1 || b2);
+Console.WriteLine($"true and true = {true || true}");
+Console.WriteLine($"true and false = {true || false}");
+Console.WriteLine($"false and true = {false || true}");
+Console.WriteLine($"false and false = {false  || false}");
+
+
+Console.WriteLine("Comparison");
+int i1 = 42;
+int i2 = 42;
+int i3 = 44;
+Console.WriteLine($"i1 == i2 =  {i1 == i2}");
+Console.WriteLine($"i1 == i3 =  {i1 == i3}");
+Console.WriteLine($"i1 != i2 =  {i1 != i2}");
+Console.WriteLine($"i1 != i3 =  {i1 != i3}");
