@@ -31,7 +31,7 @@ Console.WriteLine(" here's a result of several math functions:");
 int random = new Random().Next(999);
 int y = 65;
 Console.WriteLine($"  X = {random} (the random number between 0 and 999)\n  Y = {y} (why not?)");
-Console.WriteLine($"-6*x^3+5*x^2-10*x+15 = {-6*random^3+5*random^2-10*random+15}");
+Console.WriteLine($"-6*x^3+5*x^2-10*x+15 = {-6*Math.Pow(random,3)+5*Math.Pow(random,2)-10*random+15}");
 Console.WriteLine($"abs(x)*sin(x) = {Math.Abs(random)*Math.Sin(random)}");
 Console.WriteLine($"2*pi*x = {2*Math.PI*random}");
 Console.WriteLine($"max(x, y) = {Math.Max(random, y)}\n");
