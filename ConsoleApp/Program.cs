@@ -156,3 +156,13 @@ Console.WriteLine($"Floor (-42.6) = {Math.Floor(-42.6)}");
 Console.WriteLine($"Truncate (-42) = {Math.Truncate(-42.0)}");
 Console.WriteLine($"Truncate (-42.2) = {Math.Truncate(-42.2)}");
 Console.WriteLine($"Truncate (-42.6) = {Math.Truncate(-42.6)}");
+
+Console.WriteLine($"POW (9, 4) = {Math.Pow(9, 4)}");
+Console.WriteLine($"POW (1.5, 4.5) = {Math.Pow(1.5, 4.5)}");
+
+// x^2 + 3x + 5
+int x = 5;
+
+Console.WriteLine($"x^2 + 3x + 5 = {Math.Pow (x, 2) + 3*x + 5}");
+
+
