@@ -54,3 +54,15 @@ for (int i = 1; i <= 10; ++i)
     mul *= i;
 }
 Console.WriteLine(mul);
+
+mul =1;
+int j = 1;
+while (j <= 10)
+{
+    mul *= j++;
+    
+}
+Console.WriteLine(mul);
+
+
+// for (;;) -- можна опускати аргументи
