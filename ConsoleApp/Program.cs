@@ -37,3 +37,20 @@ for (int i = 0; i < 10; ++i)
 {
     Console.WriteLine(i);
 };
+
+
+var sum = 0;
+for (int i = 0; i <= 10; ++i)
+{
+    sum += i;
+    }
+    Console.WriteLine($"sum from 0 to 10 = {sum}");
+
+Console.WriteLine("MULTIPLICATION");
+
+var mul = 1;
+for (int i = 1; i <= 10; ++i)
+{
+    mul *= i;
+}
+Console.WriteLine(mul);
