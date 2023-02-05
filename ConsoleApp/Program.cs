@@ -1,5 +1,7 @@
 ﻿// домашня робота по уроку 02 -- типи даних
 
+Console.WriteLine("=================================");
+
 byte b = 10;
 short st = 15;
 int i = 33;
@@ -35,8 +37,18 @@ max(x, y)
 */
 
 double x = 8;
+double y = 16;
 double result00 = -6 * (Math.Pow (x, 3)) + 5 * Math.Pow(x,2) - 10 * x + 15;
 double result01 = -6 * x*x*x + 5 * x*x - 10 * x + 15;
-Console.WriteLine(result00);
-Console.WriteLine(result01);
+Console.WriteLine($"-6*x^3+5*x^2-10*x+15 = {result00}");
+Console.WriteLine($"те саме = {result01}");
+Console.WriteLine("=================================");
+
+Console.WriteLine($"2*pi*x = {2 * Math.PI * x}");
+Console.WriteLine($"max(x, y) = {Math.Max(x, y)}");
+
+
+Console.WriteLine("=================================");
+
+
 
