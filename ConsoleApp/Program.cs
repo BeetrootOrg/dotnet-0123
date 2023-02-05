@@ -29,5 +29,11 @@ switch (name)
 }
 
 int a = 11;
-int b = (a == 10 ? 15:20);
+int b = (a == 10 ? 15 : 20);
 Console.WriteLine(b);
+
+
+for (int i = 0; i < 10; ++i)
+{
+    Console.WriteLine(i);
+};
