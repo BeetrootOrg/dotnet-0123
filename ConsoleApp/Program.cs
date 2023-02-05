@@ -200,4 +200,6 @@ Console.WriteLine($"3<<2 = {3<<2}");
 //  3>>1 => 0011>1 => 0001 =>1
 Console.WriteLine($"3>>1 = {3>>1}");
 
+const int c = 5;
+Console.WriteLine(c);
 
