@@ -71,3 +71,14 @@ void RefNoAssign(ref int param) { }
 int temp3 = 15;
 RefNoAssign(ref temp3);
 Console.WriteLine(temp3);
+
+bool TryReadInt(out int result)
+{
+    string input = Console.ReadLine();
+    return int.TryParse(input, out result);
+}
+
+if (TryReadInt(out int temp4))
+{
+    Console.WriteLine(temp4);
+}
