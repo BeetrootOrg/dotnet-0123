@@ -1,23 +1,23 @@
-﻿Console.Write("X=");
-if(!int.TryParse(Console.ReadLine(), out int x))
-{
-    Console.WriteLine("Invalid input");
-    Environment.Exit(0);
-}
+﻿const int n = 5;
 
-Console.Write("Y=");
-if(!int.TryParse(Console.ReadLine(), out int y))
-{
-    Console.WriteLine("Invalid input");
-    Environment.Exit(0);
-}
+int previous = 0;
+int current = 1;
 
-int min = x < y ? x : y;
-int max = x > y ? x : y;
-
-int sum = 0;
-for (int i = min; i <= max; i++)
+if(n == 1)
 {
-    sum += i;
+    Console.WriteLine(previous);
 }
-Console.Write($"Sum={sum}");
+else if(n == 2)
+{
+    Console.WriteLine(current);
+}
+else
+{
+    for (int i = 3; i <= n; i++)
+    {
+        int temp = current;
+        current += previous;
+        previous = temp;
+    }
+    Console.WriteLine(current);
+}
