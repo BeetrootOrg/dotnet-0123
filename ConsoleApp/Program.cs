@@ -1,6 +1,6 @@
 ﻿
-Console.WriteLine(MMax(1, 2,11345,234));
-Console.WriteLine(MMin(3, 2,-124235));
+Console.WriteLine(MMax(1, 2, 11345, 234));
+Console.WriteLine(MMin(3, 2, -124235));
 bool f = TrySumIfOdd(4, 5, out int sum);
 Console.WriteLine($"result {f} summ {sum}");
 Console.WriteLine(Repeat("str", 3));
