@@ -76,8 +76,8 @@ Console.WriteLine(temp3);
 
 bool TryReadInt(out int result)
 {
-    string input = Console.ReadLine();
-    return int.TryParse(input, out result);
+    // string input = Console.ReadLine();
+    return int.TryParse("42", out result);
 }
 
 if (TryReadInt(out int temp4))
@@ -191,3 +191,12 @@ Console.WriteLine(Fibonacci(n));
 sw.Stop();
 
 Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds}ms");
+
+void PrintHello(string name = "Dima")
+{
+    Console.WriteLine($"Hello, {name}!");
+}
+
+PrintHello("Dima");
+PrintHello();
+PrintHello("World");
