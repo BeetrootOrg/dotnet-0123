@@ -1,5 +1,5 @@
-﻿const int x=10;
-const int y=12;
+﻿int x=10;
+int y=12;
 int sum=0;
 int X=x;
 int Y=y;
@@ -18,7 +18,7 @@ sum=0;
 try{
     x1=Convert.ToInt16(Console.ReadLine());
     y1=Convert.ToInt16(Console.ReadLine());
-    if (x==y) sum=x; else
+    if (x1==y1) sum=x1; else
     {
         for(var i=x1;i<=y1;i++){ sum=sum+i; }
     }
