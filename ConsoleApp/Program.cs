@@ -1,4 +1,6 @@
-﻿static int Sum(int a, int b)
+﻿using System.Diagnostics;
+
+static int Sum(int a, int b)
 {
     int sum = a + b;
     return sum;
@@ -125,3 +127,67 @@ Console.WriteLine($"TryDivideByThree(7) = {result}. Result = {temp4}");
 
 result = TryDivideByThreeBest(7, out temp4);
 Console.WriteLine($"BEST VERSION: TryDivideByThree(7) = {result}. Result = {temp4}");
+
+long Fibonacci(int n)
+{
+#pragma warning disable IDE0046
+    if (n == 1)
+    {
+        return 1;
+    }
+
+    if (n == 2)
+    {
+        return 1;
+    }
+
+    return Fibonacci(n - 1) + Fibonacci(n - 2);
+#pragma warning restore IDE0046
+}
+
+
+long FibonacciLoop(int n)
+{
+    long prev = 1;
+    long curr = 1;
+
+    int i = n - 2;
+    while (i-- > 0)
+    {
+        long temp = prev;
+        prev = curr;
+        curr += temp;
+    }
+
+    return curr;
+}
+
+long FibonacciWithTernary(int n)
+{
+    return n == 1
+        ? 1
+        : n == 2
+        ? 1
+        : FibonacciWithTernary(n - 1) + FibonacciWithTernary(n - 2);
+}
+
+Console.WriteLine(Fibonacci(3));
+Console.WriteLine(Fibonacci(5));
+Console.WriteLine(FibonacciWithTernary(3));
+
+const int n = 30;
+Stopwatch sw = new();
+
+sw.Start();
+Console.WriteLine(FibonacciLoop(n));
+sw.Stop();
+
+Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds}ms");
+
+sw.Reset();
+
+sw.Start();
+Console.WriteLine(Fibonacci(n));
+sw.Stop();
+
+Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds}ms");
