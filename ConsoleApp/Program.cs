@@ -1,14 +1,16 @@
-﻿const int n = 5;
-
-int prev = 1;
-int curr = 1;
-
-int i = n - 2;
-while (i-- > 0)
+﻿static int Sum(int a, int b)
 {
-    int temp = prev;
-    prev = curr;
-    curr += temp;
+    int sum = a + b;
+    return sum;
 }
 
-Console.WriteLine(curr);
+// static int SumOneLine(int a, int b) => a + b; // { return a + b; }
+static int SumOneLine(int a, int b)
+{
+    return a + b; // { return a + b; }
+}
+
+int a = 15;
+int b = 20;
+Console.WriteLine(Sum(a, b));
+Console.WriteLine(SumOneLine(42, 80));
