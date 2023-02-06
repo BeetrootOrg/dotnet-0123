@@ -62,3 +62,12 @@ Console.WriteLine(temp1);
 
 Assign42Out(out int temp2);
 Console.WriteLine(temp2);
+
+void RefNoAssign(ref int param) { }
+
+// COMPILATION ERROR
+// void OutNoAssign(out int param) { }
+
+int temp3 = 15;
+RefNoAssign(ref temp3);
+Console.WriteLine(temp3);
