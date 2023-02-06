@@ -15,7 +15,6 @@ int Fib(int n)
 }
 //-----------Фібоначи Цикл---------------
 Console.WriteLine("Фібоначи Цикл");
-
 int count=i;
 int fib1=1;
 int fib2=0;
