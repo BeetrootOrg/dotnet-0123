@@ -200,3 +200,23 @@ void PrintHello(string name = "Dima")
 PrintHello("Dima");
 PrintHello();
 PrintHello("World");
+
+void PrintNumbersLoop(int a, int b)
+{
+    for (int i = a; i <= b; i++)
+    {
+        Console.WriteLine(i);
+    }
+}
+
+void PrintNumbersRecursion(int a, int b)
+{
+    Console.WriteLine(a);
+    if (a != b)
+    {
+        PrintNumbersRecursion(a + 1, b);
+    }
+}
+
+PrintNumbersLoop(5, 15);
+PrintNumbersRecursion(5, 15);
