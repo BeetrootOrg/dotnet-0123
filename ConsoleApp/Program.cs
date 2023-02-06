@@ -50,3 +50,15 @@ void Assign42Ref(ref int param)
 
 Assign42Ref(ref a);
 Console.WriteLine(a);
+
+void Assign42Out(out int param)
+{
+    param = 42;
+}
+
+int temp1;
+Assign42Out(out temp1);
+Console.WriteLine(temp1);
+
+Assign42Out(out int temp2);
+Console.WriteLine(temp2);
