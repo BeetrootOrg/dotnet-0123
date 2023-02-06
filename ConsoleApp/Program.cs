@@ -34,3 +34,19 @@ IncrementWithClosure();
 IncrementWithoutClosure();
 
 Console.WriteLine(inc);
+
+void Assign42(int param)
+{
+    param = 42;
+}
+
+Assign42(a);
+Console.WriteLine(a);
+
+void Assign42Ref(ref int param)
+{
+    param = 42;
+}
+
+Assign42Ref(ref a);
+Console.WriteLine(a);
