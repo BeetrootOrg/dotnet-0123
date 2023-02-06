@@ -27,3 +27,8 @@ while (count>0 ){
     fib2=fib3;
     count--;
 }
+//-------------урок--------------------
+int Sum(int a,int b)=>a+b;
+int a=10;int b=20;
+
+Console.WriteLine($"Summ {a}+{b}={Sum(a,b)}");
