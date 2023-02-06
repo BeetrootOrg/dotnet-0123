@@ -4,8 +4,10 @@
 //- what is methods;- how to use methods;- ref and out parameters;- optional parameters;- methods overloading
 
 
+using System.Diagnostics;
+
 const int i=10;
-//-----------Фібоначи Рекурсія---------------
+//-----------Фібоначчи Рекурсія---------------
 Console.WriteLine("Фібоначи Рекурсія");
 Console.WriteLine($"Fib={Fib(i)}");
 
@@ -13,7 +15,7 @@ int Fib(int n)
 {
   return n > 1 ? Fib(n - 1) + Fib(n - 2) : n;
 }
-//-----------Фібоначи Цикл---------------
+//-----------Фібоначчи Цикл---------------
 Console.WriteLine("Фібоначи Цикл");
 int count=i;
 int fib1=1;
@@ -48,3 +50,47 @@ void AssignOut42(out int param){param=42;}
 int ou;
 AssignOut42(out ou);
 Console.WriteLine($"перевірка значення метод(аут тип) au={ou}");
+
+//-----------------------------------------
+bool TryReadInt(out int result)
+{
+    var input=Console.ReadLine();
+    return int.TryParse(input,out result);
+}
+if (TryReadInt(out int temp)) Console.WriteLine($"Можно парсити число {temp}");
+//-----------------------------------------
+bool TryDivideByThree(int num,out int result ){
+    result=num/3;
+    if (num%3==0) return true; 
+    return false;
+}
+
+bool flag=TryDivideByThree(6,out temp);
+Console.WriteLine($"TryDivideByThree(6)={flag}. Result={temp}" );
+flag=TryDivideByThree(7,out temp);
+Console.WriteLine($"TryDivideByThree(7)={flag}. Result={temp}" );
+//-------------------Рекурсія----------------------
+//-------------------Рекурсія Фібоначчи----------------------
+int Fibonacci(int n){
+    Console.WriteLine($"Fibonacci n={n}");
+    if (n==1) return n;
+    if (n==2) return 1;
+    return Fibonacci(n-1)+Fibonacci(n-2);
+}
+
+Console.WriteLine($"Фібоначі для 10={Fibonacci(10)}");
+var sw=new Stopwatch();
+sw.Start();
+Console.WriteLine($"Фібоначі для 25={Fibonacci(25)}");
+sw.Stop();
+Console.WriteLine($"Time calc fib={sw.Elapsed}");
+//-----------Виклики  з параметрами та без----
+void Hello(string Name="Andrey")=>Console.WriteLine($"Hello, {Name}!");
+Hello();
+Hello("Dima");
+
+void PrintNumberLoop(int a,int b){
+    for(int i=a;i<=b;i++){
+        Console.WriteLine(@$"PrintNumberLoop {i}");
+    }
+}
