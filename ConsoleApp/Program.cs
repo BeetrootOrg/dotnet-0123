@@ -6,7 +6,7 @@ int max = Math.Max(X, Y);
 int sum = (min == max) ? min : 0;
 string str = "Sum=";
 
-if (sum == 0)
+if (min != max)
 {
     for (int i = min; i <= max; i++)
     {
