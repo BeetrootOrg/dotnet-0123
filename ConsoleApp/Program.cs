@@ -82,3 +82,46 @@ if (TryReadInt(out int temp4))
 {
     Console.WriteLine(temp4);
 }
+
+
+bool TryDivideByThree(int num, out int result)
+{
+    if (num % 3 == 0)
+    {
+        result = num / 3;
+        return true;
+    }
+    else
+    {
+        result = 0;
+        return false;
+    }
+}
+
+bool TryDivideByThreeBetter(int num, out int result)
+{
+    if (num % 3 == 0)
+    {
+        result = num / 3;
+        return true;
+    }
+
+    result = 0;
+    return false;
+}
+
+
+bool TryDivideByThreeBest(int num, out int result)
+{
+    result = num / 3;
+    return num % 3 == 0;
+}
+
+bool result = TryDivideByThree(6, out temp4);
+Console.WriteLine($"TryDivideByThree(6) = {result}. Result = {temp4}");
+
+result = TryDivideByThreeBetter(7, out temp4);
+Console.WriteLine($"TryDivideByThree(7) = {result}. Result = {temp4}");
+
+result = TryDivideByThreeBest(7, out temp4);
+Console.WriteLine($"BEST VERSION: TryDivideByThree(7) = {result}. Result = {temp4}");
