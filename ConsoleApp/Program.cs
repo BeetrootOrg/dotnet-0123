@@ -1,11 +1,6 @@
-﻿const int N = 7;
-int a1 = 1;
-int a2 = 1;
-int a = 0;
-for (int i = 3; i<= N; i++ )
-{
-    a = a1 + a2;
-    a1 = a2;
-    a2 = a;
-}
-Console.WriteLine (a);
+﻿int a = 42;
+int b = 3;
+int c = a + b;
+
+Console.WriteLine(a + b);
+Console.WriteLine(c);
