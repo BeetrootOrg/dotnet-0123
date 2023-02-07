@@ -1,4 +1,11 @@
-﻿string name = "vviktor";
+﻿// Класиний урок №03 умовні оператори
+// Парсинг, безпечний парсинг з bool
+// DateTime
+// TimeSpan
+
+
+/*
+string name = "vviktor";
 if (name == "Viktor")
 { Console.WriteLine($"name = {name}"); }
 
@@ -184,7 +191,20 @@ Console.WriteLine($"you entered = {d1}");
 
 */
 
+
+/*
 System.Console.WriteLine("enter a number");
 string input1 = Console.ReadLine ();
 int number = Convert.ToInt32 (input1);
 System.Console.WriteLine($"you entered {number}");
+*/
+
+
+DateTime data = new DateTime (2025, 1, 10, 21, 54, 30);
+Console.WriteLine(data);
+
+DateTime data1 = DateTime.Now;
+Console.WriteLine(data1);
+
+TimeSpan ts1 = new TimeSpan (0, 70, 20);
+Console.WriteLine(data + ts1);
