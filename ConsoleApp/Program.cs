@@ -49,3 +49,21 @@ bool TrySumIfOdd(int a, int b, out int result)
     return ((a + b) % 2) == 1;
 }
 Console.WriteLine($"TrySumIfOdd(a, b) = {TrySumIfOdd(a, b, out int result)}. Result = {result}");
+
+string input = "str";
+
+void Repeat(string input, int num)
+{
+    if (num == 1)
+    {
+        Console.Write(input);
+    }
+    else
+    {
+        Console.Write(input);
+        Repeat(input, num - 1);
+    }
+
+}
+
+Repeat(input, b);
