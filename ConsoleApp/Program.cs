@@ -1,21 +1,29 @@
-﻿using System.Diagnostics;
-
-static int Sum(int a, int b)
+﻿void PrintHello (string name = "Vasja")
 {
-    int sum = a + b;
-    return sum;
+    Console.WriteLine($"Hello {name}");
 }
 
-// static int SumOneLine(int a, int b) => a + b; // { return a + b; }
-static int SumOneLine(int a, int b)
+PrintHello ("Vitja");
+PrintHello ();
+
+
+
+/*
+int Sum (int a, int b)
 {
-    return a + b; // { return a + b; }
+    var sumaa = a + b;
+    return sumaa;
 }
 
-int a = 15;
-int b = 20;
-Console.WriteLine(Sum(a, b));
-Console.WriteLine(SumOneLine(42, 80));
+int x = 20;
+int y = 15;
+
+Console.WriteLine(Sum (x, y));
+
+int sumOneLine (int a, int b) => a + b; //
+Console.WriteLine(sumOneLine (42, 80));
+
+
 
 int inc = 0;
 void IncrementWithClosure()
@@ -25,26 +33,37 @@ void IncrementWithClosure()
 
 static void IncrementWithoutClosure()
 {
-    int inc = 0;
-#pragma warning disable IDE0059
+    int inc = 0; // ця змінна внутрішня і ніякого відношення до зовнішньої змінної inc вона не має; замикання змінної
     ++inc;
-#pragma warning restore all
 }
 
-IncrementWithClosure();
-IncrementWithClosure();
-IncrementWithoutClosure();
+
+IncrementWithClosure ();
+IncrementWithClosure ();
+IncrementWithoutClosure ();
+
 
 Console.WriteLine(inc);
+
 
 void Assign42(int param)
 {
     param = 42;
 }
 
-Assign42(a);
-Console.WriteLine(a);
+Assign42(x);  // тут значення змінної копіюється для відпрацювання в функції, але сама змінна не міняється
+Console.WriteLine(x);
 
+
+void Assign42R(ref int param)
+{
+    param = 42;
+}
+
+Assign42R(ref x);  // тут значення змінної копіюється для відпрацювання в функції, але сама змінна не міняється
+Console.WriteLine(x);
+
+/*
 void Assign42Ref(ref int param)
 {
     param = 42;
@@ -73,6 +92,7 @@ void RefNoAssign(ref int param) { }
 int temp3 = 15;
 RefNoAssign(ref temp3);
 Console.WriteLine(temp3);
+
 
 bool TryReadInt(out int result)
 {
@@ -164,10 +184,8 @@ long FibonacciLoop(int n)
 
 long FibonacciWithTernary(int n)
 {
-    return n == 1
-        ? 1
-        : n == 2
-        ? 1
+    return n == 1 ? 1
+        : n == 2  ? 1
         : FibonacciWithTernary(n - 1) + FibonacciWithTernary(n - 2);
 }
 
@@ -176,6 +194,8 @@ Console.WriteLine(Fibonacci(5));
 Console.WriteLine(FibonacciWithTernary(3));
 
 const int n = 30;
+
+/* 
 Stopwatch sw = new();
 
 sw.Start();
@@ -220,3 +240,4 @@ void PrintNumbersRecursion(int a, int b)
 
 PrintNumbersLoop(5, 15);
 PrintNumbersRecursion(5, 15);
+*/
