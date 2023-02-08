@@ -43,3 +43,4 @@ string StringToBinari(int n){
 }
 Console.WriteLine(StringToBinari(5));
 Console.WriteLine(StringToBinari(510));
+
