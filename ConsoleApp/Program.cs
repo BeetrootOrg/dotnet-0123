@@ -36,8 +36,8 @@ string StringToBinari(int n){
     int num=n;
     string result="";
     do{
-        result=num/2+result;
-        num/=2;
+        result=num%2+result;
+        num=num/2;
     }while(num>0);
     return result;
 }
