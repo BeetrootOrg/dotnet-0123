@@ -51,3 +51,23 @@ Console.WriteLine(f1);
 
 double d1 = random.NextDouble(); // [0.0; 1.0)
 Console.WriteLine(d1);
+
+static int SumRecursion(int from, int to)
+{
+#pragma warning disable IDE0046
+    if (from > to)
+    {
+        return SumRecursion(to, from);
+    }
+
+    if (from == to)
+    {
+        return from;
+    }
+
+    return from + SumRecursion(from + 1, to);
+#pragma warning restore IDE0046
+}
+
+Console.WriteLine(SumRecursion(1, 3));
+Console.WriteLine(SumRecursion(3, 1));
