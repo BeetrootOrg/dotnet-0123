@@ -3,6 +3,17 @@ namespace ConsoleApp.Classes
 {
     public static class Lesson06
     {
+        public static double Distance(float x1,float y1,float x2,float y2){
+            double dx=Math.Abs(x2-x1);
+            double dy=Math.Abs(y2-y1);
+            return Math.Sqrt(dx*dx+dy*dy);
+        }
+        public static int SumFromTo(int from, int to){
+            if (from>to) return SumFromTo(to, from);
+            if (from==to) return to;
+            return from+SumFromTo(from+1,to);
+        }
+
         public static int Fibonacci(int n)
         {
             if (n == 1 || n == 2) return 1;

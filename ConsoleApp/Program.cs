@@ -26,3 +26,8 @@ Console.WriteLine(random.Next(10));//[0,10) 10 не включено
 Console.WriteLine(random.Next(-10,10));//[-10,10) 10 не включено
 Console.WriteLine(random.NextSingle());//0.0<= <1.0
 Console.WriteLine(random.NextDouble());//0.0<= <1.0
+//-----------------------
+Console.WriteLine(Lesson06.SumFromTo(1,10));
+//-------------Відстань між 2 точками 
+Console.WriteLine(Lesson06.Distance(0,0,5,5));
+Console.WriteLine(Lesson06.Distance(0,3,4,0));
