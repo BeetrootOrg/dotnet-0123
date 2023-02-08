@@ -17,5 +17,5 @@ for (int i = 0; i < 10; i++)
 {
     Console.Write(i);
 }
-// дебаг фибоначчи
+// ---------------дебаг фибоначчи
 Console.WriteLine(Lesson06.Fibonacci(5));

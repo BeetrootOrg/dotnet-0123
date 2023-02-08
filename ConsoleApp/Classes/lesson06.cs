@@ -5,8 +5,8 @@ namespace ConsoleApp.Classes
     {
         public static int Fibonacci(int n)
         {
-            if (n==1 || n==2) return 1;
-            return  Fibonacci(n - 1) + Fibonacci(n - 2);
+            if (n == 1 || n == 2) return 1;
+            return Fibonacci(n - 1) + Fibonacci(n - 2);
         }
         public static int Sum(int a, int b)
         {
