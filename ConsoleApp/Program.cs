@@ -19,3 +19,8 @@ for (int i = 0; i < 5; i++)
 {
     System.Console.WriteLine(i);
 }
+
+
+Random random = new((int)DateTime.Now.Ticks);
+System.Console.WriteLine(random.Next(10));
+
