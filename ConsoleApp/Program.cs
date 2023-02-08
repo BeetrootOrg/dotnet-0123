@@ -124,7 +124,7 @@ static string ConvertToBinary(int n)
     do
     {
         result = (num % 2) + result;
-        num /= 2;
+        num /= 2; // num = num / 2
     } while (num > 0);
 
     return result;
