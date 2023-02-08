@@ -40,3 +40,14 @@ static long Fibonacci(int n)
 
 Fibonacci(3);
 Fibonacci(5);
+
+Random random = new((int)DateTime.Now.Ticks);
+Console.WriteLine(random.Next());
+Console.WriteLine(random.Next(10)); // [0; 10)
+Console.WriteLine(random.Next(-10, 10)); // [-10; 10)
+
+float f1 = random.NextSingle(); // [0.0; 1.0)
+Console.WriteLine(f1);
+
+double d1 = random.NextDouble(); // [0.0; 1.0)
+Console.WriteLine(d1);
