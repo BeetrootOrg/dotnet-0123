@@ -31,3 +31,15 @@ Console.WriteLine(Lesson06.SumFromTo(1,10));
 //-------------Відстань між 2 точками 
 Console.WriteLine(Lesson06.Distance(0,0,5,5));
 Console.WriteLine(Lesson06.Distance(0,3,4,0));
+// StringToBinari
+string StringToBinari(int n){
+    int num=n;
+    string result="";
+    do{
+        result=num/2+result;
+        num/=2;
+    }while(num>0);
+    return result;
+}
+Console.WriteLine(5);
+Console.WriteLine(510);
