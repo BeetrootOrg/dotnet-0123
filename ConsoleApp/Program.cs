@@ -42,15 +42,31 @@
 bool b1 = true;
 bool b2 = false;
 
-System.Console.WriteLine(b1);
-System.Console.WriteLine(b2);
+// System.Console.WriteLine(b1);
+// System.Console.WriteLine(b2);
 
 // System.Console.WriteLine( b1 && b2);
 // System.Console.WriteLine($"true && true = {true && true}");
 // System.Console.WriteLine($"true && false = {true && false}");
 // System.Console.WriteLine($"false && false = {false && false}");
 
-System.Console.WriteLine( b1 || b2);
-System.Console.WriteLine($"true || true = {true || true}");
-System.Console.WriteLine($"true || false = {true || false}");
-System.Console.WriteLine($"false || false = {false || false}");
+// System.Console.WriteLine( b1 || b2);
+// System.Console.WriteLine($"true || true = {true || true}");
+// System.Console.WriteLine($"true || false = {true || false}");
+// System.Console.WriteLine($"false || false = {false || false}");
+
+int i1 = 42;
+int i2 = 42;
+int i3 = 43;
+
+// System.Console.WriteLine($"i1 > i2 = {i1 > i2}");
+// System.Console.WriteLine($"i1 >= i2 = {i1 >= i2}");
+// System.Console.WriteLine($"i1 == i2 = {i1 == i2}");
+// System.Console.WriteLine($"i1 != i2 = {i1 != i2}");
+
+// System.Console.WriteLine($"i3 > i2 = {i3 > i2}");
+// System.Console.WriteLine($"i3 >= i2 = {i3 >= i2}");
+// System.Console.WriteLine($"i3 == i2 = {i3 == i2}");
+// System.Console.WriteLine($"i3 != i2 = {i3 != i2}");
+
+System.Console.WriteLine(6.0M / (decimal) 6.0F);
