@@ -71,3 +71,31 @@ static int SumRecursion(int from, int to)
 
 Console.WriteLine(SumRecursion(1, 3));
 Console.WriteLine(SumRecursion(3, 1));
+
+static double CalculateDistance(double x1, double y1, double x2, double y2)
+{
+    double dx = x2 - x1;
+    double dy = y2 - y1;
+    return Math.Sqrt((dx * dx) + (dy * dy));
+}
+
+Console.WriteLine(CalculateDistance(0, 3, 4, 0));
+Console.WriteLine(CalculateDistance(15.5, 42, -6.3, 101.05));
+
+static int NearestSquare(int n)
+{
+    double sqrt = Math.Sqrt(n);
+    int rounded = (int)Math.Round(sqrt);
+    return rounded * rounded;
+}
+
+Console.WriteLine(NearestSquare(120));
+Console.WriteLine(NearestSquare(111));
+Console.WriteLine(NearestSquare(110));
+
+Console.WriteLine(NearestSquare(4));
+Console.WriteLine(NearestSquare(5));
+Console.WriteLine(NearestSquare(6));
+Console.WriteLine(NearestSquare(7));
+Console.WriteLine(NearestSquare(8));
+Console.WriteLine(NearestSquare(9));
