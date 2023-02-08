@@ -13,3 +13,7 @@ Lesson06.WriteNumbers(10);
 //---------------Debugging------------------------
 int res = Lesson06.Sum(10, 5);
 Console.WriteLine(res);
+for (int i = 0; i < 10; i++)
+{
+    Console.Write(i);
+}
