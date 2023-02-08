@@ -1,30 +1,51 @@
-﻿Console.WriteLine("Enter the value X :");
-string? x = Console.ReadLine();
-bool success = int.TryParse(x, out int  num1);
-if (success)
+﻿ static int Sum (int a, int b)
 {
-    Console.WriteLine("Enter the value Y :");
-    string? y = Console.ReadLine();
-    bool success1 = int.TryParse(y, out int  num2);
-    if (success1)
-    {
-        int min = num1 < num2 ? num1 : num2; // if {5 < 2}  {2 = num1} else {2 = num2}  
-        int max = num1 > num2 ? num1 : num2;// if {5 > 2} { 5 = num1} else {5 = num2}
-        int sum = 0;
-        for(int i = min; i <= max; ++i )
-        {
-            sum += i;
-        }
-        Console.WriteLine($"Sum of values = {sum}");
-    }
-    else
-    {
-        Console.WriteLine($"Invalid input ");
-    }
-}
-else
-{
-    Console.WriteLine($"Invalid input ");
+    var sum = a + b;
+    return sum;   
 }
 
- 
+int a = 15;
+int b = 20;
+System.Console.WriteLine(Sum(a, b));
+
+static int SumOneLine (int a, int b) => a + b;
+
+System.Console.WriteLine(SumOneLine(42, 80));
+
+int inc = 0;
+void Increment()
+{
+    ++inc;
+}
+
+Increment();
+Increment();
+System.Console.WriteLine(inc);
+
+void Assing42(int c)
+{
+      c = 42;
+}
+
+Assing42(a);
+System.Console.WriteLine(a);
+
+void Assing42Ref (ref int c)
+{
+    c = 42;
+}
+
+Assing42Ref(ref a);
+System.Console.WriteLine(a);
+
+void Assing42Out (out int c)
+{
+    c = 42;
+}
+int d;
+Assing42Out(out d);
+System.Console.WriteLine(d);
+
+Assing42Out(out int e);
+System.Console.WriteLine(e);
+
