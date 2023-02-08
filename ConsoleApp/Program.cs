@@ -1,20 +1,21 @@
-﻿int a = 5;
-long Factorial(int n)
+﻿int Sum(int a, int b)
 {
-    if (n == 0)
-    {
-        return 1;
-    }
-    return n * Factorial(n - 1);
+    int sum = a+b;
+    return sum;
 }
-Console.WriteLine(Factorial(a));
 
-void WriteNumbers(int n)
+static int Mul(int a, int b)
 {
-    Console.WriteLine(n);
-    if (n != 1)
-    {
-        WriteNumbers(n - 1);
-    }
+    int mul = a*b;
+    return mul;
 }
-WriteNumbers(a);
+int result = Sum(42,80);
+System.Console.WriteLine(result);
+
+result = Mul(10,12);
+System.Console.WriteLine(result);
+
+for (int i = 0; i < 5; i++)
+{
+    System.Console.WriteLine(i);
+}
