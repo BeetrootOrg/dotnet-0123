@@ -41,5 +41,5 @@ string StringToBinari(int n){
     }while(num>0);
     return result;
 }
-Console.WriteLine(5);
-Console.WriteLine(510);
+Console.WriteLine(StringToBinari(5));
+Console.WriteLine(StringToBinari(510));
