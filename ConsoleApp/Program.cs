@@ -26,3 +26,4 @@ System.Console.WriteLine($"decimal = {de1}");
 System.Console.WriteLine($"string = {st1}");
 
 System.Console.WriteLine($"b1 + s1 + i1 + l1 = {b1 + s1 + i1 + l1}"); //implicit casting to the same type
+System.Console.WriteLine($"b1 && ");
