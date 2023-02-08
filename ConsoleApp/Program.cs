@@ -1,53 +1,17 @@
-﻿static int Sum(int a, int b)
+﻿Random random = new((int)DateTime.Now.Ticks);
+
+Console.WriteLine("Press ENTER to start the game");
+while (true)
 {
-    int sum = a + b;
-    return sum;
-}
-
-static int Mul(int a, int b)
-{
-    int mul = a * b;
-    return mul;
-}
-
-int result = Sum(42, 80);
-Console.WriteLine(result);
-
-result = Mul(10, 12);
-Console.WriteLine(result);
-
-for (int i = 0; i < 10; i++)
-{
-    Console.WriteLine(i);
-}
-
-static long Fibonacci(int n)
-{
-#pragma warning disable IDE0046
-    if (n == 1)
+    _ = Console.ReadLine();
+    int num = random.Next(0, 6);
+    if (num == 3)
     {
-        return 1;
+        Console.WriteLine("Game Over!");
+        return;
     }
-
-    if (n == 2)
+    else
     {
-        return 1;
+        Console.WriteLine("Continue game...");
     }
-
-    return Fibonacci(n - 1) + Fibonacci(n - 2);
-#pragma warning restore IDE0046
 }
-
-Fibonacci(3);
-Fibonacci(5);
-
-Random random = new((int)DateTime.Now.Ticks);
-Console.WriteLine(random.Next());
-Console.WriteLine(random.Next(10)); // [0; 10)
-Console.WriteLine(random.Next(-10, 10)); // [-10; 10)
-
-float f1 = random.NextSingle(); // [0.0; 1.0)
-Console.WriteLine(f1);
-
-double d1 = random.NextDouble(); // [0.0; 1.0)
-Console.WriteLine(d1);
