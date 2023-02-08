@@ -19,3 +19,10 @@ for (int i = 0; i < 10; i++)
 }
 // ---------------дебаг фибоначчи
 Console.WriteLine(Lesson06.Fibonacci(5));
+// ---------------Рандом
+Random random =new ((int)DateTime.Now.Ticks);
+Console.WriteLine(random.Next());
+Console.WriteLine(random.Next(10));//[0,10) 10 не включено
+Console.WriteLine(random.Next(-10,10));//[-10,10) 10 не включено
+Console.WriteLine(random.NextSingle());//0.0<= <1.0
+Console.WriteLine(random.NextDouble());//0.0<= <1.0
