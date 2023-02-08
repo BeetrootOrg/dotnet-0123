@@ -43,4 +43,29 @@ System.Console.WriteLine(Math.Abs (de1));
 // 2*pi*x
 // max(x, y)
 
+System.Console.WriteLine("X = ");
+string x1 = Console.ReadLine();
+double xd = Convert.ToDouble(x1);
+double f = -6 * Math.Pow( xd, 3) + 5 * Math.Pow( xd, 2) - 10 * xd + 15;
+System.Console.WriteLine($"f(x) = {f}");
+
+double x2 = Math.PI/2;
+System.Console.WriteLine($"x2 = {x2}");
+System.Console.WriteLine($"abs(x2)*sin(x2) = {Math.Abs(x2) * Math.Sin(x2)}");
+
+double x3 = -0.5;
+System.Console.WriteLine($"x3 = {x3}");
+System.Console.WriteLine($"2*pi*x3 = {2 * Math.PI * x3}");
+
+System.Console.WriteLine($"max(x2, x3) = {Math.Max(x2, x3)}");
+
+//Date task
+
+DateOnly startdate = new DateOnly(2023, 1, 1);
+DateOnly enddate = new DateOnly(2023, 12, 31);
+DateOnly currentdate = DateOnly.FromDateTime(DateTime.Now);
+
+System.Console.WriteLine($"X days left to New Year = {currentdate.DayNumber - startdate.DayNumber + 1}");
+System.Console.WriteLine($"Y days passed from New Year = {enddate.DayNumber - currentdate.DayNumber}");
+
 
