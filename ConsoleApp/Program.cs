@@ -20,3 +20,23 @@ for (int i = 0; i < 10; i++)
 {
     Console.WriteLine(i);
 }
+
+static long Fibonacci(int n)
+{
+#pragma warning disable IDE0046
+    if (n == 1)
+    {
+        return 1;
+    }
+
+    if (n == 2)
+    {
+        return 1;
+    }
+
+    return Fibonacci(n - 1) + Fibonacci(n - 2);
+#pragma warning restore IDE0046
+}
+
+Fibonacci(3);
+Fibonacci(5);
