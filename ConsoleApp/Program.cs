@@ -99,3 +99,40 @@ Console.WriteLine(NearestSquare(6));
 Console.WriteLine(NearestSquare(7));
 Console.WriteLine(NearestSquare(8));
 Console.WriteLine(NearestSquare(9));
+
+char c = 'a';
+string s = "string";
+
+Console.WriteLine(c);
+Console.WriteLine(s[2]);
+
+s += " abc";
+
+Console.WriteLine(s);
+
+static string ConvertToBinary(int n)
+{
+    // 0, 1, 2, ... 9, 10, 11, ..., 99, 100
+    // 0, 1, 10, 11, 100, 101, 110, 111
+
+    // 456 = 4 * 100 + 5 * 10 + 6 * 1
+    // 101b = 1 * 100b + 0 * 10b + 1 * 1b = 1 * 4 + 0 * 2 + 1 * 1 = 5
+    // 2 = 1 * 2 + 0 * 1 = 1 * 10b + 0 * 0b = 10b
+    // 5 = 1 * 4 + 0 * 2 + 1 * 1 = 1 * 100b + 0 * 10b + 1 * 1b = 101b
+    int num = n;
+    string result = "";
+    do
+    {
+        result = (num % 2) + result;
+        num /= 2;
+    } while (num > 0);
+
+    return result;
+}
+
+Console.WriteLine(ConvertToBinary(0));
+Console.WriteLine(ConvertToBinary(1));
+Console.WriteLine(ConvertToBinary(2));
+Console.WriteLine(ConvertToBinary(3));
+Console.WriteLine(ConvertToBinary(4));
+Console.WriteLine(ConvertToBinary(5));
