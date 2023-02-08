@@ -67,3 +67,75 @@ System.Console.WriteLine($"i1 > i3 ={i1 > i3}");
 System.Console.WriteLine($"i1 >= i3 ={i1 >= i3}");
 System.Console.WriteLine($"i1 < i3 ={i1 < i3}");
 System.Console.WriteLine($"i1 <= i3 ={i1 <= i3}");
+
+System.Console.WriteLine("combination");
+System.Console.WriteLine($"b1 || b2 || (i1 >= i3 && i2 <= i1) = {b1 || b2 || (i1 >= i3 && i2 <= i1)}") ;
+
+System.Console.WriteLine("increment/decrement");
+int inc = 42;
+System.Console.WriteLine($"++inc = {++inc}");//preincrement
+System.Console.WriteLine($"inc++={inc++}");//postincrement
+System.Console.WriteLine("inc = {inc}"); // inc
+System.Console.WriteLine($"--inc = {--inc}");//predecrement
+System.Console.WriteLine($"inc--={inc--}");//postdecrement
+System.Console.WriteLine("inc = {inc}"); // inc
+
+System.Console.WriteLine("MATH");
+System.Console.WriteLine("ABS");
+System.Console.WriteLine($"ABS = {Math.Abs(51)}");
+System.Console.WriteLine($"ABS = {Math.Abs(-42.2)}");
+System.Console.WriteLine("ROUND");
+System.Console.WriteLine($"ROUND(42) = {Math .Round(42.0)}");
+System.Console.WriteLine($"ROUND(42.2) = {Math .Round(42.2)}");
+System.Console.WriteLine($"ROUND(42.6) = {Math .Round(42.6)}");
+
+System.Console.WriteLine("Ceiling");
+System.Console.WriteLine($"Ceiling(42) = {Math .Ceiling(42.0)}");
+System.Console.WriteLine($"Ceiling(42.2) = {Math .Ceiling(42.2)}");
+System.Console.WriteLine($"Ceiling(42.6) = {Math .Ceiling(42.6)}");
+
+System.Console.WriteLine("Floor");
+System.Console.WriteLine($"Floor(42) = {Math .Floor(42.0)}");
+System.Console.WriteLine($"Floor(42.2) = {Math .Floor(42.2)}");
+System.Console.WriteLine($"Floor(42.6) = {Math .Floor(42.6)}");
+
+System.Console.WriteLine("Truncate");
+System.Console.WriteLine($"Truncate(42) = {Math .Truncate(42.0)}");
+System.Console.WriteLine($"Truncate(42.2) = {Math .Truncate(42.2)}");
+System.Console.WriteLine($"Truncate(42.6) = {Math .Truncate(42.6)}");
+
+
+System.Console.WriteLine("ROUND");
+System.Console.WriteLine($"ROUND(42) = {Math .Round(42.0)}");
+System.Console.WriteLine($"ROUND(42.2) = {Math .Round(42.2)}");
+System.Console.WriteLine($"ROUND(42.6) = {Math .Round(42.6)}");
+
+System.Console.WriteLine("Ceiling");
+System.Console.WriteLine($"Ceiling(42) = {Math .Ceiling(42.0)}");
+System.Console.WriteLine($"Ceiling(42.2) = {Math .Ceiling(42.2)}");
+System.Console.WriteLine($"Ceiling(42.6) = {Math .Ceiling(42.6)}");
+
+System.Console.WriteLine("negative numbers");
+System.Console.WriteLine("Floor");
+System.Console.WriteLine($"Floor(-42) = {Math .Floor(-42.0)}");
+System.Console.WriteLine($"Floor(-42.2) = {Math .Floor(-42.2)}");
+System.Console.WriteLine($"Floor(-42.6) = {Math .Floor(-42.6)}");
+
+System.Console.WriteLine("Truncate");
+System.Console.WriteLine($"Truncate(-42) = {Math .Truncate(-42.0)}");
+System.Console.WriteLine($"Truncate(-42.2) = {Math .Truncate(-42.2)}");
+System.Console.WriteLine($"Truncate(-42.6) = {Math .Truncate(-42.6)}");
+
+System.Console.WriteLine("Pow");
+System.Console.WriteLine($"Pow(9^4) = {Math.Pow(9,4)}");
+System.Console.WriteLine($"9^4 = {9^4}");//not the same as pow
+System.Console.WriteLine( $"Pow(1.3,2.5) = {Math.Pow(1.3,2.5)}");
+
+//x^2+3*x+5
+int x = 5;
+System.Console.WriteLine($"x^2+3*x+5 = {Math.Pow(x,2)+3*x+5}");
+
+
+
+
+
