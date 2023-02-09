@@ -1,7 +1,86 @@
-﻿
+﻿/* Домашня робота 04-functions
+
+Define and call with different parameters next methods:
+
+Method that will return max value among all the parameters
+… min value …
+Method TrySumIfOdd that accepts 2 parameters and returns true if sum of numbers between inputs is odd, otherwise false, sum return as out parameter
+Overload first two methods with 3 and 4 parameters
+Extra:
+
+Define and call with different parameters next methods:
+
+Method Repeat that will accept string X and number N and return X repeated N times (e.g. Repeat(‘str’, 3) returns ‘strstrstr’ = ‘str’ three times)
+*/
 
 
-int Sum (int a, int b)
+int x1 = 66;
+int x2 = 1013;
+int x3 = 297;
+int x4 = 976;
+
+/////////////////////////////////////////////////
+int result = Max2(x1, x2);
+// Console.WriteLine(result);
+int Max2(int a, int b)
+{
+    if (a > b) return a;
+    return b;
+}
+/////////////////////////////////////////////////
+result = Max3(x1, x2, x3);     // тут без int, бо вже визначили тип
+// Console.WriteLine(result);
+int Max3(int a, int b, int c)
+{
+    if (Max2(a, b) < c) return c;
+    return (Max2(a, b));
+}
+/////////////////////////////////////////////////
+result = Max4(x1, x2, x3, x4);
+// Console.WriteLine(result);
+int Max4(int a, int b, int c, int d)
+{
+    if (Max2(a, b) < Max2(c, d))
+    {
+        return Max2(c, d);
+    }
+    return Max2(a, b);
+}
+/////////////////////////////////////////////////
+result = Max(x4, x2, x1);
+// Console.WriteLine(result);
+int Max(int a, int b, int c = 0, int d = 0)
+{
+    // return c == 0 ? Max3(a, b, d)    // тут чомусь помилка компілятора
+    // : d == 0 ? Max3(a, b, c);        // тут чомусь помилка компілятора
+    if (c == 0) return Max3(a, b, d);
+    return Max3(a, b, c);
+}
+/////////////////////////////////////////////////
+// з Min не роблю бо все те саме.
+/////////////////////////////////////////////////
+
+// bool res = TrySumIfOdd (x1, x2, out int summa); //результат out проініціалізується в змінну summa
+// Console.WriteLine($"{res}   {summa});
+
+bool oddEven = TrySumIfOdd (x1, x2, out var suma); //ініціалізуємо змінну suma і записуємо туди значення із result
+System.Console.WriteLine($"{x1} + {x2} = {suma}...{oddEven}");
+bool TrySumIfOdd(int a, int b, out int result) // тут де result, у нас буде назва змінної (suma) із виклику
+{
+    if ((a + b) % 2 == 0)
+    {
+        result = a + b; //ця сама змінна result передастся в шапку функції, її треба дати значення перед return
+        return false;
+    }
+    result = a + b;
+    return true;        //ця сама змінна result передастся в шапку функції, її треба дати значення перед return
+}
+
+/*
+
+
+
+int Sum(int a, int b)
 {
     var sumaa = a + b;
     return sumaa;
@@ -10,10 +89,10 @@ int Sum (int a, int b)
 int x = 20;
 int y = 15;
 
-Console.WriteLine(Sum (x, y));
+Console.WriteLine(Sum(x, y));
 
-int sumOneLine (int a, int b) => a + b; //
-Console.WriteLine(sumOneLine (42, 80));
+int sumOneLine(int a, int b) => a + b; //
+Console.WriteLine(sumOneLine(42, 80));
 
 
 
@@ -30,9 +109,9 @@ static void IncrementWithoutClosure()
 }
 
 
-IncrementWithClosure ();
-IncrementWithClosure ();
-IncrementWithoutClosure ();
+IncrementWithClosure();
+IncrementWithClosure();
+IncrementWithoutClosure();
 
 
 Console.WriteLine(inc);
@@ -88,7 +167,7 @@ Console.WriteLine(temp3); // а тут нічого немає в функції
 
 bool TryReadInt(out int result) //результатом ф-ції є булеан (аргумент int result)
 {
-   string input = Console.ReadLine();
+    string input = Console.ReadLine();
     return int.TryParse(input, out result); // повертає true або false, якщо тру, то в result розпарсене стрінгове значення input
 }
 
@@ -179,8 +258,8 @@ long FibonacciLoop(int n)
 long FibonacciWithTernary(int n)
 {
     return n == 1 ? 1
-        : n == 2  ? 1
-        : FibonacciWithTernary(n - 1) + FibonacciWithTernary(n - 2);
+    : n == 2 ? 1
+    : FibonacciWithTernary(n - 1) + FibonacciWithTernary(n - 2);
 }
 
 Console.WriteLine(Fibonacci(3));
@@ -189,7 +268,7 @@ Console.WriteLine(FibonacciWithTernary(3));
 
 const int n = 30;
 
- 
+
 // Stopwatch sw = new();
 
 // sw.Start();
@@ -234,3 +313,4 @@ void PrintNumbersRecursion(int a, int b)
 
 PrintNumbersLoop(5, 15);
 PrintNumbersRecursion(5, 15);
+*/
