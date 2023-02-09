@@ -1,14 +1,6 @@
-﻿void PrintHello (string name = "Vasja")
-{
-    Console.WriteLine($"Hello {name}");
-}
-
-PrintHello ("Vitja");
-PrintHello ();
+﻿
 
 
-
-/*
 int Sum (int a, int b)
 {
     var sumaa = a + b;
@@ -60,47 +52,47 @@ void Assign42R(ref int param)
     param = 42;
 }
 
-Assign42R(ref x);  // тут значення змінної копіюється для відпрацювання в функції, але сама змінна не міняється
+Assign42R(ref x);  // тут значення змінної копіюється для відпрацювання в функції, але сама змінна не міняється тобто x залишиться 20
 Console.WriteLine(x);
 
-/*
-void Assign42Ref(ref int param)
+
+void Assign42Ref(ref int param) //тут вже значення посилається на змінну і змінна міняється реально
 {
     param = 42;
 }
 
-Assign42Ref(ref a);
-Console.WriteLine(a);
+Assign42Ref(ref x); //тобто тут змінна х = 42
+Console.WriteLine(x);
 
 void Assign42Out(out int param)
 {
     param = 42;
 }
 
-int temp1;
-Assign42Out(out temp1);
+int temp1; // цю строку можна було взагалі закоментвати, бо out ініціалізує змінну
+Assign42Out(out temp1); // в нас міняєтья непроініціалізована змінна і вона приймає значення 42 
 Console.WriteLine(temp1);
 
-Assign42Out(out int temp2);
+Assign42Out(out int temp2); //тут ще одна змінна ініціалізується і теж приймає значення 42
 Console.WriteLine(temp2);
 
-void RefNoAssign(ref int param) { }
+void RefNoAssign(ref int param) { }  // а тут нічого немає в функції навіть ніякого return
 
 // COMPILATION ERROR
 // void OutNoAssign(out int param) { }
 
 int temp3 = 15;
 RefNoAssign(ref temp3);
-Console.WriteLine(temp3);
+Console.WriteLine(temp3); // а тут нічого немає в функції, тож ніяких змін зі змінною не буде
 
 
-bool TryReadInt(out int result)
+bool TryReadInt(out int result) //результатом ф-ції є булеан (аргумент int result)
 {
-    // string input = Console.ReadLine();
-    return int.TryParse("42", out result);
+   string input = Console.ReadLine();
+    return int.TryParse(input, out result); // повертає true або false, якщо тру, то в result розпарсене стрінгове значення input
 }
 
-if (TryReadInt(out int temp4))
+if (TryReadInt(out int temp4)) //тут значення фуції bool, але аргумент temp4 це змінна що ініціалізується і створюється вона в функції - див. вище.
 {
     Console.WriteLine(temp4);
 }
@@ -136,11 +128,11 @@ bool TryDivideByThreeBetter(int num, out int result)
 bool TryDivideByThreeBest(int num, out int result)
 {
     result = num / 3;
-    return num % 3 == 0;
+    return num % 3 == 0; // тут буде булеве значення при дійсній умові, але при не дійсній змінна result буде мати будь-що, навіть не int
 }
 
 bool result = TryDivideByThree(6, out temp4);
-Console.WriteLine($"TryDivideByThree(6) = {result}. Result = {temp4}");
+Console.WriteLine($"TryDivideByThree(6) = {result}. Result = {temp4}"); //тут result це true або false, а temp4 це результат
 
 result = TryDivideByThreeBetter(7, out temp4);
 Console.WriteLine($"TryDivideByThree(7) = {result}. Result = {temp4}");
@@ -148,9 +140,11 @@ Console.WriteLine($"TryDivideByThree(7) = {result}. Result = {temp4}");
 result = TryDivideByThreeBest(7, out temp4);
 Console.WriteLine($"BEST VERSION: TryDivideByThree(7) = {result}. Result = {temp4}");
 
-long Fibonacci(int n)
+
+
+long Fibonacci(int n)   // тут функція з рекурсією
 {
-#pragma warning disable IDE0046
+
     if (n == 1)
     {
         return 1;
@@ -162,7 +156,7 @@ long Fibonacci(int n)
     }
 
     return Fibonacci(n - 1) + Fibonacci(n - 2);
-#pragma warning restore IDE0046
+
 }
 
 
@@ -195,29 +189,29 @@ Console.WriteLine(FibonacciWithTernary(3));
 
 const int n = 30;
 
-/* 
-Stopwatch sw = new();
+ 
+// Stopwatch sw = new();
 
-sw.Start();
+// sw.Start();
 Console.WriteLine(FibonacciLoop(n));
-sw.Stop();
+// sw.Stop();
 
-Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds}ms");
+// Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds}ms");
 
-sw.Reset();
+// sw.Reset();
 
-sw.Start();
+// sw.Start();
 Console.WriteLine(Fibonacci(n));
-sw.Stop();
+// sw.Stop();
 
-Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds}ms");
+// Console.WriteLine($"Elapsed: {sw.ElapsedMilliseconds}ms");
 
-void PrintHello(string name = "Dima")
+void PrintHello(string name = "Dima") //опціональний параметр
 {
     Console.WriteLine($"Hello, {name}!");
 }
 
-PrintHello("Dima");
+PrintHello("Vova");
 PrintHello();
 PrintHello("World");
 
@@ -240,4 +234,3 @@ void PrintNumbersRecursion(int a, int b)
 
 PrintNumbersLoop(5, 15);
 PrintNumbersRecursion(5, 15);
-*/
