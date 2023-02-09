@@ -1,232 +1,129 @@
-﻿string name = "dima";
+﻿// string name = "Mayday2";
 
-if (name == "Dima")
-{
-    Console.WriteLine("Hi, Dima");
-}
-else if (name == "dima")
-{
-    Console.WriteLine("Hi, dima");
-}
-else if (name == "dima")
-{
-    Console.WriteLine("Hi, DIMA");
-}
-else
-{
-    Console.WriteLine("Hi, not Dima");
-}
-
-Console.WriteLine("next operation");
-
-Console.WriteLine("SWITCH/CASE");
-switch (name)
-{
-    case "Dima":
-        Console.WriteLine("Hi, Dima");
-        break;
-    case "dima":
-        Console.WriteLine("Hi, dima");
-        break;
-    default:
-        Console.WriteLine("Hi, not Dima");
-        break;
-}
-
-int a = 10;
-int b = (a == 10 ? 15 : 20); // if (a == 10) { b = 15 } else { b = 20 }
-Console.WriteLine(b);
-
-// POSSIBLE BUT NOT PREFERABLE
-if (a == 10)
-    b = 15;
-else
-    b = 20;
-
-Console.WriteLine("NUMBERS FROM 0 TO 9");
-for (int i = 0; i < 10; ++i)
-{
-    Console.WriteLine(i);
-}
-
-var sum = 0;
-for (int i = 0; i <= 10; ++i)
-{
-    sum += i;
-}
-
-Console.WriteLine($"Sum from 0 to 10 is equal to {sum}");
-
-var mul = 1;
-for (int i = 1; i <= 10; ++i)
-{
-    mul *= i; // 1 * 1 * 2 * 3 ... * 8 * 9 * 10
-}
-
-Console.WriteLine($"Mul from 1 to 10 is equal to {mul}");
-
-mul = 1;
-int j = 1;
-while (j <= 10)
-{
-    mul *= j++;
-}
-
-Console.WriteLine($"Mul from 1 to 10 is equal to {mul}");
-
-// for (;;)
+// if (name == "Mayday")
 // {
-//     Console.WriteLine("INFINITE LOOP");
+//     System.Console.WriteLine($"Hi, {name}");
+// }
+// else if (name == "Mayday1")
+// {
+//     System.Console.WriteLine($"Hi, {name}");
+// }
+// else
+// {
+//     System.Console.WriteLine("Hello, not Mayday");
+// };
+
+// System.Console.WriteLine("Next Operation");
+// System.Console.WriteLine("SWITCH/CASE");
+
+// switch (name)
+// {
+//     case "Mayday":
+//     System.Console.WriteLine("Hello, Mayday");
+//     break;
+//     case "Mayday1":
+//     System.Console.WriteLine("Hello, Mayday1");
+//     break;
+//     default:
+//     System.Console.WriteLine("Hello, not Mayday");
+//     break;
 // }
 
-// while (true)
+// int a = 11;
+// int b = (a == 10 ? 15 : 20);
+// System.Console.WriteLine(b);
+
+// int sum = 0;
+// for (int i = 0; i <= 10; ++i)
 // {
-//     Console.WriteLine("INFINITE LOOP");
+//     sum += i;
 // }
 
-mul = 1;
-j = 1;
-do
-{
-    mul *= j++;
-} while (j <= 10);
+// System.Console.WriteLine(sum);
 
-Console.WriteLine($"Mul from 1 to 10 is equal to {mul}");
+// int mul = 1;
+// for (int i = 1; i <= 10; i++)
+// {
+//     mul *= i;
+// }
 
-while (false)
-{
-    Console.WriteLine("NEVER INSIDE");
-}
+// System.Console.WriteLine(mul);
 
-do
-{
-    Console.WriteLine("ONLY ONCE");
-} while (false);
+// int i2 = 10;
+// int sum2 = 0;
+// while (i2 > 0)
+// {
+//     sum2 += i2;
+//     i2--;
+// }
 
-sum = 0;
-for (int i = 0; i <= 42; i += 2)
-{
-    sum += i;
-}
+// System.Console.WriteLine(sum2);
 
-Console.WriteLine($"Sum of even from 0 to 42 is {sum}");
+// i2 = 10;
+// int mul2 = 1;
 
-sum = 0;
-for (int i = 1; i <= 42; i += 2)
-{
-    sum += i;
-}
+// while (i2 > 0)
+// {
+//     mul2 *= i2--;
+// }
 
-Console.WriteLine($"Sum of odd from 0 to 42 is {sum}");
+// System.Console.WriteLine(mul2);
 
-sum = 0;
-for (int i = 0; i <= 42; i++)
-{
-    sum += i;
-}
+// i2 = 10;
+// mul2 = 1;
+// do
+// {
+//     mul2 *= i2--;
+// } while (i2 > 0);
 
-Console.WriteLine($"Sum from 0 to 42 is {sum}");
+// System.Console.WriteLine(mul2);
 
-sum = 0;
-for (int i = 0; i <= 42; i++)
-{
-    if (i % 2 == 1)
-    {
-        continue;
-    }
+// int sum_odd = 0;
 
-    sum += i;
-}
+// for (int i3 = 0; i3 <= 42; i3++)
+// {
+//     if (i3 % 2 == 0)
+//     {
+//         continue;
+//     }
+//     sum_odd += i3;
+// }
 
-Console.WriteLine($"Sum of even from 0 to 42 is {sum}");
+// int sum_even = 0;
+// for (int i4 = 0; i4 <= 42; i4++)
+// {
+//     if (i4 % 2 == 1)
+//     {
+//         continue;
+//     }
+//     sum_even += i4;
+// }
 
-for (int i = 0; i < 10; i++)
-{
-    if (i == 5)
-    {
-        break;
-    }
+// System.Console.WriteLine(sum_odd);
+// System.Console.WriteLine(sum_even);
 
-    Console.WriteLine("NEW EXECUTION");
-}
+// for (int i5 = 0; i5 < 10; i5++)
+// {
+//     if (i5 == 5)
+//     {
+//         break;
+//     }
+//     System.Console.WriteLine($"Iteration {i5}");
+// }
 
-Console.WriteLine("PLEASE ENTER THE VALUE:");
-string input = "42";
-// string input = Console.ReadLine();
-Console.WriteLine($"You've entered '{input}'");
+string input1 = Console.ReadLine();
+int num1 = int.Parse(input1);
 
-Console.WriteLine("Please enter number #1:");
-// input = Console.ReadLine();
-int num1 = int.Parse(input);
+string input2 = Console.ReadLine();
+int num2 = int.Parse(input2);
 
-Console.WriteLine("Please enter number #2:");
-// input = Console.ReadLine();
-int num2 = int.Parse(input);
+int sum4 = num1 + num2;
+System.Console.WriteLine(sum4);
 
-Console.WriteLine($"Sum of 2 numbers is {num1 + num2}");
+input1 = Console.ReadLine();
+bool success = int.TryParse(input1, out int num3);
 
-Console.WriteLine("Please enter number #3:");
-// input = Console.ReadLine();
-bool success = int.TryParse(input, out int num3);
 if (success)
 {
-    Console.WriteLine($"You entered number {num3}");
+    System.Console.WriteLine(num3);
 }
-else
-{
-    Console.WriteLine($"You entered shit");
-}
-
-Console.WriteLine("Please enter number #4 (decimal):");
-// input = Console.ReadLine();
-decimal d1 = decimal.Parse(input);
-Console.WriteLine($"You entered number {d1}");
-
-Console.WriteLine("Please enter number #5:");
-// input = Console.ReadLine();
-int num5 = Convert.ToInt32(input);
-Console.WriteLine($"You entered number {num5}");
-
-DateTime dateTime1 = new DateTime();
-Console.WriteLine(dateTime1);
-
-DateTime dateTime2 = new DateTime(2023, 2, 2);
-DateTime dateTime3 = new DateTime(2023, 2, 2, 20, 23, 00);
-
-Console.WriteLine(dateTime2);
-Console.WriteLine(dateTime3);
-
-DateTime dateTime4 = DateTime.Now;
-Console.WriteLine(dateTime4);
-
-Console.WriteLine(dateTime4 - dateTime2);
-
-TimeSpan timeSpan1 = new TimeSpan();
-TimeSpan timeSpan2 = new TimeSpan(10, 5, 15);
-
-Console.WriteLine(timeSpan1);
-Console.WriteLine(timeSpan2);
-
-Console.WriteLine(dateTime4 + timeSpan2);
-
-Console.WriteLine(dateTime4.Month);
-Console.WriteLine(dateTime4.Day);
-Console.WriteLine(dateTime4.Date);
-Console.WriteLine(dateTime4.DayOfWeek);
-Console.WriteLine(dateTime4.DayOfYear);
-Console.WriteLine(dateTime4.TimeOfDay);
-
-Console.WriteLine("DATETIME COMPARISON");
-Console.WriteLine(dateTime4 > dateTime2);
-
-DateOnly dateOnly1 = new DateOnly();
-DateOnly dateOnly2 = new DateOnly(2023, 2, 3);
-
-Console.WriteLine(dateOnly1);
-Console.WriteLine(dateOnly2);
-
-TimeOnly timeOnly1 = new TimeOnly();
-TimeOnly timeOnly2 = new TimeOnly(12, 13, 15, 152, 467);
-
-Console.WriteLine(timeOnly1);
-Console.WriteLine(timeOnly2);
