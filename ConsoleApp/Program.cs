@@ -1,73 +1,21 @@
-﻿static int Sum(int a, int b)
+﻿int N = 10;
+int f_n1 = 1;
+int f_n2 = 1;
+for (int i = 3; i <= N; i++ )
 {
-    int sum = a + b;
-    return sum;
+    int sum = f_n1 + f_n2;
+    f_n1 = f_n2;
+    f_n2 = sum;
 }
 
-// static int SumOneLine(int a, int b) => a + b; // { return a + b; }
-static int SumOneLine(int a, int b)
+System.Console.WriteLine($"{N}-member of Fibonacci = {f_n2}");
+
+static int Sum(int a, int b)
 {
-    return a + b; // { return a + b; }
+   int sum = a + b;
+   return sum;  
 }
 
-int a = 15;
-int b = 20;
-Console.WriteLine(Sum(a, b));
-Console.WriteLine(SumOneLine(42, 80));
-
-int inc = 0;
-void IncrementWithClosure()
-{
-    ++inc;
-}
-
-static void IncrementWithoutClosure()
-{
-    int inc = 0;
-#pragma warning disable IDE0059
-    ++inc;
-#pragma warning restore all
-}
-
-IncrementWithClosure();
-IncrementWithClosure();
-IncrementWithoutClosure();
-
-Console.WriteLine(inc);
-
-void Assign42(int param)
-{
-    param = 42;
-}
-
-Assign42(a);
-Console.WriteLine(a);
-
-void Assign42Ref(ref int param)
-{
-    param = 42;
-}
-
-Assign42Ref(ref a);
-Console.WriteLine(a);
-
-void Assign42Out(out int param)
-{
-    param = 42;
-}
-
-int temp1;
-Assign42Out(out temp1);
-Console.WriteLine(temp1);
-
-Assign42Out(out int temp2);
-Console.WriteLine(temp2);
-
-void RefNoAssign(ref int param) { }
-
-// COMPILATION ERROR
-// void OutNoAssign(out int param) { }
-
-int temp3 = 15;
-RefNoAssign(ref temp3);
-Console.WriteLine(temp3);
+int a = 10;
+int b = 5;
+System.Console.WriteLine(Sum(a, b));
