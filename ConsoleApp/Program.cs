@@ -253,3 +253,29 @@ WriteLineArray(Sort(backsorted));
 
 Console.WriteLine("EMPTY ARRAY");
 WriteLineArray(Sort(empty));
+
+
+// 0, 1, 2 -> 2, 1, 0
+// 0, 1, 2, 3 -> 3, 2, 1, 0
+static int[] Reverse(int[] arr)
+{
+    int[] reversed = new int[arr.Length];
+    Array.Copy(arr, reversed, arr.Length);
+
+    int halfSize = reversed.Length / 2;
+    for (int i = 0; i < halfSize; i++)
+    {
+#pragma warning disable IDE0180
+        int temp = reversed[i];
+        reversed[i] = reversed[^(i + 1)];
+        reversed[^(i + 1)] = temp;
+#pragma warning restore
+    }
+
+    return reversed;
+}
+
+Console.WriteLine("REVERSE");
+WriteLineArray(Reverse(new[] { 1, 2, 3 }));
+Console.WriteLine("REVERSE");
+WriteLineArray(Reverse(new[] { 1, 2, 3, 4 }));
