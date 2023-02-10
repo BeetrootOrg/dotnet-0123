@@ -1,37 +1,8 @@
-﻿ Console.WriteLine("Please enter a first number");
-           string input1 = Console.ReadLine();
-           bool success1 = int.TryParse(input1, out int num1);
-          
-           Console.WriteLine("Please enter a second number");
-           string input2 = Console.ReadLine();
-           bool success2 = int.TryParse(input2, out int num2);
+﻿DateTime date1 = DateTime.Now;
 
-           int sum = 0;
+DateTime newYear2023 = new DateTime (2023, 1, 1);
 
-           if (success1 && success2)
-           {
-               if (num1 >= num2)
-               {
-                   for (int i = num2; i <= num1; i++)
-                   {
-                       sum += i;
-                   }
-                   Console.WriteLine("Sum of numbers = " + sum);
-               }
+DateTime newYear2024 = new DateTime (2023, 12, 31);
 
-               else
-               {
-                   for (int j = num1; j <= num2; j++)
-                   {
-                       sum += j;
-                   }
-                   Console.WriteLine("Sum of numbers = " + sum);
-               }
-           }
-           
-           else
-           {
-               {
-                   Console.WriteLine("You entered a wrong number");
-               }
-           }
+Console.WriteLine(newYear2024.DayOfYear - date1.DayOfYear + " days left to the New Year");
+Console.WriteLine(date1.DayOfYear - newYear2023.DayOfYear + " days passed from the New Year");
