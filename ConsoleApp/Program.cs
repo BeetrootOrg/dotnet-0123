@@ -204,3 +204,52 @@ for (int i = 0; i < jagged.Length; i++)
         Console.WriteLine(inner[j]);
     }
 }
+
+static int[] Sort(int[] arr)
+{
+    int[] sorted = new int[arr.Length];
+    Array.Copy(arr, sorted, arr.Length);
+
+    for (int i = 1; i < arr.Length; i++)
+    {
+        int item = arr[i];
+        int index = i;
+
+        for (int j = i - 1; j >= 0; j--)
+        {
+            int current = arr[j];
+            if (current > item)
+            {
+                arr[j + 1] = arr[j];
+                index = j;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        arr[index] = item;
+    }
+
+    return arr;
+}
+
+int[] sorted = new[] { -1, 0, 1, 3, 3 };
+int[] random = new[] { -5, 10, 0, 15, -20, 100, 0 };
+int[] backsorted = new[] { 3, 1, 0, -1, -1 };
+#pragma warning disable CA1825
+int[] empty = new int[0];
+#pragma warning restore
+
+Console.WriteLine("SORTED ARRAY");
+WriteLineArray(Sort(sorted));
+
+Console.WriteLine("RANDOM ARRAY");
+WriteLineArray(Sort(random));
+
+Console.WriteLine("BACK SORTED ARRAY");
+WriteLineArray(Sort(backsorted));
+
+Console.WriteLine("EMPTY ARRAY");
+WriteLineArray(Sort(empty));
