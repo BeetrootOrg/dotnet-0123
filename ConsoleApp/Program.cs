@@ -76,3 +76,12 @@ Console.WriteLine("COPY ARRAY");
 int[] subarray = nullArr[1..];
 subarray[0] = 42;
 WriteLineArray(nullArr);
+
+Console.WriteLine("RANGE OPERATOR ^3..^1");
+WriteLineArray(nullArr[^3..^1]); // [1][2]
+
+Console.WriteLine("RANGE OPERATOR ..^1");
+WriteLineArray(nullArr[..^1]); // [0][1][2]
+
+Console.WriteLine("RANGE OPERATOR ^3..");
+WriteLineArray(nullArr[..^1]); // [1][2][3]
