@@ -1,20 +1,19 @@
 ﻿/* Домашня робота 04-functions
 
 Define and call with different parameters next methods:
-
 Method that will return max value among all the parameters
 … min value …
-Method TrySumIfOdd that accepts 2 parameters and returns true if sum of numbers between inputs is odd, otherwise false, sum return as out parameter
+
 Overload first two methods with 3 and 4 parameters
 Extra:
 
 Define and call with different parameters next methods:
 
-Method Repeat that will accept string X and number N and return X repeated N times (e.g. Repeat(‘str’, 3) returns ‘strstrstr’ = ‘str’ three times)
+
 */
 
 
-int x1 = 66;
+int x1 = 99;
 int x2 = 1013;
 int x3 = 297;
 int x4 = 976;
@@ -60,20 +59,48 @@ int Max(int a, int b, int c = 0, int d = 0)
 // з Min не роблю бо все те саме.
 /////////////////////////////////////////////////
 
-// bool res = TrySumIfOdd (x1, x2, out int summa); //результат out проініціалізується в змінну summa
-// Console.WriteLine($"{res}   {summa});
 
-bool oddEven = TrySumIfOdd (x1, x2, out var suma); //ініціалізуємо змінну suma і записуємо туди значення із result
-System.Console.WriteLine($"{x1} + {x2} = {suma}...{oddEven}");
+/*
+Method TrySumIfOdd that accepts 2 parameters and returns 
+true if sum of numbers between inputs is odd, 
+otherwise false, sum return as out parameter
+*/
+
+bool oddEven = TrySumIfOdd(x1, x2, out var suma); //ініціалізуємо змінну suma і записуємо туди значення із result
+Console.WriteLine($"{x1} + {x2} = {suma}...{oddEven}");
+
 bool TrySumIfOdd(int a, int b, out int result) // тут де result, у нас буде назва змінної (suma) із виклику
 {
     if ((a + b) % 2 == 0)
     {
-        result = a + b; //ця сама змінна result передастся в шапку функції, її треба дати значення перед return
+        result = a + b; //ця сама змінна result передастся в шапку функції, їй потрібно присвоїти значення перед return
         return false;
     }
     result = a + b;
-    return true;        //ця сама змінна result передастся в шапку функції, її треба дати значення перед return
+    return true;        //ця сама змінна result передастся в шапку функції, їй потрібно присвоїти значення перед return
+}
+/////////////////////////////////////////////////
+
+/* 
+Method Repeat that will accept string X and number N and return X repeated N times
+(e.g. Repeat(‘str’, 3) returns ‘strstrstr’ = ‘str’ three times)
+*/
+
+string text = Repeat(x1); //без опціонального параметра
+string text2 = Repeat(x1, "str "); //з опціональним параметром
+Console.WriteLine(text);
+Console.WriteLine(text2);
+
+string Repeat(int n, string sign = "yourtext ")
+{
+    string stroka = sign;
+    while (n > 1)
+    {
+        //sign += "str ";
+        stroka += sign;
+        n--;
+    }
+    return stroka;
 }
 
 /*
