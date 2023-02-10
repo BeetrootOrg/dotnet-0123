@@ -38,17 +38,10 @@ else
     max = x1;
 };
 
-int sum = 0;
-if (min != max)
-{
-    for (int i = min; i <= max; i++)
+int sum = 0; 
+for (int i = min; i <= max; i++)
     {
         sum +=i;
     }
-}
-else
-{
-    sum = min;
-};
 
 System.Console.WriteLine($"Sum = {sum}");
