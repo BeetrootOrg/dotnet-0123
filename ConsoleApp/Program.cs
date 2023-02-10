@@ -117,3 +117,27 @@ Console.WriteLine(Sum(nums2));
 Console.WriteLine(SumParams(nums2));
 Console.WriteLine(SumParams(1, 2, 3));
 Console.WriteLine(SumParams());
+
+static void ResizeArray(ref int[] arr, int size)
+{
+    if (arr.Length == size)
+    {
+        return;
+    }
+
+    int[] newArr = new int[size];
+    int minLength = arr.Length < size ? arr.Length : size;
+    for (int i = 0; i < minLength; i++)
+    {
+        newArr[i] = arr[i];
+    }
+
+    arr = newArr;
+}
+
+Console.WriteLine("RESIZE");
+ResizeArray(ref nums3, 4);
+WriteLineArray(nums3);
+
+ResizeArray(ref nums3, 2);
+WriteLineArray(nums3);
