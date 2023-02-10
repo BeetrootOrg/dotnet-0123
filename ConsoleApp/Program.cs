@@ -141,3 +141,26 @@ WriteLineArray(nums3);
 
 ResizeArray(ref nums3, 2);
 WriteLineArray(nums3);
+
+// BEST OPTION
+Array.Resize(ref nums3, 4);
+WriteLineArray(nums3);
+
+static int[] MulBy2(int[] arr)
+{
+    int[] copy = new int[arr.Length];
+    Array.Copy(arr, copy, arr.Length);
+
+    for (int i = 0; i < copy.Length; i++)
+    {
+        copy[i] *= 2;
+    }
+
+    return copy;
+}
+
+Console.WriteLine("MUL BY 2");
+WriteLineArray(MulBy2(nums4));
+
+Console.WriteLine("ORIGINAL nums4");
+WriteLineArray(nums4);
