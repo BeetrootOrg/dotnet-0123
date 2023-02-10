@@ -19,3 +19,38 @@ static void WriteLineArray(int[] arr)
 }
 
 WriteLineArray(nums1);
+
+int[] nullArr = null;
+if (nullArr != null)
+{
+    Console.WriteLine(nullArr.Length);
+}
+
+static void UpdateElementAt(int[] arr, int index, int newValue)
+{
+    arr[index] = newValue;
+}
+
+#pragma warning disable IDE0059
+static void UpdateArray(int[] arr)
+{
+    arr = new[] { 4, 5, 6, 7 };
+}
+#pragma warning restore
+
+static void UpdateArrayRef(ref int[] arr)
+{
+    arr = new[] { 4, 5, 6, 7 };
+}
+
+Console.WriteLine("UPDATE ARRAY ELEMENT");
+UpdateElementAt(nums1, 1, 42);
+WriteLineArray(nums1);
+
+Console.WriteLine("UPDATE ARRAY");
+UpdateArray(nums1);
+WriteLineArray(nums1);
+
+Console.WriteLine("UPDATE ARRAY REF");
+UpdateArrayRef(ref nums1);
+WriteLineArray(nums1);
