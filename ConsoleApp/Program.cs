@@ -1,40 +1,65 @@
-﻿int Max5(int a, int b, int c = 0, int d = 0, int e = 0)
+﻿int Max3(int a, int b, int c)
 {
-    if (a >= b)
-    {
-        if (a >= c)
-            if (a >= d)
-                if (a >= e)
-                    return a;
-    }
+    if (a >= b & a>=c) return a;
     else
     {
         a = b;
         b = c;
-        c = d;
-        d = e;
     }
-    return Max5(a, b, c, d, e);
+    return Max3(a, b, c);
 }
 
 
-int Min5(int a, int b, int c=0, int d=0, int e=0)
+int Min3 (int a, int b, int c)
 {
-    if (a <= b)
+    if (a <= b & a <= c)
     {
-        if (a <= c)
-            if (a <= d)
-                if (a <= e)
-                    return a;
+        return a;
     }
     else
     {
         a = b;
         b = c;
-        c = d;
-        d = e;
     }
-    return Min5(a, b, c, d, e);
+    return Min3(a, b, c);
+}
+
+
+int Max4(int a, int b, int c, int d)
+{
+    if (a >= b & a >=c & a>=d) return a;
+    else
+    {
+        a = b;
+        b = c;
+        c = d;
+    }
+    return Max3(a, b, c);
+}
+
+
+int Min4(int a, int b, int c, int d)
+{
+    if (a <= b & a <=c & a<=d) return a;
+    else
+    {
+        a = b;
+        b = c;
+        c = d;
+    }
+    return Min3(a, b, c);
+}
+
+
+int Max5(int a, int b, int c, int d, int e)
+{
+    return Max3(a, b, Max3(c, d, e));
+}
+
+
+int Min5(int a, int b, int c, int d, int e)
+{
+    return Min3(a, b, Min3(c, d, e));
 }
 
 
@@ -68,7 +93,11 @@ string Repeat(string text, int count)
 }
 
 
-Console.WriteLine(Max5(3, 18, 30, 20, 5));
-Console.WriteLine(Min5(5, 2, 5, 1, 4));
-Console.WriteLine(TrySumIfOdd(1, 3, out int result));
+Console.WriteLine(Max3(3, 18, 30));
+Console.WriteLine(Min3(5, 4, 2));
+Console.WriteLine(Max4(3, 18, 30, 100));
+Console.WriteLine(Min4(5, 4, 2, 1));
+Console.WriteLine(Max5(3, 18, 30, 67, 31));
+Console.WriteLine(Min5(5, 4, 2, 6, 4));
+Console.WriteLine(TrySumIfOdd(1, 7, out int result));
 Console.WriteLine(Repeat("hello", 5));
