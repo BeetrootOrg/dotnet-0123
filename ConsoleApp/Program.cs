@@ -85,3 +85,35 @@ WriteLineArray(nullArr[..^1]); // [0][1][2]
 
 Console.WriteLine("RANGE OPERATOR ^3..");
 WriteLineArray(nullArr[..^1]); // [1][2][3]
+
+Console.WriteLine("SUM");
+static int Sum(int[] arr)
+{
+    int sum = 0;
+    foreach (int item in arr)
+    {
+        sum += item;
+    }
+
+    return sum;
+}
+
+static int SumParams(params int[] arr)
+{
+    int sum = 0;
+    foreach (int item in arr)
+    {
+        sum += item;
+    }
+
+    return sum;
+}
+
+Console.WriteLine(Sum(nums2));
+// COMPILATION ERRORS BELOW:
+// Console.WriteLine(Sum(1, 2, 3));
+// Console.WriteLine(Sum());
+
+Console.WriteLine(SumParams(nums2));
+Console.WriteLine(SumParams(1, 2, 3));
+Console.WriteLine(SumParams());
