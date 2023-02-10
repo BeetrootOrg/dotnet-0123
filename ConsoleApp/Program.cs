@@ -18,6 +18,14 @@ static void WriteLineArray(int[] arr)
     }
 }
 
+static void WriteLineArrayForeach(int[] arr)
+{
+    foreach (int item in arr)
+    {
+        Console.WriteLine(item);
+    }
+}
+
 WriteLineArray(nums1);
 
 int[] nullArr = null;
@@ -52,5 +60,19 @@ UpdateArray(nums1);
 WriteLineArray(nums1);
 
 Console.WriteLine("UPDATE ARRAY REF");
-UpdateArrayRef(ref nums1);
-WriteLineArray(nums1);
+UpdateArrayRef(ref nullArr);
+WriteLineArrayForeach(nullArr);
+
+Console.WriteLine("RANGE OPERATOR 1..3");
+WriteLineArray(nullArr[1..3]); // [1][2]
+
+Console.WriteLine("RANGE OPERATOR ..3");
+WriteLineArray(nullArr[..3]); // [0][1][2]
+
+Console.WriteLine("RANGE OPERATOR ..3");
+WriteLineArray(nullArr[1..]); // [1][2][3]
+
+Console.WriteLine("COPY ARRAY");
+int[] subarray = nullArr[1..];
+subarray[0] = 42;
+WriteLineArray(nullArr);
