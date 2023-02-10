@@ -182,3 +182,25 @@ for (int i = 0; i < matrix.GetLength(0); i++)
         Console.WriteLine(matrix[i, j]);
     }
 }
+
+int[][] jagged = new int[2][]
+{
+    new[] { 1, 2, 3 },
+    new[] { 1, 2 },
+};
+
+foreach (int[] item in jagged)
+{
+    Console.WriteLine("JAGGED ARRAY");
+    WriteLineArray(item);
+}
+
+Console.WriteLine($"LENGTH = {jagged.Length}");
+for (int i = 0; i < jagged.Length; i++)
+{
+    int[] inner = jagged[i];
+    for (int j = 0; j < inner.Length; j++)
+    {
+        Console.WriteLine(inner[j]);
+    }
+}
