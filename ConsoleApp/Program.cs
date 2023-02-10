@@ -49,22 +49,28 @@ void Assign42Ref (ref int param)
 Assign42Ref(ref a);
 System.Console.WriteLine(a);
 
-// void Assign42Out (out int param1);
-// {
-//     param1 = 42;
-// }
-// Assign42Out();
-
-void Repeat(string X, int N)
+void Assign42Out (out int param)
 {
-    string r = X;
-    for (int i = 2; i <= N; i++ )
-    {
-        r += X;
-    }
-    System.Console.WriteLine(r);
-};
+    param = 42;
+}
 
-String x = "mayday_";
-int n = 3;
-Repeat(x, n);
+int temp1;
+Assign42Out(out temp1);
+System.Console.WriteLine($"temp1 = {temp1}");
+
+Assign42Out(out int temp2);
+System.Console.WriteLine($"temp2 = {temp2}");
+
+// void Repeat(string X, int N)
+// {
+//     string r = X;
+//     for (int i = 2; i <= N; i++ )
+//     {
+//         r += X;
+//     }
+//     System.Console.WriteLine(r);
+// };
+
+// String x = "mayday_";
+// int n = 3;
+// Repeat(x, n);
