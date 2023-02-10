@@ -164,3 +164,21 @@ WriteLineArray(MulBy2(nums4));
 
 Console.WriteLine("ORIGINAL nums4");
 WriteLineArray(nums4);
+
+int[,] matrix = new int[2, 4] { { 0, 1, 2, 3 }, { 4, 5, 6, 7 } };
+foreach (int item in matrix)
+{
+    Console.WriteLine(item);
+}
+
+Console.WriteLine($"LENGTH = {matrix.Length}");
+Console.WriteLine($"GetLength(0) = {matrix.GetLength(0)}");
+Console.WriteLine($"GetLength(1) = {matrix.GetLength(1)}");
+
+for (int i = 0; i < matrix.GetLength(0); i++)
+{
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+        Console.WriteLine(matrix[i, j]);
+    }
+}
