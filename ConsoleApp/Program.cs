@@ -31,3 +31,23 @@ static int[] SelectionSort(int[] arr)
     
     return arrCopy;
 }
+
+static int[] BubbleSort(int[] arr)
+{
+    int[] arrCopy = CopyArray(arr);
+    
+    for (int i = 1; i < arrCopy.Length; i++)
+    {
+        for (int j = 1; j < arrCopy.Length; j++)
+        {
+            if (arrCopy[j - 1] > arrCopy[j])
+            {
+                int value = arrCopy[j];
+                arrCopy[j] = arrCopy[j - 1];
+                arrCopy[j - 1] = value;
+            }
+        }
+    }
+
+    return arrCopy;
+}
