@@ -1,37 +1,30 @@
-﻿ Console.WriteLine("Please enter a first number");
-           string input1 = Console.ReadLine();
-           bool success1 = int.TryParse(input1, out int num1);
-          
-           Console.WriteLine("Please enter a second number");
-           string input2 = Console.ReadLine();
-           bool success2 = int.TryParse(input2, out int num2);
+﻿int Max(int a, int b, int c = Int32.MinValue, int d = Int32.MinValue)
+{
+    int max1 = Math.Max(a, b);
+    int max2 = Math.Max(c, d);
+    return Math.Max(max1, max2);
+}
 
-           int sum = 0;
+int Min(int a, int b, int c = Int32.MaxValue, int d = Int32.MaxValue)
+{
+    int min1 = Math.Min(a, b);
+    int min2 = Math.Min(c, d);
+    return Math.Min(min1, min2);
+}
 
-           if (success1 && success2)
-           {
-               if (num1 >= num2)
-               {
-                   for (int i = num2; i <= num1; i++)
-                   {
-                       sum += i;
-                   }
-                   Console.WriteLine("Sum of numbers = " + sum);
-               }
+bool TrySumIfOdd(int a, int b, out int result)
 
-               else
-               {
-                   for (int j = num1; j <= num2; j++)
-                   {
-                       sum += j;
-                   }
-                   Console.WriteLine("Sum of numbers = " + sum);
-               }
-           }
-           
-           else
-           {
-               {
-                   Console.WriteLine("You entered a wrong number");
-               }
-           }
+{
+    result = a + b;
+    return (a + b) % 2 != 0;
+}
+
+void Repeat(string str, int n)
+{
+    Console.Write(str);
+    if (n > 1)
+    {
+        Repeat(str, n - 1);
+    }
+}
+
