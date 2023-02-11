@@ -16,8 +16,6 @@ Console.WriteLine($"SelectionSort");
 WriteLineArray(SelectionSort(tosortsel));
 Console.WriteLine($"BubbleSort");
 WriteLineArray(BubbleSort(tosortbuble));
-Console.WriteLine($"SelectionSort");
-WriteLineArray(SelectionSort(tosortbuble));
 Console.WriteLine($"InsertionSort");
 WriteLineArray(InsertionSort(tosortins));
 Console.WriteLine($"SortLinq");
