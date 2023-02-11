@@ -94,3 +94,23 @@ sum = 0;
  }
 
 System.Console.WriteLine($"sum of odd numbers {sum}");
+
+sum = 0;
+ for (int i = 0; i <=42; i++)
+ {
+    if (i % 2 == 1)//also founding only even numbers
+    {
+        continue;
+    }
+    sum += i;//
+ }
+
+System.Console.WriteLine($"sum of even numbers {sum}");
+
+for(int i = 0; i < 10; i++){
+    if (i == 5)
+    {
+        break;
+    }
+    System.Console.WriteLine("new execution");
+}
