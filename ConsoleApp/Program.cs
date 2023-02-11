@@ -1,4 +1,5 @@
 ﻿using ConsoleApp.Classes;
+
 using System.Linq;
 //---------------- 11.02.2023----------------------
 //--------- Масиви ----------------
@@ -101,8 +102,9 @@ void WriteLineArray(int[] arr)
     }
 }
 
-int[] SortLinq(int[] arrey){
-    return arrey.OrderBy(x=>x).ToArray();
+int[] SortLinq(int[] arrey)
+{
+    return arrey.OrderBy(x => x).ToArray();
 }
 
 do
