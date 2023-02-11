@@ -1,10 +1,6 @@
 ﻿using ConsoleApp.Classes;
 //---------------- 11.02.2023----------------------
 //--------- Масиви ----------------
-int[] nums = { 1, 2, 3, 4, 5 };
-int[] mums1 = new[] { 1, 2, 3, 4, 5 };
-int[] mums2 = new int[] { 1, 2, 3, 4, 5 };
-int[] mums3 = new int[5] { 1, 2, 3, 4, 5 };
 
 int[] tosort = { 123, 3456, 5, 879, 789, 899, 900, 566 };
 int[] tosortsel = { 123, 3456, 5, 879, 789, 899, 900, 566 };
@@ -12,30 +8,15 @@ int[] tosortbuble = { 123, 3456, 5, 879, 789, 899, 900, 566 };
 int[] tosortins = { 123, 3456, 5, 879, 789, 899, 900, 566 };
 bool flag = true;
 int j = 1;
-do
-{
-    flag = false;
-    Console.WriteLine($"Проход {j}"); j++;
-    for (int i = 1; i < tosort.Length; i++)
-    {
-        var c = tosort[i - 1];
-        if (c > tosort[i])
-        {
-            tosort[i - 1] = tosort[i];
-            tosort[i] = c;
-            flag = true;
-            WriteLineArray(tosort);
-        }
-    }
-} while (flag);
+
 Console.WriteLine($"SelectionSort");
 WriteLineArray(SelectionSort(tosortsel));
 Console.WriteLine($"BubbleSort");
-WriteLineArray(SelectionSort(tosortbuble));
-Console.WriteLine($"BubbleSort");
+WriteLineArray(BubbleSort(tosortbuble));
+Console.WriteLine($"SelectionSort");
 WriteLineArray(SelectionSort(tosortbuble));
 Console.WriteLine($"InsertionSort");
-WriteLineArray(SelectionSort(tosortins));
+WriteLineArray(InsertionSort(tosortins));
 
 int[] InsertionSort(int[] arrey)
 {
@@ -108,8 +89,6 @@ int[] SelectionSort(int[] arrey)
     return arr;
 }
 
-//WriteLineArray(tosort);
-
 void WriteLineArray(int[] arr)
 {
     foreach (var item in arr)
@@ -117,3 +96,20 @@ void WriteLineArray(int[] arr)
         Console.WriteLine(item);
     }
 }
+
+do
+{
+    flag = false;
+    Console.WriteLine($"Проход {j}"); j++;
+    for (int i = 1; i < tosort.Length; i++)
+    {
+        var c = tosort[i - 1];
+        if (c > tosort[i])
+        {
+            tosort[i - 1] = tosort[i];
+            tosort[i] = c;
+            flag = true;
+            WriteLineArray(tosort);
+        }
+    }
+} while (flag);
