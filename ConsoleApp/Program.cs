@@ -1,46 +1,119 @@
 ﻿using ConsoleApp.Classes;
-//---------------- 08.02.2023----------------------
-//--------- Classwork 6. Debugging ----------------
+//---------------- 11.02.2023----------------------
+//--------- Масиви ----------------
+int[] nums = { 1, 2, 3, 4, 5 };
+int[] mums1 = new[] { 1, 2, 3, 4, 5 };
+int[] mums2 = new int[] { 1, 2, 3, 4, 5 };
+int[] mums3 = new int[5] { 1, 2, 3, 4, 5 };
 
-// ------test stat class------------------------
-Lesson06.Test();
-// ------ 1 завдання-----------------------------
-// --------факториал-------------------------
-Console.WriteLine(Lesson06.Factorial(10));
-// ------ 2 завдання-----------------------------
-// --------цифри від n до 1-------------------------
-Lesson06.WriteNumbers(10);
-//---------------Debugging------------------------
-int res = Lesson06.Sum(10, 5);
-Console.WriteLine(res);
-for (int i = 0; i < 10; i++)
+int[] tosort = { 123, 3456, 5, 879, 789, 899, 900, 566 };
+int[] tosortsel = { 123, 3456, 5, 879, 789, 899, 900, 566 };
+int[] tosortbuble = { 123, 3456, 5, 879, 789, 899, 900, 566 };
+int[] tosortins = { 123, 3456, 5, 879, 789, 899, 900, 566 };
+bool flag = true;
+int j = 1;
+do
 {
-    Console.Write(i);
-}
-// ---------------дебаг фибоначчи
-Console.WriteLine(Lesson06.Fibonacci(5));
-// ---------------Рандом
-Random random =new ((int)DateTime.Now.Ticks);
-Console.WriteLine(random.Next());
-Console.WriteLine(random.Next(10));//[0,10) 10 не включено
-Console.WriteLine(random.Next(-10,10));//[-10,10) 10 не включено
-Console.WriteLine(random.NextSingle());//0.0<= <1.0
-Console.WriteLine(random.NextDouble());//0.0<= <1.0
-//-----------------------
-Console.WriteLine(Lesson06.SumFromTo(1,10));
-//-------------Відстань між 2 точками 
-Console.WriteLine(Lesson06.Distance(0,0,5,5));
-Console.WriteLine(Lesson06.Distance(0,3,4,0));
-// StringToBinari
-string StringToBinari(int n){
-    int num=n;
-    string result="";
-    do{
-        result=num%2+result;
-        num=num/2;
-    }while(num>0);
-    return result;
-}
-Console.WriteLine(StringToBinari(5));
-Console.WriteLine(StringToBinari(510));
+    flag = false;
+    Console.WriteLine($"Проход {j}"); j++;
+    for (int i = 1; i < tosort.Length; i++)
+    {
+        var c = tosort[i - 1];
+        if (c > tosort[i])
+        {
+            tosort[i - 1] = tosort[i];
+            tosort[i] = c;
+            flag = true;
+            WriteLineArray(tosort);
+        }
+    }
+} while (flag);
+Console.WriteLine($"SelectionSort");
+WriteLineArray(SelectionSort(tosortsel));
+Console.WriteLine($"BubbleSort");
+WriteLineArray(SelectionSort(tosortbuble));
+Console.WriteLine($"BubbleSort");
+WriteLineArray(SelectionSort(tosortbuble));
+Console.WriteLine($"InsertionSort");
+WriteLineArray(SelectionSort(tosortins));
 
+int[] InsertionSort(int[] arrey)
+{
+    if (arrey.Length < 2) return arrey;
+    int[] arr = new int[arrey.Length];
+    Array.Copy(arrey, arr, arrey.Length);
+    int buf;
+    for (int i = 1; i < arrey.Length; i++)
+    {
+        buf = arr[i];
+        for (int j = i - 1; j >= 0;)
+        {
+            if (buf < arr[j])
+            {
+                arr[j + 1] = arr[j];
+                j--;
+                arr[j + 1] = buf;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+    }
+    return arr;
+}
+
+int[] BubbleSort(int[] arrey)
+{
+    if (arrey.Length < 2) return arrey;
+    int[] arr = new int[arrey.Length];
+    Array.Copy(arrey, arr, arrey.Length);
+    int buf;
+    for (int j = 0; j <= arr.Length - 2; j++)
+    {
+        for (int i = 0; i <= arr.Length - 2; i++)
+        {
+            if (arr[i] > arr[i + 1])
+            {
+                buf = arr[i + 1];
+                arr[i + 1] = arr[i];
+                arr[i] = buf;
+            }
+        }
+    }
+    return arr;
+}
+
+int[] SelectionSort(int[] arrey)
+{
+    if (arrey.Length < 2) return arrey;
+    int[] arr = new int[arrey.Length];
+    Array.Copy(arrey, arr, arrey.Length);
+    int minind, buf;
+    for (int i = 0; i < arr.Length - 1; i++)
+    {
+        minind = i;
+        for (int j = i + 1; j < arr.Length; j++)
+        {
+            if (arr[minind] > arr[j]) { minind = j; }
+        }
+        if (i != minind)
+        {
+            buf = arr[i];
+            arr[i] = arr[minind];
+            arr[minind] = buf;
+        }
+    }
+    return arr;
+}
+
+//WriteLineArray(tosort);
+
+void WriteLineArray(int[] arr)
+{
+    foreach (var item in arr)
+    {
+        Console.WriteLine(item);
+    }
+}
