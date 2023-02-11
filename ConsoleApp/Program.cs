@@ -1,4 +1,5 @@
 ﻿using ConsoleApp.Classes;
+using System.Linq;
 //---------------- 11.02.2023----------------------
 //--------- Масиви ----------------
 
@@ -6,6 +7,7 @@ int[] tosort = { 123, 3456, 5, 879, 789, 899, 900, 566 };
 int[] tosortsel = { 123, 3456, 5, 879, 789, 899, 900, 566 };
 int[] tosortbuble = { 123, 3456, 5, 879, 789, 899, 900, 566 };
 int[] tosortins = { 123, 3456, 5, 879, 789, 899, 900, 566 };
+int[] tosortlinq = { 123, 3456, 5, 879, 789, 899, 900, 566 };
 bool flag = true;
 int j = 1;
 
@@ -17,6 +19,8 @@ Console.WriteLine($"SelectionSort");
 WriteLineArray(SelectionSort(tosortbuble));
 Console.WriteLine($"InsertionSort");
 WriteLineArray(InsertionSort(tosortins));
+Console.WriteLine($"SortLinq");
+WriteLineArray(SortLinq(tosortlinq));
 
 int[] InsertionSort(int[] arrey)
 {
@@ -95,6 +99,10 @@ void WriteLineArray(int[] arr)
     {
         Console.WriteLine(item);
     }
+}
+
+int[] SortLinq(int[] arrey){
+    return arrey.OrderBy(x=>x).ToArray();
 }
 
 do
