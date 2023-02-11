@@ -1,78 +1,44 @@
-﻿int N = 10;
-int f_n1 = 1;
-int f_n2 = 1;
-for (int i = 3; i <= N; i++ )
+﻿int[] nums1 ={1, 2, 3, 4};
+int[] nums2 = new[] {1,2,3,4};
+int[] nums3 = new int[]{1, 2, 3};
+int[] nums4 = new int[3]{1,2,3};
+int[] nums5 = new int[5];
+
+void WriteLineArray (int[] arr)
 {
-    int sum = f_n1 + f_n2;
-    f_n1 = f_n2;
-    f_n2 = sum;
+    for (int i = 0; i < arr.Length; i++)
+    {
+        System.Console.WriteLine(arr[i]);
+    }
 }
 
-System.Console.WriteLine($"{N}-member of Fibonacci = {f_n2}");
+WriteLineArray(nums1);
 
-static int Sum(int a, int b)
+void UpdateElementAt (int[] arr, int index, int newValue)
 {
-   int sum = a + b;
-   return sum;  
+    arr[index] = newValue;
+} 
+
+static void UpdateArray (int[] arr)
+{
+    arr = new[] {5, 6, 7, 8};
 }
 
-static int SumOneLine (int a, int b) => a + b;
+UpdateElementAt (nums1, 1, 0);
+WriteLineArray(nums1);
 
-int a = 10;
-int b = 5;
-System.Console.WriteLine(Sum(a, b));
-System.Console.WriteLine(SumOneLine(a, b));
+UpdateArray(nums1);
+WriteLineArray(nums1);
 
-int inc = 0;
-void Increment ()
+static void UpdateArrayRef (ref int[] arr)
 {
-    ++inc;
+    arr = new[] {5, 6, 7, 8};
 }
 
-Increment();
-Increment();
+UpdateArrayRef(ref nums1);
+WriteLineArray(nums1);
 
-System.Console.WriteLine(inc);
-
-void Assign42 (int param)
-{
-    param = 42;
-}
-
-Assign42(a);
-System.Console.WriteLine(a);
-
-void Assign42Ref (ref int param)
-{
-    param = 42;
-}
-Assign42Ref(ref a);
-System.Console.WriteLine(a);
-
-void Assign42Out (out int param)
-{
-    param = 42;
-}
-
-int temp1;
-Assign42Out(out temp1);
-System.Console.WriteLine($"temp1 = {temp1}");
-
-Assign42Out(out int temp2);
-System.Console.WriteLine($"temp2 = {temp2}");
-
-// void Repeat(string X, int N)
+// static void WriteLineForeach (int[] arr)
 // {
-//     string r = X;
-//     for (int i = 2; i <= N; i++ )
-//     {
-//         r += X;
-//     }
-//     System.Console.WriteLine(r);
-// };
-
-// String x = "mayday_";
-// int n = 3;
-// Repeat(x, n);
-
-
+//     foreach
+// }
