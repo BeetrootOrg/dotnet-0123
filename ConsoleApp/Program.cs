@@ -21,9 +21,9 @@ WriteLineArray(InsertionSort(tosortins));
 Console.WriteLine($"SortLinq");
 WriteLineArray(SortLinq(tosortlinq));
 
-int[] InsertionSort(int[] arrey)
+int[]? InsertionSort(int[]? arrey)
 {
-    if (arrey.Length < 2) return arrey;
+    if (arrey?.Length < 2) return arrey;
     int[] arr = new int[arrey.Length];
     Array.Copy(arrey, arr, arrey.Length);
     int buf;
@@ -48,9 +48,9 @@ int[] InsertionSort(int[] arrey)
     return arr;
 }
 
-int[] BubbleSort(int[] arrey)
+int[]? BubbleSort(int[]? arrey)
 {
-    if (arrey.Length < 2) return arrey;
+    if (arrey?.Length < 2) return arrey;
     int[] arr = new int[arrey.Length];
     Array.Copy(arrey, arr, arrey.Length);
     int buf;
@@ -69,9 +69,9 @@ int[] BubbleSort(int[] arrey)
     return arr;
 }
 
-int[] SelectionSort(int[] arrey)
+int[]? SelectionSort(int[]? arrey)
 {
-    if (arrey.Length < 2) return arrey;
+    if (arrey?.Length < 2) return arrey;
     int[] arr = new int[arrey.Length];
     Array.Copy(arrey, arr, arrey.Length);
     int minind, buf;
@@ -100,9 +100,9 @@ void WriteLineArray(int[] arr)
     }
 }
 
-int[] SortLinq(int[] arrey)
+int[]? SortLinq(int[]? arrey)
 {
-    return arrey.OrderBy(x => x).ToArray();
+    return arrey?.OrderBy(x => x).ToArray();
 }
 
 do
