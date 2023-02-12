@@ -1,50 +1,46 @@
-﻿// Create a program that will start with declaration of two constants (X and Y)
-// and will count the sum of all numbers between these constants. If they are equal then sum should be one of them
+﻿// Define and call with different parameters next methods:
 //
-// Example:
-//
-// X=10
-// Y=12
-// Sum=10+11+12=33
-//
-// X=5
-// Y=2
-// Sum=2+3+4+5=14
-//
-// X=10
-// Y=10
-// Sum=10
+// Method that will return max value among all the parameters
+//     … min value …
+// Method TrySumIfOdd that accepts 2 parameters and returns true if sum of numbers between inputs is odd, otherwise false, sum return as out parameter
+//     Overload first two methods with 3 and 4 parameters
 //
 // Extra:
 //
-// Read values of X and Y from the console. If output is invalid - write to console Invalid input and exit the program.
+// Define and call with different parameters next methods:
 //
-Console.WriteLine("Hello, please enter the value of X");
-int x = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Hello, please enter the value of Y");
-string input = Console.ReadLine();
-int y;
-Int32.TryParse(input, out y);
-Console.WriteLine($"{x} {y}");
-if (x == y)
+// Method Repeat that will accept string X and number N and return X repeated N times (e.g. Repeat(‘str’, 3) returns ‘strstrstr’ = ‘str’ three times)
+
+var sourceArray = new int[] { 13, 4, 23, 0, 17, 9, 42, 24 };
+Console.WriteLine($"max value {MaxValue(sourceArray)}");
+Console.WriteLine($"min value {MinValue(sourceArray)}");
+Console.WriteLine($"bool method {TrySumIfOdd(10, 10, out int result)}");
+Console.WriteLine($"repeat string {Repeat("World", 5)}");
+
+int MaxValue(int[] sourceArray)
 {
-    Console.WriteLine($"Sum = {x}");
-}
-else
-{
-    if (x < y)
-    {
-        Console.WriteLine(Sum(x, y));
-    }
-    else
-    {
-        Console.WriteLine(Sum(y, x));
-    }
-    
+    return sourceArray.Max();
 }
 
-static int Sum(int x, int y)
+int MinValue(int[] sourceArray)
 {
-    int sum = (x + y) * (y - x + 1) / 2;
-    return sum;
+    return sourceArray.Min();
 }
+
+bool TrySumIfOdd(int x, int y, out int result)
+{
+    result = (x + y) % 2;
+    if (result != 0)
+    {
+        return true;
+    }
+        
+    return false;
+}
+
+string Repeat(string str, int num)
+{
+    string result = string.Concat(Enumerable.Repeat(str, num));
+    return result;
+}
+
