@@ -1,4 +1,5 @@
-﻿static int Sum(int a, int b)
+﻿
+static int Sum(int a, int b)
 {
     int sum = a + b;
     return sum;
@@ -23,7 +24,6 @@ for (int i = 0; i < 10; i++)
 
 static long Fibonacci(int n)
 {
-#pragma warning disable IDE0046
     if (n == 1)
     {
         return 1;
@@ -35,17 +35,37 @@ static long Fibonacci(int n)
     }
 
     return Fibonacci(n - 1) + Fibonacci(n - 2);
-#pragma warning restore IDE0046
 }
 
 Fibonacci(3);
 Fibonacci(5);
 
+
 Random random = new((int)DateTime.Now.Ticks);
 Console.WriteLine(random.Next());
+
 Console.WriteLine(random.Next(10)); // [0; 10)
 Console.WriteLine(random.Next(-10, 10)); // [-10; 10)
 
+
+System.Console.WriteLine("Press ENTER to start");
+Random r = new((int)DateTime.Now.Ticks);
+
+while (true)
+{
+    Console.ReadLine();
+    if (random.Next(0, 5) == 3)
+    {
+        System.Console.WriteLine("Gave over");
+        break;
+    }
+    else
+    {
+        System.Console.WriteLine("continue game");
+    }
+}
+
+/*
 float f1 = random.NextSingle(); // [0.0; 1.0)
 Console.WriteLine(f1);
 
@@ -136,3 +156,4 @@ Console.WriteLine(ConvertToBinary(2));
 Console.WriteLine(ConvertToBinary(3));
 Console.WriteLine(ConvertToBinary(4));
 Console.WriteLine(ConvertToBinary(5));
+*/
