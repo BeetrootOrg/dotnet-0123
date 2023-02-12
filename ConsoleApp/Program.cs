@@ -1,4 +1,4 @@
-﻿
+﻿/*
 static int Sum(int a, int b)
 {
     int sum = a + b;
@@ -57,7 +57,8 @@ while (true)
     if (random.Next(0, 5) == 3)
     {
         System.Console.WriteLine("Gave over");
-        break;
+        // break;
+        return;
     }
     else
     {
@@ -65,16 +66,18 @@ while (true)
     }
 }
 
-/*
+
+
 float f1 = random.NextSingle(); // [0.0; 1.0)
 Console.WriteLine(f1);
 
 double d1 = random.NextDouble(); // [0.0; 1.0)
 Console.WriteLine(d1);
 
+
+
 static int SumRecursion(int from, int to)
 {
-#pragma warning disable IDE0046
     if (from > to)
     {
         return SumRecursion(to, from);
@@ -86,11 +89,14 @@ static int SumRecursion(int from, int to)
     }
 
     return from + SumRecursion(from + 1, to);
-#pragma warning restore IDE0046
 }
 
 Console.WriteLine(SumRecursion(1, 3));
+
+
 Console.WriteLine(SumRecursion(3, 1));
+
+
 
 static double CalculateDistance(double x1, double y1, double x2, double y2)
 {
@@ -101,6 +107,8 @@ static double CalculateDistance(double x1, double y1, double x2, double y2)
 
 Console.WriteLine(CalculateDistance(0, 3, 4, 0));
 Console.WriteLine(CalculateDistance(15.5, 42, -6.3, 101.05));
+
+
 
 static int NearestSquare(int n)
 {
@@ -119,6 +127,9 @@ Console.WriteLine(NearestSquare(6));
 Console.WriteLine(NearestSquare(7));
 Console.WriteLine(NearestSquare(8));
 Console.WriteLine(NearestSquare(9));
+
+
+*/
 
 char c = 'a';
 string s = "string";
@@ -156,4 +167,4 @@ Console.WriteLine(ConvertToBinary(2));
 Console.WriteLine(ConvertToBinary(3));
 Console.WriteLine(ConvertToBinary(4));
 Console.WriteLine(ConvertToBinary(5));
-*/
+Console.WriteLine(ConvertToBinary(10));
