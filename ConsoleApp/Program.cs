@@ -10,6 +10,38 @@ Console.WriteLine(nums3);
 Console.WriteLine(nums4);
 Console.WriteLine(nums5);
 
+static void Writearray(int[] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        Console.WriteLine(array[i]);
+    }
+}
+
+Writearray(nums1);
+
+static void arraychange(int[] arr, int index, int newrate)
+{
+    arr[index] = newrate;
+}
+
+arraychange (nums1, 1, 99);
+Writearray(nums1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 static void WriteLineArray(int[] arr)
 {
     for (int i = 0; i < arr.Length; i++)
@@ -279,3 +311,4 @@ Console.WriteLine("REVERSE");
 WriteLineArray(Reverse(new[] { 1, 2, 3 }));
 Console.WriteLine("REVERSE");
 WriteLineArray(Reverse(new[] { 1, 2, 3, 4 }));
+*/
