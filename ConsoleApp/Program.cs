@@ -23,3 +23,15 @@ Console.WriteLine(num);
 Console.WriteLine(some);
 Console.WriteLine(a);
 Console.WriteLine(b);
+
+(string, string)[] tuples = new[]
+{
+    ("a", "b"),
+    ("c", "d"),
+};
+
+foreach ((string first, string second) in tuples)
+{
+    Console.WriteLine(first);
+    Console.WriteLine(second);
+}
