@@ -36,3 +36,5 @@ DescribeChar('4');
 
 Console.WriteLine("Symbol '\u1234'");
 DescribeChar('\u1234');
+
+Console.WriteLine($"C greater than c = {'C' > 'c'}");
