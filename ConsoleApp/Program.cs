@@ -90,7 +90,7 @@ Console.WriteLine("RANGE OPERATOR ^3..");
 WriteLineArray(nullArr[^3..]); // [1][2][3]
 
 
-/*
+
 Console.WriteLine("SUM");
 static int Sum(int[] arr)
 {
@@ -119,9 +119,12 @@ Console.WriteLine(Sum(nums2));
 // Console.WriteLine(Sum(1, 2, 3));
 // Console.WriteLine(Sum());
 
+
+
 Console.WriteLine(SumParams(nums2));
-Console.WriteLine(SumParams(1, 2, 3));
+Console.WriteLine(SumParams(10, 20, 30, 40));
 Console.WriteLine(SumParams());
+
 
 static void ResizeArray(ref int[] arr, int size)
 {
@@ -140,10 +143,14 @@ static void ResizeArray(ref int[] arr, int size)
     arr = newArr;
 }
 
+Console.WriteLine("before RESIZE");
+WriteLineArray(nums3);
 Console.WriteLine("RESIZE");
-ResizeArray(ref nums3, 4);
+ResizeArray(ref nums3, 8);
 WriteLineArray(nums3);
 
+
+/*
 ResizeArray(ref nums3, 2);
 WriteLineArray(nums3);
 
