@@ -24,12 +24,13 @@ class Cells{
         DrawCurrState();
     }
     public void DrawCurrState(){
+        Console.WriteLine("Draw Curr State:");
         Console.Clear();
         foreach(var c in matrix){
             Console.Write(c.GetCurString());
         }
         //await Task.Run(()=>{Thread.Sleep(300);});
-        Thread.Sleep(300);
+        Thread.Sleep(500);
     }
 }
 
@@ -49,7 +50,7 @@ class Cell
         if (col < 1) startcol = 0; else startcol = col - 1;
         if (col < cells.GetLength(1) - 1) endcol = cells.GetLength(1) - 2; else endcol = cells.GetLength(1) - 1;
         var r = new Random(); Row = row; Col = Col; Cells = cells;
-        CurrentState = NextState = (byte)r.Next(0, 1);
+        CurrentState = NextState = (byte)r.Next(0, 2);
     }
     public void InitNexState()
     {
@@ -59,8 +60,8 @@ class Cell
     }
     public string GetCurString()
     {
-        if (Col == 0) return $"\n{CurrentState}";
-        return $"{CurrentState}";
+        if (Col > 0) return $"{CurrentState}";
+        return $"\n{CurrentState}";
     }
     public int Neighbours()
     {
