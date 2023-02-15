@@ -150,7 +150,7 @@ ResizeArray(ref nums3, 8);
 WriteLineArray(nums3);
 
 
-/*
+
 ResizeArray(ref nums3, 2);
 WriteLineArray(nums3);
 
@@ -158,6 +158,8 @@ WriteLineArray(nums3);
 Array.Resize(ref nums3, 4);
 WriteLineArray(nums3);
 
+
+/*
 static int[] MulBy2(int[] arr)
 {
     int[] copy = new int[arr.Length];
