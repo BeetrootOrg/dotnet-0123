@@ -51,3 +51,8 @@ Console.WriteLine(s2);
 Console.WriteLine(s3);
 Console.WriteLine(s4);
 Console.WriteLine(s5);
+
+Console.WriteLine($"CONTAINS 'W' = {s1.Contains('W')}");
+Console.WriteLine($"CONTAINS 'World' = {s1.Contains("World")}");
+Console.WriteLine($"CONTAINS 'world' = {s1.Contains("world")}");
+Console.WriteLine($"CONTAINS 'world' OrdinalIgnoreCase = {s1.Contains("world", StringComparison.OrdinalIgnoreCase)}");
