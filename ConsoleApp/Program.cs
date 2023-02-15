@@ -61,6 +61,100 @@ System.Console.WriteLine($"temp1 = {temp1}");
 Assign42Out(out int temp2);
 System.Console.WriteLine($"temp2 = {temp2}");
 
+void RefNoAssign(ref int param) {}
+// void OutNoAssign(out int param) {}
+
+int temp3 = 15;
+RefNoAssign(ref temp3);
+System.Console.WriteLine(temp3);
+
+bool TryReadInt(out int result)
+{
+    var input = Console.ReadLine();
+    return int.TryParse(input, out result);
+
+    // if (int.TryParse(input, out result)) very ugly style
+    // {
+    //     return true;
+    // }
+    // else
+    // {
+    //     return false;
+    // }
+}
+
+if (TryReadInt(out int temp4))
+{
+    System.Console.WriteLine(temp4);
+}
+
+
+bool TryDivideByThree (int num, out int result)
+{
+    if (num % 3 == 0)
+    {
+        result = num / 3;
+        return true;
+    }
+    else
+    {
+        result = 0;
+        return false;
+    }
+}
+var result1 =  TryDivideByThree (6, out temp4);
+System.Console.WriteLine($"TryDivideByThree(6) = {result1}. Result = {temp4}");
+
+result1 =  TryDivideByThree (7, out temp4);
+System.Console.WriteLine($"TryDivideByThree(7) = {result1}. Result = {temp4}");
+
+bool TryDivideByThreeBetter (int num, out int result)
+{
+    if (num % 3 == 0)
+    {
+        result = num / 3;
+        return true;
+    }
+    result = 0;
+    return false;
+}
+
+bool TryDivideByThreeBest (int num, out int result)
+{
+    result = num / 3;
+    return num % 3 == 0;
+}
+
+result1 =  TryDivideByThreeBetter  (7, out temp4);
+System.Console.WriteLine($"TryDivideByThreeBetter (7) = {result1}. Result = {temp4}");
+
+result1 =  TryDivideByThreeBest  (7, out temp4);
+System.Console.WriteLine($"TryDivideByThreeBest (7) = {result1}. Result = {temp4}");
+
+int Fibonacci (int n)
+{
+    // if (n == 1)
+    // {
+    //     return 1;
+    // }
+    // if ( n == 2)
+    // {
+    //     return 1;
+    // }
+    // return Fibonacci(n - 1) + Fibonacci(n - 2);
+    return n == 1 
+        ? 1 
+        : n == 2 
+        ? 1 
+        : Fibonacci(n - 1) + Fibonacci (n - 2);
+}
+
+int temp5 = Fibonacci (3);
+System.Console.WriteLine($"Fibonacci(5) = {temp5}");
+System.Console.WriteLine($"Fibonacci({N}) = {Fibonacci(N)}");
+
+
+
 // void Repeat(string X, int N)
 // {
 //     string r = X;
