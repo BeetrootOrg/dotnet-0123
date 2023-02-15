@@ -1,4 +1,6 @@
-﻿char c1 = 'c';
+﻿using System.Text;
+
+char c1 = 'c';
 char c2 = (char)99;
 char c3 = '\u0063';
 
@@ -130,3 +132,21 @@ Console.WriteLine($"string.IsNullOrEmpty(null) = {string.IsNullOrEmpty(null)}");
 Console.WriteLine($"string.IsNullOrEmpty('') = {string.IsNullOrEmpty("")}");
 Console.WriteLine($"string.IsNullOrEmpty('   ') = {string.IsNullOrEmpty("   ")}");
 Console.WriteLine($"string.IsNullOrWhiteSpace('   ') = {string.IsNullOrWhiteSpace("   ")}");
+
+string result = string.Empty;
+for (int i = 0; i < 100; i++)
+{
+    result += $"{i}, ";
+}
+
+Console.WriteLine(result[..^2]);
+
+StringBuilder sb = new();
+for (int i = 0; i < 100; i++)
+{
+    _ = sb.Append($"{i}, ");
+    // SAME ABOVE
+    // sb.Append($"{i}, ");
+}
+
+Console.WriteLine(sb.ToString()[..^2]);
