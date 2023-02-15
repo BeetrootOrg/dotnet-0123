@@ -1,37 +1,25 @@
-﻿string buffer;
+﻿(int, string) tuple = (42, "hello");
+Console.WriteLine(tuple);
 
-Console.WriteLine("Enter X");
-buffer = Console.ReadLine();
-if (!int.TryParse(buffer, out int x))
+(string, string) fullname1 = ("Dmytro", "Misik");
+Console.WriteLine(fullname1);
+Console.WriteLine(fullname1.Item1);
+Console.WriteLine(fullname1.Item2);
+
+(string, string) fullname2 = ("Dmytro", "Misik");
+Console.WriteLine(fullname1 == fullname2);
+
+static (int, string) GetSome()
 {
-    Console.WriteLine("Invalid input");
-    return;
+    return (42, "something");
 }
 
-Console.WriteLine("Enter Y");
-buffer = Console.ReadLine();
-if (!int.TryParse(buffer, out int y))
-{
-    Console.WriteLine("Invalid input");
-    return;
-}
+(int, string) result = GetSome();
+(int num, string some) = GetSome();
+(int a, string b) = result;
 
-int min, max;
-if (x < y)
-{
-    min = x;
-    max = y;
-}
-else
-{
-    min = y;
-    max = x;
-}
-
-int sum = 0;
-for (int i = min; i <= max; i++)
-{
-    sum += i;
-}
-
-Console.WriteLine(sum);
+Console.WriteLine(result);
+Console.WriteLine(num);
+Console.WriteLine(some);
+Console.WriteLine(a);
+Console.WriteLine(b);
