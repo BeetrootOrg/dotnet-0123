@@ -72,3 +72,9 @@ Console.WriteLine($"s1.EndsWith(\"RLD!\", StringComparison.OrdinalIgnoreCase) = 
 Console.WriteLine($"s1.StartsWith('ell') = {s1.StartsWith("ell")}");
 Console.WriteLine($"s1.StartsWith('Hell') = {s1.StartsWith("Hell")}");
 Console.WriteLine($"s1.StartsWith('HeLl', StringComparison.OrdinalIgnoreCase) = {s1.StartsWith("HeLl", StringComparison.OrdinalIgnoreCase)}");
+
+Console.WriteLine($"s1.IndexOf(',') = {s1.IndexOf(',')}");
+Console.WriteLine($"s1.IndexOf('l') = {s1.IndexOf('l')}");
+Console.WriteLine($"s1.IndexOf('ll') = {s1.IndexOf("ll")}");
+Console.WriteLine($"s1.IndexOf('a') = {s1.IndexOf("a")}");
+Console.WriteLine($"s1.LastIndexOf('l') = {s1.LastIndexOf('l')}");
