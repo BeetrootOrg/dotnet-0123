@@ -1,4 +1,5 @@
-﻿char c1 = 'c';
+﻿using System.Text;
+char c1 = 'c';
 char c2 = (char)99;
 char c3 = '\u0063';
 Console.WriteLine(c1);
@@ -32,3 +33,9 @@ Console.WriteLine(c3);
  System.Console.WriteLine(multiline1);
  System.Console.WriteLine(multiline2);
 
+StringBuilder sb = new();
+for (int i = 0; i < 100; i++)
+{
+    _ = sb.Append($"{i}, ");
+}
+System.Console.WriteLine(sb);
