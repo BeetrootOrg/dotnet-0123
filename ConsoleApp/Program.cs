@@ -150,16 +150,16 @@ ResizeArray(ref nums3, 8);
 WriteLineArray(nums3);
 
 
-
+System.Console.WriteLine("========resize to 2=========");
 ResizeArray(ref nums3, 2);
 WriteLineArray(nums3);
 
 // BEST OPTION
-Array.Resize(ref nums3, 4);
+System.Console.WriteLine("Array.Resize========resize to 5=========Array.Resize");
+Array.Resize(ref nums3, 5);
 WriteLineArray(nums3);
 
 
-/*
 static int[] MulBy2(int[] arr)
 {
     int[] copy = new int[arr.Length];
@@ -179,15 +179,19 @@ WriteLineArray(MulBy2(nums4));
 Console.WriteLine("ORIGINAL nums4");
 WriteLineArray(nums4);
 
-int[,] matrix = new int[2, 4] { { 0, 1, 2, 3 }, { 4, 5, 6, 7 } };
+
+System.Console.WriteLine("2D matrix");
+int[,] matrix = new int[2, 4];// { { 0, 1, 2, 3 }, { 4, 5, 6, 7 } };
 foreach (int item in matrix)
 {
     Console.WriteLine(item);
 }
 
+
 Console.WriteLine($"LENGTH = {matrix.Length}");
 Console.WriteLine($"GetLength(0) = {matrix.GetLength(0)}");
 Console.WriteLine($"GetLength(1) = {matrix.GetLength(1)}");
+
 
 for (int i = 0; i < matrix.GetLength(0); i++)
 {
@@ -209,6 +213,8 @@ foreach (int[] item in jagged)
     WriteLineArray(item);
 }
 
+
+/*
 Console.WriteLine($"LENGTH = {jagged.Length}");
 for (int i = 0; i < jagged.Length; i++)
 {
