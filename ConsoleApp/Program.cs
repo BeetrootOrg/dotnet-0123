@@ -103,3 +103,30 @@ DateTime now = DateTime.Now;
 Console.WriteLine($"now = {now}");
 Console.WriteLine($"now:D = {now:D}");
 Console.WriteLine($"now:yyy dd mm = {now:yyy dd mm}");
+
+Console.WriteLine($"s1.Replace('World', 'Dima') = {s1.Replace("World", "Dima")}");
+Console.WriteLine($"s1.Replace('world', 'Dima') = {s1.Replace("world", "Dima")}");
+Console.WriteLine($"s1.Replace('world', 'Dima', StringComparison.OrdinalIgnoreCase) = {s1.Replace("world", "Dima", StringComparison.OrdinalIgnoreCase)}");
+
+string[] splitted = s1.Split(',');
+Console.WriteLine("After Split");
+foreach (string part in splitted)
+{
+    Console.WriteLine(part);
+}
+
+Console.WriteLine($"s1.Substring(2, 5) = {s1.Substring(2, 5)}");
+Console.WriteLine($"s1[2..5] = {s1[2..5]}");
+
+Console.WriteLine($"s1.ToUpper() = {s1.ToUpper(System.Globalization.CultureInfo.CurrentCulture)}");
+Console.WriteLine($"s1.ToLower() = {s1.ToLower(System.Globalization.CultureInfo.CurrentCulture)}");
+
+Console.WriteLine($"s1.Trim('H') = {s1.Trim('H')}");
+Console.WriteLine($"s1.TrimEnd('H') = {s1.TrimEnd('H')}");
+Console.WriteLine($"s1.TrimEnd('!') = {s1.TrimEnd('!')}");
+Console.WriteLine($"s1.TrimStart('H') = {s1.TrimStart('H')}");
+
+Console.WriteLine($"string.IsNullOrEmpty(null) = {string.IsNullOrEmpty(null)}");
+Console.WriteLine($"string.IsNullOrEmpty('') = {string.IsNullOrEmpty("")}");
+Console.WriteLine($"string.IsNullOrEmpty('   ') = {string.IsNullOrEmpty("   ")}");
+Console.WriteLine($"string.IsNullOrWhiteSpace('   ') = {string.IsNullOrWhiteSpace("   ")}");
