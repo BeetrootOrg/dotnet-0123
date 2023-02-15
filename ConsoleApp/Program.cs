@@ -82,3 +82,24 @@ Console.WriteLine($"s1.IndexOfAny('o', 'l') = {s1.IndexOfAny(new[] { 'o', 'l' })
 Console.WriteLine($"s1.LastIndexOfAny('o', 'l') = {s1.LastIndexOfAny(new[] { 'o', 'l' })}");
 
 Console.WriteLine($"s1.Insert(5, 'interesting') = {s1.Insert(6, " interesting")}");
+
+string multiline1 = "Hello, \nDima";
+string multiline2 = @$"Hello, 
+Dima {age}";
+
+Console.WriteLine(multiline1);
+Console.WriteLine(multiline2);
+
+Console.WriteLine($"s1.Length = {s1.Length}");
+
+Console.WriteLine($"s1.PadLeft(20) = {s1,20}");
+Console.WriteLine($"{s1,-20} = s1.PadRight(20)");
+Console.WriteLine($"12,4 = {12,4}");
+Console.WriteLine($"{12,-4} = 12,-4");
+// SAME AS ABOVE
+// Console.WriteLine($"s1.PadLeft(20) = {s1.PadLeft(20)}");
+
+DateTime now = DateTime.Now;
+Console.WriteLine($"now = {now}");
+Console.WriteLine($"now:D = {now:D}");
+Console.WriteLine($"now:yyy dd mm = {now:yyy dd mm}");
