@@ -79,16 +79,18 @@ subarray[0] = 42;
 WriteLineArray(nullArr);
 WriteLineArray(subarray);
 
-/*
+
 Console.WriteLine("RANGE OPERATOR ^3..^1");
-WriteLineArray(nullArr[^3..^1]); // [1][2]
+WriteLineArray(nullArr[^3..4]); // [1][2]
 
 Console.WriteLine("RANGE OPERATOR ..^1");
 WriteLineArray(nullArr[..^1]); // [0][1][2]
 
 Console.WriteLine("RANGE OPERATOR ^3..");
-WriteLineArray(nullArr[..^1]); // [1][2][3]
+WriteLineArray(nullArr[^3..]); // [1][2][3]
 
+
+/*
 Console.WriteLine("SUM");
 static int Sum(int[] arr)
 {
