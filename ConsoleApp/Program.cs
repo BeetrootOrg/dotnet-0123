@@ -38,3 +38,16 @@ Console.WriteLine("Symbol '\u1234'");
 DescribeChar('\u1234');
 
 Console.WriteLine($"C greater than c = {'C' > 'c'}");
+
+string s1 = "Hello, World!";
+int age = 26;
+string s2 = "My age is " + age;
+string s3 = $"My age is {age}";
+string s4 = string.Format("My age is {0}", age);
+string s5 = string.Format("My age is {0} and my name is {1}", age, "Dima");
+
+Console.WriteLine(s1);
+Console.WriteLine(s2);
+Console.WriteLine(s3);
+Console.WriteLine(s4);
+Console.WriteLine(s5);
