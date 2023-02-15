@@ -78,3 +78,7 @@ Console.WriteLine($"s1.IndexOf('l') = {s1.IndexOf('l')}");
 Console.WriteLine($"s1.IndexOf('ll') = {s1.IndexOf("ll")}");
 Console.WriteLine($"s1.IndexOf('a') = {s1.IndexOf("a")}");
 Console.WriteLine($"s1.LastIndexOf('l') = {s1.LastIndexOf('l')}");
+Console.WriteLine($"s1.IndexOfAny('o', 'l') = {s1.IndexOfAny(new[] { 'o', 'l' })}");
+Console.WriteLine($"s1.LastIndexOfAny('o', 'l') = {s1.LastIndexOfAny(new[] { 'o', 'l' })}");
+
+Console.WriteLine($"s1.Insert(5, 'interesting') = {s1.Insert(6, " interesting")}");
