@@ -3,6 +3,7 @@ int[] nums2 = new[] { 1, 2, 3 };
 int[] nums3 = new int[] { 1, 2, 3 };
 int[] nums4 = new int[3] { 1, 2, 3 };
 int[] nums5 = new int[3];
+int [] nullArr = null;
 
 Console.WriteLine(nums1);
 Console.WriteLine(nums2);
@@ -10,7 +11,7 @@ Console.WriteLine(nums3);
 Console.WriteLine(nums4);
 Console.WriteLine(nums5);
 
-static void Writearray(int[] array)
+static void WriteLineArray(int[] array)
 {
     for (int i = 0; i < array.Length; i++)
     {
@@ -18,37 +19,39 @@ static void Writearray(int[] array)
     }
 }
 
-Writearray(nums1);
+WriteLineArray(nums1);
 
-static void arraychange(int[] arr, int index, int newrate)
+static void arraychange(int[] arr, int index, int newRate)
 {
-    arr[index] = newrate;
+    arr[index] = newRate;
 }
 
 arraychange (nums1, 1, 99);
-Writearray(nums1);
+WriteLineArray(nums1);
 
+nums1 [1] = 100;
+WriteLineArray(nums1);
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-static void WriteLineArray(int[] arr)
+static void UpdateArrayR(ref int[] arr)
 {
-    for (int i = 0; i < arr.Length; i++)
-    {
-        Console.WriteLine(arr[i]);
-    }
+    arr = new[] { 4, 5, 6, 7 };
 }
+UpdateArrayR (ref nums1);
+
+WriteLineArray(nums1);
+
+
+
+nums1 = new [] {2,5,7,10};
+WriteLineArray(nums1);
+System.Console.WriteLine( "udate null array");
+
+
+UpdateArrayR (ref nullArr);
+WriteLineArray(nullArr);
+
+System.Console.WriteLine("foreach");
+WriteLineArrayForeach (nullArr);
 
 static void WriteLineArrayForeach(int[] arr)
 {
@@ -58,42 +61,6 @@ static void WriteLineArrayForeach(int[] arr)
     }
 }
 
-WriteLineArray(nums1);
-
-int[] nullArr = null;
-if (nullArr != null)
-{
-    Console.WriteLine(nullArr.Length);
-}
-
-static void UpdateElementAt(int[] arr, int index, int newValue)
-{
-    arr[index] = newValue;
-}
-
-#pragma warning disable IDE0059
-static void UpdateArray(int[] arr)
-{
-    arr = new[] { 4, 5, 6, 7 };
-}
-#pragma warning restore
-
-static void UpdateArrayRef(ref int[] arr)
-{
-    arr = new[] { 4, 5, 6, 7 };
-}
-
-Console.WriteLine("UPDATE ARRAY ELEMENT");
-UpdateElementAt(nums1, 1, 42);
-WriteLineArray(nums1);
-
-Console.WriteLine("UPDATE ARRAY");
-UpdateArray(nums1);
-WriteLineArray(nums1);
-
-Console.WriteLine("UPDATE ARRAY REF");
-UpdateArrayRef(ref nullArr);
-WriteLineArrayForeach(nullArr);
 
 Console.WriteLine("RANGE OPERATOR 1..3");
 WriteLineArray(nullArr[1..3]); // [1][2]
@@ -104,11 +71,15 @@ WriteLineArray(nullArr[..3]); // [0][1][2]
 Console.WriteLine("RANGE OPERATOR ..3");
 WriteLineArray(nullArr[1..]); // [1][2][3]
 
+
+
 Console.WriteLine("COPY ARRAY");
 int[] subarray = nullArr[1..];
 subarray[0] = 42;
 WriteLineArray(nullArr);
+WriteLineArray(subarray);
 
+/*
 Console.WriteLine("RANGE OPERATOR ^3..^1");
 WriteLineArray(nullArr[^3..^1]); // [1][2]
 
