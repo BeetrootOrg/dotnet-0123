@@ -1,34 +1,50 @@
-﻿// int Sum(int a, int b)
-// {
-//     int sum = a+b;
-//     return sum;
-// }
+﻿int[] nums1 = {1,2,3};
+int[] nums2 = new[] {1,2,3};
+int[] nums3 = new int[] {1,2,3};
+int[] nums4 = new int[3] {1,2,3};
 
-static int Mul(int a, int b)
+System.Console.WriteLine(nums1);
+System.Console.WriteLine(nums2);
+System.Console.WriteLine(nums3);
+System.Console.WriteLine(nums4);
+
+void WriteLineArray(int[] array)
 {
-    int mul = a*b;
-    return mul;
+    foreach (var item in array)
+    {
+        System.Console.WriteLine(item);
+    }
 }
-// int result = Sum(42,80);
-// System.Console.WriteLine(result);
+WriteLineArray(nums1);
 
-int result = Mul(10,12);
-System.Console.WriteLine(result);
-
-for (int i = 0; i < 5; i++)
+void ResizeArray(ref int[] arr, int size)
 {
-    System.Console.WriteLine(i);
+    if (arr.Length==size)
+    {
+        return;
+    }
+    int[] newArr = new int[size];
+    int minLength = size<arr.Length?arr.Length:size;
+    for (int i = 0; i < minLength; i++)
+    {
+        newArr[i]= arr[i];
+    }
+    arr = newArr;
 }
 
+WriteLineArray(nums3);
+Array.Resize(ref nums3,4);
+WriteLineArray(nums3);
 
-Random random = new((int)DateTime.Now.Ticks);
-System.Console.WriteLine(random.Next(10));
-
-int Sum(int from, int to)
+int[] MulBy2(int[] arr)
 {
-    if (from > to) return Sum(to,from);
-    if (from == to) return from;
-    return from + Sum(from+1,to);
+    int[] copy = new int[arr.Length];
+    Array.Copy(arr,copy, arr.Length);
+    for (int i = 0; i < copy.Length; i++)
+    {
+        copy[i]*=2;
+    }
+    return copy;
 }
-System.Console.WriteLine(Sum(1,3));
-
+System.Console.WriteLine("Mul by 2");
+WriteLineArray(MulBy2(nums3));
