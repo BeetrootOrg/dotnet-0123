@@ -29,5 +29,3 @@ Console.WriteLine($"max(x, y) = {Math.Max(x1, y1)}");
  Console.WriteLine($"days left to New Year = {DaysLeft}");
  Console.WriteLine($"days passed from New Year = {DaysPassed}");
 
-
-
