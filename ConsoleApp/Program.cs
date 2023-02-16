@@ -29,13 +29,13 @@ class Cells
         bool flag = true;
         do
         {
-            Console.Clear();
             DrawCurrState();
             var copy = MakeCopy();
             UpdateNextStage();
             Thread.Sleep(300);
             flag = CheckState(copy);
         } while (flag);
+         DrawCurrState();
     }
     bool CheckState(int[] copy)
     {
@@ -67,6 +67,7 @@ class Cells
     }
     public void DrawCurrState()
     {
+         Console.Clear();
         Console.WriteLine($"Draw Curr State {DateTime.Now}:");
         var s = new StringBuilder();
         foreach (var c in matrix)
