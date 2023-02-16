@@ -1,4 +1,5 @@
-﻿void WriteArray(char[] array)
+﻿// additional methods
+void WriteArray(char[] array)
 {
     foreach (var item in array)
     {
@@ -34,6 +35,8 @@ char[] BubbleSort( char[] array)
     return copy;
 }
 
+
+//homework part
 bool Compare(string first, string second)
 {
     return first==second;
