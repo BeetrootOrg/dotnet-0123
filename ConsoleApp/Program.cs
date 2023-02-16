@@ -204,7 +204,7 @@ for (int i = 0; i < matrix.GetLength(0); i++)
 int[][] jagged = new int[2][]
 {
     new[] { 1, 2, 3 },
-    new[] { 1, 2 },
+    new[] { 1, 2},
 };
 
 foreach (int[] item in jagged)
@@ -214,8 +214,9 @@ foreach (int[] item in jagged)
 }
 
 
-/*
+
 Console.WriteLine($"LENGTH = {jagged.Length}");
+
 for (int i = 0; i < jagged.Length; i++)
 {
     int[] inner = jagged[i];
@@ -224,6 +225,8 @@ for (int i = 0; i < jagged.Length; i++)
         Console.WriteLine(inner[j]);
     }
 }
+
+
 
 static int[] Sort(int[] arr)
 {
@@ -258,9 +261,8 @@ static int[] Sort(int[] arr)
 int[] sorted = new[] { -1, 0, 1, 3, 3 };
 int[] random = new[] { -5, 10, 0, 15, -20, 100, 0 };
 int[] backsorted = new[] { 3, 1, 0, -1, -1 };
-#pragma warning disable CA1825
 int[] empty = new int[0];
-#pragma warning restore
+
 
 Console.WriteLine("SORTED ARRAY");
 WriteLineArray(Sort(sorted));
@@ -275,6 +277,7 @@ Console.WriteLine("EMPTY ARRAY");
 WriteLineArray(Sort(empty));
 
 
+/*
 // 0, 1, 2 -> 2, 1, 0
 // 0, 1, 2, 3 -> 3, 2, 1, 0
 static int[] Reverse(int[] arr)
