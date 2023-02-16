@@ -29,7 +29,7 @@ class Cells
         bool flag = true;
         do
         {
-            //Console.Clear();
+            Console.Clear();
             DrawCurrState();
              var copy=MakeCopy();
             UpdateNextStage();
