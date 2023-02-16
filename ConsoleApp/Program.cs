@@ -5,7 +5,7 @@ using System.Text;
 //---------------- 15.02.2023----------------------
 //--------- Гра життя ----------------
 
-var cs = new Cells(18, 50);
+var cs = new Cells(18, 100);
 cs.Run();
 class Cells
 {
@@ -33,23 +33,25 @@ class Cells
             DrawCurrState();
             var copy = MakeCopy();
             UpdateNextStage();
-            Thread.Sleep(400);
-            flag = CheckState(copy,bcopy);
+            Thread.Sleep(200);
+            flag = CheckState(copy, bcopy);
         } while (flag);
-         DrawCurrState();
+        DrawCurrState();
     }
-    bool CheckState(int[] copy,int[] bcopy) 
+    bool CheckState(int[] copy, int[] bcopy)
     {
-
         int i = 0;
+        bool flag = true;
+        foreach (var item in matrix)
+        {
+            if (bcopy[i] != item.NextState) flag = false;
+            i++;
+        }
+        if (flag) return false;
+        i = 0;
         foreach (var item in matrix)
         {
             if (copy[i] != item.NextState) return true;
-            i++;
-        }
-        foreach (var item in matrix)
-        {
-            if (bcopy[i] != item.NextState) return true;
             i++;
         }
         return false;
@@ -113,13 +115,13 @@ class Cell
         int sumNs = Neighbours();
         if (CurrentState == 0 && sumNs == 3) NextState = 1;
         else
-        if (CurrentState == 1 && (sumNs ==3 || sumNs == 2)) NextState = 1; else NextState = 0;
+        if (CurrentState == 1 && (sumNs == 3 || sumNs == 2)) NextState = 1; else NextState = 0;
     }
     public string GetCurString()
     {
-        string res=" ";
-        if (CurrentState==1) res="*";
-        if (Col == 0) res=$"\n{res}";
+        string res = " ";
+        if (CurrentState == 1) res = "8";
+        if (Col == 0) res = $"\n{res}";
         return res;
     }
     public int Neighbours()
@@ -129,8 +131,9 @@ class Cell
         {
             for (int c = startcol; c <= endcol; c++)
             {
-                if (r == Row && c == Col) continue; else
-                    res+=Cells[r, c].CurrentState;
+                if (r == Row && c == Col) continue;
+                else
+                    res += Cells[r, c].CurrentState;
             }
         }
         return res;
