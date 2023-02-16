@@ -31,7 +31,7 @@ class Cells
         {
             Console.Clear();
             DrawCurrState();
-             var copy=MakeCopy();
+            var copy = MakeCopy();
             UpdateNextStage();
             Thread.Sleep(300);
             flag = CheckState(copy);
@@ -39,10 +39,10 @@ class Cells
     }
     bool CheckState(int[] copy)
     {
-        int i=0;
+        int i = 0;
         foreach (var item in matrix)
         {
-            if (copy[i]!=item.NextState) return true;
+            if (copy[i] != item.NextState) return true;
             i++;
         }
         return false;
@@ -54,12 +54,13 @@ class Cells
             c.InitNexState();
         }
     }
-    int [] MakeCopy(){
-        int[] result=new int[matrix.Length];
-        int i=0;
+    int[] MakeCopy()
+    {
+        int[] result = new int[matrix.Length];
+        int i = 0;
         foreach (var item in matrix)
         {
-            result[i]=item.CurrentState;
+            result[i] = item.CurrentState;
             i++;
         }
         return result;
@@ -102,7 +103,8 @@ class Cell
     public void InitNexState()
     {
         int sumNs = Neighbours();
-        if (CurrentState == 0 && sumNs == 3)  NextState = 1;  else
+        if (CurrentState == 0 && sumNs == 3) NextState = 1;
+        else
         if (CurrentState == 1 && (sumNs == 3 || sumNs == 2)) NextState = 1; else NextState = 0;
     }
     public string GetCurString()
@@ -117,7 +119,8 @@ class Cell
         {
             for (int c = startcol; c <= endcol; c++)
             {
-                res +=Cells[r, c].CurrentState;
+                if (r != Row && c != Col)
+                    res += Cells[r, c].CurrentState;
             }
         }
         return res;
