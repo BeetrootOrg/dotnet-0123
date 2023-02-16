@@ -29,20 +29,27 @@ class Cells
         bool flag = true;
         do
         {
+            var bcopy = MakeCopy();
             DrawCurrState();
             var copy = MakeCopy();
             UpdateNextStage();
             Thread.Sleep(400);
-            flag = CheckState(copy);
+            flag = CheckState(copy,bcopy);
         } while (flag);
          DrawCurrState();
     }
-    bool CheckState(int[] copy)
+    bool CheckState(int[] copy,int[] bcopy) 
     {
+
         int i = 0;
         foreach (var item in matrix)
         {
             if (copy[i] != item.NextState) return true;
+            i++;
+        }
+        foreach (var item in matrix)
+        {
+            if (bcopy[i] != item.NextState) return true;
             i++;
         }
         return false;
@@ -110,8 +117,8 @@ class Cell
     }
     public string GetCurString()
     {
-        string res="-";
-        if (CurrentState==1) res="8";
+        string res=" ";
+        if (CurrentState==1) res="*";
         if (Col == 0) res=$"\n{res}";
         return res;
     }
