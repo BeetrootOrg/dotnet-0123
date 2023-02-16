@@ -120,7 +120,7 @@ class Cell
             for (int c = startcol; c <= endcol; c++)
             {
                 if (r != Row && c != Col)
-                    res += Cells[r, c].CurrentState;
+                    res=res+Cells[r, c].CurrentState;
             }
         }
         return res;
