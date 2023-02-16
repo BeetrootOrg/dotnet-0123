@@ -5,32 +5,75 @@ using System.Text;
 //---------------- 15.02.2023----------------------
 //--------- Гра життя ----------------
 
-var cs=new Cells(10,10);
-
-class Cells{
-    public int Rows{get;}
-    public int Cols{get;}
+var cs = new Cells(10, 30);
+cs.Run();
+class Cells
+{
+    public int Rows { get; }
+    public int Cols { get; }
     Cell[,] matrix;
-    public Cells (int rows,int cols){
-        Rows=rows; Cols=cols;
-        matrix=new Cell[rows,cols];
-        for (var r = 0; r < rows; r++)
+    public Cells(int rows, int cols)
+    {
+        Rows = rows; Cols = cols;
+        matrix = new Cell[Rows, Cols];
+        for (int r = 0; r < Rows; r++)
         {
-            for (var c = 0; c < cols; c++)
+            for (int c = 0; c < Cols; c++)
             {
-                matrix[r,c]=new Cell(in matrix,r,c);
+                matrix[r, c] = new Cell(in matrix, r, c);
             }
         }
-        DrawCurrState();
     }
-    public void DrawCurrState(){
-        Console.WriteLine("Draw Curr State:");
-        Console.Clear();
-        foreach(var c in matrix){
-            Console.Write(c.GetCurString());
+    public async void Run()
+    {
+        bool flag = true;
+        do
+        {
+            //Console.Clear();
+            DrawCurrState();
+             var copy=MakeCopy();
+            UpdateNextStage();
+            Thread.Sleep(300);
+            flag = CheckState(copy);
+        } while (flag);
+    }
+    bool CheckState(int[] copy)
+    {
+        int i=0;
+        foreach (var item in matrix)
+        {
+            if (copy[i]!=item.NextState) return true;
+            i++;
         }
-        //await Task.Run(()=>{Thread.Sleep(300);});
-        Thread.Sleep(500);
+        return false;
+    }
+    public void UpdateNextStage()
+    {
+        foreach (var c in matrix)
+        {
+            c.InitNexState();
+        }
+    }
+    int [] MakeCopy(){
+        int[] result=new int[matrix.Length];
+        int i=0;
+        foreach (var item in matrix)
+        {
+            result[i]=item.CurrentState;
+            i++;
+        }
+        return result;
+    }
+    public void DrawCurrState()
+    {
+        Console.WriteLine($"Draw Curr State {DateTime.Now}:");
+        var s = new StringBuilder();
+        foreach (var c in matrix)
+        {
+            c.CurrentState = c.NextState;
+            s.Append(c.GetCurString());
+        }
+        Console.WriteLine(s);
     }
 }
 
@@ -39,38 +82,42 @@ class Cell
 {
     public byte CurrentState { get; set; } = 0;
     public byte NextState { get; set; } = 0;
-    public int Row { get; }
-    public int Col { get; }
+    public int Row { get; set; }
+    public int Col { get; set; }
     Cell[,] Cells { get; set; }
     int startrow, endrow, startcol, endcol;
     public Cell(in Cell[,] cells, int row, int col)
     {
+        int rows = cells.GetLength(0) - 1;
+        int cols = cells.GetLength(1) - 1;
+        Row = row; Col = col; Cells = cells;
         if (row < 1) startrow = 0; else startrow = row - 1;
-        if (row < cells.GetLength(0) - 1) endrow = cells.GetLength(0) - 2; else endrow = cells.GetLength(0) - 1;
+        if (row < rows) endrow = row + 1; else endrow = cells.GetLength(0) - 1;
         if (col < 1) startcol = 0; else startcol = col - 1;
-        if (col < cells.GetLength(1) - 1) endcol = cells.GetLength(1) - 2; else endcol = cells.GetLength(1) - 1;
-        var r = new Random(); Row = row; Col = Col; Cells = cells;
+        if (col < cols) endcol = col + 1; else endcol = cells.GetLength(1) - 1;
+        var r = new Random();
         CurrentState = NextState = (byte)r.Next(0, 2);
     }
+
     public void InitNexState()
     {
         int sumNs = Neighbours();
-        if (CurrentState == 0 && sumNs == 3) { NextState = 1; return; }
+        if (CurrentState == 0 && sumNs == 3)  NextState = 1;  else
         if (CurrentState == 1 && (sumNs == 3 || sumNs == 2)) NextState = 1; else NextState = 0;
     }
     public string GetCurString()
     {
-        if (Col > 0) return $"{CurrentState}";
-        return $"\n{CurrentState}";
+        if (Col > 0) return $"{CurrentState.ToString()}";
+        return $"\n{CurrentState.ToString()}";
     }
     public int Neighbours()
     {
-        int res = -1;
-        for (var r = startrow; r <= endrow; r++)
+        int res = 0;
+        for (int r = startrow; r <= endrow; r++)
         {
-            for (var c = startrow; c <= endrow; c++)
+            for (int c = startcol; c <= endcol; c++)
             {
-                res += Cells[r,c].CurrentState;
+                res +=Cells[r, c].CurrentState;
             }
         }
         return res;
