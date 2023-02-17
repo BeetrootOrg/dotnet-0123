@@ -79,6 +79,7 @@ char[] DuplicateCheck(string s){
     }
     return res.Distinct().ToArray();
 }
+//-----------EXTRA-------------------
 //--------- Гра життя ----------------
 const char LifeCell = '*';
 const char DeadCell = '.';
