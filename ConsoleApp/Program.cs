@@ -1,18 +1,22 @@
 ﻿// homework/06-arrays
-// bubble sort
 int[] sorted = new[] { -1, 0, 1, 3, 3 };
 int[] random = new[] { -5, 10, 0, 15, -20, 100, 0 };
 int[] backsorted = new[] { 3, 1, 0, -1, -1 };
 
 
 
-
+// bubble sort
+/*
+Works by repeatedly swapping the adjacent elements if they are in the wrong order. 
+This algorithm is not suitable for large data sets as its average and worst-case time complexity is quite high.
+*/
 static int[] BubbleSort(int[] arr)
 {
     int length = arr.Length;
-    bool flag = new bool(); //по замовчуванню false
+    bool flag = new bool(); //прапорець по замовчуванню false
     do
     {
+        flag = true;
         for (int i = 1; i < length; i++)
         {
             if (arr[i - 1] > arr[i]) //якщо потрібно поміняти елементи, то міняємо
@@ -20,24 +24,59 @@ static int[] BubbleSort(int[] arr)
                 int tmp = arr[i - 1];
                 arr[i - 1] = arr[i];
                 arr[i] = tmp;
+                flag = false; //якщо в нас була заміна, то опускаємо прапорець
             }
-            else flag = true; //якщо в нас не було заміни, то піднімаємо прапорець
+
         }
-    } while (flag == false); //сортуємо елементи, поки не буде піднятий прапорець
+    } while (flag == false); //сортуємо елементи, допоки прапорець опущений
+    return arr;
+}
+
+// selection sort
+
+/*
+The algorithm repeatedly selects the smallest (or largest) element from the unsorted portion 
+of the list and swaps it with the first element of the unsorted portion. 
+This process is repeated for the remaining unsorted portion of the list until the entire list is sorted.
+*/
+static int[] SelectionSort(int[] arr)
+{
+    int length = arr.Length;
+    for (int j = 0; j < length; j++) // цей цикл => від сортованої частини до несортованої (до кінця масиву)
+    {
+        for (int i = j; i < length; i++) // цей цикл => від першого до останнього елемента несортованої частини
+        {
+            if (arr[j] > arr[i])  // якщо потрібно, то міняємо поточний елемент сортованої частини з поточним елементом несортованої
+            {
+                int tmp = arr[j];
+                arr[j] = arr[i];
+                arr[i] = tmp;
+            }
+        }
+    }
     return arr;
 }
 
 
 
-
-
 Console.WriteLine("BubbleSort random");
-WriteLineArray(BubbleSort(new[] { 8, 5, -85, 0, 8, -2, 5, 14}));
+WriteLineArray(BubbleSort(new[] { 8, 5, -85, 0, 8, -2, 5, 14 }));
 Console.WriteLine("BubbleSort arranged");
 WriteLineArray(BubbleSort(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 20 }));
 Console.WriteLine("BubbleSort reversed");
-WriteLineArray(BubbleSort(new[] { 20, 17, 15, 12, 8, 4, 0, 0, -2, -2, -15,}));
+WriteLineArray(BubbleSort(new[] { 20, 17, 15, 12, 8, 4, 0, 0, -2, -2, -15, }));
+Console.WriteLine("ENDofsort");
 
+System.Console.WriteLine('\n');
+System.Console.WriteLine('\n');
+
+Console.WriteLine("SelectionSort random");
+WriteLineArray(SelectionSort(new[] { 8, 5, -85, 0, 8, -2, 5, 14 }));
+Console.WriteLine("SelectionSort arranged");
+WriteLineArray(SelectionSort(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 20 }));
+Console.WriteLine("SelectionSort reversed");
+WriteLineArray(SelectionSort(new[] { 20, 17, 15, 12, 8, 4, 0, 0, -2, -2, -15, }));
+Console.WriteLine("ENDofsort");
 
 
 
@@ -105,7 +144,7 @@ static void WriteLineArrayForeach(int[] arr)
 {
     foreach (int item in arr)
     {
-        Console.WriteLine(item);
+        // Console.WriteLine(item);
     }
 }
 
@@ -165,16 +204,16 @@ static int SumParams(params int[] arr)
     return sum;
 }
 
-Console.WriteLine(Sum(nums2));
+// Console.WriteLine(Sum(nums2));
 // COMPILATION ERRORS BELOW:
 // Console.WriteLine(Sum(1, 2, 3));
 // Console.WriteLine(Sum());
 
 
 
-Console.WriteLine(SumParams(nums2));
-Console.WriteLine(SumParams(10, 20, 30, 40));
-Console.WriteLine(SumParams());
+// Console.WriteLine(SumParams(nums2));
+// Console.WriteLine(SumParams(10, 20, 30, 40));
+// Console.WriteLine(SumParams());
 
 
 static void ResizeArray(ref int[] arr, int size)
@@ -194,21 +233,21 @@ static void ResizeArray(ref int[] arr, int size)
     arr = newArr;
 }
 
-Console.WriteLine("before RESIZE");
-WriteLineArray(nums3);
-Console.WriteLine("RESIZE");
-ResizeArray(ref nums3, 8);
-WriteLineArray(nums3);
+// Console.WriteLine("before RESIZE");
+// WriteLineArray(nums3);
+// Console.WriteLine("RESIZE");
+// ResizeArray(ref nums3, 8);
+// WriteLineArray(nums3);
 
 
-System.Console.WriteLine("========resize to 2=========");
-ResizeArray(ref nums3, 2);
-WriteLineArray(nums3);
+// System.Console.WriteLine("========resize to 2=========");
+// ResizeArray(ref nums3, 2);
+// WriteLineArray(nums3);
 
-// BEST OPTION
-System.Console.WriteLine("Array.Resize========resize to 5=========Array.Resize");
-Array.Resize(ref nums3, 5);
-WriteLineArray(nums3);
+// // BEST OPTION
+// System.Console.WriteLine("Array.Resize========resize to 5=========Array.Resize");
+// Array.Resize(ref nums3, 5);
+// WriteLineArray(nums3);
 
 
 static int[] MulBy2(int[] arr)
@@ -224,31 +263,31 @@ static int[] MulBy2(int[] arr)
     return copy;
 }
 
-Console.WriteLine("MUL BY 2");
-WriteLineArray(MulBy2(nums4));
+// Console.WriteLine("MUL BY 2");
+// WriteLineArray(MulBy2(nums4));
 
-Console.WriteLine("ORIGINAL nums4");
-WriteLineArray(nums4);
+// Console.WriteLine("ORIGINAL nums4");
+// WriteLineArray(nums4);
 
 
-System.Console.WriteLine("2D matrix");
+// System.Console.WriteLine("2D matrix");
 int[,] matrix = new int[2, 4];// { { 0, 1, 2, 3 }, { 4, 5, 6, 7 } };
 foreach (int item in matrix)
 {
-    Console.WriteLine(item);
+    // Console.WriteLine(item);
 }
 
 
-Console.WriteLine($"LENGTH = {matrix.Length}");
-Console.WriteLine($"GetLength(0) = {matrix.GetLength(0)}");
-Console.WriteLine($"GetLength(1) = {matrix.GetLength(1)}");
+// Console.WriteLine($"LENGTH = {matrix.Length}");
+// Console.WriteLine($"GetLength(0) = {matrix.GetLength(0)}");
+// Console.WriteLine($"GetLength(1) = {matrix.GetLength(1)}");
 
 
 for (int i = 0; i < matrix.GetLength(0); i++)
 {
     for (int j = 0; j < matrix.GetLength(1); j++)
     {
-        Console.WriteLine(matrix[i, j]);
+        // Console.WriteLine(matrix[i, j]);
     }
 }
 
@@ -260,20 +299,20 @@ int[][] jagged = new int[2][]
 
 foreach (int[] item in jagged)
 {
-    Console.WriteLine("JAGGED ARRAY");
-    WriteLineArray(item);
+    // Console.WriteLine("JAGGED ARRAY");
+    // WriteLineArray(item);
 }
 
 
 
-Console.WriteLine($"LENGTH = {jagged.Length}");
+// Console.WriteLine($"LENGTH = {jagged.Length}");
 
 for (int i = 0; i < jagged.Length; i++)
 {
     int[] inner = jagged[i];
     for (int j = 0; j < inner.Length; j++)
     {
-        Console.WriteLine(inner[j]);
+        // Console.WriteLine(inner[j]);
     }
 }
 
@@ -311,14 +350,14 @@ static int[] Sort(int[] arr)
 
 
 
-Console.WriteLine("SORTED ARRAY");
-WriteLineArray(Sort(sorted));
+// Console.WriteLine("SORTED ARRAY");
+// WriteLineArray(Sort(sorted));
 
-Console.WriteLine("RANDOM ARRAY");
-WriteLineArray(Sort(random));
+// Console.WriteLine("RANDOM ARRAY");
+// WriteLineArray(Sort(random));
 
-Console.WriteLine("BACK SORTED ARRAY");
-WriteLineArray(Sort(backsorted));
+// Console.WriteLine("BACK SORTED ARRAY");
+// WriteLineArray(Sort(backsorted));
 
 
 
@@ -341,10 +380,10 @@ static int[] Reverse(int[] arr)
     return reversed;
 }
 
-Console.WriteLine("REVERSE");
-WriteLineArray(Reverse(new[] { 1, 2, 3 }));
-Console.WriteLine("REVERSE");
-WriteLineArray(Reverse(new[] { 1, 2, 3, 4 }));
+// Console.WriteLine("REVERSE");
+// WriteLineArray(Reverse(new[] { 1, 2, 3 }));
+// Console.WriteLine("REVERSE");
+// WriteLineArray(Reverse(new[] { 1, 2, 3, 4 }));
 
 
 //простіший спосіб
@@ -365,11 +404,11 @@ static int[] Reverse1(int[] arr)
     return reversed;
 }
 
-Console.WriteLine("REVERSE");
-WriteLineArray(Reverse1(new[] { 1, 2, 3 }));
-Console.WriteLine("REVERSE");
-WriteLineArray(Reverse1(new[] { 1, 2, 3, 4, 5, 45, 99, 101 }));
-Console.WriteLine("REVERSE");
-WriteLineArray(Reverse1(new[] { 1, 2, 3, 4, 5 }));
-Console.WriteLine("REVERSE");
-WriteLineArray(Reverse1(new[] { 1, 2, 3, 4, 5, 45, 99, 101, 202 }));
+// Console.WriteLine("REVERSE");
+// WriteLineArray(Reverse1(new[] { 1, 2, 3 }));
+// Console.WriteLine("REVERSE");
+// WriteLineArray(Reverse1(new[] { 1, 2, 3, 4, 5, 45, 99, 101 }));
+// Console.WriteLine("REVERSE");
+// WriteLineArray(Reverse1(new[] { 1, 2, 3, 4, 5 }));
+// Console.WriteLine("REVERSE");
+// WriteLineArray(Reverse1(new[] { 1, 2, 3, 4, 5, 45, 99, 101, 202 }));
