@@ -1,4 +1,6 @@
-﻿(string, DateTime, int, string)[] meetings = Array.Empty<(string, DateTime, int, string)>();
+﻿using System.Text;
+
+(string, DateTime, int, string)[] meetings = Array.Empty<(string, DateTime, int, string)>();
 
 void Menu()
 {
@@ -41,6 +43,8 @@ void CreateMeeting()
 
     Array.Resize(ref meetings, meetings.Length + 1);
     meetings[^1] = (meetingName, meetingStart, meetingDuration, roomName);
+
+    DumpToFile();
 
     Console.WriteLine("Meeting successfully created!");
     Console.WriteLine("To continue press ENTER...");
@@ -153,6 +157,18 @@ void ShowMeetings()
     Console.WriteLine();
     Console.WriteLine("To continue press ENTER...");
     _ = Console.ReadLine();
+}
+
+void DumpToFile()
+{
+    StringBuilder sb = new();
+    _ = sb.AppendLine("Name,Start,Duration,Room");
+    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    {
+        _ = sb.AppendLine($"{name},{start},{duration},{room}");
+    }
+
+    File.WriteAllText("dump.csv", sb.ToString());
 }
 
 while (true)
