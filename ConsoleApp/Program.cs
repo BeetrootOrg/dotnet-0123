@@ -174,6 +174,12 @@ void DumpToFile()
 
 void LoadFromFile()
 {
+    if (!File.Exists(filename))
+    {
+        meetings = Array.Empty<(string, DateTime, int, string)>();
+        return;
+    }
+
     string text = File.ReadAllText(filename);
 
     string[] lines = text.Split('\n');
