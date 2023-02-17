@@ -223,8 +223,60 @@ System.Console.WriteLine("Jagged array via for");
 for (int i = 0; i < jagged.Length; i++)
 {
     int[] inner = jagged[i];
-    for ( int j = 0; j < inner.Length; j++)
+    for (int j = 0; j < inner.Length; j++)
     {
         System.Console.WriteLine(inner[j]);
     }
 }
+
+//Insertion sort
+
+int[] toSort = new int[] { -5, 10, 0, 15, -20, 100, 0 };
+
+int[] Sort(int[] arr)
+{
+    int[] copy = new int[arr.Length];
+    Array.Copy(arr, copy, arr.Length);
+
+    for (int i = 1; i < copy.Length; i++)
+    {
+        var item = copy[i];
+        var index = i;
+        for (int j = i - 1; j >= 0; j--)
+        {
+            var current = copy[j];
+            
+            if (current > item)
+            {
+                copy[j+1] = copy[j];
+                index = j;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        copy[index] = item;
+    }
+
+    return copy;
+}
+
+int[] sorted = new int[] { -1, 0, 1, 3 };
+int[] random = new int[] { -5, 10, 0, 15, -20, 100, 0 };
+int[] backsorted = new int[] { 3, 1, 0, -1 };
+int[] empty = new int[0];
+
+System.Console.WriteLine("Sort array");
+WriteLineArray(Sort(sorted));
+
+System.Console.WriteLine("Random array");
+WriteLineArray(Sort(random));
+
+System.Console.WriteLine("BackSorted array");
+WriteLineArray(Sort(backsorted));
+
+System.Console.WriteLine("Null Array");
+WriteLineArray(Sort(empty));
+
