@@ -34,19 +34,10 @@ void CreateMeeting()
 {
     Console.Clear();
 
-    Console.WriteLine("Enter meeting name:");
-    string meetingName = Console.ReadLine();
-
-    Console.WriteLine("Enter meeting start:");
-    string meetingStartInput = Console.ReadLine();
-    DateTime meetingStart = DateTime.Parse(meetingStartInput);
-
-    Console.WriteLine("Enter meeting duration (in minutes):");
-    string meetingDurationInput = Console.ReadLine();
-    int meetingDuration = int.Parse(meetingDurationInput);
-
-    Console.WriteLine("Room name:");
-    string roomName = Console.ReadLine();
+    string meetingName = EnterMeetingName();
+    DateTime meetingStart = EnterMeetingStart();
+    int meetingDuration = MeetingDurationInMinutes();
+    string roomName = EnterRoomName();
 
     Array.Resize(ref meetings, meetings.Length + 1);
     meetings[^1] = (meetingName, meetingStart, meetingDuration, roomName);
@@ -54,6 +45,98 @@ void CreateMeeting()
     Console.WriteLine("Meeting successfully created!");
     Console.WriteLine("To continue press ENTER...");
     _ = Console.ReadLine();
+}
+
+string EnterMeetingName()
+{
+    while (true)
+    {
+        Console.WriteLine("Enter meeting name:");
+        string input = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            Console.WriteLine("Meeting name should be not empty!");
+            continue;
+        }
+
+        if (input.Length > 20)
+        {
+            Console.WriteLine("Meeting name length should be less than 20!");
+            continue;
+        }
+
+        return input;
+    }
+}
+
+DateTime EnterMeetingStart()
+{
+    while (true)
+    {
+        Console.WriteLine("Enter meeting start:");
+        string input = Console.ReadLine();
+
+        if (!DateTime.TryParse(input, out DateTime start))
+        {
+            Console.WriteLine("Meeting start should be valid timestamp!");
+            continue;
+        }
+
+        if (start <= DateTime.Now)
+        {
+            Console.WriteLine("Meeting start should be in future!");
+            continue;
+        }
+
+        return start;
+    }
+}
+
+int MeetingDurationInMinutes()
+{
+    while (true)
+    {
+        Console.WriteLine("Enter meeting duration (in minutes):");
+        string input = Console.ReadLine();
+
+        if (!int.TryParse(input, out int duration))
+        {
+            Console.WriteLine("Meeting duration should be valid number!");
+            continue;
+        }
+
+        if (duration <= 0)
+        {
+            Console.WriteLine("Meeting duration should be positive number!");
+            continue;
+        }
+
+        return duration;
+    }
+}
+
+string EnterRoomName()
+{
+    while (true)
+    {
+        Console.WriteLine("Enter room name:");
+        string input = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            Console.WriteLine("Room name should be not empty!");
+            continue;
+        }
+
+        if (input.Length > 20)
+        {
+            Console.WriteLine("Room name length should be less than 20!");
+            continue;
+        }
+
+        return input;
+    }
 }
 
 void ShowMeetings()
