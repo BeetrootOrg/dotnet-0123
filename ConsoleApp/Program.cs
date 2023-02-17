@@ -1,13 +1,16 @@
-﻿const int n = 5;
-
-int fib1=1;
-int fib2=1;
-int fib3;
-
-for(int r=1;r<=n;r++)
+﻿
+static int Sum(int a,int b)
 {
-    fib3=fib1+fib2;
-    fib1=fib2;
-    fib2=fib3;
+ var sum = a + b;
+ return sum;
 }
-System.Console.WriteLine(fib1);
+//static int sumoneline(int a,int b)=>a+b;{return a+b;}
+static int SumOneLine(int a, int b)
+{
+    return a + b;
+}
+
+int a = 15;
+int b = 20;
+System.Console.WriteLine(Sum(a,b));
+System.Console.WriteLine(SumOneLine(42,80));
