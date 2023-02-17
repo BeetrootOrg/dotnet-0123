@@ -6,8 +6,45 @@ using System.Text;
 // Домашка
 // Основне
 
-// 
+// 1. Compare that will return true if 2 strings are equal, otherwise false, but do not use build-in method
+Console.WriteLine(Compare("Andrey", "Andrey"));
+Console.WriteLine(Compare("Andrey", "ANDREY"));
+Thread.Sleep(1000);
+bool Compare(string str1, string str2)
+{
+    if (str1.Length != str2.Length) return false;
+    for (int i = 0; i < str1.Length; i++)
+    {
+        if (str1[i] != str2[i]) return false;
+    }
+    return true;
+}
+// 2. Analyze that will return number of alphabetic chars in string, digits and another special characters
+Analyze("Andrey12345!,.\n\t");
+void Analyze(string str)
+{
+    int alpha = 0;
+    int digi = 0;
+    int spec = 0;
+    int punct = 0;
+    foreach (char c in str)
+    {
+        if (char.IsLetter(c)) alpha++;
+        if (char.IsDigit(c)) digi++;
+        if (char.IsControl(c)) spec++;
+        if (char.IsPunctuation(c)) punct++;
+    }
+    Console.WriteLine($"Letters {alpha}");
+    Console.WriteLine($"Digits {digi}");
+    Console.WriteLine($"Controls {spec}");
+    Console.WriteLine($"Punctuations {punct}");
+}
+Thread.Sleep(1000);
+//3. Sort that will return string that contains all characters from input 
+// string sorted in alphabetical order (e.g. 'Hello' -> 'ehllo')
+string Sort(string s){
 
+}
 
 //--------- Гра життя ----------------
 const char LifeCell = '*';
