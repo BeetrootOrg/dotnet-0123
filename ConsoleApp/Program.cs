@@ -42,12 +42,21 @@ void CreateMeeting()
     int meetingDuration = MeetingDurationInMinutes();
     string roomName = EnterRoomName();
 
-    Array.Resize(ref meetings, meetings.Length + 1);
-    meetings[^1] = (meetingName, meetingStart, meetingDuration, roomName);
+    (string, DateTime, int, string) meeting = (meetingName, meetingStart, meetingDuration, roomName);
+    if (DoesIntersectWithOther(meeting))
+    {
+        Console.WriteLine("Meeting intersects with another!");
+    }
+    else
+    {
+        Array.Resize(ref meetings, meetings.Length + 1);
+        meetings[^1] = meeting;
 
-    DumpToFile();
+        DumpToFile();
 
-    Console.WriteLine("Meeting successfully created!");
+        Console.WriteLine("Meeting successfully created!");
+    }
+
     Console.WriteLine("To continue press ENTER...");
     _ = Console.ReadLine();
 }
@@ -142,6 +151,30 @@ string EnterRoomName()
 
         return input;
     }
+}
+
+bool DoesIntersectWithOther((string name, DateTime start, int duration, string room) meeting)
+{
+    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    {
+        if (meeting.room == room)
+        {
+            DateTime end1 = meeting.start.AddMinutes(meeting.duration);
+            DateTime end2 = start.AddMinutes(duration);
+
+            if (meeting.start >= start && meeting.start < end2)
+            {
+                return true;
+            }
+
+            if (start >= meeting.start && start < end1)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 void ShowMeetings()
