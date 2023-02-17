@@ -2,13 +2,18 @@
 
 using System.Linq;
 using System.Text;
-
 //---------------- 17.02.2023----------------------
+// Домашка
+// Основне
+
+// 
+
+
 //--------- Гра життя ----------------
 const char LifeCell = '*';
 const char DeadCell = '.';
 
-var cells = CreateRandomField(10, 50);
+var cells = CreateRandomField(5, 5);
 PrintField(cells);
 bool flag = false;
 var before = new char[cells.GetLength(0), cells.GetLength(1)];
