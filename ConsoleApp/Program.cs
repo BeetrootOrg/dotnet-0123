@@ -114,3 +114,18 @@ for(int i = 0; i < 10; i++){
     }
     System.Console.WriteLine("new execution");
 }
+
+System.Console.WriteLine("pleaseasdasdasda");
+string input = Console.ReadLine();
+System.Console.WriteLine($"asdasdasdasd");
+
+
+Console.WriteLine("please enter the num2:");
+     input = Console.ReadLine();
+    int num1 = int.Parse(input);
+
+Console.WriteLine("please enter the num1:");
+     input = Console.ReadLine();
+    int num2 = int.Parse(input);
+
+System.Console.WriteLine($"Sum of 2 numbers is {num1+ num2}");
