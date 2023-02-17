@@ -1,6 +1,7 @@
 ﻿using System.Text;
 
-(string, DateTime, int, string)[] meetings = Array.Empty<(string, DateTime, int, string)>();
+const string filename = "dump.csv";
+(string, DateTime, int, string)[] meetings;
 
 void Menu()
 {
@@ -168,9 +169,25 @@ void DumpToFile()
         _ = sb.AppendLine($"{name},{start},{duration},{room}");
     }
 
-    File.WriteAllText("dump.csv", sb.ToString());
+    File.WriteAllText(filename, sb.ToString());
 }
 
+void LoadFromFile()
+{
+    string text = File.ReadAllText(filename);
+
+    string[] lines = text.Split('\n');
+    meetings = new (string, DateTime, int, string)[lines.Length - 2];
+
+    for (int i = 1; i < lines.Length - 1; i++)
+    {
+        string line = lines[i];
+        string[] items = line.Split(',');
+        meetings[i - 1] = (items[0], DateTime.Parse(items[1]), int.Parse(items[2]), items[3]);
+    }
+}
+
+LoadFromFile();
 while (true)
 {
     Menu();
