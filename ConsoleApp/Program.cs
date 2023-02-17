@@ -1,15 +1,63 @@
-﻿int[] nums1 = { 1, 2, 3 };
+﻿// homework/06-arrays
+// bubble sort
+int[] sorted = new[] { -1, 0, 1, 3, 3 };
+int[] random = new[] { -5, 10, 0, 15, -20, 100, 0 };
+int[] backsorted = new[] { 3, 1, 0, -1, -1 };
+
+
+
+
+static int[] BubbleSort(int[] arr)
+{
+    int length = arr.Length;
+    bool flag = new bool(); //по замовчуванню false
+    do
+    {
+        for (int i = 1; i < length; i++)
+        {
+            if (arr[i - 1] > arr[i]) //якщо потрібно поміняти елементи, то міняємо
+            {
+                int tmp = arr[i - 1];
+                arr[i - 1] = arr[i];
+                arr[i] = tmp;
+            }
+            else flag = true; //якщо в нас не було заміни, то піднімаємо прапорець
+        }
+    } while (flag == false); //сортуємо елементи, поки не буде піднятий прапорець
+    return arr;
+}
+
+
+
+
+
+Console.WriteLine("BubbleSort random");
+WriteLineArray(BubbleSort(new[] { 8, 5, -85, 0, 8, -2, 5, 14}));
+Console.WriteLine("BubbleSort arranged");
+WriteLineArray(BubbleSort(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 20 }));
+Console.WriteLine("BubbleSort reversed");
+WriteLineArray(BubbleSort(new[] { 20, 17, 15, 12, 8, 4, 0, 0, -2, -2, -15,}));
+
+
+
+
+
+
+
+int[] nums1 = { 1, 2, 3 };
 int[] nums2 = new[] { 1, 2, 3 };
 int[] nums3 = new int[] { 1, 2, 3 };
 int[] nums4 = new int[3] { 1, 2, 3 };
 int[] nums5 = new int[3];
-int [] nullArr = null;
+int[] nullArr = null;
 
+/*
 Console.WriteLine(nums1);
 Console.WriteLine(nums2);
 Console.WriteLine(nums3);
 Console.WriteLine(nums4);
 Console.WriteLine(nums5);
+*/
 
 static void WriteLineArray(int[] array)
 {
@@ -19,39 +67,39 @@ static void WriteLineArray(int[] array)
     }
 }
 
-WriteLineArray(nums1);
+// WriteLineArray(nums1);
 
 static void arraychange(int[] arr, int index, int newRate)
 {
     arr[index] = newRate;
 }
 
-arraychange (nums1, 1, 99);
-WriteLineArray(nums1);
+arraychange(nums1, 1, 99);
+// WriteLineArray(nums1);
 
-nums1 [1] = 100;
-WriteLineArray(nums1);
+nums1[1] = 100;
+// WriteLineArray(nums1);
 
 static void UpdateArrayR(ref int[] arr)
 {
     arr = new[] { 4, 5, 6, 7 };
 }
-UpdateArrayR (ref nums1);
+UpdateArrayR(ref nums1);
 
-WriteLineArray(nums1);
-
-
-
-nums1 = new [] {2,5,7,10};
-WriteLineArray(nums1);
-System.Console.WriteLine( "udate null array");
+// WriteLineArray(nums1);
 
 
-UpdateArrayR (ref nullArr);
-WriteLineArray(nullArr);
 
-System.Console.WriteLine("foreach");
-WriteLineArrayForeach (nullArr);
+nums1 = new[] { 2, 5, 7, 10 };
+// WriteLineArray(nums1);
+// System.Console.WriteLine("udate null array");
+
+
+UpdateArrayR(ref nullArr);
+// WriteLineArray(nullArr);
+
+// System.Console.WriteLine("foreach");
+// WriteLineArrayForeach(nullArr);
 
 static void WriteLineArrayForeach(int[] arr)
 {
@@ -61,7 +109,7 @@ static void WriteLineArrayForeach(int[] arr)
     }
 }
 
-
+/*
 Console.WriteLine("RANGE OPERATOR 1..3");
 WriteLineArray(nullArr[1..3]); // [1][2]
 
@@ -70,16 +118,17 @@ WriteLineArray(nullArr[..3]); // [0][1][2]
 
 Console.WriteLine("RANGE OPERATOR ..3");
 WriteLineArray(nullArr[1..]); // [1][2][3]
+*/
 
-
-
+/*
 Console.WriteLine("COPY ARRAY");
 int[] subarray = nullArr[1..];
 subarray[0] = 42;
 WriteLineArray(nullArr);
 WriteLineArray(subarray);
+*/
 
-
+/*
 Console.WriteLine("RANGE OPERATOR ^3..^1");
 WriteLineArray(nullArr[^3..4]); // [1][2]
 
@@ -88,9 +137,9 @@ WriteLineArray(nullArr[..^1]); // [0][1][2]
 
 Console.WriteLine("RANGE OPERATOR ^3..");
 WriteLineArray(nullArr[^3..]); // [1][2][3]
+*/
 
-
-
+/*
 Console.WriteLine("SUM");
 static int Sum(int[] arr)
 {
@@ -102,6 +151,8 @@ static int Sum(int[] arr)
 
     return sum;
 }
+*/
+
 
 static int SumParams(params int[] arr)
 {
@@ -258,10 +309,6 @@ static int[] Sort(int[] arr)
     return arr;
 }
 
-int[] sorted = new[] { -1, 0, 1, 3, 3 };
-int[] random = new[] { -5, 10, 0, 15, -20, 100, 0 };
-int[] backsorted = new[] { 3, 1, 0, -1, -1 };
-int[] empty = new int[0];
 
 
 Console.WriteLine("SORTED ARRAY");
@@ -273,8 +320,6 @@ WriteLineArray(Sort(random));
 Console.WriteLine("BACK SORTED ARRAY");
 WriteLineArray(Sort(backsorted));
 
-Console.WriteLine("EMPTY ARRAY");
-WriteLineArray(Sort(empty));
 
 
 
@@ -323,4 +368,8 @@ static int[] Reverse1(int[] arr)
 Console.WriteLine("REVERSE");
 WriteLineArray(Reverse1(new[] { 1, 2, 3 }));
 Console.WriteLine("REVERSE");
-WriteLineArray(Reverse1(new[] { 1, 2, 3, 4 }));
+WriteLineArray(Reverse1(new[] { 1, 2, 3, 4, 5, 45, 99, 101 }));
+Console.WriteLine("REVERSE");
+WriteLineArray(Reverse1(new[] { 1, 2, 3, 4, 5 }));
+Console.WriteLine("REVERSE");
+WriteLineArray(Reverse1(new[] { 1, 2, 3, 4, 5, 45, 99, 101, 202 }));
