@@ -42,13 +42,13 @@ void Analyze(string str)
 Thread.Sleep(1000);
 //3. Sort that will return string that contains all characters from input 
 // string sorted in alphabetical order (e.g. 'Hello' -> 'ehllo')
-string Sort(string s){
-int[]? BubbleSort(int[]? arrey)
+Console.WriteLine(Sort("Andrey"));
+Thread.Sleep(1000);
+string Sort(string s)
 {
-    if (arrey?.Length < 2) return arrey;
-    int[] arr = new int[arrey.Length];
-    Array.Copy(arrey, arr, arrey.Length);
-    int buf;
+    var arr=s.ToCharArray();
+    if (arr.Length < 2) return new string(arr);
+    char buf;
     for (int j = 0; j <= arr.Length - 2; j++)
     {
         for (int i = 0; i <= arr.Length - 2; i++)
@@ -61,10 +61,24 @@ int[]? BubbleSort(int[]? arrey)
             }
         }
     }
-    return arr;
+    return new string(arr);
 }
+// 4.Duplicate that will return array of characters that are duplicated in input string 
+// (e.g. 'Hello and hi' -> ['h', 'l'])
+Console.WriteLine(new string(DuplicateCheck("Andrey Vasya")));
+Thread.Sleep(1000);
+char[] DuplicateCheck(string s){
+    var arr=s.ToCharArray();
+    string res=string.Empty;
+    foreach(char c in arr){
+        int i=0;
+        foreach(char c1 in arr){
+            if (c1==c) i++;
+        }
+        if (i>1) res=res+c;
+    }
+    return res.ToArray<char>().Distinct<char>().ToArray();
 }
-
 //--------- Гра життя ----------------
 const char LifeCell = '*';
 const char DeadCell = '.';
