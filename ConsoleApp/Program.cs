@@ -19,6 +19,10 @@ void Menu()
     {
         CreateMeeting();
     }
+    else if (key.Key == ConsoleKey.D2)
+    {
+        ShowMeetings();
+    }
 }
 
 static void Exit()
@@ -48,6 +52,22 @@ void CreateMeeting()
     meetings[^1] = (meetingName, meetingStart, meetingDuration, roomName);
 
     Console.WriteLine("Meeting successfully created!");
+    Console.WriteLine("To continue press ENTER...");
+    _ = Console.ReadLine();
+}
+
+void ShowMeetings()
+{
+    Console.Clear();
+
+    Console.WriteLine($"{"Name",-25}{"Start",-25}{"End",-25}{"Room",-25}");
+    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    {
+        DateTime end = start.AddMinutes(duration);
+        Console.WriteLine($"{name,-25}{start,-25}{end,-25}{room,-25}");
+    }
+
+    Console.WriteLine();
     Console.WriteLine("To continue press ENTER...");
     _ = Console.ReadLine();
 }
