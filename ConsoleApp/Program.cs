@@ -1,10 +1,13 @@
-﻿static void Menu()
+﻿(string, DateTime, int, string)[] meetings = Array.Empty<(string, DateTime, int, string)>();
+
+void Menu()
 {
     Console.Clear();
 
     Console.WriteLine("Meeting Booker");
     Console.WriteLine();
     Console.WriteLine("1. Create a meeting");
+    Console.WriteLine("2. Show all meetings");
     Console.WriteLine("0. Exit");
 
     ConsoleKeyInfo key = Console.ReadKey();
@@ -23,7 +26,7 @@ static void Exit()
     Environment.Exit(0);
 }
 
-static void CreateMeeting()
+void CreateMeeting()
 {
     Console.Clear();
 
@@ -41,7 +44,12 @@ static void CreateMeeting()
     Console.WriteLine("Room name:");
     string roomName = Console.ReadLine();
 
-    Console.WriteLine($"{meetingName} {meetingStart} {meetingDuration} {roomName}");
+    Array.Resize(ref meetings, meetings.Length + 1);
+    meetings[^1] = (meetingName, meetingStart, meetingDuration, roomName);
+
+    Console.WriteLine("Meeting successfully created!");
+    Console.WriteLine("To continue press ENTER...");
+    _ = Console.ReadLine();
 }
 
 while (true)
