@@ -79,28 +79,6 @@ int[] SelectionSort(int[] arr)
     return copy;
 }
 
-int[] QuickSort(int[] arr)
-{
-   int[] copy = CreateArrayCopy(arr, out int length);
-   int low = 0;
-   int high = length - 1;
-
-   int pivot = copy[high];
-   int i = low - 1;
-
-   for (int j = low; j < high; j++)
-   {
-        if (copy[j] <= pivot)
-        {
-            i++;
-            SwapVar(ref copy[i], ref copy[j];)
-        };
-   };
-
-   SwapVar(ref copy[i+1], ref copy[high]);
-   return copy;
-}
-
 int[] random = new int[] { 6, 3, 2, 4, 1 };
 int[] sorted = new int[] { -7, 0, 5, 7 };
 int[] backsorted = new int[] { 7, 5, 0, -7 };
