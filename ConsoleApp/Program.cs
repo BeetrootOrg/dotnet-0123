@@ -213,12 +213,10 @@ void LoadFromFile()
         return;
     }
 
-    string text = File.ReadAllText(filename);
+    string[] lines = File.ReadAllLines(filename);
+    meetings = new (string, DateTime, int, string)[lines.Length - 1];
 
-    string[] lines = text.Split('\n');
-    meetings = new (string, DateTime, int, string)[lines.Length - 2];
-
-    for (int i = 1; i < lines.Length - 1; i++)
+    for (int i = 1; i < lines.Length; i++)
     {
         string line = lines[i];
         string[] items = line.Split(',');
