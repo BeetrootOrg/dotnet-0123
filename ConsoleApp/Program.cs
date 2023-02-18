@@ -79,11 +79,9 @@ int[] SelectionSort(int[] arr)
     return copy;
 }
 
-int[] QuickSort(int[] arr)
+int Partition(int[] arr, int low, int high)
 {
    int[] copy = CreateArrayCopy(arr, out int length);
-   int low = 0;
-   int high = length - 1;
 
    int pivot = copy[high];
    int i = low - 1;
@@ -93,13 +91,36 @@ int[] QuickSort(int[] arr)
         if (copy[j] <= pivot)
         {
             i++;
-            SwapVar(ref copy[i], ref copy[j];)
-        };
-   };
+            SwapVar(ref copy[i], ref copy[j]);
+        }
+   }
 
    SwapVar(ref copy[i+1], ref copy[high]);
-   return copy;
+   return (i + 1);
 }
+
+void Sorting(int[] arr, int low, int high)
+{
+    if (low < high)
+    {
+        int pi = Partition(arr, low, high);
+        Sorting(arr, low, pi - 1);
+        Sorting(arr, pi + 1, high);
+    }
+}
+
+int[] QuickSort(int[] arr)
+{
+    int[] copy = CreateArrayCopy(arr, out int length);
+    int low = 0;
+    int high = length - 1;
+
+    Sorting(copy, low, high);
+    return copy;
+}
+
+
+
 
 int[] random = new int[] { 6, 3, 2, 4, 1 };
 int[] sorted = new int[] { -7, 0, 5, 7 };
@@ -122,6 +143,15 @@ WriteLineArray(SelectionSort(sorted));
 
 System.Console.WriteLine("BackSorted Array - SelectionSort");
 WriteLineArray(SelectionSort(backsorted));
+
+System.Console.WriteLine("Random Array - QuickSort");
+WriteLineArray(QuickSort(random));
+
+System.Console.WriteLine("Sorted Array - QuickSort");
+WriteLineArray(QuickSort(sorted));
+
+System.Console.WriteLine("BackSorted Array - QuickSort");
+WriteLineArray(QuickSort(backsorted));
 
 
 
