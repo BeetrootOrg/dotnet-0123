@@ -1,5 +1,5 @@
 ﻿using System.Text;
-
+ 
 char c1 = 'c';
 char c2 = (char)99;
 char c3 = '\u0063';
@@ -8,6 +8,8 @@ Console.WriteLine(c1);
 Console.WriteLine(c2);
 Console.WriteLine(c3);
 
+
+/*
 char c4 = '\'';
 Console.WriteLine(c4);
 
@@ -144,9 +146,10 @@ Console.WriteLine(result[..^2]);
 StringBuilder sb = new();
 for (int i = 0; i < 100; i++)
 {
-    _ = sb.Append($"{i}, ");
-    // SAME ABOVE
-    // sb.Append($"{i}, ");
+    for (int i = 0; i < array.Length; i++)
+    {
+        Console.WriteLine(array[i]);
+    }
 }
 
-Console.WriteLine(sb.ToString()[..^2]);
+*/
