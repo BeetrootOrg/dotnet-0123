@@ -9,7 +9,7 @@ Console.WriteLine(c2);
 Console.WriteLine(c3);
 
 
-/*
+
 char c4 = '\'';
 Console.WriteLine(c4);
 
@@ -43,6 +43,8 @@ DescribeChar('\u1234');
 
 Console.WriteLine($"C greater than c = {'C' > 'c'}");
 
+
+
 string s1 = "Hello, World!";
 int age = 26;
 string s2 = "My age is " + age;
@@ -56,6 +58,8 @@ Console.WriteLine(s3);
 Console.WriteLine(s4);
 Console.WriteLine(s5);
 
+
+/*
 Console.WriteLine($"s1.Contains('W') = {s1.Contains('W')}");
 Console.WriteLine($"s1.Contains('World') = {s1.Contains("World")}");
 Console.WriteLine($"s1.Contains('world') = {s1.Contains("world")}");
