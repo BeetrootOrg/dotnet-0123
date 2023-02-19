@@ -1,5 +1,4 @@
-﻿
-static int Sum(int a, int b)
+﻿static int Sum(int a, int b)
 {
     var sum = a + b;
     return sum;
@@ -66,12 +65,12 @@ int temp3 = 15;
 RefNoAssign(ref temp3);
 System.Console.WriteLine(temp3);
 
-bool TryReadInt(out int result)
+// bool TryReadInt(out int result)
 {
 
 
-    string input = Console.ReadLine();
-    return int.TryParse(input, out result);
+    // string input = Console.ReadLine();
+    // return int.TryParse(input, out result);
 
 
     // if (int.TryParse(input,out result))
@@ -83,9 +82,9 @@ bool TryReadInt(out int result)
     //     return false;
     // } плохой стиль програмирования
 }
-if (TryReadInt(out int temp4))
+// if (TryReadInt(out int temp4))
 {
-    System.Console.WriteLine(temp4);
+    // System.Console.WriteLine(temp4);
 }
 
 bool TryDivideByThree(int num, out int result)
@@ -101,10 +100,10 @@ bool TryDivideByThree(int num, out int result)
         return false;
     }
 }
-bool result = TryDivideByThree(6, out temp4);
-System.Console.WriteLine($"TryDivideByThree(6) = {result}.Result = {temp4}");
-result = TryDivideByThree(7, out temp4);
-System.Console.WriteLine($"TryDivideByThree(7) = {result}.Result = {temp4}");
+// bool result = TryDivideByThree(6, out temp4);
+// System.Console.WriteLine($"TryDivideByThree(6) = {result}.Result = {temp4}");
+// result = TryDivideByThree(7, out temp4);
+// System.Console.WriteLine($"TryDivideByThree(7) = {result}.Result = {temp4}");
 
 int Fibonacci(int n)
 {
@@ -132,3 +131,18 @@ System.Console.WriteLine(Fibonacci(3));
 System.Console.WriteLine(Fibonacci(5));
 System.Console.WriteLine(FibonacciWithTernary(3));
 System.Console.WriteLine(FibonacciWithTernary(5));
+
+
+Fibonacci(3);
+Fibonacci(5);
+
+Random random = new((int)DateTime.Now.Ticks);
+System.Console.WriteLine(random.Next());
+System.Console.WriteLine(random.Next(10));//[0,10)
+System.Console.WriteLine(random.Next(-10, 10));//[-10,10)
+
+
+float f1 = random.NextSingle();//[0.0,1.0)
+System.Console.WriteLine(f1);
+double d1 = random.NextDouble();//[0.0,1.0]
+System.Console.WriteLine(d1);
