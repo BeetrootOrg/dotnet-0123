@@ -146,3 +146,17 @@ float f1 = random.NextSingle();//[0.0,1.0)
 System.Console.WriteLine(f1);
 double d1 = random.NextDouble();//[0.0,1.0]
 System.Console.WriteLine(d1);
+
+int SumRecursion(int from, int to)
+{
+    if (from > to)
+    {
+        return SumRecursion(to, from);
+    }
+    if (from == to)
+    {
+        return from;
+    }
+    return from + SumRecursion(from + 1, to);
+}
+System.Console.WriteLine(SumRecursion(1, 4));
