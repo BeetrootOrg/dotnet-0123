@@ -59,7 +59,7 @@ Console.WriteLine(s4);
 Console.WriteLine(s5);
 
 
-/*
+
 Console.WriteLine($"s1.Contains('W') = {s1.Contains('W')}");
 Console.WriteLine($"s1.Contains('World') = {s1.Contains("World")}");
 Console.WriteLine($"s1.Contains('world') = {s1.Contains("world")}");
@@ -81,6 +81,8 @@ Console.WriteLine($"s1.StartsWith('ell') = {s1.StartsWith("ell")}");
 Console.WriteLine($"s1.StartsWith('Hell') = {s1.StartsWith("Hell")}");
 Console.WriteLine($"s1.StartsWith('HeLl', StringComparison.OrdinalIgnoreCase) = {s1.StartsWith("HeLl", StringComparison.OrdinalIgnoreCase)}");
 
+
+/*
 Console.WriteLine($"s1.IndexOf(',') = {s1.IndexOf(',')}");
 Console.WriteLine($"s1.IndexOf('l') = {s1.IndexOf('l')}");
 Console.WriteLine($"s1.IndexOf('ll') = {s1.IndexOf("ll")}");
