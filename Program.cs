@@ -1,17 +1,17 @@
-﻿// char[,] a = new char [5,4] {{'.','.','.','*'},{'*','.','*','*'},{'.','*','.','*'},{'.','.','.','*'},{'*','.','*','*'}};
+﻿char[,] a = new char [8,8] {{'.','.','.','*','*','.','.','.'},{'.','.','*','*','*','*','.','.'},{'.','*','.','.','.','.','*','.'},{'*','*','.','.','.','.','*','*'},{'*','*','.','.','.','.','*','*'},{'.','*','.','.','.','.','*','.'},{'.','.','*','*','*','*','.','.'},{'.','.','.','*','*','.','.','.'}};
 
 
-// static void Print2DArray<T>(T[,] matrix)
-// {
-//     for (int i = 0; i < matrix.GetLength(0); i++)
-//     {
-//         for (int j = 0; j < matrix.GetLength(1); j++)
-//         {
-//             Console.Write(matrix[i,j] + "\t");
-//         }
-//         Console.WriteLine();
-//     }
-// }
+static void Print2DArray<T>(T[,] matrix)
+{
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            Console.Write(matrix[i,j] + "\t");
+        }
+        Console.WriteLine();
+    }
+}
 
 //1) Any live cell with fewer than two live neighbours dies, as if by underpopulation.
 //2) Any live cell with two or three live neighbours lives on to the next generation.
@@ -87,18 +87,18 @@ char[,] Execute(char[,] cells)
 
             if (solution[i,j] == '*')
             {
-                if (neighbours != 2)
+                if (neighbours == 2 || neighbours == 3)
                 {
-                    answer[i-1,j-1] = '.';
+                    answer[i-1,j-1] = '*';
                 }
                 else
                 {
-                    answer[i-1,j-1] = '*';
+                    answer[i-1,j-1] = '.';
                 }
             }
             else if (solution[i,j] == '.')
             {
-                if (neighbours >= 3)
+                if (neighbours == 3)
                 {
                     answer[i-1,j-1] = '*';
                 }
@@ -111,3 +111,16 @@ char[,] Execute(char[,] cells)
     }
     return(answer);
 }
+
+char[,] Run(char[,] cells, int t)
+{
+    while(true)
+    {
+    Console.Clear();
+
+    Print2DArray(cells);
+    cells = Execute(cells);
+    System.Threading.Thread.Sleep(t*1000);
+    }
+    return cells;
+} 
