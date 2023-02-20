@@ -1,4 +1,33 @@
-﻿using System.Text;
+﻿/*
+Compare that will return true if 2 strings are equal, otherwise false, but do not use build-in method (bool Compare(string, string))
+Analyze that will return number of alphabetic chars in string, digits and another special characters (void Analyze(string))
+Sort that will return string that contains all characters from input string sorted in alphabetical order (e.g. 'Hello' -> 'ehllo') (string Sort(string))
+Duplicate that will return array of characters that are duplicated in input string (e.g. 'Hello and hi' -> ['h', 'l']) (char[] Duplicate(string))
+*/
+
+
+string str1 = "111f";
+string str2 = "111s";
+System.Console.WriteLine(str1 == str2);
+
+/*
+
+static bool Compare(string str1, string str2)
+{
+    if (str1 == str2) return false
+
+    int length1 = str1.Length;
+    int length2 = str2.Length;
+    if (length1 != length2) return false; //стірнги різної довжини
+
+    char[]
+    for (int i = 0; i < length1; i++)
+    {
+
+    }
+}
+
+// using System.Text;
 
 char c1 = 'c';
 char c2 = (char)99;
@@ -162,14 +191,14 @@ for (int i = 0; i < 100; i++)
 }
 
 Console.WriteLine(result[..^2]);
-*/
+
 
 
 StringBuilder sb = new();
 
 for (int i = 0; i < 100; i++)
 {
-   sb.Append($"{i}, ");
+    sb.Append($"{i}, ");
 }
 
 
@@ -179,3 +208,4 @@ Console.WriteLine(tuple.Item2); // 10
 tuple.Item1 += 26;
 Console.WriteLine(tuple.Item1); // 31
 
+*/
