@@ -45,18 +45,21 @@ void CreateMeeting()
     string roomName = EnterRoomName();
 
     (string, DateTime, int, string) meeting = (meetingName, meetingStart, meetingDuration, roomName);
-    if (DoesIntersectWithOther(meeting))
+
+    try
     {
-        Console.WriteLine("Meeting intersects with another!");
-    }
-    else
-    {
+        VerifyNotIntersectWithOther(meeting);
+
         Array.Resize(ref meetings, meetings.Length + 1);
         meetings[^1] = meeting;
 
         DumpToFile();
 
         Console.WriteLine("Meeting successfully created!");
+    }
+    catch (ArgumentException ae)
+    {
+        Console.WriteLine(ae.Message);
     }
 
     Console.WriteLine("To continue press ENTER...");
@@ -170,7 +173,7 @@ string EnterRoomName()
     }
 }
 
-bool DoesIntersectWithOther((string name, DateTime start, int duration, string room) meeting)
+void VerifyNotIntersectWithOther((string name, DateTime start, int duration, string room) meeting)
 {
     foreach ((string name, DateTime start, int duration, string room) in meetings)
     {
@@ -181,17 +184,15 @@ bool DoesIntersectWithOther((string name, DateTime start, int duration, string r
 
             if (meeting.start >= start && meeting.start < end2)
             {
-                return true;
+                throw new ArgumentException($"Meeting '{name}' intersects with '{meeting.name}'!");
             }
 
             if (start >= meeting.start && start < end1)
             {
-                return true;
+                throw new ArgumentException($"Meeting '{name}' intersects with '{meeting.name}'!");
             }
         }
     }
-
-    return false;
 }
 
 void ShowMeetings()
