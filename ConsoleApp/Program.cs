@@ -1,8 +1,7 @@
 ﻿
- 
 using System.Text;
 
-/*Console.WriteLine("Enter the first word");
+Console.WriteLine("Enter the first word");
 string s1 = Console.ReadLine();
 
 Console.WriteLine("Enter the second word");
@@ -10,6 +9,11 @@ string s2 = Console.ReadLine();
 
 bool Compare(string s1, string s2)
 {
+    if(s1.Length != s2.Length)
+    {
+        Console.WriteLine("strings are not equal");
+        return false;
+    }
     for( int i = 0; s1.Length < i; i++)
     {
         if( s1[i] != s2[i])
@@ -22,9 +26,8 @@ bool Compare(string s1, string s2)
     Console.WriteLine("strings are equal");
     return true;
 }
-Compare(s1, s2);*/
+Compare(s1, s2);
 
-Console.Clear();
 
 Console.WriteLine("Enter the word");
 string word = Console.ReadLine();
@@ -53,9 +56,9 @@ void Analyze(string word)
         }
         
     }
-
+    Console.WriteLine("Letters: {0} Digits: {1} Controls: {2}", alp, digit, splch);
 }
-Console.WriteLine($"letters: {0}, digits: {1}, special: {2}");
+Analyze(word);
 
 /*
 while(word[i] != '\0')
@@ -75,3 +78,47 @@ while(word[i] != '\0')
         i++;
     }
 */
+
+void sortString(string srt)
+{
+    char []arr = srt.ToCharArray();
+    Array.Sort(arr);
+    Console.WriteLine(String.Join("",arr));
+}
+sortString("qwertyuiop");
+
+void WriteArray(char[] array)
+{
+    foreach (var item in array)
+    {
+        Console.Write($"{item} ");
+    }
+    Console.Write("\n");
+}
+
+
+char[] Duplicate(string s)
+{
+    StringBuilder sb = new();
+    string str = s.ToLower();
+    
+    foreach (char ch in str)
+    {
+        if (sb.ToString().Contains(ch) || Char.IsWhiteSpace(ch))
+        {
+            continue;
+        }
+
+        int i = str.Split(ch).Length - 1;
+        
+        if (i > 1)
+        {
+            sb.Append(ch);
+        }
+    }
+    
+    return sb.ToString().ToCharArray(); 
+}
+string s = "Hello and hi";
+Console.Write($"Duplicate({s}) = ");
+WriteArray(Duplicate(s));
