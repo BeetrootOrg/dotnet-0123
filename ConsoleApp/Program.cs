@@ -11,6 +11,7 @@ void Menu()
     Console.WriteLine();
     Console.WriteLine("1. Create a meeting");
     Console.WriteLine("2. Show all meetings");
+    Console.WriteLine("3. Update meeting by name");
     Console.WriteLine("0. Exit");
 
     ConsoleKeyInfo key = Console.ReadKey();
@@ -25,6 +26,10 @@ void Menu()
     else if (key.Key == ConsoleKey.D2)
     {
         ShowMeetings();
+    }
+    else if (key.Key == ConsoleKey.D3)
+    {
+        UpdateMeetingByName();
     }
 }
 
@@ -43,7 +48,7 @@ void CreateMeeting()
     string roomName = EnterRoomName();
 
     (string, DateTime, int, string) meeting = (meetingName, meetingStart, meetingDuration, roomName);
-    if (DoesIntersectWithOther(meeting))
+    if (DoesIntersectWithOther(meeting, meetings))
     {
         Console.WriteLine("Meeting intersects with another!");
     }
@@ -59,6 +64,84 @@ void CreateMeeting()
 
     Console.WriteLine("To continue press ENTER...");
     _ = Console.ReadLine();
+}
+
+void UpdateMeetingByName()
+{
+    Console.Clear();
+    Console.WriteLine("We need meeting name");
+    string meetingName = EnterMeetingName();
+    int count = 0;
+    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    {
+        if (name == meetingName)
+        {
+            count++;
+        }
+    }
+    if (count == 0)
+    {
+        Console.WriteLine("Sorry, we cannot find meetings with this name");
+
+        Console.WriteLine("To continue press ENTER...");
+        _ = Console.ReadLine();
+        return;
+    }
+    DateTime meetingStart = EnterMeetingStart();
+    int meetingDuration = MeetingDurationInMinutes();
+
+    (string, DateTime, int, string)[] updatedMeetings;
+    updatedMeetings = Array.Empty<(string, DateTime, int, string)>();
+    (string, DateTime, int, string)[] nonupdatedMeetings;
+    nonupdatedMeetings = Array.Empty<(string, DateTime, int, string)>();
+
+    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    {
+        if (name == meetingName)
+        {
+            Array.Resize(ref updatedMeetings, updatedMeetings.Length + 1);
+            updatedMeetings[^1] = (name, meetingStart, meetingDuration, room);
+        }
+        else
+        {
+            Array.Resize(ref nonupdatedMeetings, nonupdatedMeetings.Length + 1);
+            nonupdatedMeetings[^1] = (name, start, duration, room);
+        }
+    }
+
+    bool intersection = false;
+    foreach ((string name, DateTime start, int duration, string room) in updatedMeetings)
+    {
+        intersection = DoesIntersectWithOther((name, start, duration, room), nonupdatedMeetings);
+        if (intersection)
+        {
+            break;
+        }
+    }
+
+    if (intersection)
+    {
+        Console.WriteLine("Meeting intersects with another!");
+    }
+    else
+    {
+        foreach ((string name, DateTime start, int duration, string room) in updatedMeetings)
+        {
+            Array.Resize(ref nonupdatedMeetings, nonupdatedMeetings.Length + 1);
+            nonupdatedMeetings[^1] = (name, start, duration, room);
+        }
+        meetings = nonupdatedMeetings;
+        DumpToFile();
+
+        Console.WriteLine("Meeting successfully updated!");
+    }
+
+    Console.WriteLine("To continue press ENTER...");
+    _ = Console.ReadLine();
+
+
+
+
 }
 
 string EnterMeetingName()
@@ -153,9 +236,9 @@ string EnterRoomName()
     }
 }
 
-bool DoesIntersectWithOther((string name, DateTime start, int duration, string room) meeting)
+bool DoesIntersectWithOther((string name, DateTime start, int duration, string room) meeting, (string, DateTime, int, string)[] arrayOfMeetings)
 {
-    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    foreach ((string name, DateTime start, int duration, string room) in arrayOfMeetings)
     {
         if (meeting.room == room)
         {
