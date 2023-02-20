@@ -75,8 +75,7 @@ void DataCorrupted()
 
 void AppendError(Exception e)
 {
-    File.AppendAllText(logfile, e.Message);
-    File.AppendAllText(logfile, e.StackTrace);
+    File.AppendAllLines(logfile, new[] { e.Message, e.StackTrace });
 }
 
 string EnterMeetingName()
@@ -243,8 +242,10 @@ void LoadFromFile()
         {
             meetings[i - 1] = (items[0], DateTime.Parse(items[1]), int.Parse(items[2]), items[3]);
         }
-        catch (IndexOutOfRangeException)
+        catch (IndexOutOfRangeException ioore)
         {
+            AppendError(ioore);
+
             if (items.Length == 3)
             {
                 bool dateTimeParse = DateTime.TryParse(items[1], out DateTime start);
