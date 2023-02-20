@@ -1,4 +1,6 @@
-﻿int Max2(int a, int b)
+﻿using System;
+
+int Max2(int a, int b)
 {
     return a > b ? a : b;
 }
