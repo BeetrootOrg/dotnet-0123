@@ -1,5 +1,5 @@
 ﻿using System.Text;
- 
+
 char c1 = 'c';
 char c2 = (char)99;
 char c3 = '\u0063';
@@ -83,7 +83,7 @@ Console.WriteLine($"s1.StartsWith('HeLl', StringComparison.OrdinalIgnoreCase) = 
 
 System.Console.WriteLine(s1.EndsWith("!"));
 
- 
+
 Console.WriteLine($"s1.IndexOf(',') = {s1.IndexOf(',')}");
 Console.WriteLine($"s1.IndexOf('l') = {s1.IndexOf('l')}");
 Console.WriteLine($"s1.IndexOf('ll') = {s1.IndexOf("ll")}");
@@ -110,7 +110,7 @@ Console.WriteLine(multiline2);
 Console.WriteLine($"s1.Length = {s1.Length}");
 
 Console.WriteLine($"s1.PadLeft(20) = {s1,14}");
-Console.WriteLine($"{s1, -20} = s1.PadRight(20)");
+Console.WriteLine($"{s1,-20} = s1.PadRight(20)");
 
 
 Console.WriteLine($"12,4 = {12,4}");
@@ -139,7 +139,7 @@ Console.WriteLine($"s1[2..5] = {s1[2..5]}");
 
 Console.WriteLine($"s1.ToUpper() = {s1.ToUpper()}");
 Console.WriteLine($"s1.ToLower() = {s1.ToLower(System.Globalization.CultureInfo.CurrentCulture)}");
- 
+
 
 
 Console.WriteLine($"s1.Trim('H') = {s1.Trim('H')}");
@@ -154,7 +154,7 @@ Console.WriteLine($"string.IsNullOrEmpty(null) = {string.IsNullOrEmpty(null)}");
 Console.WriteLine($"string.IsNullOrEmpty('') = {string.IsNullOrEmpty("")}");
 Console.WriteLine($"string.IsNullOrEmpty('   ') = {string.IsNullOrEmpty("   ")}");
 Console.WriteLine($"string.IsNullOrWhiteSpace('   ') = {string.IsNullOrWhiteSpace("   ")}");
-
+/*
 string result = string.Empty;
 for (int i = 0; i < 100; i++)
 {
@@ -162,14 +162,20 @@ for (int i = 0; i < 100; i++)
 }
 
 Console.WriteLine(result[..^2]);
-/*
+*/
+
+
 StringBuilder sb = new();
+
 for (int i = 0; i < 100; i++)
 {
-    for (int i = 0; i < array.Length; i++)
-    {
-        Console.WriteLine(array[i]);
-    }
+   sb.Append($"{i}, ");
 }
 
-*/
+
+var tuple = (5, 10);
+Console.WriteLine(tuple.Item1); // 5
+Console.WriteLine(tuple.Item2); // 10
+tuple.Item1 += 26;
+Console.WriteLine(tuple.Item1); // 31
+
