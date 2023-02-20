@@ -61,6 +61,16 @@ void CreateMeeting()
     _ = Console.ReadLine();
 }
 
+void DataCorrupted()
+{
+    meetings = Array.Empty<(string, DateTime, int, string)>();
+
+    Console.Clear();
+    Console.WriteLine("DATA CORRUPTED");
+    Console.WriteLine("To continue press ENTER...");
+    _ = Console.ReadLine();
+}
+
 string EnterMeetingName()
 {
     while (true)
@@ -218,9 +228,17 @@ void LoadFromFile()
 
     for (int i = 1; i < lines.Length; i++)
     {
-        string line = lines[i];
-        string[] items = line.Split(',');
-        meetings[i - 1] = (items[0], DateTime.Parse(items[1]), int.Parse(items[2]), items[3]);
+        try
+        {
+            string line = lines[i];
+            string[] items = line.Split(',');
+            meetings[i - 1] = (items[0], DateTime.Parse(items[1]), int.Parse(items[2]), items[3]);
+        }
+        catch
+        {
+            DataCorrupted();
+            return;
+        }
     }
 }
 
