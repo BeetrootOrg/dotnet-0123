@@ -13,6 +13,7 @@ void Menu()
     Console.WriteLine();
     Console.WriteLine("1. Create a meeting");
     Console.WriteLine("2. Show all meetings");
+    Console.WriteLine("3. Update meeting by name");
     Console.WriteLine("0. Exit");
 
     ConsoleKeyInfo key = Console.ReadKey();
@@ -27,6 +28,10 @@ void Menu()
     else if (key.Key == ConsoleKey.D2)
     {
         ShowMeetings();
+    }
+    else if (key.Key == ConsoleKey.D3)
+    {
+        UpdateMeetingByName();
     }
 }
 
@@ -211,6 +216,11 @@ void ShowMeetings()
     _ = Console.ReadLine();
 }
 
+void UpdateMeetingByName()
+{
+    throw new NotImplementedException();
+}
+
 void DumpToFile()
 {
     StringBuilder sb = new();
@@ -271,5 +281,13 @@ void LoadFromFile()
 LoadFromFile();
 while (true)
 {
-    Menu();
+    try
+    {
+        Menu();
+    }
+    catch (Exception e)
+    {
+        AppendError(e);
+        throw;
+    }
 }
