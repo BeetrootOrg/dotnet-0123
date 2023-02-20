@@ -1,6 +1,8 @@
 ﻿using System.Text;
 
 const string filename = "dump.csv";
+const string logfile = "log.txt";
+
 (string, DateTime, int, string)[] meetings;
 
 void Menu()
@@ -69,6 +71,12 @@ void DataCorrupted()
     Console.WriteLine("DATA CORRUPTED");
     Console.WriteLine("To continue press ENTER...");
     _ = Console.ReadLine();
+}
+
+void AppendError(Exception e)
+{
+    File.AppendAllText(logfile, e.Message);
+    File.AppendAllText(logfile, e.StackTrace);
 }
 
 string EnterMeetingName()
@@ -228,15 +236,31 @@ void LoadFromFile()
 
     for (int i = 1; i < lines.Length; i++)
     {
+        string line = lines[i];
+        string[] items = line.Split(',');
+
         try
         {
-            string line = lines[i];
-            string[] items = line.Split(',');
             meetings[i - 1] = (items[0], DateTime.Parse(items[1]), int.Parse(items[2]), items[3]);
         }
-        catch
+        catch (IndexOutOfRangeException)
         {
+            if (items.Length == 3)
+            {
+                bool dateTimeParse = DateTime.TryParse(items[1], out DateTime start);
+                bool durationParse = int.TryParse(items[2], out int duration);
+
+                if (dateTimeParse && durationParse)
+                {
+                    meetings[i - 1] = (items[0], start, duration, "unknown");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            AppendError(e);
             DataCorrupted();
+
             return;
         }
     }
