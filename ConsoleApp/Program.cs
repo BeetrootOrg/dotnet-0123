@@ -81,8 +81,9 @@ Console.WriteLine($"s1.StartsWith('ell') = {s1.StartsWith("ell")}");
 Console.WriteLine($"s1.StartsWith('Hell') = {s1.StartsWith("Hell")}");
 Console.WriteLine($"s1.StartsWith('HeLl', StringComparison.OrdinalIgnoreCase) = {s1.StartsWith("HeLl", StringComparison.OrdinalIgnoreCase)}");
 
+System.Console.WriteLine(s1.EndsWith("!"));
 
-/*
+ 
 Console.WriteLine($"s1.IndexOf(',') = {s1.IndexOf(',')}");
 Console.WriteLine($"s1.IndexOf('l') = {s1.IndexOf('l')}");
 Console.WriteLine($"s1.IndexOf('ll') = {s1.IndexOf("ll")}");
@@ -97,13 +98,21 @@ string multiline1 = "Hello, \nDima";
 string multiline2 = @$"Hello, 
 Dima {age}";
 
+Console.WriteLine(@"
+Hello.
+How are you?
+I'm fine!
+");
+
 Console.WriteLine(multiline1);
 Console.WriteLine(multiline2);
 
 Console.WriteLine($"s1.Length = {s1.Length}");
 
-Console.WriteLine($"s1.PadLeft(20) = {s1,20}");
-Console.WriteLine($"{s1,-20} = s1.PadRight(20)");
+Console.WriteLine($"s1.PadLeft(20) = {s1,14}");
+Console.WriteLine($"{s1, -20} = s1.PadRight(20)");
+
+
 Console.WriteLine($"12,4 = {12,4}");
 Console.WriteLine($"{12,-4} = 12,-4");
 // SAME AS ABOVE
@@ -112,7 +121,7 @@ Console.WriteLine($"{12,-4} = 12,-4");
 DateTime now = DateTime.Now;
 Console.WriteLine($"now = {now}");
 Console.WriteLine($"now:D = {now:D}");
-Console.WriteLine($"now:yyy dd mm = {now:yyy dd mm}");
+Console.WriteLine($"now:yyy dd mm = {now:yyy M dd}");
 
 Console.WriteLine($"s1.Replace('World', 'Dima') = {s1.Replace("World", "Dima")}");
 Console.WriteLine($"s1.Replace('world', 'Dima') = {s1.Replace("world", "Dima")}");
@@ -128,13 +137,18 @@ foreach (string part in splitted)
 Console.WriteLine($"s1.Substring(2, 5) = {s1.Substring(2, 5)}");
 Console.WriteLine($"s1[2..5] = {s1[2..5]}");
 
-Console.WriteLine($"s1.ToUpper() = {s1.ToUpper(System.Globalization.CultureInfo.CurrentCulture)}");
+Console.WriteLine($"s1.ToUpper() = {s1.ToUpper()}");
 Console.WriteLine($"s1.ToLower() = {s1.ToLower(System.Globalization.CultureInfo.CurrentCulture)}");
+ 
+
 
 Console.WriteLine($"s1.Trim('H') = {s1.Trim('H')}");
 Console.WriteLine($"s1.TrimEnd('H') = {s1.TrimEnd('H')}");
 Console.WriteLine($"s1.TrimEnd('!') = {s1.TrimEnd('!')}");
 Console.WriteLine($"s1.TrimStart('H') = {s1.TrimStart('H')}");
+Console.WriteLine($"s1.Trim(' ') = {s1.Trim(' ')}");
+Console.WriteLine($"s1.TrimStart('!') = {s1.TrimStart('!')}");
+
 
 Console.WriteLine($"string.IsNullOrEmpty(null) = {string.IsNullOrEmpty(null)}");
 Console.WriteLine($"string.IsNullOrEmpty('') = {string.IsNullOrEmpty("")}");
@@ -148,7 +162,7 @@ for (int i = 0; i < 100; i++)
 }
 
 Console.WriteLine(result[..^2]);
-
+/*
 StringBuilder sb = new();
 for (int i = 0; i < 100; i++)
 {
