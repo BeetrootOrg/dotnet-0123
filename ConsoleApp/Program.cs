@@ -117,40 +117,50 @@ static char[] BubbleSort(char[] arr)
 // Duplicate that will return array of characters that are duplicated in input string 
 // (e.g. 'Hello and hi' -> ['h', 'l']) (char[] Duplicate(string))
 
+// Сортуємо стрінг попереднім методом
 // копіюємо string в char[]
-// цикл 
-//{
-//  обрізаємо символ char[i] із поточного стрінга;
-//  перевіряємо довжину string обрізану із оригінальною; 
+// порівнюємо поточний з наступним
 //  {
-//      якщо різниця більша ніж 1, то символ дублюється;
-//      обновлюємо якийсь новий масив, куди записуємо char[i];
+//      якщо рівний, то добавляємо знак в новий масив[] і йдемо до наступної зміни символа
+//  }
+//  
+//  
+//      обновлюємо новий масив, куди записуємо char[i];
 //  }
 //  return новий масив;
 // }
 
 char[] Duplicate(string stringCheckDuplicate)
 {
-    int length = stringCheckDuplicate.Length - 1;
+    string sorted = Sort(stringCheckDuplicate);
+    sorted = sorted.ToLower();
+
+    int length = sorted.Length - 1;
     char[] charArrFromString = new char[length];
-    charArrFromString = stringCheckDuplicate.ToCharArray(); // copy from string
+    charArrFromString = sorted.ToCharArray(); // copy from string
 
-    char[] newCharArr = new char[0]; //here we'll put duplicated chars
-    int count = new(); //quantity of duplicates
+    char[] outputChar = new char[0]; //here we'll put duplicated symbols
+    int count = 0;
+    bool flag = false;
 
-    for (int i = 0; i < length; i++)
+    for (int j = 0; j < length; j++)
     {
-        string tmpString = stringCheckDuplicate.Trim(charArrFromString[i]); //trim of current char
-        if (stringCheckDuplicate.Length - tmpString.Length > 1) //if symbol duplicated == differrence is more then 1
+        if (charArrFromString[j + 1] == charArrFromString[j] || !flag)
         {
-            Array.Resize(ref newCharArr, count++); //we increase count directly here
-            newCharArr[i] = charArrFromString[i];
-            System.Console.WriteLine($"{count} : {newCharArr[i]}");
-
+            flag = true;
+            outputChar[count] = charArrFromString[j]; //and add doplicated character
+            Array.Resize(ref outputChar, count++); //we increase count directly here
         }
-    }
+        else
+        {
+            continue;
+        }
 
-    return newCharArr;
+        Console.WriteLine($"{count} : {outputChar[count]}");
+    }
+}
+
+return newCharArr;
 }
 
 
@@ -175,7 +185,8 @@ System.Console.WriteLine(Sort(str1));
 System.Console.WriteLine(Sort(str2));
 
 System.Console.WriteLine("DUPLICATE");
-Duplicate (str1);
+Duplicate(str1);
+
 
 // foreach (var item in Duplicate (str1))
 // {
