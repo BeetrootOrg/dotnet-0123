@@ -1,32 +1,130 @@
 ﻿/*
 Compare that will return true if 2 strings are equal, otherwise false, but do not use build-in method (bool Compare(string, string))
-Analyze that will return number of alphabetic chars in string, digits and another special characters (void Analyze(string))
-Sort that will return string that contains all characters from input string sorted in alphabetical order (e.g. 'Hello' -> 'ehllo') (string Sort(string))
+
+
 Duplicate that will return array of characters that are duplicated in input string (e.g. 'Hello and hi' -> ['h', 'l']) (char[] Duplicate(string))
 */
 
 
-string str1 = "111f";
-string str2 = "111s";
-System.Console.WriteLine(str1 == str2);
-
-/*
-
 static bool Compare(string str1, string str2)
 {
-    if (str1 == str2) return false
+    if (str1 == null && str2 == null) return true; // null exception, but "equal"
+    if (str1 == null || str2 == null) return false; // null exception -- повертаємо false
 
-    int length1 = str1.Length;
-    int length2 = str2.Length;
-    if (length1 != length2) return false; //стірнги різної довжини
+    int length1 = str1.Length - 1;// максимальний індекс масиву меньше ніж кількість елементів масиву на 1
+    int length2 = str2.Length - 1;
 
-    char[]
+    if (length1 != length2) return false; //стрінги різної довжини -- повертаємо false
+
+    char[] chr1 = new char[length1];
+    char[] chr2 = new char[length1];
+
+    chr1 = str1.ToCharArray(); //копіюємо в масив chr1 масив із стрінга
+    chr2 = str2.ToCharArray();
+
     for (int i = 0; i < length1; i++)
     {
-
+        if (chr1[i] != chr2[i]) return false;
     }
+    return true; //нарешті все рівно одне одному
 }
 
+
+
+
+// Analyze that will return number of alphabetic chars in string, digits and another special characters (void Analyze(string))
+
+void Analyze(string line)
+{
+    int abcNumbs = new int();
+    int digits = new int();
+    int specials = new int();
+
+    if (line == null) return; //null exception
+    int length = line.Length - 1;
+    char[] chr1 = new char[length];
+    chr1 = line.ToCharArray();
+
+    for (int i = 0; i < length; i++)
+    {
+        if (char.IsLetter(chr1[i])) abcNumbs++;
+        if (char.IsDigit(chr1[i])) digits++;
+        if (char.IsControl(chr1[i])) specials++;
+    }
+    System.Console.WriteLine(@$"
+    Letters = {abcNumbs}
+    Digits = {digits}
+    Special characters = {specials}
+    ");
+}
+
+
+
+// Sort that will return string that contains all characters from input string sorted in alphabetical order (e.g. 'Hello' -> 'ehllo')
+// (string Sort(string))
+static string Sort(string str1)
+{
+    str1 = str1.ToLower();
+    int length = str1.Length - 1;
+    char[] charLine = new char[length];
+    charLine = str1.ToCharArray();
+
+    foreach (var item in charLine)
+    {
+        if (charLine[item] <= 97 && charLine[item] >= 122) //перевіряємо чи в нас тільки букви
+        {
+            return "game over";
+        }
+    }
+    
+    BubbleSort(charLine[]);
+    return charLine[]; // зробити стрінг з масиву
+
+}
+
+static char[] BubbleSort(int[] arr)
+{
+    int length = arr.Length;
+    bool flag = new bool();
+    do
+    {
+        flag = true;
+        for (int i = 1; i < length; i++)
+        {
+            if (arr[i - 1] > arr[i])
+            {
+                int tmp = arr[i - 1];
+                arr[i - 1] = arr[i];
+                arr[i] = tmp;
+                flag = false;
+            }
+
+        }
+    } while (flag == false);
+    return arr;
+}
+
+
+
+// Нижче код тільки для перевірки
+
+// string str1 = "";
+// string str2 = "";
+string str1 = "121fffdddSQA ♀]p♪♫ %3&#6$ ";
+// string str2 = "111fffddd";
+string str2 = null;
+// string str1 = null;
+
+
+Console.WriteLine(Compare(str1, str2));
+Analyze(str1);
+
+
+
+
+
+
+/*
 // using System.Text;
 
 char c1 = 'c';
