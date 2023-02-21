@@ -117,10 +117,45 @@ static char[] BubbleSort(char[] arr)
 // Duplicate that will return array of characters that are duplicated in input string 
 // (e.g. 'Hello and hi' -> ['h', 'l']) (char[] Duplicate(string))
 
+// копіюємо string в char[]
+// цикл 
+//{
+//  обрізаємо символ char[i] із поточного стрінга;
+//  перевіряємо довжину string обрізану із оригінальною; 
+//  {
+//      якщо різниця більша ніж 1, то символ дублюється;
+//      обновлюємо якийсь новий масив, куди записуємо char[i];
+//  }
+//  return новий масив;
+// }
+
 char[] Duplicate(string stringCheckDuplicate)
 {
-return charDupl[];
+    int length = stringCheckDuplicate.Length - 1;
+    char[] charArrFromString = new char[length];
+    charArrFromString = stringCheckDuplicate.ToCharArray(); // copy from string
+
+    char[] newCharArr = new char[0]; //here we'll put duplicated chars
+    int count = new(); //quantity of duplicates
+
+    for (int i = 0; i < length; i++)
+    {
+        string tmpString = stringCheckDuplicate.Trim(charArrFromString[i]); //trim of current char
+        if (stringCheckDuplicate.Length - tmpString.Length > 1) //if symbol duplicated == differrence is more then 1
+        {
+            Array.Resize(ref newCharArr, count++); //we increase count directly here
+            newCharArr[i] = charArrFromString[i];
+            System.Console.WriteLine($"{count} : {newCharArr[i]}");
+
+        }
+    }
+
+    return newCharArr;
 }
+
+
+
+
 
 
 
@@ -134,10 +169,18 @@ string str2 = "111fffddd";
 // string str1 = null;
 
 
-// Console.WriteLine(Compare(str1, str2));
+Console.WriteLine(Compare(str1, str2));
 Analyze(str1);
 System.Console.WriteLine(Sort(str1));
 System.Console.WriteLine(Sort(str2));
+
+System.Console.WriteLine("DUPLICATE");
+Duplicate (str1);
+
+// foreach (var item in Duplicate (str1))
+// {
+//     System.Console.WriteLine(item);
+// }
 
 
 
