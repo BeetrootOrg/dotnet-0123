@@ -1,12 +1,10 @@
-﻿/*
-Compare that will return true if 2 strings are equal, otherwise false, but do not use build-in method (bool Compare(string, string))
+﻿
 
-
-Duplicate that will return array of characters that are duplicated in input string (e.g. 'Hello and hi' -> ['h', 'l']) (char[] Duplicate(string))
-*/
 
 using System.Text; //for StringBuilder
 
+
+// Compare that will return true if 2 strings are equal, otherwise false, but do not use build-in method (bool Compare(string, string))
 static bool Compare(string str1, string str2)
 {
     if (str1 == null && str2 == null) return true; // null exception, but "equal"
@@ -114,17 +112,29 @@ static char[] BubbleSort(char[] arr)
 
 
 
-// Нижче код тільки для перевірки
 
+
+// Duplicate that will return array of characters that are duplicated in input string 
+// (e.g. 'Hello and hi' -> ['h', 'l']) (char[] Duplicate(string))
+
+char[] Duplicate(string stringCheckDuplicate)
+{
+return charDupl[];
+}
+
+
+
+// Нижче код тільки для перевірки
 // string str1 = "";
 // string str2 = "";
 string str1 = "121fffdddSQA ♀]p♪♫ babyboy%3&#6$ ";
 string str2 = "111fffddd";
+// string str1 = "111fffddd";
 // string str2 = null;
 // string str1 = null;
 
 
-Console.WriteLine(Compare(str1, str2));
+// Console.WriteLine(Compare(str1, str2));
 Analyze(str1);
 System.Console.WriteLine(Sort(str1));
 System.Console.WriteLine(Sort(str2));
