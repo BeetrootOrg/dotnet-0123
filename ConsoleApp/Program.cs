@@ -17,12 +17,12 @@ using System.Linq;
 
 
 const string filename = "dump.csv";
+const string filelog = "log.txt";
 (string, DateTime, int, string)[] meetings;
 
 void Menu()
 {
     Console.Clear();
-
     Console.WriteLine("Meeting Booker");
     Console.WriteLine();
     Console.WriteLine("1. Create a meeting");
@@ -30,27 +30,33 @@ void Menu()
     Console.WriteLine("3. Update existent meeting");
     Console.WriteLine("4. Show meeting in room");
     Console.WriteLine("0. Exit");
-
-    ConsoleKeyInfo key = Console.ReadKey();
-    if (key.Key == ConsoleKey.D0)
+    try
     {
-        Exit();
+        ConsoleKeyInfo key = Console.ReadKey();
+        if (key.Key == ConsoleKey.D0)
+        {
+            Exit();
+        }
+        else if (key.Key == ConsoleKey.D1)
+        {
+            CreateMeeting(null);
+        }
+        else if (key.Key == ConsoleKey.D2)
+        {
+            ShowMeetings();
+        }
+        else if (key.Key == ConsoleKey.D3)
+        {
+            UpdateExistingMeeting(string.Empty);
+        }
+        else if (key.Key == ConsoleKey.D4)
+        {
+            ShowMeetingInRoom();
+        }
     }
-    else if (key.Key == ConsoleKey.D1)
+    catch (Exception e)
     {
-        CreateMeeting(null);
-    }
-    else if (key.Key == ConsoleKey.D2)
-    {
-        ShowMeetings();
-    }
-    else if (key.Key == ConsoleKey.D3)
-    {
-        UpdateExistingMeeting(string.Empty);
-    }
-    else if (key.Key == ConsoleKey.D4)
-    {
-        ShowMeetingInRoom();
+        LogError(e);
     }
 }
 
@@ -81,7 +87,14 @@ void UpdateExistingMeeting(string s)
     }
     int num = ReadNumberFromConsole(listmeets.Length);
     if (num <= 0) return;
-    CreateMeeting(num - 1);
+    try
+    {
+        CreateMeeting(num - 1);
+    }
+    catch (Exception e)
+    {
+        LogError(e);
+    }
     UpdateExistingMeeting(input);
 }
 // Показує всі зустрічи в кімнаті
@@ -96,29 +109,36 @@ void ShowMeetingInRoom()
         Console.WriteLine($"{i}. {s}");
         i++;
     }
-    int num = ReadNumberFromConsole(m.Length-1);
-    if (num<0) return;
+    int num = ReadNumberFromConsole(m.Length - 1);
+    if (num < 0) return;
     ShowMeetings(m[num]);
 }
-//maxnum - максимальне число яке можно ввести,0-повернення
+//Нова функція, читає цифри з консолі. maxnum - максимальне число яке можно ввести,0-повернення
 int ReadNumberFromConsole(int maxnum)
 {
-    int num =-1;
-    while (true)
+
+    int num = -1;
+    try
     {
-        string numstr = Console.ReadLine();
-        if (string.IsNullOrEmpty(numstr)) return 0;
-        if (int.TryParse(numstr, out num))
+        while (true)
         {
-            if (num > -1 && num <= maxnum) break;
-            else Console.WriteLine($"Number must be between 0..{maxnum}, or press Enter to return");
+            string numstr = Console.ReadLine();
+            if (string.IsNullOrEmpty(numstr)) return 0;
+            if (int.TryParse(numstr, out num))
+            {
+                if (num > -1 && num <= maxnum) break;
+                else Console.WriteLine($"Number must be between 0..{maxnum}, or press Enter to return");
+            }
+            else Console.WriteLine($"Please enter a number between 0..{maxnum}, or press Enter to return");
         }
-        else Console.WriteLine($"Please enter a number between 0..{maxnum}, or press Enter to return");
+    }
+    catch (Exception e)
+    {
+        LogError(e);
     }
     return num;
 }
 
-// внесено зміну, int? index - індекс запису в масиві, якщо null - создається новий запис
 void CreateMeeting(int? index = null)
 {
     Console.Clear();
@@ -277,7 +297,7 @@ bool DoesIntersectWithOther((string name, DateTime start, int duration, string r
 
     return false;
 }
-//Внесено зміни  Якщо параметр roomname не пустий відображаються зустрічі в обраній кімнаті
+
 void ShowMeetings(string roomname = "")
 {
     Console.Clear();
@@ -300,36 +320,68 @@ void ShowMeetings(string roomname = "")
     Console.WriteLine("To continue press ENTER...");
     _ = Console.ReadLine();
 }
-
+// зімна по домашці exception
 void DumpToFile()
 {
-    StringBuilder sb = new();
-    _ = sb.AppendLine("Name,Start,Duration,Room");
-    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    try
     {
-        _ = sb.AppendLine($"{name},{start},{duration},{room}");
+        StringBuilder sb = new();
+        _ = sb.AppendLine("Name,Start,Duration,Room");
+        foreach ((string name, DateTime start, int duration, string room) in meetings)
+        {
+            _ = sb.AppendLine($"{name},{start},{duration},{room}");
+        }
+
+        File.WriteAllText(filename, sb.ToString());
     }
-
-    File.WriteAllText(filename, sb.ToString());
+    catch (Exception e)
+    {
+        Console.WriteLine("Data not saved. Try letter");
+        LogError(e);
+    }
 }
-
+// зміна - string[] lines  = File.ReadAllLines(filename); 
+// зімна по домашці exception
 void LoadFromFile()
 {
-    if (!File.Exists(filename))
+    try
     {
+        if (!File.Exists(filename))
+        {
+            meetings = Array.Empty<(string, DateTime, int, string)>();
+            return;
+        }
+
+        string[] lines = File.ReadAllLines(filename);
+        meetings = new (string, DateTime, int, string)[lines.Length - 2];
+        for (int i = 1; i < lines.Length - 1; i++)
+        {
+            string line = lines[i];
+            string[] items = line.Split(',');
+            try
+            {
+                meetings[i - 1] = (items[0], DateTime.Parse(items[1]), int.Parse(items[2]), items[3]);
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+                Console.WriteLine("Eroor during parsing datafrom file. Try restore");
+                meetings[i - 1] = new("corrupteddata", DateTime.Now.AddMinutes(i), 1, "error room");
+            }
+        }
+    }
+    catch (Exception e)
+    {
+        LogError(e);
         meetings = Array.Empty<(string, DateTime, int, string)>();
-        return;
     }
-
-    string[] lines  = File.ReadAllLines(filename);
-    meetings = new (string, DateTime, int, string)[lines.Length - 2];
-
-    for (int i = 1; i < lines.Length - 1; i++)
-    {
-        string line = lines[i];
-        string[] items = line.Split(',');
-        meetings[i - 1] = (items[0], DateTime.Parse(items[1]), int.Parse(items[2]), items[3]);
-    }
+}
+// домашка Exceprions
+// Метод логірує помилки
+void LogError(Exception e)
+{
+    File.AppendAllText(filelog, e.Message);
+    File.AppendAllText(filelog, e.StackTrace);
 }
 
 LoadFromFile();
