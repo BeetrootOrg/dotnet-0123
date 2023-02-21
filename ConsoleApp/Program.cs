@@ -5,6 +5,7 @@ Compare that will return true if 2 strings are equal, otherwise false, but do no
 Duplicate that will return array of characters that are duplicated in input string (e.g. 'Hello and hi' -> ['h', 'l']) (char[] Duplicate(string))
 */
 
+using System.Text; //for StringBuilder
 
 static bool Compare(string str1, string str2)
 {
@@ -69,22 +70,29 @@ static string Sort(string str1)
     char[] charLine = new char[length];
     charLine = str1.ToCharArray();
 
-    foreach (var item in charLine)
+    BubbleSort(charLine); //сортуємо бульбашково
+
+    // just to check if charLine[] is sorted
+    // for (int i = 0; i < length; i++) System.Console.WriteLine(charLine[i])
+
+    StringBuilder sb = new();
+    for (int i = 0; i < length; i++)
     {
-        if (charLine[item] <= 97 && charLine[item] >= 122) //перевіряємо чи в нас тільки букви
-        {
-            return "game over";
-        }
+        sb.Append($"{charLine[i]}");
     }
-    
-    BubbleSort(charLine[]);
-    return charLine[]; // зробити стрінг з масиву
+    // Console.WriteLine(sb); //just to check
+
+
+    return sb.ToString();
 
 }
 
-static char[] BubbleSort(int[] arr)
+
+
+
+static char[] BubbleSort(char[] arr)
 {
-    int length = arr.Length;
+    int length = arr.Length - 1;
     bool flag = new bool();
     do
     {
@@ -93,14 +101,14 @@ static char[] BubbleSort(int[] arr)
         {
             if (arr[i - 1] > arr[i])
             {
-                int tmp = arr[i - 1];
+                var tmp = arr[i - 1];
                 arr[i - 1] = arr[i];
                 arr[i] = tmp;
                 flag = false;
             }
 
         }
-    } while (flag == false);
+    } while (!flag);
     return arr;
 }
 
@@ -110,14 +118,17 @@ static char[] BubbleSort(int[] arr)
 
 // string str1 = "";
 // string str2 = "";
-string str1 = "121fffdddSQA ♀]p♪♫ %3&#6$ ";
-// string str2 = "111fffddd";
-string str2 = null;
+string str1 = "121fffdddSQA ♀]p♪♫ babyboy%3&#6$ ";
+string str2 = "111fffddd";
+// string str2 = null;
 // string str1 = null;
 
 
 Console.WriteLine(Compare(str1, str2));
 Analyze(str1);
+System.Console.WriteLine(Sort(str1));
+System.Console.WriteLine(Sort(str2));
+
 
 
 
