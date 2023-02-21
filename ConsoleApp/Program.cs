@@ -80,7 +80,7 @@ void UpdateExistingMeeting(string s)
         i++;
     }
     int num = ReadNumberFromConsole(listmeets.Length);
-    if (num == 0) return;
+    if (num <= 0) return;
     CreateMeeting(num - 1);
     UpdateExistingMeeting(input);
 }
@@ -96,14 +96,14 @@ void ShowMeetingInRoom()
         Console.WriteLine($"{i}. {s}");
         i++;
     }
-    int num = ReadNumberFromConsole(m.Length - 1);
-    if (num == 0) return;
+    int num = ReadNumberFromConsole(m.Length-1);
+    if (num<0) return;
     ShowMeetings(m[num]);
 }
 //maxnum - максимальне число яке можно ввести,0-повернення
 int ReadNumberFromConsole(int maxnum)
 {
-    int num = 0;
+    int num =-1;
     while (true)
     {
         string numstr = Console.ReadLine();
@@ -321,9 +321,7 @@ void LoadFromFile()
         return;
     }
 
-    string text = File.ReadAllText(filename);
-
-    string[] lines = text.Split('\n');
+    string[] lines  = File.ReadAllLines(filename);
     meetings = new (string, DateTime, int, string)[lines.Length - 2];
 
     for (int i = 1; i < lines.Length - 1; i++)
