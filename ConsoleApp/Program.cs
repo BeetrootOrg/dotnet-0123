@@ -12,6 +12,8 @@ void Menu()
     Console.WriteLine("1. Create a meeting");
     Console.WriteLine("2. Show all meetings");
     Console.WriteLine("3. Update meeting by name");
+    Console.WriteLine("4. Search meeting by room name");
+    Console.WriteLine("5. Search meeting by time range");
     Console.WriteLine("0. Exit");
 
     ConsoleKeyInfo key = Console.ReadKey();
@@ -30,6 +32,14 @@ void Menu()
     else if (key.Key == ConsoleKey.D3)
     {
         UpdateMeetingByName();
+    }
+    else if (key.Key == ConsoleKey.D4)
+    {
+        SearchByRoom();
+    }
+    else if (key.Key == ConsoleKey.D5)
+    {
+        SearchByTimeRange();
     }
 }
 
@@ -71,6 +81,8 @@ void UpdateMeetingByName()
     Console.Clear();
     Console.WriteLine("We need meeting name");
     string meetingName = EnterMeetingName();
+
+    // checking if meetings with this name exist
     int count = 0;
     foreach ((string name, DateTime start, int duration, string room) in meetings)
     {
@@ -79,6 +91,7 @@ void UpdateMeetingByName()
             count++;
         }
     }
+
     if (count == 0)
     {
         Console.WriteLine("Sorry, we cannot find meetings with this name");
@@ -87,9 +100,13 @@ void UpdateMeetingByName()
         _ = Console.ReadLine();
         return;
     }
+
+    // enter new meetings start and duration
     DateTime meetingStart = EnterMeetingStart();
     int meetingDuration = MeetingDurationInMinutes();
 
+
+    // creating new arrays and sorting meetings[] by name
     (string, DateTime, int, string)[] updatedMeetings;
     updatedMeetings = Array.Empty<(string, DateTime, int, string)>();
     (string, DateTime, int, string)[] nonupdatedMeetings;
@@ -109,6 +126,7 @@ void UpdateMeetingByName()
         }
     }
 
+    // checking intersection
     bool intersection = false;
     foreach ((string name, DateTime start, int duration, string room) in updatedMeetings)
     {
@@ -125,6 +143,7 @@ void UpdateMeetingByName()
     }
     else
     {
+        // adding updated data to general array
         foreach ((string name, DateTime start, int duration, string room) in updatedMeetings)
         {
             Array.Resize(ref nonupdatedMeetings, nonupdatedMeetings.Length + 1);
@@ -138,10 +157,67 @@ void UpdateMeetingByName()
 
     Console.WriteLine("To continue press ENTER...");
     _ = Console.ReadLine();
+}
+
+void SearchByRoom()
+{
+    Console.Clear();
+    string roomName = EnterRoomName();
+    int count = 0;
+
+    Console.Clear();
+    Console.WriteLine($"{"Name",-25}{"Start",-25}{"End",-25}{"Room",-25}");
+    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    {
+        if (room == roomName)
+        {
+            DateTime end = start.AddMinutes(duration);
+            Console.WriteLine($"{name,-25}{start,-25}{end,-25}{room,-25}");
+            count++;
+        }
+    }
+
+    if (count == 0)
+    {
+        Console.Clear();
+        Console.WriteLine("Sorry, we cannot find meetings in this room");
+    }
 
 
+    Console.WriteLine("To continue press ENTER...");
+    _ = Console.ReadLine();
+}
+
+void SearchByTimeRange()
+{
+    Console.Clear();
+    DateTime date1 = EnterDateRange("start");
+    DateTime date2 = EnterDateRange("end");
+    DateTime dateStart = date1 > date2 ? date2 : date1;
+    DateTime dateEnd = date1 > date2 ? date1 : date2;
+    int count = 0;
+
+    Console.Clear();
+    Console.WriteLine($"{"Name",-25}{"Start",-25}{"End",-25}{"Room",-25}");
+    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    {
+        DateTime end = start.AddMinutes(duration);
+        if ((dateStart<=start)&&(dateEnd>=end))
+        {
+            Console.WriteLine($"{name,-25}{start,-25}{end,-25}{room,-25}");
+            count++;
+        }
+    }
+
+    if (count == 0)
+    {
+        Console.Clear();
+        Console.WriteLine("Sorry, we cannot find meetings in this time range");
+    }
 
 
+    Console.WriteLine("To continue press ENTER...");
+    _ = Console.ReadLine();
 }
 
 string EnterMeetingName()
@@ -177,6 +253,29 @@ DateTime EnterMeetingStart()
         if (!DateTime.TryParse(input, out DateTime start))
         {
             Console.WriteLine("Meeting start should be valid timestamp!");
+            continue;
+        }
+
+        if (start <= DateTime.Now)
+        {
+            Console.WriteLine("Meeting start should be in future!");
+            continue;
+        }
+
+        return start;
+    }
+}
+
+DateTime EnterDateRange(string part)
+{
+    while (true)
+    {
+        Console.WriteLine($"Enter {part} of range:");
+        string input = Console.ReadLine();
+
+        if (!DateTime.TryParse(input, out DateTime start))
+        {
+            Console.WriteLine("Date should be valid timestamp!");
             continue;
         }
 
@@ -236,6 +335,8 @@ string EnterRoomName()
     }
 }
 
+
+//add new argument for checking in certain array
 bool DoesIntersectWithOther((string name, DateTime start, int duration, string room) meeting, (string, DateTime, int, string)[] arrayOfMeetings)
 {
     foreach ((string name, DateTime start, int duration, string room) in arrayOfMeetings)
