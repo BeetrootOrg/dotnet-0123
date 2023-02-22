@@ -29,3 +29,25 @@ Console.WriteLine($"Changes: {person3.Changes}");
 
 person3.Age = 43;
 Console.WriteLine($"Changes: {person3.Changes}");
+
+Contact contact1 = new()
+{
+    Person = person1,
+    PhoneNumber = "+12345678"
+};
+
+Contact contact2 = new()
+{
+    Person = person2,
+    PhoneNumber = "+87654321"
+};
+
+PhoneBook phoneBook = new(contact1, contact2);
+phoneBook.Add(new Contact
+{
+    Person = person3,
+    PhoneNumber = "-+"
+});
+
+Console.WriteLine(phoneBook.Contacts.Length);
+
