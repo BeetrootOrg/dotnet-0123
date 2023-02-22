@@ -65,3 +65,18 @@ Console.WriteLine(p2.GetFullInfo());
 Console.WriteLine(p3.GetFullInfo());
 Console.WriteLine(p4.GetFullInfo());
 
+User user1 = new(42, "user");
+User user2 = new()
+{
+    Username = "user1",
+    Id = 43
+};
+
+Console.WriteLine(user1.Id);
+Console.WriteLine(user1.Username);
+
+Console.WriteLine(user2.Id);
+Console.WriteLine(user2.Username);
+
+// COMPILATION ERROR BELOW
+// user1.Id = 43;
