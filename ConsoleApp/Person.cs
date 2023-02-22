@@ -49,13 +49,7 @@ namespace ConsoleApp
             _age = age;
         }
 
-        public Person(Person person)
-        {
-            _firstName = person.FirstName;
-            _lastName = person.LastName;
-            _age = person.Age;
-        }
-
+        public Person(Person person) : this(person.FirstName, person.LastName, person.Age) { }
 
         public string GetFullInfo()
         {
