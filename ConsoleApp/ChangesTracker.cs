@@ -5,6 +5,11 @@ namespace ConsoleApp
         public static int GlobalChanges { get; set; }
         public int Changes { get; set; }
 
+        static ChangesTracker()
+        {
+            ResetGlobalCounter();
+        }
+
         public void IncChanges()
         {
             ++GlobalChanges;
