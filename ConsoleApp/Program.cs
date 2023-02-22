@@ -193,6 +193,8 @@ void SearchByTimeRange()
     Console.Clear();
     DateTime date1 = EnterDateRange("start");
     DateTime date2 = EnterDateRange("end");
+
+    //check if user made mistake
     DateTime dateStart = date1 > date2 ? date2 : date1;
     DateTime dateEnd = date1 > date2 ? date1 : date2;
     int count = 0;
@@ -266,6 +268,8 @@ DateTime EnterMeetingStart()
     }
 }
 
+
+//method for enter part of range
 DateTime EnterDateRange(string part)
 {
     while (true)
