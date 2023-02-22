@@ -16,3 +16,16 @@ person2.FirstName = "Jane";
 Console.WriteLine(person2.FirstName);
 Console.WriteLine(person2.LastName);
 Console.WriteLine(person2.FullName);
+
+Person person3 = new("A", "B", 42);
+
+Console.WriteLine($"Changes: {person3.Changes}");
+
+person3.FirstName = "B";
+Console.WriteLine($"Changes: {person3.Changes}");
+
+person3.LastName = "A";
+Console.WriteLine($"Changes: {person3.Changes}");
+
+person3.Age = 43;
+Console.WriteLine($"Changes: {person3.Changes}");
