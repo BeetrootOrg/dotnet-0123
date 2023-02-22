@@ -71,12 +71,20 @@ User user2 = new()
     Username = "user1",
     Id = 43
 };
+User user3 = new()
+{
+    Id = 44,
+    Username = "user2"
+};
 
 Console.WriteLine(user1.Id);
 Console.WriteLine(user1.Username);
 
 Console.WriteLine(user2.Id);
 Console.WriteLine(user2.Username);
+
+Console.WriteLine(user3.Id);
+Console.WriteLine(user3.Username);
 
 // COMPILATION ERROR BELOW
 // user1.Id = 43;
