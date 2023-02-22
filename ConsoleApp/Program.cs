@@ -262,27 +262,23 @@ void UpdateMeeting()
     else
     {
         PrintMeetings(arr);
+        Console.WriteLine("\nWarning! If there is more than one meeting with the same name and room, will by updated only one\n");
+        
+        string name = InputString("Enter new meeting name:");
+        DateTime start = InputDate("Enter new meeting start:");
+        int duration = MeetingDurationInMinutes();
 
-        if (!IsOnceNameInRoom(arr))
+        if (DoesUpdatingIntersect(arr, currentName, start, duration))
         {
-            Console.WriteLine("\nUpdate not possible! More than one meeting with same name and room");
+            Console.WriteLine("\nUpdate not possible! There are datetime intersection with other meetings");
         }
         else
         {
-            string name = InputString("Enter new meeting name:");
-            DateTime start = InputDate("Enter new meeting start:");
-            int duration = MeetingDurationInMinutes();
+            bool multyUpdate = IsMeetingNameUnique(arr); 
+            RewriteMeeting(currentName, name, start, duration, multyUpdate);
+            Console.WriteLine("Meeting name successfully updated!");
+        }    
 
-            if (DoesUpdatingIntersect(arr, currentName, start, duration))
-            {
-                Console.WriteLine("\nUpdate not possible! There are datetime intersection with other meetings");
-            }
-            else
-            {
-                RewriteMeeting(currentName, name, start, duration);
-                Console.WriteLine("Meeting name successfully updated!");
-            }    
-        }
     }
 
     Console.WriteLine("To continue press ENTER...");
@@ -368,7 +364,7 @@ void ShowMeetingsByDateRange()
     return arr;
 }
 
-static int CountPairNameAndRoom((string, DateTime, int, string)[] meetings, string name, string room)
+static int CountByNameAndRoom((string, DateTime, int, string)[] meetings, string name, string room)
 {
     int count = 0;
     
@@ -383,11 +379,11 @@ static int CountPairNameAndRoom((string, DateTime, int, string)[] meetings, stri
     return count;
 }
 
-static bool IsOnceNameInRoom((string, DateTime, int, string)[] meetings)
+static bool IsMeetingNameUnique((string, DateTime, int, string)[] meetings)
 {
     foreach ((string name, DateTime start, int duration, string room) meeting in meetings)
     {
-        int count = CountPairNameAndRoom(meetings, meeting.name, meeting.room);
+        int count = CountByNameAndRoom(meetings, meeting.name, meeting.room);
         
         if (count > 1)
         {
@@ -398,19 +394,22 @@ static bool IsOnceNameInRoom((string, DateTime, int, string)[] meetings)
     return true;
 }
 
-void RewriteMeeting(string oldName, string name, DateTime start, int duration)
+void RewriteMeeting(string oldName, string name, DateTime start, int duration, bool multyUpdate)
 {
     for (int i = 0; i < meetings.Length; i++)
     {
         (string currentName, DateTime currentStart, int currentDuration, string currentRoom) = meetings[i];
         
-        if (!oldName.Equals(currentName))
+        if (oldName.Equals(currentName))
         {
-            continue;
+            meetings[i] = (name, start, duration, currentRoom);
+            DumpToFile();
+
+            if (multyUpdate == false)
+            {
+                break;
+            }
         }
-        
-        meetings[i] = (name, start, duration, currentRoom);
-        DumpToFile();
     }
 }
 
