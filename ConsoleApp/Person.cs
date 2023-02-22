@@ -6,6 +6,8 @@ namespace ConsoleApp
         public string LastName { get; set; }
         public int Age { get; set; }
 
+        public string FullName => $"{FirstName} {LastName}";
+
         public Person(string firstName, string lastName, int age)
         {
             FirstName = firstName;
