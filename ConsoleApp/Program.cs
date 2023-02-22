@@ -101,3 +101,9 @@ c2.IncChanges();
 
 Console.WriteLine(c1.Changes);
 Console.WriteLine(c2.Changes);
+
+Console.WriteLine(ChangesTracker.GlobalChanges);
+
+ChangesTracker.ResetGlobalCounter();
+
+Console.WriteLine(ChangesTracker.GlobalChanges);
