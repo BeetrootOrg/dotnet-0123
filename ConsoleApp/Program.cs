@@ -19,16 +19,16 @@ Console.WriteLine(person2.FullName);
 
 Person person3 = new("A", "B", 42);
 
-Console.WriteLine($"Changes: {person3.Changes}");
+Console.WriteLine($"Changes: {person3.Tracker.Changes}");
 
 person3.FirstName = "B";
-Console.WriteLine($"Changes: {person3.Changes}");
+Console.WriteLine($"Changes: {person3.Tracker.Changes}");
 
 person3.LastName = "A";
-Console.WriteLine($"Changes: {person3.Changes}");
+Console.WriteLine($"Changes: {person3.Tracker.Changes}");
 
 person3.Age = 43;
-Console.WriteLine($"Changes: {person3.Changes}");
+Console.WriteLine($"Changes: {person3.Tracker.Changes}");
 
 Contact contact1 = new()
 {
@@ -88,3 +88,16 @@ Console.WriteLine(user3.Username);
 
 // COMPILATION ERROR BELOW
 // user1.Id = 43;
+
+ChangesTracker c1 = new();
+ChangesTracker c2 = new();
+
+c1.IncChanges();
+c1.IncChanges();
+c1.IncChanges();
+
+c2.IncChanges();
+c2.IncChanges();
+
+Console.WriteLine(c1.Changes);
+Console.WriteLine(c2.Changes);

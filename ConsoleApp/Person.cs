@@ -2,7 +2,7 @@ namespace ConsoleApp
 {
     public class Person
     {
-        public int Changes { get; set; }
+        public ChangesTracker Tracker { get; } = new ChangesTracker();
 
         private string _firstName;
         private string _lastName;
@@ -13,7 +13,7 @@ namespace ConsoleApp
             get => _firstName;
             set
             {
-                ++Changes;
+                Tracker.IncChanges();
                 _firstName = value;
             }
         }
@@ -23,7 +23,7 @@ namespace ConsoleApp
             get => _lastName;
             set
             {
-                ++Changes;
+                Tracker.IncChanges();
                 _lastName = value;
             }
         }
@@ -33,7 +33,7 @@ namespace ConsoleApp
             get => _age;
             set
             {
-                ++Changes;
+                Tracker.IncChanges();
                 _age = value;
             }
         }
