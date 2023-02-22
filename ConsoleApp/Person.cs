@@ -40,12 +40,22 @@ namespace ConsoleApp
 
         public string FullName => $"{FirstName} {LastName}";
 
+        public Person() { }
+
         public Person(string firstName, string lastName, int age)
         {
             _firstName = firstName;
             _lastName = lastName;
             _age = age;
         }
+
+        public Person(Person person)
+        {
+            _firstName = person.FirstName;
+            _lastName = person.LastName;
+            _age = person.Age;
+        }
+
 
         public string GetFullInfo()
         {

@@ -51,3 +51,17 @@ phoneBook.Add(new Contact
 
 Console.WriteLine(phoneBook.Contacts.Length);
 
+Person p1 = new();
+Person p2 = new("C", "D", 42);
+Person p3 = new(p2);
+Person p4 = new()
+{
+    FirstName = "F",
+    Age = 42
+};
+
+Console.WriteLine(p1.GetFullInfo());
+Console.WriteLine(p2.GetFullInfo());
+Console.WriteLine(p3.GetFullInfo());
+Console.WriteLine(p4.GetFullInfo());
+
