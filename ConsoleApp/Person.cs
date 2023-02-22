@@ -12,5 +12,10 @@ namespace ConsoleApp
             LastName = lastName;
             Age = age;
         }
+
+        public string GetFullInfo()
+        {
+            return $"First Name: {FirstName}. Last Name: {LastName}. Age: {Age}";
+        }
     }
 }
