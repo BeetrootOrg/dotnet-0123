@@ -1,5 +1,12 @@
 ﻿using System.Text;
 
+// Console.Clear();
+// while (true)
+// {
+//     ConsoleKeyInfo key = Console.ReadKey();
+//     Console.WriteLine(key.Key);
+// }
+
 const string filename = "dump.csv";
 (string, DateTime, int, string)[] meetings;
 
