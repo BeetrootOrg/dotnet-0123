@@ -14,6 +14,7 @@ void Menu()
     Console.WriteLine("3. Update meeting");
     Console.WriteLine("4. Show meetings by room");
     Console.WriteLine("5. Show meetings by date range");
+    Console.WriteLine("6. Cool method (not implemented)");
     Console.WriteLine("0. Exit");
 
     ConsoleKeyInfo key = Console.ReadKey();
@@ -40,6 +41,10 @@ void Menu()
     else if (key.Key == ConsoleKey.D5)
     {
         ShowMeetingsByDateRange();
+    }
+    else if (key.Key == ConsoleKey.D6)
+    {
+        CoolMethod();
     }
 }
 
@@ -83,13 +88,23 @@ string InputString(string title)
         Console.WriteLine(title);
         string input = Console.ReadLine();
 
-        if (string.IsNullOrWhiteSpace(input))
+        try
+        {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                throw new ArgumentNullException();
+            }
+            if (input.Length > 20)
+            {
+                throw new ArgumentOutOfRangeException(); 
+            }
+        }
+        catch(ArgumentNullException)
         {
             Console.WriteLine("Meeting name should be not empty!");
             continue;
         }
-
-        if (input.Length > 20)
+        catch(ArgumentOutOfRangeException)
         {
             Console.WriteLine("Meeting name length should be less than 20!");
             continue;
@@ -105,14 +120,22 @@ DateTime InputDate(string title, bool onlyFuture = true)
     {
         Console.WriteLine(title);
         string input = Console.ReadLine();
+        DateTime start; 
 
-        if (!DateTime.TryParse(input, out DateTime start))
+        try
+        {
+            start = DateTime.Parse(input);
+            if (start <= DateTime.Now && onlyFuture == true)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+        catch(FormatException)
         {
             Console.WriteLine("Meeting start should be valid timestamp!");
             continue;
         }
-
-        if (start <= DateTime.Now && onlyFuture == true)
+        catch(ArgumentOutOfRangeException)
         {
             Console.WriteLine("Meeting start should be in future!");
             continue;
@@ -128,17 +151,29 @@ int MeetingDurationInMinutes()
     {
         Console.WriteLine("Enter meeting duration (in minutes):");
         string input = Console.ReadLine();
+        int duration;
 
-        if (!int.TryParse(input, out int duration))
+        try
+        {
+            duration = int.Parse(input);
+            try
+            {
+                if (duration <= 0)
+                {
+                    throw new Exception();    
+                }
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("Meeting duration should be positive number!");
+                continue;
+            }
+        }
+        catch(FormatException)
         {
             Console.WriteLine("Meeting duration should be valid number!");
             continue;
-        }
 
-        if (duration <= 0)
-        {
-            Console.WriteLine("Meeting duration should be positive number!");
-            continue;
         }
 
         return duration;
@@ -225,6 +260,7 @@ void DumpToFile()
     }
 
     File.WriteAllText(filename, sb.ToString());
+    
 }
 
 void LoadFromFile()
@@ -472,6 +508,33 @@ static void PrintMeetings((string, DateTime, int, string)[] meetings)
     }
 
     Console.WriteLine();
+}
+
+void CoolMethod()
+{
+    Console.Clear();
+    try
+    {
+        NotImplementedMethod();
+    }
+    catch(NotImplementedException)
+    {
+       Console.WriteLine("This method not implemented yet!");
+    }
+    finally
+    {
+        Console.WriteLine("To continue press ENTER...");
+        _ = Console.ReadLine();
+    }    
+}
+
+void NotImplementedMethod()
+{
+    bool isCool = false;
+    if (!isCool)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 // END OF HOMEWORK
