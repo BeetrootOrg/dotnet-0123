@@ -168,11 +168,11 @@ string EnterRoomName()
     }
 }
 
-bool DoesIntersectWithOther((string name, DateTime start, int duration, string room) meeting, string exceptName = null)
+bool DoesIntersectWithOther((string name, DateTime start, int duration, string room) meeting, string exceptName = null, DateTime? exceptStart = null)
 {
     foreach ((string name, DateTime start, int duration, string room) in meetings)
     {
-        if (name.Equals(exceptName))
+        if (name.Equals(exceptName) && start.Equals(exceptStart))
         {
             continue;
         }
@@ -262,23 +262,37 @@ void UpdateMeeting()
     else
     {
         PrintMeetings(arr);
-        Console.WriteLine("\nWarning! If there is more than one meeting with the same name and room, will by updated only one\n");
         
-        string name = InputString("Enter new meeting name:");
-        DateTime start = InputDate("Enter new meeting start:");
-        int duration = MeetingDurationInMinutes();
+        string oldName = arr[0].Item1;
+        DateTime oldStart = arr[0].Item2;
+        string room = arr[0].Item4;
+        
+        string newName = InputString("Enter new meeting name:");
+        DateTime newStart = InputDate("Enter new meeting start:");
+        int newDuration = MeetingDurationInMinutes();
 
-        if (DoesUpdatingIntersect(arr, currentName, start, duration))
+        if (arr.Length == 1 || !IsMeetingNameUnique(arr))
         {
-            Console.WriteLine("\nUpdate not possible! There are datetime intersection with other meetings");
+            if (DoesIntersectWithOther((newName, newStart, newDuration, room), oldName, oldStart))
+            {
+                Console.WriteLine("The new meetings will be intersected with other");
+            }
+            else
+            {
+                RewriteMeeting(oldName, room, newName, newStart, newDuration, onlyOnce: true);
+            }
         }
         else
         {
-            bool multyUpdate = IsMeetingNameUnique(arr); 
-            RewriteMeeting(currentName, name, start, duration, multyUpdate);
-            Console.WriteLine("Meeting name successfully updated!");
-        }    
-
+            if (DoesUpdatingIntersect(arr, oldName, newStart, newDuration))
+            {
+                Console.WriteLine("Update not possible! There are datetime intersection with other meetings");
+            }
+            else
+            {
+                RewriteMeeting(oldName, room, newName, newStart, newDuration);
+            }    
+        }
     }
 
     Console.WriteLine("To continue press ENTER...");
@@ -394,23 +408,23 @@ static bool IsMeetingNameUnique((string, DateTime, int, string)[] meetings)
     return true;
 }
 
-void RewriteMeeting(string oldName, string name, DateTime start, int duration, bool multyUpdate)
+void RewriteMeeting(string oldName, string oldRoom, string newName, DateTime newStart, int newDuration, bool onlyOnce = false)
 {
     for (int i = 0; i < meetings.Length; i++)
     {
-        (string currentName, DateTime currentStart, int currentDuration, string currentRoom) = meetings[i];
+        (string name, DateTime start, int duration, string room) = meetings[i];
         
-        if (oldName.Equals(currentName))
+        if (name.Equals(oldName))
         {
-            meetings[i] = (name, start, duration, currentRoom);
-            DumpToFile();
-
-            if (multyUpdate == false)
+            meetings[i] = (newName, newStart, newDuration, oldRoom);
+            if (onlyOnce)
             {
                 break;
-            }
+            }    
         }
     }
+
+    DumpToFile();
 }
 
 bool DoesUpdatingIntersect((string, DateTime, int, string)[] updatingMeetings, string currentName, DateTime start, int duration)
