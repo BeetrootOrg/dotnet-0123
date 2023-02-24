@@ -35,3 +35,8 @@ Person person1 = new() { FirstName = "John", LastName = "Smith", Age = 30 };
 Person person2 = new() { FirstName = "John", LastName = "Smith", Age = 30 };
 
 Console.WriteLine(person1 == person2);
+
+Console.WriteLine(person1);
+
+Car car1 = new("Ford", "Mustang", 1969, "Red");
+Console.WriteLine(car1);
