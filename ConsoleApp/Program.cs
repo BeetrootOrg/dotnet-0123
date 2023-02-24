@@ -1,27 +1,81 @@
-﻿int[] BubbleSort(int[] arr)
+﻿using System.Text;
+
+bool Compare(string str1, string str2)
 {
-    int[] copy = new int[arr.Length];
-    Array.Copy(arr, copy, arr.Length);
-    int temp;
-    for (int i = 0; i < arr.Length; i++)
+    for (int i = 0; i < str1.Length; i++)
     {
-        for (int j = 0; j < arr.Length - 1; j++)
+        
+        if (str1[i] != str2[i])
+            return false;
+    }
+
+    return true;
+}
+
+void Analyze(string str)
+{
+    int digital = 0;
+    int letters = 0;
+    int anotherSpecialCharacters = 0;
+
+    for (int i = 0; i < str.Length; i++)
+    {
+        if (char.IsDigit(str[i]))
         {
-            if (arr[j] > arr[j + 1])
+            digital++;
+        }
+        else if (char.IsLetter(str[i]))
+        {
+            letters++;
+        }
+        else if (char.IsControl(str[i]))
+        {
+            anotherSpecialCharacters++;
+        }
+    }
+    Console.WriteLine("Digitals: " + digital);
+    Console.WriteLine("Letters: " + letters);
+    Console.WriteLine("Another special characters: " + anotherSpecialCharacters);
+}
+
+string Sort(string str)
+{
+    char temp;
+    char[] chars = str.ToLower().ToCharArray();
+    for (int i = 0; i < chars.Length; i++)
+    {
+        for (int j = 0; j < chars.Length - 1; j++)
+        {
+            if (chars[j] > chars[j + 1])
             {
-                temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
+                temp = chars[j];
+                chars[j] = chars[j + 1];
+                chars[j + 1] = temp;
             }
         }
     }
-
-    return arr;
+    string sorted = new string(chars);
+    return sorted;
 }
 
-int[] forSort = new[] { 3, 6, 4, 8, 1 };
-BubbleSort(forSort);
-foreach (var item in forSort)
+
+char[] Duplicate(string str)
 {
-    Console.WriteLine(item);
+    str = str.ToLower();
+    StringBuilder sb = new StringBuilder();
+
+    for (int i = 0; i < str.Length; i++)
+    {
+        for (int j = i + 1; j < str.Length; j++)
+        {
+            if (str[i] != str[j])
+                continue;
+
+            sb.Append(str[i]);
+            break;
+        }
+    }
+    char[] duplicate = new char[sb.Length];
+    return duplicate = sb.ToString().ToCharArray();
 }
+
