@@ -2,13 +2,15 @@ namespace ConsoleApp
 {
     public class SoftwareEngineer
     {
+        public static readonly SoftwareEngineer Example = new("Jane", "Doe", "jdoe", "jdoe@outlook.com", Positions.CTO, decimal.MaxValue);
+
         public string FirstName { get; }
         public string LastName { get; }
         public string Username { get; }
         public string Position { get; private set; }
         public decimal Salary { get; private set; }
 #pragma warning disable IDE0040
-        string Email { get; set; }
+        string Email { get; }
 #pragma warning restore IDE0040
 
         public SoftwareEngineer(string firstName, string lastName, string username, string email,
