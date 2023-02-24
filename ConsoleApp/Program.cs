@@ -1,6 +1,8 @@
 ﻿using ConsoleApp;
 
-Employee employee = new("John", "Smith", "jsmith", Positions.SoftwareEngineer, 50000);
-Console.WriteLine(employee.GetFullInformation());
-employee.Promote();
-Console.WriteLine(employee.GetFullInformation());
+SoftwareEngineer engineer = new("John", "Smith", "jsmith", Positions.SoftwareEngineer, 50000);
+for (int i = 0; i < 5; i++)
+{
+    Console.WriteLine(engineer.GetFullInformation());
+    engineer.Promote();
+}

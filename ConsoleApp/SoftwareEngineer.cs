@@ -1,6 +1,6 @@
 namespace ConsoleApp
 {
-    public class Employee
+    public class SoftwareEngineer
     {
         public string FirstName { get; }
         public string LastName { get; }
@@ -8,7 +8,7 @@ namespace ConsoleApp
         public string Position { get; private set; }
         public decimal Salary { get; private set; }
 
-        public Employee(string firstName, string lastName, string username,
+        public SoftwareEngineer(string firstName, string lastName, string username,
             string position, decimal salary)
         {
             FirstName = firstName;
@@ -24,6 +24,21 @@ namespace ConsoleApp
             {
                 Position = Positions.SeniorSoftwareEngineer;
                 Salary *= 1.5M;
+            }
+            else if (Position == Positions.SeniorSoftwareEngineer)
+            {
+                Position = Positions.TechLead;
+                Salary *= 2M;
+            }
+            else if (Position == Positions.TechLead)
+            {
+                Position = Positions.Architect;
+                Salary *= 2.5M;
+            }
+            else if (Position == Positions.Architect)
+            {
+                Position = Positions.CTO;
+                Salary *= 5M;
             }
         }
 
