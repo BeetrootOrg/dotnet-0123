@@ -107,7 +107,8 @@ string InputString(string title)
         catch(ArgumentOutOfRangeException)
         {
             Console.WriteLine("Meeting name length should be less than 20!");
-            continue;
+            Console.WriteLine("Your value will be truncated!");
+            input = input.Substring(0, 20);
         }
 
         return input;
