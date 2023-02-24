@@ -299,6 +299,7 @@ void UpdateMeeting()
     else
     {
         PrintMeetings(arr);
+        Console.WriteLine("If we have more then one meeting with the same name and room, we'll updating only first meeting in the list!\n");
         
         string oldName = arr[0].Item1;
         DateTime oldStart = arr[0].Item2;
@@ -316,7 +317,7 @@ void UpdateMeeting()
             }
             else
             {
-                RewriteMeeting(oldName, room, newName, newStart, newDuration, onlyOnce: true);
+                RewriteMeeting(oldName, newName, newStart, newDuration, onlyOnce: true);
             }
         }
         else
@@ -327,7 +328,7 @@ void UpdateMeeting()
             }
             else
             {
-                RewriteMeeting(oldName, room, newName, newStart, newDuration);
+                RewriteMeeting(oldName, newName, newStart, newDuration);
             }    
         }
     }
@@ -445,19 +446,22 @@ static bool IsMeetingNameUnique((string, DateTime, int, string)[] meetings)
     return true;
 }
 
-void RewriteMeeting(string oldName, string oldRoom, string newName, DateTime newStart, int newDuration, bool onlyOnce = false)
+void RewriteMeeting(string oldName, string newName, DateTime newStart, int newDuration, bool onlyOnce = false)
 {
     for (int i = 0; i < meetings.Length; i++)
     {
         (string name, DateTime start, int duration, string room) = meetings[i];
-        
+  
         if (name.Equals(oldName))
         {
-            meetings[i] = (newName, newStart, newDuration, oldRoom);
+            meetings[i].Item1 = newName;
+            meetings[i].Item2 = newStart;
+            meetings[i].Item3 = newDuration;
+
             if (onlyOnce)
             {
                 break;
-            }    
+            }  
         }
     }
 
@@ -470,7 +474,7 @@ bool DoesUpdatingIntersect((string, DateTime, int, string)[] updatingMeetings, s
     {
         (string, DateTime, int, string) meeting = (updatingMeeting.name, start, duration, updatingMeeting.room);
         
-        if (DoesIntersectWithOther(meeting, currentName))
+        if (DoesIntersectWithOther(meeting, currentName, start))
         {
             return true;
         }
