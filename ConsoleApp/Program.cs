@@ -40,3 +40,14 @@ Console.WriteLine(person1);
 
 Car car1 = new("Ford", "Mustang", 1969, "Red");
 Console.WriteLine(car1);
+
+
+Singleton s1 = Singleton.Instance;
+Singleton s2 = Singleton.Instance;
+
+Console.WriteLine(s1 == s2);
+
+Cache c1 = Cache.Instane;
+Console.WriteLine(c1.VeryHardData[0]);
+Cache c2 = Cache.Instane;
+Console.WriteLine(c2.VeryHardData[0]);
