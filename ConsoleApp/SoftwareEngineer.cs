@@ -7,8 +7,11 @@ namespace ConsoleApp
         public string Username { get; }
         public string Position { get; private set; }
         public decimal Salary { get; private set; }
+#pragma warning disable IDE0040
+        string Email { get; set; }
+#pragma warning restore IDE0040
 
-        public SoftwareEngineer(string firstName, string lastName, string username,
+        public SoftwareEngineer(string firstName, string lastName, string username, string email,
             string position, decimal salary)
         {
             FirstName = firstName;
@@ -16,6 +19,7 @@ namespace ConsoleApp
             Username = username;
             Position = position;
             Salary = salary;
+            Email = email;
         }
 
         public void Promote()
@@ -44,7 +48,7 @@ namespace ConsoleApp
 
         public string GetFullInformation()
         {
-            return $"{FirstName} {LastName} ({Username}) is a {Position} and makes {Salary:C}";
+            return $"{FirstName} {LastName} ({Username}/{Email}) is a {Position} and makes {Salary:C}";
         }
     }
 }
