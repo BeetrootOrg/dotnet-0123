@@ -96,7 +96,7 @@ void SearchMeetingsByDate()
     foreach ((string name, DateTime start, int duration, string room) in meetings)
     {
         DateTime end = start.AddMinutes(duration);
-        if (start >= startPeriod && end <= endPeriod)
+        if (startPeriod <= start && start <= endPeriod)
         {
             Console.WriteLine($"{name,-25}{start,-25}{end,-25}{room,-25}");
         }
