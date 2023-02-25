@@ -4,6 +4,7 @@ const string filename = "dump.csv";
 const string logfile = "log.txt";
 
 (string, DateTime, int, string)[] meetings;
+bool skipSomeCode = false;
 
 void Menu()
 {
@@ -212,13 +213,34 @@ void ShowMeetings()
     }
 
     Console.WriteLine();
-    Console.WriteLine("To continue press ENTER...");
-    _ = Console.ReadLine();
+
+    if (!skipSomeCode) //skip 'input Enter' if there was a call from UpdateMeetingByName()
+    {
+        Console.WriteLine("To continue press ENTER...");
+        _ = Console.ReadLine();
+    }
+    skipSomeCode = false;
 }
 
 void UpdateMeetingByName()
 {
-    throw new NotImplementedException();
+    Console.Clear();
+
+    skipSomeCode = true; //we use it in ShowMeetings() method
+    ShowMeetings();
+
+    Console.WriteLine("update existent meeting by it`s name");
+    string input = Console.ReadLine();
+    for (int i = 0; i < meetings.Length; i++)
+    {
+        string checkName = meetings[i].Item1;
+        if (checkName == input)
+        {
+            meetings[i].Item1 = "dfdfd";
+        }
+    }
+
+    // throw new NotImplementedException();
 }
 
 void DumpToFile()
