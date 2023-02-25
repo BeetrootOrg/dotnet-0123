@@ -15,6 +15,8 @@ void Menu()
     Console.WriteLine("1. Create a meeting");
     Console.WriteLine("2. Show all meetings");
     Console.WriteLine("3. Update meeting by name");
+    Console.WriteLine("4. Show meetings in certain room");
+    Console.WriteLine("5. Search meetings by date");
     Console.WriteLine("0. Exit");
 
     ConsoleKeyInfo key = Console.ReadKey();
@@ -34,12 +36,61 @@ void Menu()
     {
         UpdateMeetingByName();
     }
+    else if (key.Key == ConsoleKey.D4)
+    {
+        ShowMeetingsInCertainRoom();
+    }
+    else if (key.Key == ConsoleKey.D5)
+    {
+        SearchMeetingsByDate();
+    }
 }
 
 static void Exit()
 {
     Environment.Exit(0);
 }
+
+void SearchMeetingsByDate()
+{
+    
+}
+
+
+
+
+void ShowMeetingsInCertainRoom()
+{
+    Console.Clear();
+
+    skipSomeCode = true; //we use it in ShowMeetings() method
+    ShowMeetings();
+
+    Console.WriteLine();
+
+    Console.WriteLine("Select room to show all meetings in it");
+    string input = Console.ReadLine();
+
+    Console.WriteLine(@$"
+    =====================
+    {input}
+    =====================");
+
+    for (int i = 0; i < meetings.Length; i++)
+    {
+        string checkRoom = meetings[i].Item4;
+
+        if (checkRoom == input)
+        {
+            DateTime end = meetings[i].Item2.AddMinutes(meetings[i].Item3);
+            Console.WriteLine($"{meetings[i].Item1,-25}{meetings[i].Item2,-25}{end,-25}");
+        }
+    }
+    Console.WriteLine("To continue press ENTER...");
+    Console.ReadLine();
+
+}
+
 
 void CreateMeeting()
 {
@@ -236,11 +287,34 @@ void UpdateMeetingByName()
         string checkName = meetings[i].Item1;
         if (checkName == input)
         {
-            meetings[i].Item1 = "dfdfd";
+            Console.Clear();
+            Console.WriteLine($"Enter new data for {checkName}");
+
+            DateTime meetingStart = EnterMeetingStart();
+            int meetingDuration = MeetingDurationInMinutes();
+            (string, DateTime, int, string) meetingWillUpdate = (checkName, meetingStart, meetingDuration, meetings[i].Item4);
+
+            try //блок try catch я скопіпастив, не знаю чи в даному випадку це правильно (don't repeat yourself)
+            {
+                // VerifyNotIntersectWithOther(meetingWillUpdate); // може бути таке, що meetingWillUpdate перетнеться із meetings[i] (сам із собою)
+
+                meetings[i] = meetingWillUpdate;
+
+                DumpToFile();
+
+                Console.WriteLine("Meeting successfully updated!");
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine(ae.Message);
+            }
+            Console.WriteLine("To continue press ENTER...");
+            _ = Console.ReadLine();
+
         }
     }
 
-    // throw new NotImplementedException();
+    // throw new NotImplementedException(); чи можна викинути тут повідомлення: "No match was founded"?
 }
 
 void DumpToFile()
