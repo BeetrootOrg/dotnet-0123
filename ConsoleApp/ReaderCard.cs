@@ -3,7 +3,7 @@ namespace BookLibrary
     public class ReaderCard
     {
         public Reader Reader { get; set; }
-        public (Book book, DateTime start, DateTime end)[] Books { get; } 
+        public (Book book, DateTime start, DateTime end)[] Books { get; set; } 
 
         public ReaderCard(Reader reader)
         {
