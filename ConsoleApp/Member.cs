@@ -1,6 +1,6 @@
 namespace BookLibrary
 {
-    public class Reader
+    public class Member
     {
         private static int _id;
         public int Id { get => _id; } 
@@ -8,8 +8,8 @@ namespace BookLibrary
         public string LastName { get; set; }
         public string Phone { get; set; }
 
-        public Reader(string firstName, string lastName) : this(firstName, lastName, String.Empty) {}
-        public Reader(string firstName, string lastName, string phone)
+        public Member(string firstName, string lastName) : this(firstName, lastName, String.Empty) {}
+        public Member(string firstName, string lastName, string phone)
         {
             _id++;
             FirstName = firstName;

@@ -1,16 +1,30 @@
 ﻿using BookLibrary;
 
 Genre genre = new Genre("Science fiction");
-Console.WriteLine(genre.Name);
+Console.WriteLine($"Genre: {genre.Name}");
 
 Author author = new Author("Kurt", "Vonnegut");
-Console.WriteLine($"{author.FirstName} {author.LastName}");
+Console.WriteLine($"Author: {author.FirstName} {author.LastName}");
 
-Book book = new Book(author, genre, "The Sirens of Titan");
-Console.WriteLine($"{book.Name}");
+Book book1 = new Book(author, genre, "The Sirens of Titan");
+Console.WriteLine($"Book: {book1.Name}");
 
-Reader reader = new Reader("John", "Doe");
-Console.WriteLine($"Reader Id: {reader.Id}, Full Name: {reader.FirstName} {reader.LastName}");
+Member member = new Member("John", "Doe");
+Console.WriteLine($"Member Id: {member.Id}, Full Name: {member.FirstName} {member.LastName}");
 
-ReaderCard readerCard = new ReaderCard(reader);
-Console.WriteLine($"Card of reader: {reader.FirstName} {reader.LastName}"); 
+Card card = new Card(member);
+Console.WriteLine($"Card: {card.Member.FirstName} {card.Member.LastName}"); 
+
+BookInCard bookInCard = new BookInCard(book1); 
+
+var books = card.Books;
+Array.Resize(ref books, card.Books.Length + 1);
+card.Books = books;
+
+card.Books[^1] = bookInCard;
+
+Console.WriteLine($"Books in the card of {card.Member.FirstName} {card.Member.LastName}");
+foreach (BookInCard book in card.Books)
+{
+    Console.WriteLine($"{book.Book.Name}\t{book.DateGet}\t{book.DateReturn}");
+}
