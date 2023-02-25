@@ -1,5 +1,10 @@
 ﻿using ConsoleApp;
 
+
+bool trig () => true;
+System.Console.WriteLine(trig);
+
+
 Person person1 = new("Dima", "Misik", 26);
 Person person2 = new("John", "Doe", 50);
 
