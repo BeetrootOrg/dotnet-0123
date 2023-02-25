@@ -87,7 +87,7 @@ void SearchMeetingsByDate()
 
     Console.Clear();
     System.Console.WriteLine("=======================");
-    Console.WriteLine($"List of mitings for {startPeriod}...{endPeriod} period");
+    Console.WriteLine($"List of mitings for {startPeriod} ... {endPeriod} period");
     System.Console.WriteLine("=======================");
 
 
