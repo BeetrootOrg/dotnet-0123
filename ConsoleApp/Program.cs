@@ -53,9 +53,57 @@ static void Exit()
 
 void SearchMeetingsByDate()
 {
-    
-}
+    Console.Clear();
 
+    skipSomeCode = true; //we use it in ShowMeetings() method
+    ShowMeetings();
+
+    Console.WriteLine();
+
+    Console.WriteLine("Enter start date");
+    string inputStart = Console.ReadLine();
+    if (!DateTime.TryParse(inputStart, out DateTime startPeriod))
+    {
+        Console.WriteLine("Meeting start should be valid timestamp!");
+        Console.ReadLine();
+        return;
+    }
+
+    Console.WriteLine("Enter end date");
+    string inputEnd = Console.ReadLine();
+    if (!DateTime.TryParse(inputEnd, out DateTime endPeriod))
+    {
+        Console.WriteLine("Meeting start should be valid timestamp!");
+        Console.ReadLine();
+        return;
+    }
+
+    if (endPeriod < startPeriod)
+    {
+        Console.WriteLine("End must be later then Start!");
+        Console.ReadLine();
+        return;
+    }
+
+    Console.Clear();
+    System.Console.WriteLine("=======================");
+    Console.WriteLine($"List of mitings for {startPeriod}...{endPeriod} period");
+    System.Console.WriteLine("=======================");
+
+
+    Console.WriteLine($"{"Name",-25}{"Start",-25}{"End",-25}{"Room",-25}");
+
+    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    {
+        DateTime end = start.AddMinutes(duration);
+        if (start >= startPeriod && end <= endPeriod)
+        {
+            Console.WriteLine($"{name,-25}{start,-25}{end,-25}{room,-25}");
+        }
+    }
+    Console.WriteLine("To continue press ENTER...");
+    Console.ReadLine();
+}
 
 
 
