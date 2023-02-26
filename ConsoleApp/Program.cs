@@ -1,2 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿// ---------------26/02/2023-----------------
+// ------------- Homework
+//Install StarUML
+//Describe ‘book library’ domain with C# classes
+
