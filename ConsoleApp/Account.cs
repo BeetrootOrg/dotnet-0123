@@ -54,7 +54,7 @@ namespace Bank
                 
                 foreach (Operation operation in _operations)
                 {
-                    Console.WriteLine(operation.ShowOperation());
+                    Console.WriteLine(operation.FormattedData);
                 }
             }
             else
