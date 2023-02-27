@@ -30,15 +30,17 @@ namespace ConsoleApp
 
         public override bool Equals(object obj)
         {
-            return obj is Animal animal
-                && Name == animal.Name &&
+            return obj is Animal animal &&
+                Name == animal.Name &&
                 Color == animal.Color &&
-                Age == animal.Age;
+                Age == animal.Age &&
+                NumOfPaws == animal.NumOfPaws &&
+                Sound == animal.Sound;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Name, Color, Age);
+            return HashCode.Combine(Name, Color, Age, NumOfPaws, Sound);
         }
     }
 }

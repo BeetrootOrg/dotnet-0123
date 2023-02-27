@@ -51,7 +51,14 @@ Cat cat2 = new()
 {
     Color = "Black",
     Name = "Tom",
-    IsLazy = true,
+    IsLazy = false,
+    Age = 5
+};
+
+Dog dog1 = new()
+{
+    Color = "Black",
+    Name = "Tom",
     Age = 5
 };
 
@@ -59,3 +66,6 @@ Console.WriteLine(cat1.Equals(cat2));
 Console.WriteLine(cat1 == cat2);
 Console.WriteLine(cat1.GetHashCode());
 Console.WriteLine(cat2.GetHashCode());
+
+Console.WriteLine(cat1.Equals(dog1));
+Console.WriteLine(dog1.Equals(cat1));

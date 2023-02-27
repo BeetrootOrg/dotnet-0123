@@ -19,5 +19,17 @@ namespace ConsoleApp
         {
             return $"Name: {Name}, Color: {Color}, Paws: {NumOfPaws}, Lazy: {IsLazy}";
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Cat cat &&
+                base.Equals(obj) &&
+                IsLazy == cat.IsLazy;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode(), IsLazy);
+        }
     }
 }
