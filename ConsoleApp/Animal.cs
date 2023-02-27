@@ -23,6 +23,32 @@ namespace ConsoleApp
             Console.WriteLine($"{Name} is {Age} years old");
         }
 
+        public Animal Multiply(Animal animal, string name)
+        {
+            return GetType() != animal.GetType()
+                ? throw new ArgumentException("Animals must be of the same type")
+                : ExtendWithSpecificAttributes(new Animal
+                {
+                    Name = name,
+                    Color = Color,
+                    Age = 0,
+                    NumOfPaws = NumOfPaws,
+                    Sound = Sound
+                });
+        }
+
+        protected virtual Animal ExtendWithSpecificAttributes(Animal animal)
+        {
+            return new Animal
+            {
+                Name = animal.Name,
+                Color = animal.Color,
+                Age = animal.Age,
+                NumOfPaws = animal.NumOfPaws,
+                Sound = animal.Sound
+            };
+        }
+
         public override string ToString()
         {
             return $"Name: {Name}, Color: {Color}, Paws: {NumOfPaws}";

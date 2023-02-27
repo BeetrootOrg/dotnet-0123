@@ -69,3 +69,7 @@ Console.WriteLine(cat2.GetHashCode());
 
 Console.WriteLine(cat1.Equals(dog1));
 Console.WriteLine(dog1.Equals(cat1));
+
+Animal child = cat1.Multiply(cat2, "Child");
+
+PrintAnimalInfo(child);
