@@ -13,14 +13,19 @@ namespace ConsoleApp
             Console.WriteLine($"{Name} says {Sound}");
         }
 
-        public virtual void PrintInfo()
+        public void PrintInfo()
         {
-            Console.WriteLine($"Name: {Name}, Color: {Color}, Paws: {NumOfPaws}");
+            Console.WriteLine(this);
         }
 
         public void PrintAge()
         {
             Console.WriteLine($"{Name} is {Age} years old");
+        }
+
+        public override string ToString()
+        {
+            return $"Name: {Name}, Color: {Color}, Paws: {NumOfPaws}";
         }
     }
 }

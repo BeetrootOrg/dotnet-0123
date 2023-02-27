@@ -10,14 +10,14 @@ namespace ConsoleApp
             Sound = "Meow";
         }
 
-        public override void PrintInfo()
-        {
-            Console.WriteLine($"Name: {Name}, Color: {Color}, Paws: {NumOfPaws}, Lazy: {IsLazy}");
-        }
-
         public new void PrintAge()
         {
             Console.WriteLine($"{Name} is {Age} years old and is lazy: {IsLazy}");
+        }
+
+        public override string ToString()
+        {
+            return $"Name: {Name}, Color: {Color}, Paws: {NumOfPaws}, Lazy: {IsLazy}";
         }
     }
 }
