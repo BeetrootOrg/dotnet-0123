@@ -27,5 +27,18 @@ namespace ConsoleApp
         {
             return $"Name: {Name}, Color: {Color}, Paws: {NumOfPaws}";
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Animal animal
+                && Name == animal.Name &&
+                Color == animal.Color &&
+                Age == animal.Age;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Name, Color, Age);
+        }
     }
 }

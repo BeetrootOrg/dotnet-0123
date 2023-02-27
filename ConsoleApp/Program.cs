@@ -38,3 +38,24 @@ MakeNoise(dog);
 
 PrintAge(cat);
 PrintAge(dog);
+
+Cat cat1 = new()
+{
+    Color = "Black",
+    Name = "Tom",
+    IsLazy = true,
+    Age = 5
+};
+
+Cat cat2 = new()
+{
+    Color = "Black",
+    Name = "Tom",
+    IsLazy = true,
+    Age = 5
+};
+
+Console.WriteLine(cat1.Equals(cat2));
+Console.WriteLine(cat1 == cat2);
+Console.WriteLine(cat1.GetHashCode());
+Console.WriteLine(cat2.GetHashCode());
