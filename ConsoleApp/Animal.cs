@@ -4,6 +4,7 @@ namespace ConsoleApp
     {
         public string Name { get; init; }
         public string Color { get; init; }
+        public int Age { get; init; }
         protected int NumOfPaws { get; init; }
         protected string Sound { get; init; }
 
@@ -12,9 +13,14 @@ namespace ConsoleApp
             Console.WriteLine($"{Name} says {Sound}");
         }
 
-        public void PrintInfo()
+        public virtual void PrintInfo()
         {
             Console.WriteLine($"Name: {Name}, Color: {Color}, Paws: {NumOfPaws}");
+        }
+
+        public void PrintAge()
+        {
+            Console.WriteLine($"{Name} is {Age} years old");
         }
     }
 }
