@@ -6,5 +6,24 @@ Cat cat = new()
     Name = "Tom"
 };
 
-cat.MakeNoise();
-cat.PrintInfo();
+Dog dog = new()
+{
+    Color = "Brown",
+    Name = "Spike"
+};
+
+static void PrintAnimalInfo(Animal animal)
+{
+    animal.PrintInfo();
+}
+
+static void MakeNoise(Animal animal)
+{
+    animal.MakeNoise();
+}
+
+PrintAnimalInfo(cat);
+PrintAnimalInfo(dog);
+
+MakeNoise(cat);
+MakeNoise(dog);
