@@ -22,6 +22,7 @@ namespace Bank
         public void Deposite(decimal amount)
         {
             bool isPositive = Validator.IsPositive(amount); 
+            
             if (isPositive)
             {
                 _balance += amount;
@@ -32,7 +33,8 @@ namespace Bank
         
         public void Withdraw(decimal amount)
         {
-            bool isAvailable = Validator.IsAvailable(amount, _balance);
+            bool isAvailable = Validator.IsPositive(amount) && Validator.IsAvailable(amount, _balance);
+            
             if (isAvailable)
             {
                 _balance -= amount;

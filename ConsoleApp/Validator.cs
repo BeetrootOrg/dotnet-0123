@@ -6,7 +6,7 @@ namespace Bank
         {
             if (amount <= 0)
             {
-                Console.WriteLine("Error! Value could not be negative");
+                Console.WriteLine("Error! Value could not be negative or equals zero");
                 return false;
             }
             return true;
