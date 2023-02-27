@@ -2,7 +2,7 @@ namespace ConsoleApp.Models
 {
     public class Context
     {
-        private protected List<Record> Records = new List<Record>();
+        private List<Record> Records = new List<Record>();
         public decimal Balance { get { return Records.Sum(x => x.Summ); } }
         public List<string> Operations { get { return Records.Select(x => x.ToString()).ToList(); } }
 
@@ -24,7 +24,7 @@ namespace ConsoleApp.Models
             Deposit(summ);
         }
 
-        private protected class Record
+        private class Record
         {
             public int Id { get; set; } = 0;
             public DateTime DateTime { get; set; } = DateTime.Now;
