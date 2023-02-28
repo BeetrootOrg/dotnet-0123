@@ -6,22 +6,27 @@ namespace ConsoleApp.Models
         public int SideB { get; set; }
         public int SideC { get; set; }
         public int SideD { get; set; }
+        public int CornerA { get; set; }
+        public int CornerB { get; set; }
         public override double Square
         {
             get
             {
                 double p = Perimeter / 2;
-                return Math.Sqrt(p * (p - SideA) * (p - SideB) * (p - SideC));
+                return Math.Sqrt((p - SideA) * (p - SideB) * (p - SideC)*(p - SideD) - SideA*SideB*SideC*SideD*
+                Math.Cos((CornerA+CornerB)/2)*Math.Cos((CornerA+CornerB)/2));
             }
         }
-        public override double Perimeter => SideA + SideB + SideC;
+        public override double Perimeter => SideA + SideB + SideC+SideD;
 
-        public Quadrangle(int sideA, int sideB, int sideC, int sideD)
+        public Quadrangle(int sideA, int sideB, int sideC, int sideD, int cornerA, int cornerB  )
         {
             SideA = Math.Abs(sideA);
             SideB = Math.Abs(sideB);
             SideC = Math.Abs(sideC);
             SideD = Math.Abs(sideD);
+            CornerA= Math.Abs(cornerA);
+            CornerB= Math.Abs(cornerB);
             if (!Check()) throw new Exception("You entered incorrect parameters");
             Type = "Triangle";
             SidesNumber = 3;
@@ -35,12 +40,12 @@ namespace ConsoleApp.Models
         {
             if (!base.Equals(obj)) return false;
             var r = (Quadrangle)obj;
-            return SideA == r.SideA && SideB == r.SideB && SideC == r.SideC && SideD == r.SideD;
+            return SideA == r.SideA && SideB == r.SideB && SideC == r.SideC && SideD == r.SideD && CornerA==r.CornerA && CornerB==r.CornerB;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(base.GetHashCode, SideA, SideB, SideC, SideD);
+            return HashCode.Combine(base.GetHashCode, SideA, SideB, SideC, SideD, CornerA,CornerB);
         }
 
         public override string? ToString()
