@@ -1,0 +1,6 @@
+public class BookAccounting
+{
+    public int BookId { get; }
+    public bool Availability {get;}
+    
+}
