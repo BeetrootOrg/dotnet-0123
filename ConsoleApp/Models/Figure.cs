@@ -3,10 +3,10 @@ namespace ConsoleApp.Models
 
     public class Figure
     {
-        public virtual string Type { get; init; }
+        public string Type { get; init; }
         public virtual double Square { get; }
         public virtual double Perimeter { get; }
-        public virtual int SidesNumber { get; init; }
+        public int SidesNumber { get; init; }
         public Figure()
         {
             throw new Exception("You must pass parameters");
@@ -14,6 +14,11 @@ namespace ConsoleApp.Models
         public virtual bool Check()
         {
             return true;
+        }
+
+        public override bool Equals(object? obj)
+        {
+           return obj==null &&  GetType()==obj?.GetType();
         }
     }
 }

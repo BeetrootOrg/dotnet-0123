@@ -15,5 +15,22 @@ namespace ConsoleApp.Models
             Type = "Rectangle";
             SidesNumber=4;
         }
+
+        public override bool Equals(object? obj)
+        {
+           if (!base.Equals(obj)) return false;
+           var r=(Rectangle)obj;
+           return SideA==r.SideA && SideB==r.SideB; 
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode, SideA, SideB);
+        }
+
+        public override string? ToString()
+        {
+            return $"{Type}, SideA={SideA} SideA={SideB}";
+        }
     }
 }

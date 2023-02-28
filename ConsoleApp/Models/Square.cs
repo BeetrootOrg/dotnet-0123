@@ -13,5 +13,22 @@ namespace ConsoleApp.Models
             Type = "Square";
             SidesNumber=4;
         }
+        public override bool Equals(object? obj)
+        {
+           if (!base.Equals(obj)) return false;
+           var r=(SquarE)obj;
+           return SideA==r.SideA; 
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode, SideA);
+        }
+
+        public override string? ToString()
+        {
+            return $"{Type}, SideA={SideA}";
+        }
+
     }
 }

@@ -13,5 +13,21 @@ namespace ConsoleApp.Models
             Type = "Circle";
             SidesNumber=-1;
         }
+
+        public override bool Equals(object? obj)
+        {
+           if (!base.Equals(obj)) return false;
+           return Radius==((Circle)obj).Radius; 
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode, Radius);
+        }
+
+        public override string? ToString()
+        {
+            return $"Circle, radius={Radius}";
+        }
     }
 }
