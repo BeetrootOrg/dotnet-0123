@@ -6,4 +6,5 @@
 //    Perimeter - should return figure perimeter;
 //    SidesNumber - should return the number of sides; (for Circle return -1)
 // Extra:
+//   override methods ToString and Equals
 //    implement Quadrangle
