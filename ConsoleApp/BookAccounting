@@ -1,6 +1,14 @@
-public class BookAccounting
+namespace Library
 {
-    public int BookId { get; }
-    public bool Availability {get;}
-    
+    public class BookAccounting
+    {
+        public Books Book { get; }
+        public bool Availability {get; set;}
+
+        public BookAccounting (Books book, bool availability)
+        {
+            Book = book;
+            Availability = availability;
+        }
+    }
 }
