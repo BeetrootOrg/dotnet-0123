@@ -178,6 +178,33 @@ DateTime EnterMeetingStart()
     }
 }
 
+DateTime EnterSearchMeetingDateTime(string message)
+{
+    while (true)
+    {
+        Console.WriteLine(message);
+        string input = Console.ReadLine();
+
+        if (!DateTime.TryParse(input, out DateTime start))
+        {
+            Console.WriteLine("Meeting start should be valid timestamp!");
+            continue;
+        }
+
+        return start;
+    }
+}
+
+DateTime EnterSearchMeetingStart()
+{
+    return EnterSearchMeetingDateTime("Enter meeting start:");
+}
+
+DateTime EnterSearchMeetingEnd()
+{
+    return EnterSearchMeetingDateTime("Enter meeting end:");
+}
+
 int MeetingDurationInMinutes()
 {
     while (true)
@@ -253,28 +280,63 @@ bool DoesIntersectWithOther(
 
 void ShowMeetings()
 {
-    Console.Clear();
+    ShowCurrentMeetings(meetings);
+}
 
+void ShowCurrentMeetings((string, DateTime, int, string)[] meetings)
+{
+    Console.Clear();
+    WriteMeeting(meetings);
+    Console.WriteLine();
+    Console.WriteLine("To continue press ENTER...");
+    _ = Console.ReadLine();
+}
+
+void WriteMeeting((string, DateTime, int, string)[] meetings)
+{
     Console.WriteLine($"{"Name",-25}{"Start",-25}{"End",-25}{"Room",-25}");
     foreach ((string name, DateTime start, int duration, string room) in meetings)
     {
         DateTime end = start.AddMinutes(duration);
         Console.WriteLine($"{name,-25}{start,-25}{end,-25}{room,-25}");
     }
-
-    Console.WriteLine();
-    Console.WriteLine("To continue press ENTER...");
-    _ = Console.ReadLine();
 }
 
 void SearchByDateRange()
 {
-    throw new NotImplementedException();
+    Console.Clear();
+    DateTime start = EnterSearchMeetingStart();
+    DateTime end = EnterSearchMeetingEnd();
+
+    (string name, DateTime start, int duration, string room)[] filtered = Array.Empty<(string, DateTime, int, string)>();
+    foreach ((string, DateTime, int, string) meeting in meetings)
+    {
+        if (meeting.Item2 >= start && meeting.Item2 <= end)
+        {
+            Array.Resize(ref filtered, filtered.Length + 1);
+            filtered[^1] = meeting;
+        }
+    }
+
+    ShowCurrentMeetings(filtered);
 }
 
 void SearchByRoom()
 {
-    throw new NotImplementedException();
+    Console.Clear();
+    string roomName = EnterRoomName();
+    (string name, DateTime start, int duration, string room)[] filtered = Array.Empty<(string, DateTime, int, string)>();
+
+    foreach ((string, DateTime, int, string) meeting in meetings)
+    {
+        if (meeting.Item4 == roomName)
+        {
+            Array.Resize(ref filtered, filtered.Length + 1);
+            filtered[^1] = meeting;
+        }
+    }
+
+    ShowCurrentMeetings(filtered);
 }
 
 void DumpToFile()
