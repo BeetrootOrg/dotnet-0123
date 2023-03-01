@@ -1,37 +1,37 @@
 namespace ConsoleApp
 {
-    public abstract class Operation
+    public interface IOperation
     {
-        public abstract int PerformOperation(int a, int b);
+        int PerformOperation(int a, int b);
     }
 
-    public class Add : Operation
+    public class Add : IOperation
     {
-        public override int PerformOperation(int a, int b)
+        public int PerformOperation(int a, int b)
         {
             return a + b;
         }
     }
 
-    public class Subtract : Operation
+    public class Subtract : IOperation
     {
-        public override int PerformOperation(int a, int b)
+        public int PerformOperation(int a, int b)
         {
             return a - b;
         }
     }
 
-    public class Multiply : Operation
+    public class Multiply : IOperation
     {
-        public override int PerformOperation(int a, int b)
+        public int PerformOperation(int a, int b)
         {
             return a * b;
         }
     }
 
-    public class Divide : Operation
+    public class Divide : IOperation
     {
-        public override int PerformOperation(int a, int b)
+        public int PerformOperation(int a, int b)
         {
             return a / b;
         }

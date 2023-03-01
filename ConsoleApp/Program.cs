@@ -1,6 +1,6 @@
 ﻿using ConsoleApp;
 
-static Operation CreateOperation(OperationType operationType)
+static IOperation CreateOperation(OperationType operationType)
 {
     return operationType switch
     {
@@ -16,5 +16,5 @@ static Operation CreateOperation(OperationType operationType)
 Console.WriteLine("Enter math operation:");
 string input = Console.ReadLine();
 MathOperands operands = MathOperands.Parse(input);
-Operation operation = CreateOperation(operands.Operation);
+IOperation operation = CreateOperation(operands.Operation);
 Console.WriteLine($"Result is {operation.PerformOperation(operands.Operand1, operands.Operand2)}");
