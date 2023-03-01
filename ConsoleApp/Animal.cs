@@ -1,6 +1,6 @@
 namespace ConsoleApp
 {
-    public class Animal
+    public abstract class Animal
     {
         public string Name { get; init; }
         public string Color { get; init; }
@@ -27,27 +27,10 @@ namespace ConsoleApp
         {
             return GetType() != animal.GetType()
                 ? throw new ArgumentException("Animals must be of the same type")
-                : ExtendWithSpecificAttributes(new Animal
-                {
-                    Name = name,
-                    Color = Color,
-                    Age = 0,
-                    NumOfPaws = NumOfPaws,
-                    Sound = Sound
-                });
+                : ExtendWithSpecificAttributes(name);
         }
 
-        protected virtual Animal ExtendWithSpecificAttributes(Animal animal)
-        {
-            return new Animal
-            {
-                Name = animal.Name,
-                Color = animal.Color,
-                Age = animal.Age,
-                NumOfPaws = animal.NumOfPaws,
-                Sound = animal.Sound
-            };
-        }
+        protected abstract Animal ExtendWithSpecificAttributes(string name);
 
         public override string ToString()
         {

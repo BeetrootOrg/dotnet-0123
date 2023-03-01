@@ -8,13 +8,13 @@ namespace ConsoleApp
             Sound = "Woof";
         }
 
-        protected override Animal ExtendWithSpecificAttributes(Animal animal)
+        protected override Animal ExtendWithSpecificAttributes(string name)
         {
             return new Dog
             {
-                Name = animal.Name,
-                Color = animal.Color,
-                Age = animal.Age
+                Name = name,
+                Color = Color,
+                Age = Age
             };
         }
 

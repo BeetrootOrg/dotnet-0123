@@ -15,13 +15,13 @@ namespace ConsoleApp
             Console.WriteLine($"{Name} is {Age} years old and is lazy: {IsLazy}");
         }
 
-        protected override Animal ExtendWithSpecificAttributes(Animal animal)
+        protected override Animal ExtendWithSpecificAttributes(string name)
         {
             return new Cat
             {
-                Name = animal.Name,
-                Color = animal.Color,
-                Age = animal.Age,
+                Name = name,
+                Color = Color,
+                Age = Age,
                 IsLazy = IsLazy
             };
         }
