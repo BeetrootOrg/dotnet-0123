@@ -12,6 +12,10 @@ namespace ConsoleApp
 
     public class Add : IOperation
     {
+        public static readonly IOperation Instance = new Add();
+
+        private Add() { }
+
         public int PerformOperation(int a, int b)
         {
             return a + b;
@@ -20,6 +24,10 @@ namespace ConsoleApp
 
     public class Subtract : IOperation
     {
+        public static readonly IOperation Instance = new Subtract();
+
+        private Subtract() { }
+
         public int PerformOperation(int a, int b)
         {
             return a - b;
@@ -28,6 +36,10 @@ namespace ConsoleApp
 
     public class Multiply : IOperation
     {
+        public static readonly IOperation Instance = new Multiply();
+
+        private Multiply() { }
+
         public int PerformOperation(int a, int b)
         {
             return a * b;
@@ -36,9 +48,25 @@ namespace ConsoleApp
 
     public class Divide : IOperation
     {
+        public static readonly IOperation Instance = new Divide();
+
+        private Divide() { }
+
         public int PerformOperation(int a, int b)
         {
             return a / b;
+        }
+    }
+
+    public class Pow : IOperation
+    {
+        public static readonly IOperation Instance = new Pow();
+
+        private Pow() { }
+
+        public int PerformOperation(int a, int b)
+        {
+            return (int)Math.Pow(a, b);
         }
     }
 
@@ -49,10 +77,11 @@ namespace ConsoleApp
             return operationType switch
             {
                 OperationType.Unknown => throw new ArgumentException("Unknown operation", nameof(operationType)),
-                OperationType.Add => new Add(),
-                OperationType.Subtract => new Subtract(),
-                OperationType.Multiply => new Multiply(),
-                OperationType.Divide => new Divide(),
+                OperationType.Add => Add.Instance,
+                OperationType.Subtract => Subtract.Instance,
+                OperationType.Multiply => Multiply.Instance,
+                OperationType.Divide => Divide.Instance,
+                OperationType.Pow => Pow.Instance,
                 _ => throw new ArgumentException($"Unknown value {operationType}", nameof(operationType)),
             };
         }

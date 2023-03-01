@@ -8,7 +8,8 @@ namespace ConsoleApp
         Add,
         Subtract,
         Multiply,
-        Divide
+        Divide,
+        Pow
     }
 
     public class MathOperands
@@ -25,7 +26,7 @@ namespace ConsoleApp
             StringBuilder sb = new();
             foreach (char symbol in input)
             {
-                if (symbol is '+' or '-' or '*' or '/')
+                if (symbol is '+' or '-' or '*' or '/' or '^')
                 {
                     operation = symbol switch
                     {
@@ -33,6 +34,7 @@ namespace ConsoleApp
                         '-' => OperationType.Subtract,
                         '*' => OperationType.Multiply,
                         '/' => OperationType.Divide,
+                        '^' => OperationType.Pow,
                         _ => throw new ArgumentException("Unknown value")
                     };
 
