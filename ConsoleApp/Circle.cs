@@ -14,11 +14,6 @@ namespace Geometry
             get => Math.PI * _r * _r;
         }
 
-        public override int SidesNumber
-        {
-            get => _sides;
-        } 
-        
         public Circle(double r)
         {
             if (r <= 0)

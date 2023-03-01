@@ -15,11 +15,6 @@ namespace Geometry
             get => _a * _b;
         } 
 
-        public override int SidesNumber
-        {
-            get => _sides;
-        } 
-
         public Rectangle(double a, double b)
         {
             if (a <= 0 || b <= 0)

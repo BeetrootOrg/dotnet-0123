@@ -14,11 +14,6 @@ namespace Geometry
             get => _a * _a;
         }  
 
-        public override int SidesNumber
-        {
-            get => _sides;
-        } 
-
         public Square(double a)
         {
             if (a <= 0)

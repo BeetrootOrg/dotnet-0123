@@ -11,7 +11,10 @@ namespace Geometry
 
         public virtual double Perimeter { get; }
         public virtual double Area { get; }
-        public virtual int SidesNumber { get; }
+        public virtual int SidesNumber
+        { 
+            get => _sides; 
+        }
         
     }
 }
