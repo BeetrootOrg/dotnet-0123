@@ -3,11 +3,11 @@ namespace BankSystem
     public class Operations
     {
         private string Id;
-        private int Balance;
-        private string Amount;
+        private decimal Balance;
+        private decimal Amount;
         private DateTime Date;
 
-         public Operations(string id, int balance, string amount, DateTime date)
+         public Operations(string id, decimal balance, decimal amount, DateTime date)
         {
             Id = id;
             Balance = balance;
