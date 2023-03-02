@@ -6,7 +6,7 @@ namespace Company
     {
         public override string? Promotion
         { 
-            get => _employeeExtra == null ? String.Empty : _employeeExtra.NextPosition();
+            get => _employeeExtra == null ? String.Empty : _employeeExtra.Promotion();
         }
 
         public override string[]? Responsibilities

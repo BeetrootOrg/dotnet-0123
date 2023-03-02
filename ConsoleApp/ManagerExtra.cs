@@ -2,7 +2,7 @@ namespace Company
 {
     public class ManagerExtra : IEmployeeExtra
     {
-        public string NextPosition()
+        public string Promotion()
         {
             return "Boss";
         }

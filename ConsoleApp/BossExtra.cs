@@ -2,7 +2,7 @@ namespace Company
 {
     public class BossExtra : IEmployeeExtra
     {
-        public string NextPosition()
+        public string Promotion()
         {
             return "Boss cannot be promoted";
         }
