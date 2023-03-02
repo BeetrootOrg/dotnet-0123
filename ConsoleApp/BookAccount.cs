@@ -2,10 +2,10 @@ namespace Library
 {
     public class BookAccounting
     {
-        public Books Book { get; }
+        public Book Book { get; }
         public bool Availability {get; set;}
 
-        public BookAccounting (Books book, bool availability)
+        public BookAccounting (Book book, bool availability)
         {
             Book = book;
             Availability = availability;

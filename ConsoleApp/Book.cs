@@ -1,6 +1,6 @@
 namespace Library
 {
-    public class Books
+    public class Book
     {
         public static int _bookId = 1;
         public int BookId { get; set; }
@@ -8,7 +8,8 @@ namespace Library
         public Author Author { get;}
         public string Gerne { get; set; }
 
-        public Books(string bookName, Author author, string gerne)
+        public Book
+        (string bookName, Author author, string gerne)
         {
             BookId =_bookId++;
             BookName = bookName;
