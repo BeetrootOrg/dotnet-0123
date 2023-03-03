@@ -41,3 +41,11 @@ Console.WriteLine(c5 == c4);
 Console.WriteLine(c5 != c4);
 
 Console.WriteLine(c5 + 10);
+
+Complex c6 = new(3, 4);
+double d1 = (double)c6;
+
+Console.WriteLine(d1);
+
+System.Numerics.Complex c7 = c6;
+Console.WriteLine(c7);

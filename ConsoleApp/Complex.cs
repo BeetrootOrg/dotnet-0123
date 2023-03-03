@@ -78,5 +78,15 @@ namespace ConsoleApp
         {
             return !c1.Equals(c2);
         }
+
+        public static explicit operator double(Complex c)
+        {
+            return Math.Sqrt((c.Real * c.Real) + (c.Imaginary * c.Imaginary));
+        }
+
+        public static implicit operator System.Numerics.Complex(Complex c)
+        {
+            return new System.Numerics.Complex(c.Real, c.Imaginary);
+        }
     }
 }
