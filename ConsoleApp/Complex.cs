@@ -1,7 +1,7 @@
 namespace ConsoleApp
 {
 #pragma warning disable
-    public struct Complex
+    public struct Complex : IEquatable<Complex>
 #pragma warning restore
     {
         public double Real { get; set; }
@@ -20,6 +20,12 @@ namespace ConsoleApp
         public override string ToString()
         {
             return $"{Real}+{Imaginary}i";
+        }
+
+        public bool Equals(Complex other)
+        {
+            return Real == other.Real &&
+                Imaginary == other.Imaginary;
         }
     }
 }
