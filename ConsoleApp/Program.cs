@@ -1,28 +1,10 @@
 ﻿using ConsoleApp;
 
-CarBuilder cb = new();
+SingleResponsibility.CheckPositiveBad(-1);
+SingleResponsibility.CheckPositiveGood(-1);
 
-Car car = cb
-    .WithName("Ford")
-    .WithColor("Red")
-    .WithYear(2021)
-    .WithPrice(10000)
-    .Build();
+LiskovBaseBad b = new LiskovDerivedBad();
+b.DoSomething();
 
-Console.WriteLine(car);
-
-cb.Clear();
-
-Console.WriteLine("Enter name:");
-cb.WithName(Console.ReadLine());
-
-Console.WriteLine("Enter color:");
-cb.WithColor(Console.ReadLine());
-
-Console.WriteLine("Enter year:");
-cb.WithYear(int.Parse(Console.ReadLine()));
-
-Console.WriteLine("Enter price:");
-cb.WithPrice(int.Parse(Console.ReadLine()));
-
-Console.WriteLine(cb.Build());
+LiskovBaseGood g = new LiskovDerivedGood();
+g.DoSomething();
