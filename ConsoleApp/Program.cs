@@ -30,3 +30,12 @@ static void TestValueType(Complex c)
     c.Real += 1;
     c.Imaginary += 1;
 }
+
+Complex c5 = new(10, 3);
+Console.WriteLine(c5);
+
+Console.WriteLine(c4 + c5);
+Console.WriteLine(c4 - c5);
+
+Console.WriteLine(c5 == c4);
+Console.WriteLine(c5 != c4);
