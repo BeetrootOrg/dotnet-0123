@@ -39,3 +39,5 @@ Console.WriteLine(c4 - c5);
 
 Console.WriteLine(c5 == c4);
 Console.WriteLine(c5 != c4);
+
+Console.WriteLine(c5 + 10);

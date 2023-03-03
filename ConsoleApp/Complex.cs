@@ -54,9 +54,19 @@ namespace ConsoleApp
             return new Complex(c1.Real + c2.Real, c1.Imaginary + c2.Imaginary);
         }
 
+        public static Complex operator +(Complex c1, double d2)
+        {
+            return new Complex(c1.Real + d2, c1.Imaginary);
+        }
+
         public static Complex operator -(Complex c1, Complex c2)
         {
             return c1 + (-c2);
+        }
+
+        public static Complex operator -(Complex c1, double d2)
+        {
+            return c1 + (-d2);
         }
 
         public static bool operator ==(Complex c1, Complex c2)
