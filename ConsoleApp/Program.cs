@@ -55,3 +55,11 @@ Console.WriteLine(c6[1]);
 
 (c6[0], c6[1]) = (c6[1], c6[0]);
 Console.WriteLine(c6);
+
+RecordStruct rs = new()
+{
+    Num1 = 42,
+    Num2 = 100
+};
+
+Console.WriteLine(rs);
