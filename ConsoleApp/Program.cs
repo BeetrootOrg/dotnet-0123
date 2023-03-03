@@ -63,3 +63,6 @@ RecordStruct rs = new()
 };
 
 Console.WriteLine(rs);
+
+Complex c8 = c6.Prototype();
+Console.WriteLine(c8);

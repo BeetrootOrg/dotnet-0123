@@ -52,6 +52,11 @@ namespace ConsoleApp
             Imaginary = imaginary;
         }
 
+        public Complex Prototype()
+        {
+            return new Complex(Real, Imaginary);
+        }
+
         public override string ToString()
         {
             return Imaginary switch
