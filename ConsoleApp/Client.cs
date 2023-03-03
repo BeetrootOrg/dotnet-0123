@@ -24,7 +24,7 @@ namespace BankSystem
             }
             else
             {
-                Console.WriteLine("Amount must be bigger than 0!");
+                throw new ArgumentException("Amount must be bigger than 0!");
             }
         }
 
@@ -37,7 +37,7 @@ namespace BankSystem
             }
             else
             {
-                Console.WriteLine("Amount must be bigger than 0! or Not enougt money in the balance!");
+                throw new ArgumentException($"Amount must be bigger than 0! or Not enougt money in the balance!");
             }
         }
 
