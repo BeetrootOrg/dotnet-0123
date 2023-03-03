@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using ConsoleApp;
+BankAccount newAccount = new BankAccount(123);
+newAccount.ShowBalance();
+newAccount.ShowOperationsHistory();
