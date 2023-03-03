@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Company
 {
     public abstract class Employee
@@ -27,15 +29,18 @@ namespace Company
             string currentPosition = this.GetType().ToString().Split('.')[^1]; 
             string responsibilities = Responsibilities == null ? String.Empty : String.Join(", ", Responsibilities); 
             
-            return 
-                $"Current position: {currentPosition}" +
-                $"\nFirst name: {FirstName}; " +
-                $"Last name: {LastName}; " + 
-                $"Salary: {Salary}; " + 
-                $"Start of work: {StartOfWork}; " +
-                $"End of work: {EndOfWork}" +
-                $"\nPromotion: {Promotion}" + 
-                $"\nResponsibilities: {responsibilities}";
+            StringBuilder stringBuilder = new StringBuilder();
+            
+            stringBuilder.Append($"Current position: {currentPosition}; ");
+            stringBuilder.Append($"First name: {FirstName}; ");
+            stringBuilder.Append($"Last name: {LastName}; ");
+            stringBuilder.Append($"Salary: {Salary}; ");
+            stringBuilder.Append($"Start of work: {StartOfWork}; ");
+            stringBuilder.Append($"End of work: {EndOfWork}; ");
+            stringBuilder.Append($"Promotion: {Promotion}; ");
+            stringBuilder.Append($"Responsibilities: {responsibilities}");
+
+            return stringBuilder.ToString();
         }
     } 
 }
