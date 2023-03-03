@@ -1,10 +1,12 @@
 ﻿using ConsoleApp;
 
-SingleResponsibility.CheckPositiveBad(-1);
-SingleResponsibility.CheckPositiveGood(-1);
+Complex c1 = new();
+Complex c2 = new();
 
-LiskovBaseBad b = new LiskovDerivedBad();
-b.DoSomething();
+Console.WriteLine(c1);
+Console.WriteLine(c2);
+// COMPILATION ERROR WITHOUT OPERATOR OVERLOAD
+// Console.WriteLine(c1 == c2);
 
-LiskovBaseGood g = new LiskovDerivedGood();
-g.DoSomething();
+Console.WriteLine(c1.Imaginary);
+Console.WriteLine(c1.Real);
