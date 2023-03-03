@@ -49,3 +49,9 @@ Console.WriteLine(d1);
 
 System.Numerics.Complex c7 = c6;
 Console.WriteLine(c7);
+
+Console.WriteLine(c6[0]);
+Console.WriteLine(c6[1]);
+
+(c6[0], c6[1]) = (c6[1], c6[0]);
+Console.WriteLine(c6);

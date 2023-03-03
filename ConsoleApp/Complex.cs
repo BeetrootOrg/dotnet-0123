@@ -7,6 +7,30 @@ namespace ConsoleApp
         public double Real { get; set; }
         public double Imaginary { get; set; }
 
+        public double this[int i]
+        {
+            get => i switch
+            {
+                0 => Real,
+                1 => Imaginary,
+                _ => throw new ArgumentException("Allowed indices are 0 and 1")
+            };
+            set
+            {
+                switch (i)
+                {
+                    case 0:
+                        Real = value;
+                        break;
+                    case 1:
+                        Imaginary = value;
+                        break;
+                    default:
+                        throw new ArgumentException("Allowed indices are 0 and 1");
+                }
+            }
+        }
+
         /// <summary>
         /// Creates a complex number with zero imaginary part.
         /// </summary>
