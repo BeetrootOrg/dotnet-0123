@@ -10,8 +10,16 @@ namespace Company
         public decimal Salary { get; init; } 
         public string? StartOfWork { get; init; }
         public string? EndOfWork { get; init; }
-        public virtual string? Promotion { get; }
-        public virtual string[]? Responsibilities { get; }
+        
+        public string? Promotion
+        { 
+            get => _employeeExtra == null ? String.Empty : _employeeExtra.Promotion();
+        }
+        
+        public string[]? Responsibilities
+        {
+            get => _employeeExtra == null ? new string[0] : _employeeExtra.Responsibilities(); 
+        }
         
         public Employee(string? firstName, string? lastName, decimal salary, string? startOfWork, string? endOfWork)
         {
