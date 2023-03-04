@@ -1,0 +1,46 @@
+namespace ConsoleApp.Model
+{
+
+    public struct Point3D : IEquatable<Point3D>
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Z { get; set; }
+
+        public Point3D(int x, int y, int z)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+        }
+
+        public static Point3D operator +(Point3D p1, Point3D p2)
+        {
+            return new Point3D(p1.X + p2.X, p1.Y + p2.Y, p1.Z + p2.Z);
+        }
+
+        public static Point3D operator -(Point3D p1)
+        {
+            return new Point3D(-p1.X, -p1.Y, -p1.Z);
+        }
+
+        public static Point3D operator -(Point3D p1, Point3D p2)
+        {
+            return p1 + (-p2);
+        }
+        public static Point3D operator *(Point3D p1, int n)
+        {
+            return new Point3D(p1.X * n, p1.Y * n, p1.Z * n);
+        }
+
+        public bool Equals(Point3D other)
+        {
+            return X == other.X && Y == other.Y && Z == other.Z;
+        }
+
+        public static explicit operator double(Point3D p)
+        {
+            return Math.Sqrt((p.X * p.X) + (p.Y * p.Y) + (p.Z * p.Z));
+        }
+    }
+}
