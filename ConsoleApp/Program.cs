@@ -14,6 +14,7 @@ void Menu()
     Console.WriteLine("1. Create a meeting");
     Console.WriteLine("2. Show all meetings");
     Console.WriteLine("3. Update meeting by name");
+    Console.WriteLine("4. Show meetings in certain room");
     Console.WriteLine("0. Exit");
 
     ConsoleKeyInfo key = Console.ReadKey();
@@ -32,6 +33,10 @@ void Menu()
     else if (key.Key == ConsoleKey.D3)
     {
         UpdateMeetingByName();
+    }
+    else if (key.Key == ConsoleKey.D4)
+    {
+        ShowMeetingsInCertainRoom();
     }
 }
 
@@ -95,16 +100,12 @@ string EnterMeetingName()
 
         if (string.IsNullOrWhiteSpace(input))
         {
-            Console.WriteLine("Meeting name should be not empty!");
-            continue;
+            throw new ArgumentException("Meeting name should be not empty!");
         }
-
         if (input.Length > 20)
         {
-            Console.WriteLine("Meeting name length should be less than 20!");
-            continue;
+            throw new ArgumentException("Meeting name length should be less than 20!");
         }
-
         return input;
     }
 }
@@ -115,20 +116,20 @@ DateTime EnterMeetingStart()
     {
         Console.WriteLine("Enter meeting start:");
         string input = Console.ReadLine();
-
-        if (!DateTime.TryParse(input, out DateTime start))
+        try
+        {
+            DateTime.TryParse(input, out DateTime start);
+            if (start <= DateTime.Now)
+            {
+                throw new ArgumentException("Meeting start should be in future!");
+            }
+            return start;
+        }
+        catch (ArgumentException)
         {
             Console.WriteLine("Meeting start should be valid timestamp!");
             continue;
         }
-
-        if (start <= DateTime.Now)
-        {
-            Console.WriteLine("Meeting start should be in future!");
-            continue;
-        }
-
-        return start;
     }
 }
 
@@ -138,20 +139,20 @@ int MeetingDurationInMinutes()
     {
         Console.WriteLine("Enter meeting duration (in minutes):");
         string input = Console.ReadLine();
-
-        if (!int.TryParse(input, out int duration))
+        try
+        {
+            int.TryParse(input, out int duration);
+            if (duration <= 0)
+            {
+                throw new ArgumentException("Meeting duration should be positive number!");
+            }
+            return duration;
+        }
+        catch (ArgumentException)
         {
             Console.WriteLine("Meeting duration should be valid number!");
             continue;
         }
-
-        if (duration <= 0)
-        {
-            Console.WriteLine("Meeting duration should be positive number!");
-            continue;
-        }
-
-        return duration;
     }
 }
 
@@ -216,9 +217,80 @@ void ShowMeetings()
     _ = Console.ReadLine();
 }
 
+void ShowMeetingsInCertainRoom()
+{
+    Console.Clear();
+
+    Console.WriteLine("Enter the name of the room you want to see the meeting in:");
+    string input = Console.ReadLine();
+    int counter = 0;
+
+    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    {
+        if (input == room)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"{"Name",-25}{"Start",-25}{"End",-25}{"Room",-25}");
+            Console.WriteLine($"{name,-25}{start,-25}{duration,-25}{room,-25}");
+        }
+        if (input != room) counter++;
+    }
+
+    if (counter == meetings.Length)
+    {
+        throw new ArgumentException("The room with this name is not in the list of meetings.");
+    }
+
+    Console.WriteLine("\nTo continue press ENTER...");
+    _ = Console.ReadLine();
+}
+
 void UpdateMeetingByName()
 {
-    throw new NotImplementedException();
+    Console.Clear();
+
+    Console.WriteLine("Enter the name of meeting you want to change:");
+    string input1 = Console.ReadLine();
+    int count = 0;
+
+    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    {
+        if (input1 == name)
+        {
+            Console.WriteLine("Enter the new information about meeting you want to change:");
+
+            string meetingName = EnterMeetingName();
+            DateTime meetingStart = EnterMeetingStart();
+            int meetingDuration = MeetingDurationInMinutes();
+            string roomName = EnterRoomName();
+
+            (string, DateTime, int, string) meeting = (meetingName, meetingStart, meetingDuration, roomName);
+
+            try
+            {
+                VerifyNotIntersectWithOther(meeting);
+                meetings[count] = meeting;
+                DumpToFile();
+
+                Console.WriteLine("Meeting is updated");
+                break;
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine(ae.Message);
+                break;
+            }
+        }
+        count++;
+    }
+
+    if (count == meetings.Length)
+    {
+        throw new ArgumentException("The meeting with this name is not in the list of meetings.");
+    }
+
+    Console.WriteLine("To continue press ENTER...");
+    _ = Console.ReadLine();
 }
 
 void DumpToFile()
