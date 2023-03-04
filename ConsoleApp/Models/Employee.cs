@@ -1,15 +1,15 @@
 namespace ConsoleApp.Models
 {
-    public abstract class Employee
+    public  class Employee : SealClass
     {
         public string FirstName { get; init; }
         public string LastName { get; init; }
-        public Positions Position { get; init; }
-        public Days StartWorkingDay { get=>Career.GetStartWorkingDay(Position); }
-        public Days EndWorkingDay { get=>Career.GetEndWorkingDay (Position); }
-        public double Salary { get=>Career.GetSalary(Position); }
-        public Responsibilities[] Responsibilities { get=>Career.GetResponsibilities (Position); }
-        public Positions Promotion { get=>Career.GetPromotion(Position); }
+        public override sealed Positions Position { get; init; }
+        public override sealed Days StartWorkingDay { get => Career.GetStartWorkingDay(Position); }
+        public override sealed Days EndWorkingDay { get => Career.GetEndWorkingDay(Position); }
+        public override sealed double Salary { get => Career.GetSalary(Position); }
+        public override sealed Responsibilities[] Responsibilities { get => Career.GetResponsibilities(Position); }
+        public override sealed Positions Promotion { get => Career.GetPromotion(Position); }
         private Employee()
         {
             throw new Exception("The name of the employee must be passed to the parameters of the class constructor");
@@ -20,5 +20,16 @@ namespace ConsoleApp.Models
             FirstName = firstName;
             LastName = lastName;
         }
+
+    }
+
+    public abstract class SealClass
+    {
+        public abstract Positions Position { get; init; }
+        public abstract Days StartWorkingDay { get; }
+        public abstract Days EndWorkingDay { get; }
+        public abstract double Salary { get; }
+        public abstract Responsibilities[] Responsibilities { get; }
+        public abstract Positions Promotion { get; }
     }
 }
