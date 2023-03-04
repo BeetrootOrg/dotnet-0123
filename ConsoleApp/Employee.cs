@@ -34,21 +34,22 @@ namespace Company
 
         public override string ToString()
         {
-            string currentPosition = this.GetType().ToString().Split('.')[^1]; 
-            string responsibilities = Responsibilities == null ? String.Empty : String.Join(", ", Responsibilities); 
-            
             StringBuilder stringBuilder = new StringBuilder();
             
-            stringBuilder.Append($"Current position: {currentPosition}; ");
+            stringBuilder.Append($"Current position: {GetCurrentPosition()}; ");
             stringBuilder.Append($"First name: {FirstName}; ");
             stringBuilder.Append($"Last name: {LastName}; ");
             stringBuilder.Append($"Salary: {Salary}; ");
             stringBuilder.Append($"Start of work: {StartOfWork}; ");
             stringBuilder.Append($"End of work: {EndOfWork}; ");
             stringBuilder.Append($"Promotion: {Promotion}; ");
-            stringBuilder.Append($"Responsibilities: {responsibilities}");
+            stringBuilder.Append($"Responsibilities: {GetResponsibilities()}");
 
             return stringBuilder.ToString();
         }
+
+        private string GetCurrentPosition() => this.GetType().ToString().Split('.')[^1];
+        private string GetResponsibilities() => Responsibilities == null ? String.Empty : String.Join(", ", Responsibilities);
+ 
     } 
 }
