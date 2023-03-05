@@ -1,25 +1,72 @@
-﻿using ConsoleApp;
+﻿using ConsolApp;
 
-SoftwareEnginner engineer = new("John", "Smith", "jsmith", "jsmith@gmail.com",  Positions.SoftwareEnginner, 50000);
-
-for (int i =0; i < 5; i++)
+Cat cat = new Cat()
 {
-    Console.WriteLine(engineer.GetFullInformation());
-    engineer.Promote();
+    Color = "Black",
+    Name = "Tom",
+    Age = 5, 
+    IsLazy = true
+};
+
+Dog dog = new()
+{
+    Color = "Brown",
+    Name = "Spike",
+    Age = 3
+};
+
+void PrintAnimalInfo(Animal animal)
+{
+    animal.PrintInfo();
 }
+PrintAnimalInfo(cat);
+PrintAnimalInfo(dog);
 
-SoftwareEnginner example = SoftwareEnginner.Example;
-Console.WriteLine(example.GetFullInformation());
+static void MakeNoise(Animal animal)
+{
+    animal.MakeNoise();
+}
+MakeNoise(cat);
+MakeNoise(dog);
 
-Car car = new("Ford", "Mustang", 1969, "Red");
-Console.WriteLine(car);
+static void PrintAge(Animal animal)
+{
+    animal.PrintAge();
+}
+PrintAge(cat);
+PrintAge(dog);
 
-Singleton s1 = Singleton.Instance;
-Singleton s2 = Singleton.Instance;
+Cat cat1 = new()
+{
+    Color = "Black",
+    Name = "Tom",
+    Age = 5, 
+    IsLazy = true
+};
 
-Console.WriteLine(s1 == s2);
+Cat cat2 = new Cat()
+{
+    Color = "Black",
+    Name = "Tom",
+    Age = 5, 
+    IsLazy = true
+};
 
-Cache c1 = Cache.Instane;
-Console.WriteLine(c1._veryHardData[0]);
-Cache c2 = Cache.Instane;
-Console.WriteLine(c2._veryHardData[0]);
+Dog dog1 = new()
+{
+    Color = "Black",
+    Name = "Tom",
+    Age = 5, 
+};
+
+Console.WriteLine(cat1.Equals(cat2));//True
+Console.WriteLine(cat1 == cat2);//False
+Console.WriteLine(cat1.GetHashCode());
+Console.WriteLine(cat2.GetHashCode());
+
+Console.WriteLine(cat1.Equals(dog1));
+Console.WriteLine(dog1.Equals(cat1));
+
+Animal child = cat1.Multiply(cat2, "Child");
+
+PrintAnimalInfo(child);
