@@ -199,14 +199,12 @@ DateTime EnterMeetingStart()
 
         if (!DateTime.TryParse(input, out DateTime start))
         {
-            Console.WriteLine("Meeting start should be valid timestamp!");
-            continue;
+            throw new ArgumentException("Meeting start should be valid timestamp!");
         }
 
         if (start <= DateTime.Now)
         {
-            Console.WriteLine("Meeting start should be in future!");
-            continue;
+            throw new ArgumentException("Meeting start should be in future!");
         }
 
         return start;
@@ -270,18 +268,29 @@ string EnterRoomName()
         Console.WriteLine("Enter room name:");
         string input = Console.ReadLine();
 
-        if (string.IsNullOrWhiteSpace(input))
+        try
+        {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (input.Length > 20)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+        catch (ArgumentNullException)
         {
             Console.WriteLine("Room name should be not empty!");
             continue;
         }
-
-        if (input.Length > 20)
+        catch (ArgumentOutOfRangeException)
         {
             Console.WriteLine("Room name length should be less than 20!");
             continue;
         }
-
+        
         return input;
     }
 }
