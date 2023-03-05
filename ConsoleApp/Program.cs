@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 const string filename = "dump.csv";
-(string, DateTime, int, string)[] meetings;
+(string name, DateTime start, int duration, string roomName)[] meetings;
 
 void Menu()
 {
@@ -11,6 +11,8 @@ void Menu()
     Console.WriteLine();
     Console.WriteLine("1. Create a meeting");
     Console.WriteLine("2. Show all meetings");
+    Console.WriteLine("3. Search by room");
+    Console.WriteLine("4. Update meeting");
     Console.WriteLine("0. Exit");
 
     ConsoleKeyInfo key = Console.ReadKey();
@@ -25,6 +27,14 @@ void Menu()
     else if (key.Key == ConsoleKey.D2)
     {
         ShowMeetings();
+    }
+    else if (key.Key == ConsoleKey.D3)
+    {
+        ShowByName();
+    }
+    else if (key.Key == ConsoleKey.D4)
+    {
+        UpdateMeeting();
     }
 }
 
@@ -43,7 +53,7 @@ void CreateMeeting()
     string roomName = EnterRoomName();
 
     (string, DateTime, int, string) meeting = (meetingName, meetingStart, meetingDuration, roomName);
-    if (DoesIntersectWithOther(meeting))
+    if (DoesIntersectWithOther(meetings, meeting))
     {
         Console.WriteLine("Meeting intersects with another!");
     }
@@ -107,53 +117,134 @@ DateTime EnterMeetingStart()
     }
 }
 
-int MeetingDurationInMinutes()
+void UpdateMeeting()
 {
-    while (true)
+    Console.Clear();
+
+    string meetingName = EnterMeetingName();
+    (string, DateTime, int, string) meeting = (null, DateTime.MinValue, 0, null);
+    int index = -1;
+
+    for (int i = 0; i < meetings.Length; i++)
     {
-        Console.WriteLine("Enter meeting duration (in minutes):");
-        string input = Console.ReadLine();
-
-        if (!int.TryParse(input, out int duration))
+        if (meetings[i].Item1 == meetingName)
         {
-            Console.WriteLine("Meeting duration should be valid number!");
-            continue;
+            meeting = meetings[i];
+            index = i;
+            break;
         }
-
-        if (duration <= 0)
-        {
-            Console.WriteLine("Meeting duration should be positive number!");
-            continue;
-        }
-
-        return duration;
     }
+
+    if (index == -1)
+    {
+        Console.WriteLine("Meeting not found!");
+    }
+    else
+    {
+        meeting.Item2 = EnterMeetingStart();
+        meeting.Item3 = MeetingDurationInMinutes();
+        meeting.Item4 = EnterRoomName();
+
+        (string, DateTime, int, string)[] newMeetings = new (string, DateTime, int, string)[meetings.Length - 1];
+        if (index > 0)
+        {
+            Array.Copy(meetings[..index], newMeetings, index);
+        }
+        if (index < meetings.Length - 1)
+        {
+            Array.Copy(meetings[(index + 1)..], 0, newMeetings, index, meetings.Length - index - 1);
+        }
+
+        if (DoesIntersectWithOther(newMeetings, meeting))
+        {
+            Console.WriteLine("Meeting intersects with another!");
+        }
+        else
+        {
+            meetings[index] = meeting;
+            DumpToFile();
+
+            Console.WriteLine("Meeting successfully updated!");
+        }
+    }
+
+    Console.WriteLine("To continue press ENTER...");
+    _ = Console.ReadLine();
 }
 
-string EnterRoomName()
-{
-    while (true)
+    int MeetingDurationInMinutes()
     {
-        Console.WriteLine("Enter room name:");
-        string input = Console.ReadLine();
-
-        if (string.IsNullOrWhiteSpace(input))
+        while (true)
         {
-            Console.WriteLine("Room name should be not empty!");
-            continue;
-        }
+            Console.WriteLine("Enter meeting duration (in minutes):");
+            string input = Console.ReadLine();
 
-        if (input.Length > 20)
-        {
-            Console.WriteLine("Room name length should be less than 20!");
-            continue;
-        }
+            if (!int.TryParse(input, out int duration))
+            {
+                Console.WriteLine("Meeting duration should be valid number!");
+                continue;
+            }
 
-        return input;
+            if (duration <= 0)
+            {
+                Console.WriteLine("Meeting duration should be positive number!");
+                continue;
+            }
+
+            return duration;
+        }
     }
-}
 
-bool DoesIntersectWithOther((string name, DateTime start, int duration, string room) meeting)
+    string EnterRoomName()
+    {
+        while (true)
+        {
+            Console.WriteLine("Enter room name:");
+            string input = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                Console.WriteLine("Room name should be not empty!");
+                continue;
+            }
+
+            if (input.Length > 20)
+            {
+                Console.WriteLine("Room name length should be less than 20!");
+                continue;
+            }
+
+            return input;
+        }
+    }
+
+    void ShowByName()
+    {
+        Console.Clear();
+        string checkedRoom = EnterRoomName();
+        int successCounter = 0;
+        foreach (var meeting in meetings)
+        {
+            if (meeting.roomName == checkedRoom)
+            {
+                ShowTableHeader();
+                ShowMeeting(meeting);
+                successCounter++;
+            }
+        }
+        if (successCounter == 0)
+        {
+            Console.WriteLine("No meetings in this room");
+        }
+
+        Console.ReadLine();
+
+    }
+
+  bool DoesIntersectWithOther(
+    (string name, DateTime start, int duration, string room)[] meetings,
+    (string name, DateTime start, int duration, string room) meeting
+)
 {
     foreach ((string name, DateTime start, int duration, string room) in meetings)
     {
@@ -177,55 +268,66 @@ bool DoesIntersectWithOther((string name, DateTime start, int duration, string r
     return false;
 }
 
-void ShowMeetings()
-{
-    Console.Clear();
-
-    Console.WriteLine($"{"Name",-25}{"Start",-25}{"End",-25}{"Room",-25}");
-    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    void ShowMeetings()
     {
-        DateTime end = start.AddMinutes(duration);
-        Console.WriteLine($"{name,-25}{start,-25}{end,-25}{room,-25}");
+        Console.Clear();
+
+        ShowTableHeader();
+        foreach (var meeting in meetings)
+        {
+            ShowMeeting(meeting);
+        }
+
+        Console.WriteLine();
+        Console.WriteLine("To continue press ENTER...");
+        _ = Console.ReadLine();
     }
 
-    Console.WriteLine();
-    Console.WriteLine("To continue press ENTER...");
-    _ = Console.ReadLine();
-}
-
-void DumpToFile()
-{
-    StringBuilder sb = new();
-    _ = sb.AppendLine("Name,Start,Duration,Room");
-    foreach ((string name, DateTime start, int duration, string room) in meetings)
+    void ShowTableHeader()
     {
-        _ = sb.AppendLine($"{name},{start},{duration},{room}");
+        Console.WriteLine($"{"Name",-25}{"Start",-25}{"End",-25}{"Room",-25}");
     }
 
-    File.WriteAllText(filename, sb.ToString());
-}
-
-void LoadFromFile()
-{
-    if (!File.Exists(filename))
+    void ShowMeeting((string name, DateTime start, int duration, string room) meeting)
     {
-        meetings = Array.Empty<(string, DateTime, int, string)>();
-        return;
+        DateTime end = meeting.start.AddMinutes(meeting.duration);
+        Console.WriteLine($"{meeting.name,-25}{meeting.start,-25}{end,-25}{meeting.room,-25}");
     }
 
-    string[] lines = File.ReadAllLines(filename);
-    meetings = new (string, DateTime, int, string)[lines.Length - 1];
-
-    for (int i = 1; i < lines.Length; i++)
+    void DumpToFile()
     {
-        string line = lines[i];
-        string[] items = line.Split(',');
-        meetings[i - 1] = (items[0], DateTime.Parse(items[1]), int.Parse(items[2]), items[3]);
-    }
-}
+        StringBuilder sb = new();
+        _ = sb.AppendLine("Name,Start,Duration,Room");
+        foreach ((string name, DateTime start, int duration, string room) in meetings)
+        {
+            _ = sb.AppendLine($"{name},{start},{duration},{room}");
+        }
 
-LoadFromFile();
-while (true)
-{
-    Menu();
-}
+        File.WriteAllText(filename, sb.ToString());
+    }
+
+    void LoadFromFile()
+    {
+        if (!File.Exists(filename))
+        {
+            meetings = Array.Empty<(string, DateTime, int, string)>();
+            return;
+        }
+
+        string[] lines = File.ReadAllLines(filename);
+        meetings = new (string, DateTime, int, string)[lines.Length - 1];
+
+        for (int i = 1; i < lines.Length; i++)
+        {
+            string line = lines[i];
+            string[] items = line.Split(',');
+            meetings[i - 1] = (items[0], DateTime.Parse(items[1]), int.Parse(items[2]), items[3]);
+        }
+    }
+
+    LoadFromFile();
+    while (true)
+    {
+        Menu();
+    }
+
