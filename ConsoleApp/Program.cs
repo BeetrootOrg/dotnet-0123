@@ -163,14 +163,24 @@ string EnterMeetingName()
     {
         Console.WriteLine("Enter meeting name:");
         string input = Console.ReadLine();
+    	try
+        {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                throw new ArgumentNullException();
+            }
 
-        if (string.IsNullOrWhiteSpace(input))
+            if (input.Length > 20)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+        catch (ArgumentNullException)
         {
             Console.WriteLine("Meeting name should be not empty!");
             continue;
         }
-
-        if (input.Length > 20)
+        catch (ArgumentOutOfRangeException)
         {
             Console.WriteLine("Meeting name length should be less than 20!");
             continue;
