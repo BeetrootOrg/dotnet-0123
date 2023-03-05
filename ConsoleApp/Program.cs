@@ -1,6 +1,7 @@
 ﻿using System.Text;
 
 const string filename = "dump.csv";
+const string logfile = "log.txt";
 (string, DateTime, int, string)[] meetings;
 
 void Menu()
@@ -12,8 +13,9 @@ void Menu()
     Console.WriteLine("1. Create a meeting");
     Console.WriteLine("2. Show all meetings");
     Console.WriteLine("3. Update meeting");
-    Console.WriteLine("4. Search by room");
-    Console.WriteLine("5. Search by date range");
+    Console.WriteLine("4. Update meeting by name");
+    Console.WriteLine("5. Search by room");
+    Console.WriteLine("6. Search by date range");
 
     Console.WriteLine("0. Exit");
 
@@ -36,9 +38,13 @@ void Menu()
     }
     else if (key.Key == ConsoleKey.D4)
     {
-        SearchByRoom();
+        UpdateMeetingByName();
     }
     else if (key.Key == ConsoleKey.D5)
+    {
+        SearchByRoom();
+    }
+    else if (key.Key == ConsoleKey.D6)
     {
         SearchByDateRange();
     }
@@ -59,12 +65,10 @@ void CreateMeeting()
     string roomName = EnterRoomName();
 
     (string, DateTime, int, string) meeting = (meetingName, meetingStart, meetingDuration, roomName);
-    if (DoesIntersectWithOther(meetings, meeting))
+    try
     {
-        Console.WriteLine("Meeting intersects with another!");
-    }
-    else
-    {
+        VerifyNotIntersectWithOther(meetings, meeting);
+
         Array.Resize(ref meetings, meetings.Length + 1);
         meetings[^1] = meeting;
 
@@ -72,9 +76,30 @@ void CreateMeeting()
 
         Console.WriteLine("Meeting successfully created!");
     }
+    catch (ArgumentException ae)
+    {
+       Console.WriteLine(ae.Message);
+    }
 
     Console.WriteLine("To continue press ENTER...");
     _ = Console.ReadLine();
+}
+
+void DataCorrupted()
+{
+     meetings = Array.Empty<(string, DateTime, int, string)>();
+            
+    Console.Clear();
+    Console.WriteLine("Data Corrupted");
+    Console.WriteLine("To continue press ENTER...");
+    _ = Console.ReadLine();
+}
+
+void AppendError(Exception e)
+{
+    File.AppendAllLines(logfile, new[] {e.Message, e.StackTrace});
+    //File.AppendAllText(logfile, e.Message);
+    //File.AppendAllText(logfile, e.StackTrace);
 }
 
 void UpdateMeeting()
@@ -115,7 +140,7 @@ void UpdateMeeting()
             Array.Copy(meetings[(index + 1)..], 0, newMeetings, index, meetings.Length - index - 1);
         }
 
-        if (DoesIntersectWithOther(newMeetings, meeting))
+        if (VerifyNotIntersectWithOther(newMeetings, meeting))
         {
             Console.WriteLine("Meeting intersects with another!");
         }
@@ -251,7 +276,7 @@ string EnterRoomName()
     }
 }
 
-bool DoesIntersectWithOther(
+bool VerifyNotIntersectWithOther(
     (string name, DateTime start, int duration, string room)[] meetings,
     (string name, DateTime start, int duration, string room) meeting
 )
@@ -265,17 +290,22 @@ bool DoesIntersectWithOther(
 
             if (meeting.start >= start && meeting.start < end2)
             {
-                return true;
+                throw new ArgumentException($"Meeting '{name}' intersects with '{meeting.name}'!");
             }
 
             if (start >= meeting.start && start < end1)
             {
-                return true;
+                throw new ArgumentException($"Meeting '{name}' intersects with '{meeting.name}'!");
             }
         }
     }
 
     return false;
+}
+
+void UpdateMeetingByName()
+{
+    throw new NotImplementedException();
 }
 
 void ShowMeetings()
@@ -366,12 +396,45 @@ void LoadFromFile()
     {
         string line = lines[i];
         string[] items = line.Split(',');
-        meetings[i - 1] = (items[0], DateTime.Parse(items[1]), int.Parse(items[2]), items[3]);
+
+        try
+        {
+            meetings[i - 1] = (items[0], DateTime.Parse(items[1]), int.Parse(items[2]), items[3]);
+        }
+        catch (IndexOutOfRangeException ioore)
+        {
+            AppendError(ioore);
+
+            if (items.Length == 3)
+            {
+                bool dateTimeParse = DateTime.TryParse(items[1], out DateTime start);
+                bool durationParse = int.TryParse(items[2], out int duration);
+                if (dateTimeParse && durationParse)
+                {
+                    meetings[i - 1] = (items[0], start, duration, "unknown");
+                }
+            }       
+        }
+        catch (Exception e)
+        {
+            AppendError(e);
+            DataCorrupted();
+
+            return;
+        }
     }
 }
 
 LoadFromFile();
 while (true)
 {
-    Menu();
+    try
+    {
+        Menu();
+    }
+    catch (Exception e)
+    {
+        AppendError(e);
+        throw;
+    }
 }
