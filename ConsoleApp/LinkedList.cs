@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace ConsoleApp
 {
     public class LinkedList<T>
@@ -26,6 +28,24 @@ namespace ConsoleApp
                 Element last = Last();
                 last.Next = element;
             }
+        }
+
+        public override string ToString()
+        {
+            if (_head == null)
+            {
+                return string.Empty;
+            }
+
+            Element current = _head;
+            StringBuilder sb = new();
+            do
+            {
+                _ = sb.Append($"{current.Value}, ");
+                current = current.Next;
+            } while (current != null);
+
+            return sb.ToString()[..^2];
         }
 
         private Element Last()
