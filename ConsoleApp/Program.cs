@@ -22,3 +22,6 @@ static void WriteLineArray<TElement>(TElement[] arr)
 
 WriteLineArray(new[] { 1, 2, 3 });
 WriteLineArray(new[] { "hello, world" });
+
+WriteLineArray(new[] { new[] { 1, 2 }, new[] { 3, 4, 5 } });
+WriteLineArray(new object[] { 1, 3.5, "hello" });
