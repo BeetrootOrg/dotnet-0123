@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace ConsoleApp
 {
     public class LinkedList<T>
@@ -11,6 +9,7 @@ namespace ConsoleApp
         }
 
         private Element _head;
+        public int Length { get; private set; }
 
         public void Add(T item)
         {
@@ -28,24 +27,27 @@ namespace ConsoleApp
                 Element last = Last();
                 last.Next = element;
             }
+
+            ++Length;
+        }
+
+        public T[] ToArray()
+        {
+            T[] arr = new T[Length];
+
+            Element current = _head;
+            for (int i = 0; i < Length; i++)
+            {
+                arr[i] = current.Value;
+                current = current.Next;
+            }
+
+            return arr;
         }
 
         public override string ToString()
         {
-            if (_head == null)
-            {
-                return string.Empty;
-            }
-
-            Element current = _head;
-            StringBuilder sb = new();
-            do
-            {
-                _ = sb.Append($"{current.Value}, ");
-                current = current.Next;
-            } while (current != null);
-
-            return sb.ToString()[..^2];
+            return string.Join(", ", ToArray());
         }
 
         private Element Last()
