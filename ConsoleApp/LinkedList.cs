@@ -31,6 +31,12 @@ namespace ConsoleApp
             ++Length;
         }
 
+        public void Clear()
+        {
+            _head = null;
+            Length = 0;
+        }
+
         public T[] ToArray()
         {
             T[] arr = new T[Length];
