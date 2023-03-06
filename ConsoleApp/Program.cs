@@ -1,27 +1,7 @@
-﻿static void Swap<T>(ref T val1, ref T val2)
-{
-    (val1, val2) = (val2, val1);
-}
+﻿using ConsoleApp;
 
-int i1 = 5;
-int i2 = 10;
-
-Swap(ref i1, ref i2);
-Console.WriteLine((i1, i2));
-
-string s1 = "hello";
-string s2 = "world";
-
-Swap(ref s1, ref s2);
-Console.WriteLine((s1, s2));
-
-static void WriteLineArray<TElement>(TElement[] arr)
-{
-    Console.WriteLine(string.Join(", ", arr));
-}
-
-WriteLineArray(new[] { 1, 2, 3 });
-WriteLineArray(new[] { "hello, world" });
-
-WriteLineArray(new[] { new[] { 1, 2 }, new[] { 3, 4, 5 } });
-WriteLineArray(new object[] { 1, 3.5, "hello" });
+LinkedList<int> list = new();
+list.Add(1);
+list.Add(2);
+list.Add(3);
+list.Add(4);
