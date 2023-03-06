@@ -36,5 +36,20 @@ namespace Geometry
         {
             return $"Type: {Type}  Area: {Area}  Perimeter: {Perimeter}  SidesNumber: {SidesNumber}";
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Triangle triangle &&
+            base.Equals(obj) &&
+            Type == triangle.Type &&
+            Area == triangle.Area &&
+            Perimeter == triangle.Perimeter &&
+            SidesNumber == triangle.SidesNumber;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode());
+        }
     }
 }

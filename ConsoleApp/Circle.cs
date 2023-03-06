@@ -25,5 +25,20 @@ namespace Geometry
         {
             return $"Type: {Type}  Area: {Area}  Perimeter: {Perimeter}  SidesNumber: {SidesNumber}";
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Circle circle &&
+            base.Equals(obj) &&
+            Type == circle.Type &&
+            Area == circle.Area &&
+            Perimeter == circle.Perimeter &&
+            SidesNumber == circle.SidesNumber;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode());
+        }
     }
 }

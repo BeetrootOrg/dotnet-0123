@@ -16,5 +16,19 @@ namespace Geometry
         {
             return $"Type: {Type}  Area: {Area}  Perimeter: {Perimeter}  SidesNumber: {SidesNumber}";
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Figures figures &&
+            Type == figures.Type &&
+            Area == figures.Area &&
+            Perimeter == figures.Perimeter &&
+            SidesNumber == figures.SidesNumber;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Type, Area, Perimeter, SidesNumber);
+        }
     }
 }

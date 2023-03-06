@@ -26,5 +26,19 @@ namespace Geometry
             return $"Type: {Type}  Area: {Area}  Perimeter: {Perimeter}  SidesNumber: {SidesNumber}";
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Square square &&
+            base.Equals(obj) &&
+            Type == square.Type &&
+            Area == square.Area &&
+            Perimeter == square.Perimeter &&
+            SidesNumber == square.SidesNumber;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode());
+        }
     }
 }
