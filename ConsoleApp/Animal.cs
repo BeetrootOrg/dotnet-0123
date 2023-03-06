@@ -1,6 +1,6 @@
 namespace ConsolApp
 {
-    public class Animal
+    public abstract class Animal
     {
         protected int NumOfPaws {get; init;}
         public string Name {get; init;}
