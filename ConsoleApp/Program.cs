@@ -14,3 +14,11 @@ string s2 = "world";
 
 Swap(ref s1, ref s2);
 Console.WriteLine((s1, s2));
+
+static void WriteLineArray<TElement>(TElement[] arr)
+{
+    Console.WriteLine(string.Join(", ", arr));
+}
+
+WriteLineArray(new[] { 1, 2, 3 });
+WriteLineArray(new[] { "hello, world" });
