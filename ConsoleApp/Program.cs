@@ -45,3 +45,11 @@ static void WriteLineArray<T>(T[] arr)
 WriteLineArray(arr1);
 WriteLineArray(arr2);
 WriteLineArray(arr3);
+
+list.Clear();
+list.Add(1);
+list.Add(2);
+list.Add(3);
+
+list.Insert(4, 0);
+list.Insert(5, 2);

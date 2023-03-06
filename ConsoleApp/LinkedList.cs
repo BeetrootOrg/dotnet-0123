@@ -15,22 +15,7 @@ namespace ConsoleApp
 
         public void Add(T item)
         {
-            Element element = new()
-            {
-                Value = item
-            };
-
-            if (_head == null)
-            {
-                _head = element;
-            }
-            else
-            {
-                Element last = Last();
-                last.Next = element;
-            }
-
-            ++Length;
+            Insert(item, Length);
         }
 
         public void Clear()
@@ -64,6 +49,38 @@ namespace ConsoleApp
             --Length;
         }
 
+        public void Insert(T item, int position)
+        {
+            if (position < 0 || position > Length)
+            {
+                throw new IndexOutOfRangeException($"Index is outside of list");
+            }
+
+            Element element = new()
+            {
+                Value = item
+            };
+
+            if (position == 0)
+            {
+                element.Next = _head;
+                _head = element;
+            }
+            else
+            {
+                Element current = _head;
+                for (int i = 0; i < position - 1; i++)
+                {
+                    current = current.Next;
+                }
+
+                element.Next = current.Next;
+                current.Next = element;
+            }
+
+            ++Length;
+        }
+
         public T[] ToArray()
         {
             T[] arr = new T[Length];
@@ -92,17 +109,6 @@ namespace ConsoleApp
         public override string ToString()
         {
             return string.Join(", ", ToArray());
-        }
-
-        private Element Last()
-        {
-            Element last = _head;
-            while (last.Next != null)
-            {
-                last = last.Next;
-            }
-
-            return last;
         }
     }
 }
