@@ -1,3 +1,5 @@
+using System;
+
 namespace ConsoleApp
 {
     public class LinkedList<T>
@@ -35,6 +37,31 @@ namespace ConsoleApp
         {
             _head = null;
             Length = 0;
+        }
+
+        public void RemoveAt(int position)
+        {
+            if (position < 0 || position >= Length)
+            {
+                throw new IndexOutOfRangeException($"Index is outside of list");
+            }
+
+            if (position == 0)
+            {
+                _head = _head.Next;
+            }
+            else
+            {
+                Element current = _head;
+                for (int i = 0; i < position - 1; i++)
+                {
+                    current = current.Next;
+                }
+
+                current.Next = current.Next.Next;
+            }
+
+            --Length;
         }
 
         public T[] ToArray()
