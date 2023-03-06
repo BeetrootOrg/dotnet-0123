@@ -78,6 +78,17 @@ namespace ConsoleApp
             return arr;
         }
 
+        public void CopyTo(T[] arr)
+        {
+            int length = Length < arr.Length ? Length : arr.Length;
+            Element current = _head;
+            for (int i = 0; i < length; i++)
+            {
+                arr[i] = current.Value;
+                current = current.Next;
+            }
+        }
+
         public override string ToString()
         {
             return string.Join(", ", ToArray());
