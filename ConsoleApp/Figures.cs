@@ -7,7 +7,7 @@ namespace Geometry
         public virtual double Perimeter{get; init;}
         protected int SidesNumber{get; init;}
 
-        /*public void PrintInfo()
+        public void PrintInfo()
         {
             Console.WriteLine(this);
         }
@@ -15,6 +15,6 @@ namespace Geometry
         public override string ToString()
         {
             return $"Type: {Type}  Area: {Area}  Perimeter: {Perimeter}  SidesNumber: {SidesNumber}";
-        }*/
+        }
     }
 }

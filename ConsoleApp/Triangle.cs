@@ -23,7 +23,7 @@ namespace Geometry
         {
             if (((a + b) < c) || ((b + c) < a) || ((a + c) < b) || (a < 0) || (b < 0) || (c < 0))
             {
-                throw new Exception();
+                throw new ArgumentException("The value is incorrectly");
             }
                 _a = a;
                 _b = b;
