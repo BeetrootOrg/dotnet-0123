@@ -8,7 +8,7 @@ namespace ConsoleApp
         {
             if ((a<0)||(b<0))
             {
-                throw new ArgumentException("Invalid Output");
+                throw new ArgumentException("incorrect input");
             }
             sides[0] = a;
             sides[1] = b;
@@ -24,14 +24,20 @@ namespace ConsoleApp
             base.SetArea();
             base.SetPerimeter();
         }
-        public override void SetArea()
+        protected override void SetArea()
         {
             Area = sides[0]*sides[1];
         }
 
-        public override void SetPerimeter()
+        protected override void SetPerimeter()
         {
             Perimeter = sides[0]*2+sides[1]*2;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Rectangle rectangle && 
+                base.Equals(rectangle);
         }
     }
 }

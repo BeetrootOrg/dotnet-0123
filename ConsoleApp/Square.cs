@@ -23,14 +23,19 @@ namespace ConsoleApp
             base.SetArea();
             base.SetPerimeter();
         }
-        public override void SetArea()
+        protected override void SetArea()
         {
             Area = side*side;
         }
 
-        public override void SetPerimeter()
+        protected override void SetPerimeter()
         {
             Perimeter = side*4;
+        }
+        public override bool Equals(object? obj)
+        {
+            return obj is Square square && 
+                base.Equals(square);
         }
     }
 }

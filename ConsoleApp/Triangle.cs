@@ -8,7 +8,7 @@ namespace ConsoleApp
         {
             if (((a + b) < c) || ((b + c) < a) || ((a + c) < b) || (a < 0) || (b < 0) || (c < 0))
             {
-                throw new ArgumentException("Invalid Output");
+                throw new ArgumentException("incorrect input");
             }
             sides[0] = a;
             sides[1] = b;
@@ -25,16 +25,21 @@ namespace ConsoleApp
             base.SetArea();
             base.SetPerimeter();
         }
-        public override void SetArea()
+        protected override void SetArea()
         {
             // p is half perimeter
             double p = (sides[0] + sides[1] + sides[2]) / 2;
             Area = Math.Sqrt(p * (p - sides[0]) * (p - sides[1]) * (p - sides[2]));
         }
 
-        public override void SetPerimeter()
+        protected override void SetPerimeter()
         {
             Perimeter = sides[0] + sides[1] + sides[2];
+        }
+        public override bool Equals(object? obj)
+        {
+            return obj is Triangle triangle && 
+                base.Equals(triangle);
         }
     }
 }

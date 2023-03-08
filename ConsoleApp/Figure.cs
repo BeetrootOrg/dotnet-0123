@@ -7,33 +7,52 @@ namespace ConsoleApp
         protected int SidesNumber {get;set;}
         protected double Perimeter {get;set;}
 
-        public virtual void SetArea()
+        protected virtual void SetArea()
         {
-            Area = -1;
+            Area = 0;
         }
-        public virtual void SetPerimeter()
+        protected virtual void SetPerimeter()
         {
-            Perimeter = -1;
+            Perimeter = 0;
         }
+
         public Figure()
         {
             Type = "unknown";
             SetArea();
             SetPerimeter();
-            SidesNumber = -1;
+            SidesNumber = 0;
         }
 
-        public Figure(string type, int sidesNumber)
+        public Figure(string type, int sidesNumber, double area, double perimeter)
         {
+            if (!((sidesNumber>=0)&&(area>=0)&&(perimeter>=0)))
+            {
+                throw new ArgumentException("incorrect input");
+            }
             Type = type;
-            SetArea();
-            SetPerimeter();
+            Area = area;
+            Perimeter = Perimeter;
             SidesNumber = sidesNumber;
         }
 
         public override string ToString()
         {
             return $"Type: {Type}, Area: {Area}, Perimeter: {Perimeter}, SidesNumber: {SidesNumber}";
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Figure figure &&
+                    Type == figure.Type &&
+                    SidesNumber == figure.SidesNumber &&
+                    Perimeter == figure.Perimeter &&
+                    Area == figure.Area;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Type, Area, SidesNumber, Perimeter);
         }
     }
 }

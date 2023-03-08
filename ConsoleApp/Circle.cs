@@ -8,7 +8,7 @@ namespace ConsoleApp
         {
             if ((a<0))
             {
-                throw new ArgumentException("Invalid Output");
+                throw new ArgumentException("incorrect input");
             }
             radius = a;
             Type = "Circle";
@@ -23,14 +23,20 @@ namespace ConsoleApp
             base.SetArea();
             base.SetPerimeter();
         }
-        public override void SetArea()
+        protected override void SetArea()
         {
             Area = Math.PI*radius*radius;
         }
 
-        public override void SetPerimeter()
+        protected override void SetPerimeter()
         {
             Perimeter = Math.PI*2*radius;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Circle circle && 
+                base.Equals(circle);
         }
     }
 }
