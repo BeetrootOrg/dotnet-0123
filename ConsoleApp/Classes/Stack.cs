@@ -50,11 +50,6 @@ namespace ConsoleApp.classes
             return result;
         }
 
-        private void CheckInit()
-        {
-            if (Top == null) throw new ArgumentNullException("Sequence not initiated");
-        }
-
         public override string ToString()
         {
             return $"Count {Count}. Values={string.Join(',', ToArray())}.";
@@ -75,6 +70,11 @@ namespace ConsoleApp.classes
                 element = element.Next;
             }
             return list;
+        }
+
+        private void CheckInit()
+        {
+            if (Top == null) throw new ArgumentNullException("Sequence not initiated");
         }
 
         private class Element
