@@ -5,16 +5,17 @@ namespace ConsoleApp.classes
 {
     public class Stack<T>
     {
-        public int Count {get=>ToList().Count;}
+        public int Count { get => ToList().Count; }
 
         private Element? Top;
 
-        public void CopyTo(T[] arr){
-            int length=Count<arr.Length?Count:arr.Length;
-            var source=ToArray();
+        public void CopyTo(T[] arr)
+        {
+            int length = Count < arr.Length ? Count : arr.Length;
+            var source = ToArray();
             for (int i = 0; i < length; i++)
             {
-                arr[i]=source[i];
+                arr[i] = source[i];
             }
         }
 
