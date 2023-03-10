@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using ConsoleApp;
 
@@ -166,3 +167,28 @@ Console.WriteLine($"IsProperSupersetOf = {uniqueStrings.IsProperSupersetOf(new[]
 
 Console.WriteLine($"OVERLAPS 1 = {uniqueStrings.Overlaps(new[] { "three", "four" })}");
 Console.WriteLine($"OVERLAPS 2 = {uniqueStrings.Overlaps(new[] { "four" })}");
+
+static IEnumerable<int> Power(int number, int exponent)
+{
+    int result = 1;
+
+    for (int i = 0; i < exponent; i++)
+    {
+        result *= number;
+        yield return result;
+    }
+}
+
+IEnumerable<int> power = Power(2, 5);
+foreach (int item in power)
+{
+    Console.WriteLine(item);
+}
+
+foreach (int item in power)
+{
+    Console.WriteLine(item);
+}
+
+int[] arr = power.ToArray();
+WriteLineElements(arr);
