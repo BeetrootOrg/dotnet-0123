@@ -60,3 +60,20 @@ list.Remove(43);
 list.RemoveAt(1);
 
 WriteLineElements(list);
+
+Dictionary<int, string> numberToWord = new()
+{
+    { 1, "one" },
+};
+
+Dictionary<int, string> numberToWord2 = new()
+{
+    [1] = "two"
+};
+
+numberToWord.TryAdd(2, "two");
+numberToWord.Add(3, "three");
+numberToWord[4] = "four";
+
+WriteLineElements(numberToWord);
+WriteLineElements(numberToWord2);
