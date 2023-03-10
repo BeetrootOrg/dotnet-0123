@@ -77,3 +77,33 @@ numberToWord[4] = "four";
 
 WriteLineElements(numberToWord);
 WriteLineElements(numberToWord2);
+
+numberToWord2.Clear();
+Console.WriteLine("AFTER CLEAR");
+WriteLineElements(numberToWord2);
+
+Console.WriteLine($"CONTAINS KEY 1 = {numberToWord.ContainsKey(1)}");
+Console.WriteLine($"CONTAINS VALUE 'five' = {numberToWord.ContainsValue("five")}");
+
+Console.WriteLine($"REMOVE 1 = {numberToWord.Remove(1)}");
+WriteLineElements(numberToWord);
+
+Console.WriteLine($"TRY REMOVE 2 = {numberToWord.Remove(2, out string two)}");
+Console.WriteLine($"TWO = {two}");
+
+try
+{
+    numberToWord.Add(4, "five");
+}
+catch (ArgumentException)
+{
+    // ignore
+}
+
+WriteLineElements(numberToWord);
+
+Console.WriteLine($"TRY ADD 4 = {numberToWord.TryAdd(4, "five")}");
+WriteLineElements(numberToWord);
+
+numberToWord[4] = "five";
+WriteLineElements(numberToWord);
