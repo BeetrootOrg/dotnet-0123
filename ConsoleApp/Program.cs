@@ -192,3 +192,11 @@ foreach (int item in power)
 
 int[] arr = power.ToArray();
 WriteLineElements(arr);
+
+int[] numbers = new[] { 1, 2, 3, 4, 5 };
+IEnumerable<int> multipliedByThree = new MultiplierEnumerable(numbers, 3);
+
+foreach (int item in multipliedByThree)
+{
+    Console.WriteLine(item);
+}
