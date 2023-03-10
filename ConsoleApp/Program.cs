@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using ConsoleApp;
+
 List<int> list = new() { 1, 2, 3 };
 Console.WriteLine(list);
 
@@ -107,3 +109,35 @@ WriteLineElements(numberToWord);
 
 numberToWord[4] = "five";
 WriteLineElements(numberToWord);
+
+Dictionary<Test, string> testDict1 = new()
+{
+    [new Test()] = "one",
+    [new Test()] = "two"
+};
+
+WriteLineElements(testDict1);
+
+BadHashCode bh1 = new();
+BadHashCode bh2 = new();
+
+Console.WriteLine($"EQUALS = {bh1.Equals(bh2)}");
+
+Dictionary<BadHashCode, string> testDict2 = new()
+{
+    [bh1] = "one",
+    [bh2] = "two"
+};
+
+WriteLineElements(testDict2);
+
+BadEquals be1 = new();
+BadEquals be2 = new();
+
+Dictionary<BadEquals, string> testDict3 = new()
+{
+    [be1] = "one",
+    [be2] = "two"
+};
+
+WriteLineElements(testDict3);
