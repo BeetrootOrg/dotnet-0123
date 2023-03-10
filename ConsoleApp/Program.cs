@@ -200,3 +200,20 @@ foreach (int item in multipliedByThree)
 {
     Console.WriteLine(item);
 }
+
+foreach (int item in new OnlyEvenEnumerable(new[] { 1, 3, 5, 6, 7, 8, 9 }))
+{
+    Console.WriteLine(item);
+}
+
+Console.WriteLine("MUL -> EVEN");
+foreach (int item in new MultiplierEnumerable(new OnlyEvenEnumerable(new[] { 1, 3, 4 }), 2))
+{
+    Console.WriteLine(item);
+}
+
+Console.WriteLine("EVEN -> MUL");
+foreach (int item in new OnlyEvenEnumerable(new MultiplierEnumerable(new[] { 1, 3, 4 }, 2)))
+{
+    Console.WriteLine(item);
+}
