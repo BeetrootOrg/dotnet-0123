@@ -141,3 +141,28 @@ Dictionary<BadEquals, string> testDict3 = new()
 };
 
 WriteLineElements(testDict3);
+
+HashSet<string> uniqueStrings = new() { "one", "two", "three" };
+WriteLineElements(uniqueStrings);
+
+Console.WriteLine($"ADD 'one' = {uniqueStrings.Add("one")}");
+Console.WriteLine($"ADD 'four' = {uniqueStrings.Add("four")}");
+WriteLineElements(uniqueStrings);
+
+Console.WriteLine("ExceptWith");
+uniqueStrings.ExceptWith(new[] { "one", "five" });
+WriteLineElements(uniqueStrings);
+
+Console.WriteLine("IntersectWith");
+uniqueStrings.IntersectWith(new[] { "two", "three", "five" });
+WriteLineElements(uniqueStrings);
+
+Console.WriteLine("UnionWith");
+uniqueStrings.UnionWith(new[] { "one", "two" });
+WriteLineElements(uniqueStrings);
+
+Console.WriteLine($"IsProperSubsetOf = {uniqueStrings.IsProperSubsetOf(new[] { "one", "two", "three", "four" })}");
+Console.WriteLine($"IsProperSupersetOf = {uniqueStrings.IsProperSupersetOf(new[] { "one", "two" })}");
+
+Console.WriteLine($"OVERLAPS 1 = {uniqueStrings.Overlaps(new[] { "three", "four" })}");
+Console.WriteLine($"OVERLAPS 2 = {uniqueStrings.Overlaps(new[] { "four" })}");
