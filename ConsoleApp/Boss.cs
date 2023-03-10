@@ -7,7 +7,7 @@ namespace ConsoleApp
             FirstName = firstname;
             LastName = lastname;
             Position = "Boss";
-            Responsibilities = new string[] {};
+            Responsibilities = "Control of work";
             Salary = 4000;
             StartOfTheWorkingDay =  new TimeSpan(9, 30, 0);
             EndOfTheWorkingDay = new TimeSpan(18, 0, 0);
@@ -19,6 +19,10 @@ namespace ConsoleApp
         public override Boss Promote()
         {
             throw new ArgumentException("Max position, you can't to promote");
+        }
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName} is a {Position}, Salary: {Salary}\nResponsibilities: {Responsibilities}\nWork day:{StartOfTheWorkingDay} -- {EndOfTheWorkingDay}";
         }
     }
 }

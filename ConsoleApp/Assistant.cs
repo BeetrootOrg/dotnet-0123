@@ -1,24 +1,24 @@
 namespace ConsoleApp
 {
-    public class Performer : Employee
+    public class Assistant : Employee
     {
-        public Performer(string firstname, string lastname)
+        public Assistant(string firstname, string lastname)
         {
             FirstName = firstname;
             LastName = lastname;
-            Position = "Performer";
-            Responsibilities = "Performing all the tasks specified to him";
-            Salary = 1000;
+            Position = "Assistant";
+            Responsibilities = "Help to Performer";
+            Salary = 500;
             StartOfTheWorkingDay =  new TimeSpan(9, 30, 0);
-            EndOfTheWorkingDay = new TimeSpan(18, 0, 0);
+            EndOfTheWorkingDay = new TimeSpan(15, 0, 0);
         }
         public override string Promotion()
         {
-            return "Manager";
+            return "Performer";
         }
-        public override Manager Promote()
+        public override Performer Promote()
         {
-            return new Manager(this.FirstName, this.LastName);
+            return new Performer(this.FirstName, this.LastName);
         }
 
         public override string ToString()

@@ -7,7 +7,7 @@ namespace ConsoleApp
             FirstName = firstname;
             LastName = lastname;
             Position = "Manager";
-            Responsibilities = new string[] {};
+            Responsibilities = "Optimization of enterprise processes";
             Salary = 2000;
             StartOfTheWorkingDay =  new TimeSpan(9, 30, 0);
             EndOfTheWorkingDay = new TimeSpan(18, 0, 0);
@@ -20,6 +20,10 @@ namespace ConsoleApp
         public override Boss Promote()
         {
             return new Boss(this.FirstName, this.LastName);
+        }
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName} is a {Position}, Salary: {Salary}\nResponsibilities: {Responsibilities}\nWork day:{StartOfTheWorkingDay} -- {EndOfTheWorkingDay}";
         }
     }
 }
