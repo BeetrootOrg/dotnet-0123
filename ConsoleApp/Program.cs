@@ -1,9 +1,23 @@
-﻿void Menu()
+﻿static void Menu()
 {
     Console.Clear();
-    System.Console.WriteLine("Meeting Booker");
-    System.Console.WriteLine();
-    System.Console.WriteLine("1.Create meeting");
-    System.Console.WriteLine("0.Exit");
+
+    Console.WriteLine("Meeting Booker");
+    Console.WriteLine();
+    Console.WriteLine("1.Create meeting");
+    Console.WriteLine("0.Exit");
+
+    var key = Console.ReadKey();
+    if(key.Key == ConsoleKey.D0)
+    {
+        Exit();
+    }
 }
-Menu();
+static void Exit()
+{
+    Environment.Exit(0);
+}
+while(true)
+{
+    Menu();
+}
