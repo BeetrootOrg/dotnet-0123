@@ -50,7 +50,7 @@ contacts[^1] = (FirstName, LastName, PhoneNumber);
     System.Console.WriteLine($"To continue press ENTER...");
     Console.ReadLine();
 }
-void ShowContacts()
+ void ShowContacts()
 {
     Console.Clear();
     System.Console.WriteLine($"{"Name",-20}{"Start",-20}{"End",-20}{"Room",-20}");
