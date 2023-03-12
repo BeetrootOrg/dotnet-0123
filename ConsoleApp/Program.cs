@@ -1,2 +1,20 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using ConsoleApp;
+Point3D p1 = new Point3D(3, 4, 5.78);
+Point3D p2 = new Point3D(4, 5.6, 6);
+
+Console.WriteLine("*");
+Console.WriteLine(p1 * 0.5);
+Console.WriteLine(0.5 * p1);
+Console.WriteLine("+");
+Console.WriteLine(p1 + p2);
+Console.WriteLine("-");
+Console.WriteLine(p1 - p2);
+Console.WriteLine(p2 - p1);
+Console.WriteLine("==");
+Console.WriteLine(p1 == p2);
+Console.WriteLine(p2 == p1);
+Console.WriteLine("!=");
+Console.WriteLine(p1 != p2);
+Console.WriteLine(p2 != p1);
+Console.WriteLine("casting to double");
+Console.WriteLine((double)p1);
