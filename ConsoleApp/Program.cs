@@ -30,7 +30,7 @@ void CreateTopic()
 {
     Console.Clear();
 
-    string name = Input("\nEnter topic name:");
+    string name = Input("Enter topic name:");
     Topic topic = new Topic(name);
     topicList.Add(topic);
  
