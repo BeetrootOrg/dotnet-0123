@@ -76,3 +76,8 @@ foreach (string item in new ZipEnumerable<int, string, string>(numbers, words, (
 {
     Console.WriteLine(item);
 }
+
+foreach (int item in new SelectEnumerable<int, int>(numbers, (num) => num * num))
+{
+    Console.WriteLine(item);
+}
