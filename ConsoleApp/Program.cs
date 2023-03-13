@@ -16,10 +16,10 @@ int result3 = Test.Add(10, 20,
     (long result) => throw new Exception("Unexpected"),
     (int result) => Console.WriteLine($"10+20={result}"));
 
-List<int> numbers = new();
+List<int> history = new();
 
 OnChangeableChange writeline = (obj, args) => Console.WriteLine($"Number changed from {args.Old} to {args.New}");
-OnChangeableChange tracker = (obj, args) => numbers.Add(args.Old);
+OnChangeableChange tracker = (obj, args) => history.Add(args.Old);
 
 Changeable c1 = new()
 {
@@ -34,7 +34,7 @@ c1.Number = 44;
 c1.Number = 44;
 c1.Number = 42;
 
-Console.WriteLine(string.Join(", ", numbers));
+Console.WriteLine(string.Join(", ", history));
 
 foreach (int item in new WhereEnumerable<int>(new[] { 1, 2, 3, 4 }, (item) => item % 2 == 0))
 {
@@ -69,3 +69,10 @@ Console.ForegroundColor = ConsoleColor.Yellow;
 t2.Change(TimeSpan.Zero, TimeSpan.FromSeconds(1));
 Thread.Sleep(5000);
 
+int[] numbers = new[] { 1, 2, 3, 4, 5 };
+string[] words = new[] { "one", "two", "three", "four" };
+
+foreach (string item in new ZipEnumerable<int, string, string>(numbers, words, (num, word) => $"Number '{num}' pronounces as '{word}'"))
+{
+    Console.WriteLine(item);
+}
