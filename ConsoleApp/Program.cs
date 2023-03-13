@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using ConsoleApp;
 
@@ -14,10 +15,22 @@ int result3 = Test.Add(10, 20,
     (long result) => throw new Exception("Unexpected"),
     (int result) => Console.WriteLine($"10+20={result}"));
 
+List<int> numbers = new();
+
+OnChangeableChange writeline = (obj, args) => Console.WriteLine($"Number changed from {args.Old} to {args.New}");
+OnChangeableChange tracker = (obj, args) => numbers.Add(args.Old);
+
 Changeable c1 = new()
 {
-    OnChangeableChange = (obj, args) => Console.WriteLine($"Number changed from {args.Old} to {args.New}"),
     Number = 42
 };
 
+c1.OnChangeableChangeEvent += writeline;
+c1.OnChangeableChangeEvent += tracker;
+
 c1.Number = 43;
+c1.Number = 44;
+c1.Number = 44;
+c1.Number = 42;
+
+Console.WriteLine(string.Join(", ", numbers));

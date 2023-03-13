@@ -17,7 +17,7 @@ namespace ConsoleApp
             get => _number;
             set
             {
-                OnChangeableChange(this, new ChangeableChangeArgs
+                InvokeOnChangeableChange(new ChangeableChangeArgs
                 {
                     Old = _number,
                     New = value
@@ -27,6 +27,17 @@ namespace ConsoleApp
             }
         }
 
-        public OnChangeableChange OnChangeableChange { get; set; }
+        private event OnChangeableChange OnChangeableChange;
+
+        public event OnChangeableChange OnChangeableChangeEvent
+        {
+            add => OnChangeableChange += value;
+            remove => OnChangeableChange -= value;
+        }
+
+        private void InvokeOnChangeableChange(ChangeableChangeArgs args)
+        {
+            OnChangeableChange?.Invoke(this, args);
+        }
     }
 }
