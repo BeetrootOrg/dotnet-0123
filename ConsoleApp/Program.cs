@@ -34,3 +34,20 @@ c1.Number = 44;
 c1.Number = 42;
 
 Console.WriteLine(string.Join(", ", numbers));
+
+foreach (int item in new WhereEnumerable<int>(new[] { 1, 2, 3, 4 }, (item) => item % 2 == 0))
+{
+    Console.WriteLine(item);
+}
+
+foreach (string item in new WhereEnumerable<string>(new[] { "hello", "world", "!" }, (item) => item.Length > 3))
+{
+    Console.WriteLine(item);
+}
+
+#pragma warning disable
+foreach (string item in new WhereEnumerable<object>(new object[] { "hello", 1, "world", 2, "!", 3 }, (item) => item is string))
+#pragma warning restore
+{
+    Console.WriteLine(item);
+}
