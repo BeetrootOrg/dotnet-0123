@@ -65,6 +65,7 @@ Timer t2 = new((state) => Console.WriteLine("Second timer"),
     Timeout.Infinite);
 
 Thread.Sleep(5000);
+Console.ForegroundColor = ConsoleColor.Yellow;
 t2.Change(TimeSpan.Zero, TimeSpan.FromSeconds(1));
 Thread.Sleep(5000);
 
