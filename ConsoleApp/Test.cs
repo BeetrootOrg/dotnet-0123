@@ -1,25 +1,24 @@
-using System;
-
 namespace ConsoleApp
 {
+    public delegate int AddOverflowDelegate(long result);
+    public delegate void AddSuccessDelegate(int result);
+
     public class Test
     {
-        public int Number { get; set; }
-
-        public override string ToString()
+        public static int Add(int a, int b,
+            AddOverflowDelegate overflow,
+            AddSuccessDelegate success)
         {
-            return $"Test {Number}";
-        }
+            long result = (long)a + b;
+            if (result > int.MaxValue)
+            {
+                result = overflow(result);
+            }
 
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Number).GetHashCode();
-        }
+            int converted = (int)result;
 
-        public override bool Equals(object obj)
-        {
-            return obj is Test t &&
-                Number == t.Number;
+            success(converted);
+            return converted;
         }
     }
 }
