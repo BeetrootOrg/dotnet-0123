@@ -29,8 +29,9 @@ void App()
 void CreateTopic()
 {
     Console.Clear();
+    Console.WriteLine("Enter topic name:");
+    string name = Input.ValidteString();
 
-    string name = Input("Enter topic name:");
     Topic topic = new Topic(name);
     topicList.Add(topic);
  
@@ -54,7 +55,7 @@ void CreateTopic()
         optionList.Add(new Option(++counter, topic.Id, option));
     }
 
-    Menu.Return();
+    Input.Return();
 }
 
 void Vote()
@@ -113,7 +114,7 @@ void Vote()
             break;
         }
 
-        Menu.Return();
+        Input.Return();
         break;
     }
 
@@ -148,31 +149,8 @@ void ShowResults()
 
         optionList.Show(topicId);
 
-        Menu.Return();
+        Input.Return();
         break;
-    }
-}
-
-string Input(string title)
-{
-    while (true)
-    {
-        Console.WriteLine(title);
-        string input = Console.ReadLine();
-
-        if (string.IsNullOrWhiteSpace(input))
-        {
-            Console.WriteLine("Name should be not empty!");
-            continue;
-        }
-
-        if (input.Length < 3)
-        {
-            Console.WriteLine("Name length should be at least 3 symbols!");
-            continue;
-        }
-
-        return input;
     }
 }
 

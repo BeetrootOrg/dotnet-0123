@@ -12,11 +12,5 @@ namespace ConsoleApp
                 Console.WriteLine(item);
             }
         }
-
-        public static void Return()
-        {
-            Console.WriteLine("To continue press ENTER...");
-            Console.ReadLine();
-        }
     }
 }
