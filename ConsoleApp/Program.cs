@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 using ConsoleApp;
 
@@ -51,3 +52,19 @@ foreach (string item in new WhereEnumerable<object>(new object[] { "hello", 1, "
 {
     Console.WriteLine(item);
 }
+
+int called = 0;
+Timer t1 = new((state) => Console.WriteLine($"Called: {++called}"),
+    null,
+    TimeSpan.Zero,
+    TimeSpan.FromSeconds(1));
+
+Timer t2 = new((state) => Console.WriteLine("Second timer"),
+    null,
+    Timeout.Infinite,
+    Timeout.Infinite);
+
+Thread.Sleep(5000);
+t2.Change(TimeSpan.Zero, TimeSpan.FromSeconds(1));
+Thread.Sleep(5000);
+
