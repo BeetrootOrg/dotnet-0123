@@ -1,5 +1,4 @@
-﻿
-//============14/03/2023=============
+﻿//============14/03/2023=============
 // Homework Події, делегати і лямбди
 // 1. Create a program to ‘vote’ for anything. 
 // Via the console interface users will create a ‘vote topic’ with options. 
