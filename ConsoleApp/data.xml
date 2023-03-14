@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTopic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Topic>
+    <Id>1</Id>
+    <Name>Topic One</Name>
+    <Options>
+      <Option>
+        <Id>1</Id>
+        <Name>y</Name>
+        <VoteCounter>12</VoteCounter>
+      </Option>
+      <Option>
+        <Id>2</Id>
+        <Name>n</Name>
+        <VoteCounter>1</VoteCounter>
+      </Option>
+    </Options>
+  </Topic>
+  <Topic>
+    <Id>2</Id>
+    <Name>Topic 2</Name>
+    <Options>
+      <Option>
+        <Id>1</Id>
+        <Name>y</Name>
+        <VoteCounter>4</VoteCounter>
+      </Option>
+      <Option>
+        <Id>2</Id>
+        <Name>n</Name>
+        <VoteCounter>3</VoteCounter>
+      </Option>
+    </Options>
+  </Topic>
+  <Topic>
+    <Id>3</Id>
+    <Name>Topic 3</Name>
+    <Options>
+      <Option>
+        <Id>1</Id>
+        <Name>y</Name>
+        <VoteCounter>1</VoteCounter>
+      </Option>
+      <Option>
+        <Id>2</Id>
+        <Name>n</Name>
+        <VoteCounter>1</VoteCounter>
+      </Option>
+    </Options>
+  </Topic>
+</ArrayOfTopic>
