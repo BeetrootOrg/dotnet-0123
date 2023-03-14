@@ -98,7 +98,8 @@ namespace ConsoleApp
                 }
 
                 Console.WriteLine($"{Messages.VoteFor} {topicList.GetNameById(topicId)}");
-                Menu.Build(optionList);
+
+                Menu.Build(optionList.FilteredByTopic(topicId));
 
                 while(true)
                 {
@@ -158,7 +159,7 @@ namespace ConsoleApp
                     continue;
                 }
 
-                Menu.BuildFullData(optionList);
+                Menu.BuildFullData(optionList.FilteredByTopic(topicId));
 
                 Menu.Return();
                 break;
