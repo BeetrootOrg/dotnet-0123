@@ -21,6 +21,7 @@ namespace ConsoleApp.Menus
             ((Option)value).VoteCounter++;
             context.Save();
             Console.WriteLine("Vote added");
+            Console.ReadKey();
             MenuVoteMainAction();
         }
         private static void MenuVoteOptionAction(string item, object value)
@@ -55,10 +56,7 @@ namespace ConsoleApp.Menus
         private static void MenuVoteResultAction(string item = "", object value = null)
         {
             Console.Clear();
-            foreach (var topic in context.Topics)
-            {
-                Console.WriteLine(context.TopicResult(topic));
-            }
+            Console.WriteLine($"Results:\n{string.Join('\n',context.Topics.Select(x=> context.TopicResult(x)))}");
             Console.ReadKey();
         }
 

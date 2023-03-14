@@ -7,7 +7,7 @@
       <Option>
         <Id>1</Id>
         <Name>y</Name>
-        <VoteCounter>4</VoteCounter>
+        <VoteCounter>12</VoteCounter>
       </Option>
       <Option>
         <Id>2</Id>
@@ -28,7 +28,7 @@
       <Option>
         <Id>2</Id>
         <Name>n</Name>
-        <VoteCounter>2</VoteCounter>
+        <VoteCounter>3</VoteCounter>
       </Option>
     </Options>
   </Topic>
@@ -44,7 +44,7 @@
       <Option>
         <Id>2</Id>
         <Name>n</Name>
-        <VoteCounter>0</VoteCounter>
+        <VoteCounter>1</VoteCounter>
       </Option>
     </Options>
   </Topic>
