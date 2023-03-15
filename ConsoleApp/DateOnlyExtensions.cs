@@ -17,5 +17,17 @@ namespace ConsoleApp
                 yield return result;
             }
         }
+
+        public static int Age(this DateOnly birthday)
+        {
+            DateTime today = DateTime.Now;
+            int age = today.Year - birthday.Year;
+            if (birthday.Month > today.Month || (birthday.Month == today.Month && birthday.Day > today.Day))
+            {
+                age--;
+            }
+
+            return age;
+        }
     }
 }

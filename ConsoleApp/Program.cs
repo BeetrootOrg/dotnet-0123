@@ -53,3 +53,7 @@ foreach (IEnumerable<int> item in result)
 
 Console.WriteLine(string.Join(", ", new DateOnly(2023, 3, 1).DaysBetween(new DateOnly(2023, 3, 15))));
 Console.WriteLine(string.Join(", ", new DateOnly(2023, 3, 1).DaysBetween(new DateOnly(2023, 3, 1))));
+
+Console.WriteLine(new DateOnly(1996, 07, 11).Age());
+Console.WriteLine(new DateOnly(1996, 03, 15).Age());
+Console.WriteLine(new DateOnly(1996, 03, 16).Age());
