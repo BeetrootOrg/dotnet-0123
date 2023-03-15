@@ -19,5 +19,32 @@ namespace ConsoleApp
         {
             return new ZipEnumerable<T1, T2, TResult>(first, second, zip);
         }
+
+        public static IEnumerable<IEnumerable<T>> ChunkBy<T>(this IEnumerable<T> collection, int size)
+        {
+            if (size <= 0)
+            {
+                throw new ArgumentException($"Size should be positive", nameof(size));
+            }
+
+            T[] arr = new T[size];
+            int index = 0;
+            foreach (T item in collection)
+            {
+                arr[index++] = item;
+                if (index >= size)
+                {
+                    yield return arr;
+                    arr = new T[size];
+                    index = 0;
+                }
+            }
+
+            if (index > 0)
+            {
+                Array.Resize(ref arr, index);
+                yield return arr;
+            }
+        }
     }
 }

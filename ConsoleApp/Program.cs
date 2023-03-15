@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using ConsoleApp;
 
@@ -27,4 +28,25 @@ foreach (string item in numbers.Zip(words, (number, word) => $"{number} - {word}
 foreach (int item in numbers.Where((item) => item % 2 == 0).Select((item) => item * 2))
 {
     Console.WriteLine(item);
+}
+
+foreach (IEnumerable<int> item in new[] { 1, 2, 3, 4 }.ChunkBy(2))
+{
+    Console.WriteLine(string.Join(", ", item));
+}
+
+foreach (IEnumerable<int> item in new[] { 1, 2, 3 }.ChunkBy(2))
+{
+    Console.WriteLine(string.Join(", ", item));
+}
+
+foreach (IEnumerable<int> item in new[] { 1, 2, 3 }.ChunkBy(5))
+{
+    Console.WriteLine(string.Join(", ", item));
+}
+
+IEnumerable<int>[] result = System.Linq.Enumerable.ToArray(new[] { 1, 2, 3, 4 }.ChunkBy(2));
+foreach (IEnumerable<int> item in result)
+{
+    Console.WriteLine(string.Join(", ", item));
 }
