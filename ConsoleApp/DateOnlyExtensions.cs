@@ -31,5 +31,27 @@ namespace ConsoleApp
                 ? throw new ArgumentException("Birthday should be in past!")
                 : age;
         }
+
+        public static bool IsWorkday(this DateOnly date)
+        {
+            return date.DayOfWeek is not DayOfWeek.Saturday and not DayOfWeek.Sunday;
+        }
+
+        public static bool IsWeekend(this DateOnly date)
+        {
+            return !date.IsWorkday();
+        }
+
+        public static DateOnly NextWorkday(this DateOnly date)
+        {
+#pragma warning disable IDE0072
+            return date.DayOfWeek switch
+            {
+                DayOfWeek.Friday => date.AddDays(3),
+                DayOfWeek.Saturday => date.AddDays(2),
+                _ => date.AddDays(1)
+            };
+#pragma warning restore IDE0072
+        }
     }
 }

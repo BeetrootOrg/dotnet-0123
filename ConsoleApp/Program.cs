@@ -57,3 +57,15 @@ Console.WriteLine(string.Join(", ", new DateOnly(2023, 3, 1).DaysBetween(new Dat
 Console.WriteLine(new DateOnly(1996, 07, 11).Age());
 Console.WriteLine(new DateOnly(1996, 03, 15).Age());
 Console.WriteLine(new DateOnly(1996, 03, 16).Age());
+
+Console.WriteLine(new DateOnly(2023, 03, 15).IsWeekend());
+Console.WriteLine(new DateOnly(2023, 03, 17).IsWeekend());
+Console.WriteLine(new DateOnly(2023, 03, 18).IsWeekend());
+Console.WriteLine(new DateOnly(2023, 03, 19).IsWeekend());
+Console.WriteLine(new DateOnly(2023, 03, 20).IsWeekend());
+
+Console.WriteLine(new DateOnly(2023, 03, 15).NextWorkday());
+Console.WriteLine(new DateOnly(2023, 03, 17).NextWorkday());
+Console.WriteLine(new DateOnly(2023, 03, 18).NextWorkday());
+Console.WriteLine(new DateOnly(2023, 03, 19).NextWorkday());
+Console.WriteLine(new DateOnly(2023, 03, 20).NextWorkday());
