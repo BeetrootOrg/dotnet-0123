@@ -2,11 +2,11 @@ using System.Collections;
 
 namespace ConsoleApp
 {
-    public abstract class VoteList<T> : IEnumerable<T>
+    public abstract class VoteList<IVoteItem> : IEnumerable<IVoteItem>
     {
-        protected List<T> _list = new List<T>();
+        protected List<IVoteItem> _list = new List<IVoteItem>();
 
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator<IVoteItem> GetEnumerator()
         {
             return _list.GetEnumerator();
         }
@@ -16,7 +16,7 @@ namespace ConsoleApp
             return GetEnumerator();
         }
 
-        public void Add(T item)
+        public void Add(IVoteItem item)
         {
             _list.Add(item);
         }
