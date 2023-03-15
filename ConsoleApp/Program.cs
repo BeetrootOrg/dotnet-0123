@@ -50,3 +50,6 @@ foreach (IEnumerable<int> item in result)
 {
     Console.WriteLine(string.Join(", ", item));
 }
+
+Console.WriteLine(string.Join(", ", new DateOnly(2023, 3, 1).DaysBetween(new DateOnly(2023, 3, 15))));
+Console.WriteLine(string.Join(", ", new DateOnly(2023, 3, 1).DaysBetween(new DateOnly(2023, 3, 1))));
