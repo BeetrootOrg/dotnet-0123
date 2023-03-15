@@ -2,6 +2,9 @@ namespace ConsoleApp
 {
     public interface IVoteItem
     {
-        public string FullData();
+        public int Id { get; } 
+        public string Name { get; } 
+        public string ShortTitle { get; }
+        public string FullTitle { get; }
     }
 }

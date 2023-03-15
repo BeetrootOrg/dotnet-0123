@@ -17,25 +17,25 @@ namespace ConsoleApp
             Console.WriteLine(exitItem);
         }
         
-        public static void Build<T>(AbstractList<T> list)
+        public static void Build<T>(VoteList<T> list)
         {
             Console.Clear();
             
             foreach(IVoteItem item in list)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(item.ShortTitle);
             }
             
             Console.WriteLine(exitItem);
         }
 
-        public static void BuildFullData<T>(AbstractList<T> list)
+        public static void BuildFull<T>(VoteList<T> list)
         {
             Console.Clear();
             
             foreach(IVoteItem item in list)
             {
-                Console.WriteLine(item.FullData());
+                Console.WriteLine(item.FullTitle);
             }
             
             Console.WriteLine(exitItem);

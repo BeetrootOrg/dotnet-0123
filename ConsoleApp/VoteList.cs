@@ -2,7 +2,7 @@ using System.Collections;
 
 namespace ConsoleApp
 {
-    public abstract class AbstractList<T> : IEnumerable<T>
+    public abstract class VoteList<T> : IEnumerable<T>
     {
         protected List<T> _list = new List<T>();
 

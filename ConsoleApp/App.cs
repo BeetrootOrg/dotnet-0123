@@ -159,7 +159,7 @@ namespace ConsoleApp
                     continue;
                 }
 
-                Menu.BuildFullData(optionList.FilteredByTopic(topicId));
+                Menu.BuildFull(optionList.FilteredByTopic(topicId));
 
                 Menu.Return();
                 break;

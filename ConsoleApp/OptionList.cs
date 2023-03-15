@@ -1,6 +1,6 @@
 namespace ConsoleApp
 {
-    public class OptionList : AbstractList<Option>
+    public class OptionList : VoteList<Option>
     {
         public bool ItemExists(int id, int topicId)
         {

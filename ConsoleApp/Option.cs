@@ -1,9 +1,13 @@
 namespace ConsoleApp
 {
-    public class Option : AbstractItem
+    public class Option : IVoteItem
     {
         private int _votes;
+        public int Id { get; private set; }
+        public string Name { get; private set; }
         public int TopicId { get; private set; }
+        public string ShortTitle { get => $"{Id}. {Name}"; }
+        public string FullTitle { get => $"{ShortTitle} - {_votes} vote(s)"; }
         
         public Option(int id, int topicId, string name)
         {
@@ -15,11 +19,6 @@ namespace ConsoleApp
         public void AddVote()
         {
             _votes++;
-        }
-
-        public override string FullData()
-        {
-           return $"{this.ToString()} - {_votes} vote(s)";
         }
     } 
 }
