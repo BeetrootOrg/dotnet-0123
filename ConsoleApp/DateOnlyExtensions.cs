@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace ConsoleApp
 {
@@ -52,6 +53,16 @@ namespace ConsoleApp
                 _ => date.AddDays(1)
             };
 #pragma warning restore IDE0072
+        }
+
+        public static bool ToBool(this string str)
+        {
+            return str.ToLower(CultureInfo.CurrentCulture) switch
+            {
+                "true" or "1" or "yes" or "y" => true,
+                "false" or "0" or "no" or "n" => false,
+                _ => throw new ArgumentException("Cannot parse value", nameof(str))
+            };
         }
     }
 }

@@ -69,3 +69,7 @@ Console.WriteLine(new DateOnly(2023, 03, 17).NextWorkday());
 Console.WriteLine(new DateOnly(2023, 03, 18).NextWorkday());
 Console.WriteLine(new DateOnly(2023, 03, 19).NextWorkday());
 Console.WriteLine(new DateOnly(2023, 03, 20).NextWorkday());
+
+Console.WriteLine("TrUE".ToBool());
+Console.WriteLine("FALse".ToBool());
+Console.WriteLine("0".ToBool());
