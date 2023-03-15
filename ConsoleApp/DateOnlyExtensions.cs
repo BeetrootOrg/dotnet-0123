@@ -20,14 +20,16 @@ namespace ConsoleApp
 
         public static int Age(this DateOnly birthday)
         {
-            DateTime today = DateTime.Now;
-            int age = today.Year - birthday.Year;
-            if (birthday.Month > today.Month || (birthday.Month == today.Month && birthday.Day > today.Day))
+            DateTime now = DateTime.Now;
+            int age = now.Year - birthday.Year;
+            if (birthday.Month > now.Month || (birthday.Month == now.Month && birthday.Day > now.Day))
             {
                 age--;
             }
 
-            return age;
+            return age < 0
+                ? throw new ArgumentException("Birthday should be in past!")
+                : age;
         }
     }
 }
