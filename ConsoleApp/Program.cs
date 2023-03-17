@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -29,3 +30,17 @@ Person oldest = persons.MaxBy(p => p.Age);
 Console.WriteLine($"Oldest age = {oldestAge}");
 Console.WriteLine($"Oldest person = {oldest}");
 Console.WriteLine($"Oldest person name = {oldest.Name}");
+
+double averageAge = persons.Average(p => p.Age);
+Console.WriteLine($"Average age = {averageAge}");
+
+foreach (IGrouping<string, Person> group in persons.GroupBy(p => p.EyeColor))
+{
+    Console.WriteLine($"There are {group.Count()} with {group.Key} eye color");
+}
+
+foreach (IGrouping<Gender, Person> group in persons.GroupBy(p => p.Gender))
+{
+    string gender = group.Key.ToString().ToLower(CultureInfo.CurrentCulture);
+    Console.WriteLine($"There are {group.Count()} {gender}s");
+}
