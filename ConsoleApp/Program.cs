@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 using ConsoleApp;
 
 using Newtonsoft.Json;
 
 IEnumerable<Person> persons = JsonConvert.DeserializeObject<IEnumerable<Person>>(File.ReadAllText("data.json"));
-Console.WriteLine(string.Join(Environment.NewLine, persons));
+
+Console.WriteLine($"People count = {persons.Count()}");
