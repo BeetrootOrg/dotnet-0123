@@ -21,10 +21,11 @@ Person youngest = persons.MinBy(p => p.Age);
 
 Console.WriteLine($"Youngest age = {youngestAge}");
 Console.WriteLine($"Youngest person = {youngest}");
-
+Console.WriteLine($"Youngest person name = {youngest.Name}");
 
 int oldestAge = persons.Max(p => p.Age);
 Person oldest = persons.MaxBy(p => p.Age);
 
 Console.WriteLine($"Oldest age = {oldestAge}");
 Console.WriteLine($"Oldest person = {oldest}");
+Console.WriteLine($"Oldest person name = {oldest.Name}");
