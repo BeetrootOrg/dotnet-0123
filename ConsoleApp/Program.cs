@@ -82,3 +82,18 @@ foreach (var group in persons.Join(
 {
     Console.WriteLine($"Potential coleagues are {group.First.Name} and {group.Second.Name}");
 }
+
+Person theFriendestPerson = persons.MaxBy(p => p.Friends.Length);
+Console.WriteLine($"Person with max friends number is {theFriendestPerson.Name} with {theFriendestPerson.Friends.Length} friends");
+
+// 1st approach
+IGrouping<int, Person> friendestPeople1 = persons.GroupBy(p => p.Friends.Length)
+    .MaxBy(group => group.Key);
+
+Console.WriteLine($"People with max friends number are {string.Join(", ", friendestPeople1.Select(p => p.Name))} with {friendestPeople1.Key} friends each");
+
+// 2nd approach
+int maxFriendsNumber = persons.Max(p => p.Friends.Length);
+Person[] friendestPeople2 = persons.Where(p => p.Friends.Length == maxFriendsNumber).ToArray();
+
+Console.WriteLine($"There are {friendestPeople2.Length} people with {maxFriendsNumber} of friends");
