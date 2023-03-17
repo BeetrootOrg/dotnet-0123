@@ -45,14 +45,25 @@ foreach (IGrouping<Gender, Person> group in persons.GroupBy(p => p.Gender))
     Console.WriteLine($"There are {group.Count()} {gender}s");
 }
 
-IEnumerable<Name> names = persons.Select(p =>
-{
-    string[] splitted = p.Name.Split(' ');
-    return new Name
+IEnumerable<Name> names = persons
+    .Select(p =>
     {
-        FirstName = splitted[0],
-        LastName = splitted[1]
-    };
-});
+        string[] splitted = p.Name.Split(' ');
+        return new Name
+        {
+            FirstName = splitted[0],
+            LastName = splitted[1]
+        };
+    })
+    .ToArray();
 
 Console.WriteLine(string.Join(Environment.NewLine, names));
+
+IEnumerable<IGrouping<string, string>> nonUniqueNames = names.Select(n => n.FirstName)
+    .GroupBy(x => x)
+    .Where(group => group.Count() > 1);
+
+foreach (IGrouping<string, string> group in nonUniqueNames)
+{
+    Console.WriteLine($"Name {group.Key} appeared {group.Count()} times");
+}
