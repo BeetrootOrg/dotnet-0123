@@ -116,3 +116,9 @@ Console.WriteLine($"First with 6 friend = {firstWith6Friends}");
 Person personWithExactName = persons.Single(p => p.Name == "Holloway Meyers");
 Console.WriteLine($"Person with exact name = {personWithExactName}");
 
+Person orderedPerson = persons.OrderBy(x => x.Name).First();
+Console.WriteLine($"First person = {orderedPerson}");
+
+IEnumerable<Friend[]> allFriendsBad = persons.Select(x => x.Friends);
+IEnumerable<Friend> allFriendsGood = persons.SelectMany(x => x.Friends);
+
