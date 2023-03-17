@@ -97,3 +97,22 @@ int maxFriendsNumber = persons.Max(p => p.Friends.Length);
 Person[] friendestPeople2 = persons.Where(p => p.Friends.Length == maxFriendsNumber).ToArray();
 
 Console.WriteLine($"There are {friendestPeople2.Length} people with {maxFriendsNumber} of friends");
+
+Console.WriteLine($"Everybody registered in past = {persons.All(p => p.Registered < DateTime.Now)}");
+Console.WriteLine($"Anybody without friend = {persons.Any(p => p.Friends.Length == 0)}");
+
+IEnumerable<Person> distinctByEyeColor = persons.DistinctBy(p => p.EyeColor);
+Console.WriteLine($"{nameof(distinctByEyeColor)}.Count() = {distinctByEyeColor.Count()}");
+
+Person firstPerson = persons.First();
+Person firstWith4Friends = persons.First(p => p.Friends.Length == 4);
+
+Console.WriteLine($"First = {firstPerson}");
+Console.WriteLine($"First with 4 friend = {firstWith4Friends}");
+
+Person firstWith6Friends = persons.FirstOrDefault(p => p.Friends.Length == 6);
+Console.WriteLine($"First with 6 friend = {firstWith6Friends}");
+
+Person personWithExactName = persons.Single(p => p.Name == "Holloway Meyers");
+Console.WriteLine($"Person with exact name = {personWithExactName}");
+
