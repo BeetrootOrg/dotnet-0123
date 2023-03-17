@@ -44,3 +44,15 @@ foreach (IGrouping<Gender, Person> group in persons.GroupBy(p => p.Gender))
     string gender = group.Key.ToString().ToLower(CultureInfo.CurrentCulture);
     Console.WriteLine($"There are {group.Count()} {gender}s");
 }
+
+IEnumerable<Name> names = persons.Select(p =>
+{
+    string[] splitted = p.Name.Split(' ');
+    return new Name
+    {
+        FirstName = splitted[0],
+        LastName = splitted[1]
+    };
+});
+
+Console.WriteLine(string.Join(Environment.NewLine, names));
