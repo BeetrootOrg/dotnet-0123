@@ -1,11 +1,7 @@
 ﻿
-//============14/03/2023=============
-// Homework Події, делегати і лямбди
-// 1. Create a program to ‘vote’ for anything. 
-// Via the console interface users will create a ‘vote topic’ with options. 
-// Voters will vote via console interface as well. Users can see voting results via console interface.
-// 2. Extra Snake game
+//============18/03/2023=============
+// Homework 19-Методи розширення
+// GroupBy(enumerable, func) extension to a collection that will return a dictionary 
+// of grouped items by func. E.g. GroupBy([{a: 1, b: 2}, {a: 1, b: 3}, 
+// {a: 2, b: 2}, item => item.a] => {1: [{a: 1, b: 2}, {a: 1, b: 3}], 2: [{a: 2, b: 2}]}
 
-using ConsoleApp.Menus;
-
-MenuHelper.MenuTopAction ();
