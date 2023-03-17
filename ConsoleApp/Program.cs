@@ -67,3 +67,18 @@ foreach (IGrouping<string, string> group in nonUniqueNames)
 {
     Console.WriteLine($"Name {group.Key} appeared {group.Count()} times");
 }
+
+foreach (var group in persons.Join(
+                                    persons,
+                                    p => true,
+                                    p => true,
+                                    (p1, p2) => new
+                                    {
+                                        First = p1,
+                                        Second = p2
+                                    }
+                                ).Where(group => !ReferenceEquals(group.First, group.Second))
+                                .Where(group => group.First.Company == group.Second.Company))
+{
+    Console.WriteLine($"Potential coleagues are {group.First.Name} and {group.Second.Name}");
+}
