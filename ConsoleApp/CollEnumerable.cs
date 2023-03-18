@@ -4,29 +4,26 @@ using System.Collections.Generic;
 
 namespace ConsoleApp
 {
-    public class CollEnumerable<T> : IEnumerable<T>
+    public class CollEnumerable<T, K> : IEnumerable<object>
     {
         private IEnumerable<T> _collection;
-        private Predicate<T> _predicate;
-
-        public CollEnumerable(IEnumerable<T> collection, Predicate<T> predicate)
+        private Func<T, K> _func;
+        public CollEnumerable(IEnumerable<T> collection, Func<T, K> func)
         {
             _collection = collection;
-            _predicate = predicate;
+            _func = func;
         }
 
-        private class CollEnumerator : IEnumerator<T>
+        private class CollEnumerator : IEnumerator<object>
         {
-            private IEnumerator<T> _enumerator;
-            private Predicate<T> _predicate;
-
-            public CollEnumerator(IEnumerator<T> enumerator, Predicate<T> predicate)
+            IEnumerator<T> _enumerator;
+            Func<T, K> _func;
+            public CollEnumerator(IEnumerator<T> enumerator, Func<T, K> func)
             {
                 _enumerator = enumerator;
-                _predicate = predicate;
+                _func = func;
             }
-
-            public T Current { get; private set; }
+            public object Current { get; private set; }
 
             object IEnumerator.Current => Current;
 
@@ -39,14 +36,10 @@ namespace ConsoleApp
             {
                 while(_enumerator.MoveNext())
                 {
-                    if (_predicate(_enumerator.Current))
-                    {
-                        Current = _enumerator.Current;
-                        return true; 
-                    }
+                    Current = _func(_enumerator.Current);
+                    return true;
                 }
-
-                return false;
+                return false;    
             }
 
             public void Reset()
@@ -55,9 +48,9 @@ namespace ConsoleApp
             }
         }
 
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator<object> GetEnumerator()
         {
-            return new CollEnumerator(_collection.GetEnumerator(), _predicate);
+            return new CollEnumerator(_collection.GetEnumerator(), _func);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
