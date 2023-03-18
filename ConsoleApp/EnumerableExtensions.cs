@@ -5,6 +5,23 @@ namespace ConsoleApp
 {
     public static class EnumerableExtensions
     {
+        public static IEnumerable<GroupEnumerable<TKey, TSourch>> GroupBy<TKey, TSourch>(this IEnumerable<TSourch> sourch, Func<TSourch, TKey> keySelector)
+        {
+            if (sourch==null || keySelector==null) throw new ArgumentNullException("I really want to sleep");
+            IEnumerable<TKey> Keys=sourch.Select<TSourch, TKey>(x=>keySelector.Invoke(x)).Destinc();
+            foreach(TKey key in Keys){
+                yield return new GroupEnumerable<TKey, TSourch>(key, sourch.Where<TSourch>(x=>keySelector.Invoke(x).Equals(key)));
+            }           
+        }
+
+        public static IEnumerable<TSourch> Destinc<TSourch>(this IEnumerable<TSourch> sourch){
+            List<TSourch> list=new();
+            foreach(var item in sourch){
+                if (!list.Contains(item)) list.Add(item);
+            }
+            return list;
+        }
+
         public static IEnumerable<T> Where<T>(this IEnumerable<T> collection, Predicate<T> predicate)
         {
             return new WhereEnumerable<T>(collection, predicate);
