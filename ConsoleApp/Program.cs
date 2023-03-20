@@ -81,6 +81,30 @@ catch (InvalidCastException)
 Console.WriteLine($"obj is Test = {obj is Test}");
 Console.WriteLine($"obj is BadCast = {obj is BadCast}");
 
+Test test2 = CreateInstance<Test>();
+Console.WriteLine(test2);
+
+T CreateInstance<T>() where T : new()
+{
+    T instance = new();
+
+    foreach (PropertyInfo propertyInfo in testType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+    {
+        DefaultValueAttribute attr = propertyInfo.GetCustomAttribute<DefaultValueAttribute>();
+        if (attr != null)
+        {
+            propertyInfo.SetValue(instance, attr.Value);
+        }
+    }
+
+    return instance;
+}
+
+[AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
+internal class DefaultValueAttribute : Attribute
+{
+    public object Value { get; init; }
+}
 
 internal record Test
 {
@@ -95,7 +119,10 @@ internal record Test
 
     private int PrivateNumber { get; set; }
 
+    [DefaultValue(Value = 42)]
     public int PublicNumber { get; set; }
+
+    [DefaultValue(Value = "Hello, world!")]
     public string PublicValue { get; set; }
 
     public int ReadonlyNumber { get; }
