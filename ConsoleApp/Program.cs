@@ -1,77 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-
-using ConsoleApp;
-
-AddOverflowDelegate overflow = (long result) => { return (int)result;}; //AddOverflowDelegate overflow = (long result) => (int)result;
-AddSuccessDelegate success = (int result) => Console.WriteLine(result);
-
-int result1 = Test.Add(1, 2, overflow, success);
-int result2 = Test.Add(int.MaxValue, 1, overflow, success);
-
-int result3 = Test.Add(10, 20, 
-    (long result) => throw new Exception("Unexpected"), 
-    (int result) => Console.WriteLine($"10 + 20 ={result}"));
-
-List<int> numbers = new List<int>();
-
-OnChangeableChange writeLine = (obj, args) =>
-
-        Console.WriteLine($"Number changed from {args.Old} to {args.New}");
-
-OnChangeableChange tracker = (obj, args) =>
-
-        numbers.Add(args.Old);
-
-
-Changeable c1 = new Changeable
+using static System.Console;
+namespace SnakeGame
 {
-    Number = 42
-};
+    public class Program
+    {
+       private const int MapWidth = 40;
+       private const int MapHeigth = 40;
+       private const ConsoleColor BorderColor = ConsoleColor.Gray;
 
-c1.OnChangeableChange += writeLine;
-c1.OnChangeableChange += tracker;
+       static void Main()
+       {
+          SetWindowSize(MapWidth, MapHeigth);
+          SetBufferSize(MapWidth, MapHeigth);
+          CursorVisible = false;
 
-c1.Number = 43;
-c1.Number = 44;
-c1.Number = 44;
-c1.Number = 42;
+          DrawBorder();
 
-Console.WriteLine(string.Join(", ", numbers));
+          ReadKey();
+       }
 
-foreach (int item in new WhereEnumerable<int>(new[] { 1, 2, 3, 4 }, (item) => item % 2 == 0))
-{
-    Console.WriteLine(item);
+       static void DrawBorder()
+       {
+            for(int i = 0; i < MapWidth; i++)
+            {
+                new Pixel (i, 0, BorderColor).Draw();
+                new Pixel (i, MapHeigth - 1, BorderColor).Draw();
+            }
+       }
+    }
 }
-
-foreach (string item in new WhereEnumerable<string>(new[] { "hello", "world", "!" }, (item) => item.Length > 3))
-{
-    Console.WriteLine(item);
-}
-
-#pragma warning disable
-foreach (string item in new WhereEnumerable<object>(new object[] { "hello", 1, "world", 2, "!", 3 }, (item) => item is string))
-#pragma warning restore
-{
-    Console.WriteLine(item);
-}
-
-int called = 0;
-Timer t1 = new((state) => Console.WriteLine($"Called: {++called}"),
-    null,
-    TimeSpan.Zero, //0
-    TimeSpan.FromSeconds(1));
-
-Timer t2 = new((state) => Console.WriteLine("Second timer"),
-    null,
-    Timeout.Infinite,
-    Timeout.Infinite);
-
-Thread.Sleep(5000);
-Console.ForegroundColor = ConsoleColor.Yellow;
-t2.Change(TimeSpan.Zero, TimeSpan.FromSeconds(1));
-Thread.Sleep(5000);
-
-static int Method(int num) => num > 0 ? num + Method(num -1) : 0;
-Console.WriteLine(Method(3));
