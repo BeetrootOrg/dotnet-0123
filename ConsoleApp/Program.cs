@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Text;
 
 int a = 42;
 Type type = a.GetType();
@@ -98,6 +99,12 @@ T CreateInstance<T>() where T : new()
     }
 
     return instance;
+}
+
+Assembly assembly = typeof(StringBuilder).Assembly;
+foreach (Type t in assembly.GetTypes())
+{
+    Console.WriteLine($"{t.Name}");
 }
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
