@@ -59,6 +59,29 @@ foreach (MethodInfo methodInfo in testType.GetMethods())
 object obj = Activator.CreateInstance(typeof(Test));
 Console.WriteLine(obj);
 
+Test testObj1 = obj as Test;
+testObj1.PublicValue = "abc";
+Console.WriteLine($"PublicValue is {testObj1.PublicValue}");
+
+BadCast bc1 = obj as BadCast;
+Console.WriteLine($"BadCast is null = {bc1 == null}");
+
+Test testObj2 = (Test)obj;
+Console.WriteLine($"PublicValue is {testObj2.PublicValue}");
+
+try
+{
+    BadCast bc2 = (BadCast)obj;
+}
+catch (InvalidCastException)
+{
+    Console.WriteLine("INVALID CAST!");
+}
+
+Console.WriteLine($"obj is Test = {obj is Test}");
+Console.WriteLine($"obj is BadCast = {obj is BadCast}");
+
+
 internal record Test
 {
     private static readonly int PrivateStaticFieldNumber;
@@ -100,4 +123,8 @@ internal record Test
     {
         return PrivateNumber;
     }
+}
+
+internal class BadCast
+{
 }
