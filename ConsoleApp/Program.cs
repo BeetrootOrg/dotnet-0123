@@ -18,7 +18,18 @@ foreach (PropertyInfo propertyInfo in testType.GetProperties(BindingFlags.NonPub
     Console.WriteLine($"Type {testType.Name} has non-public property {propertyInfo.Name} with type {propertyInfo.PropertyType.Name}");
 }
 
-internal class Test
+Test test = new();
+foreach (PropertyInfo propertyInfo in testType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+{
+    if (propertyInfo.PropertyType == typeof(int) && propertyInfo.CanWrite)
+    {
+        propertyInfo.SetValue(test, 42);
+    }
+}
+
+Console.WriteLine(test);
+
+internal record Test
 {
     private static readonly int PrivateStaticFieldNumber;
     public static int PublicStaticFieldNumber;
@@ -33,6 +44,8 @@ internal class Test
 
     public int PublicNumber { get; set; }
     public string PublicValue { get; set; }
+
+    public int ReadonlyNumber { get; }
 
     public static int GetPrivateStaticFieldNumber()
     {
