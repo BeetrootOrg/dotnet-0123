@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using System.Text;
 
 int a = 42;
 Type type = a.GetType();
@@ -85,6 +84,10 @@ Console.WriteLine($"obj is BadCast = {obj is BadCast}");
 Test test2 = CreateInstance<Test>();
 Console.WriteLine(test2);
 
+int fourtyTwo = Convert.ToInt32("42");
+Console.WriteLine(fourtyTwo);
+Console.WriteLine(Convert.ToInt32(new Convertible()));
+
 T CreateInstance<T>() where T : new()
 {
     T instance = new();
@@ -101,11 +104,11 @@ T CreateInstance<T>() where T : new()
     return instance;
 }
 
-Assembly assembly = typeof(StringBuilder).Assembly;
-foreach (Type t in assembly.GetTypes())
-{
-    Console.WriteLine($"{t.Name}");
-}
+// Assembly assembly = typeof(StringBuilder).Assembly;
+// foreach (Type t in assembly.GetTypes())
+// {
+//     Console.WriteLine($"{t.Name}");
+// }
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 internal class DefaultValueAttribute : Attribute
@@ -161,4 +164,92 @@ internal record Test
 
 internal class BadCast
 {
+}
+
+internal class Convertible : IConvertible
+{
+    public TypeCode GetTypeCode()
+    {
+        return TypeCode.Object;
+    }
+
+    public bool ToBoolean(IFormatProvider provider)
+    {
+        return true;
+    }
+
+    public byte ToByte(IFormatProvider provider)
+    {
+        return 42;
+    }
+
+    public char ToChar(IFormatProvider provider)
+    {
+        return 'c';
+    }
+
+    public DateTime ToDateTime(IFormatProvider provider)
+    {
+        return new DateTime(2005, 01, 02);
+    }
+
+    public decimal ToDecimal(IFormatProvider provider)
+    {
+        return 42.5M;
+    }
+
+    public double ToDouble(IFormatProvider provider)
+    {
+        return 42.5;
+    }
+
+    public short ToInt16(IFormatProvider provider)
+    {
+        return 42;
+    }
+
+    public int ToInt32(IFormatProvider provider)
+    {
+        return 42;
+    }
+
+    public long ToInt64(IFormatProvider provider)
+    {
+        return 42;
+    }
+
+    public sbyte ToSByte(IFormatProvider provider)
+    {
+        return 42;
+    }
+
+    public float ToSingle(IFormatProvider provider)
+    {
+        return 42.5f;
+    }
+
+    public string ToString(IFormatProvider provider)
+    {
+        return "Hello, world!";
+    }
+
+    public object ToType(Type conversionType, IFormatProvider provider)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ushort ToUInt16(IFormatProvider provider)
+    {
+        return 42;
+    }
+
+    public uint ToUInt32(IFormatProvider provider)
+    {
+        return 42;
+    }
+
+    public ulong ToUInt64(IFormatProvider provider)
+    {
+        return 42;
+    }
 }
