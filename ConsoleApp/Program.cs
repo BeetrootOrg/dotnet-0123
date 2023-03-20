@@ -56,6 +56,9 @@ foreach (MethodInfo methodInfo in testType.GetMethods())
     }
 }
 
+object obj = Activator.CreateInstance(typeof(Test));
+Console.WriteLine(obj);
+
 internal record Test
 {
     private static readonly int PrivateStaticFieldNumber;
@@ -73,6 +76,10 @@ internal record Test
     public string PublicValue { get; set; }
 
     public int ReadonlyNumber { get; }
+
+    public Test()
+    {
+    }
 
     public static int GetPrivateStaticFieldNumber()
     {
