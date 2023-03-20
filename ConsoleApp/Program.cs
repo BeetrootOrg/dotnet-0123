@@ -27,7 +27,34 @@ foreach (PropertyInfo propertyInfo in testType.GetProperties(BindingFlags.Public
     }
 }
 
+foreach (FieldInfo fieldInfo in testType.GetFields())
+{
+    Console.WriteLine($"Type {testType.Name} has field {fieldInfo.Name} with type {fieldInfo.FieldType.Name}");
+    fieldInfo.SetValue(test, 100);
+}
+
 Console.WriteLine(test);
+foreach (MethodInfo methodInfo in testType.GetMethods())
+{
+    ParameterInfo[] parameters = methodInfo.GetParameters();
+
+    Console.WriteLine($"Type {testType.Name} has method {methodInfo.Name} with returning type {methodInfo.ReturnType.Name} "
+        + $"with {parameters.Length} parameters");
+
+    if (parameters.Length == 0 && methodInfo.ReturnType != typeof(void))
+    {
+        object result = methodInfo.Invoke(test, Array.Empty<object>());
+        Console.WriteLine($"Result of {methodInfo.Name} is {result}");
+    }
+    else if (parameters.Length == 2 &&
+        methodInfo.ReturnType != typeof(void) &&
+        parameters[0].ParameterType == typeof(Test) &&
+        parameters[1].ParameterType == typeof(Test))
+    {
+        object result = methodInfo.Invoke(test, new object[] { test, test });
+        Console.WriteLine($"Result of {methodInfo.Name} is {result}");
+    }
+}
 
 internal record Test
 {
