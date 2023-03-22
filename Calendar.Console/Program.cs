@@ -1,3 +1,8 @@
-﻿using System;
+﻿using Calendar.Console.Controllers;
 
-Console.WriteLine("Hello, World!");
+IController controller = new MainMenuController();
+while (controller != null)
+{
+    controller.Show();
+    controller = controller.Action();
+}
