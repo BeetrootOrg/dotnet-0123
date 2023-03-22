@@ -5,9 +5,9 @@ namespace Calendar.Domain
 {
     public static class Factory
     {
-        public static IMeetingService CreateService()
+        public static IMeetingService CreateService(string filename)
         {
-            return new MeetingService(new Repository());
+            return new MeetingService(Repository.CreateRepository(filename));
         }
     }
 }

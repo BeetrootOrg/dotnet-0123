@@ -12,9 +12,9 @@ namespace Calendar.Console
             Service = service;
         }
 
-        public static Context CreateContext()
+        public static Context CreateContext(string filename)
         {
-            return new Context(Factory.CreateService());
+            return new Context(Factory.CreateService(filename));
         }
     }
 }
