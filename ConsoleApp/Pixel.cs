@@ -16,6 +16,7 @@ namespace  SnakeGame
         }
         public void Draw()
         {
+            Console.ForegroundColor = Color;
             Console.SetCursorPosition(X, Y);
             Console.Write(PixelChar);
         }
