@@ -1,7 +1,5 @@
 using System;
 
-using static System.Console;
-
 namespace Calendar.Console.Controllers
 {
     internal class MainMenuController : IController
@@ -30,6 +28,8 @@ namespace Calendar.Console.Controllers
 
             return key.Key == ConsoleKey.D0
                 ? null
+                : key.Key == ConsoleKey.D1
+                ? new StartCreatingMeetingController(_context)
                 : key.Key == ConsoleKey.D2
                 ? new ShowAllMeetingsController(_context)
                 : this;

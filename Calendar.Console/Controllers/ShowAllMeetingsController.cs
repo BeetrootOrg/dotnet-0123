@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 using Calendar.Contracts;
 
-using static System.Console;
-
 namespace Calendar.Console.Controllers
 {
     internal class ShowAllMeetingsController : IController
@@ -20,7 +18,7 @@ namespace Calendar.Console.Controllers
         {
             Clear();
 
-            IEnumerable<Meeting> meetings = _context.Repository.GetAllMeetings();
+            IEnumerable<Meeting> meetings = _context.Service.GetAllMeetings();
 
             WriteLine($"{"Name",-25}{"Start",-25}{"End",-25}{"Room",-25}");
             foreach ((string name, DateTime start, TimeSpan duration, Room room) in meetings)

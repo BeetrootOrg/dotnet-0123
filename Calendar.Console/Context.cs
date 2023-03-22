@@ -1,20 +1,20 @@
 using Calendar.Domain;
-using Calendar.Domain.Repositories;
+using Calendar.Domain.Services;
 
 namespace Calendar.Console
 {
     internal class Context
     {
-        public IRepository Repository { get; }
+        public IMeetingService Service { get; }
 
-        private Context(IRepository repository)
+        private Context(IMeetingService service)
         {
-            Repository = repository;
+            Service = service;
         }
 
         public static Context CreateContext()
         {
-            return new Context(Factory.CreateRepository());
+            return new Context(Factory.CreateService());
         }
     }
 }
