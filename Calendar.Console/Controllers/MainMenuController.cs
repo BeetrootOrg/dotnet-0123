@@ -6,6 +6,13 @@ namespace Calendar.Console.Controllers
 {
     internal class MainMenuController : IController
     {
+        private readonly Context _context;
+
+        public MainMenuController(Context context)
+        {
+            _context = context;
+        }
+
         public void Show()
         {
             Clear();
@@ -22,7 +29,9 @@ namespace Calendar.Console.Controllers
             ConsoleKeyInfo key = ReadKey();
 
             return key.Key == ConsoleKey.D0
-                ? (IController)null
+                ? null
+                : key.Key == ConsoleKey.D2
+                ? new ShowAllMeetingsController(_context)
                 : this;
         }
 
