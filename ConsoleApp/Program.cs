@@ -73,5 +73,15 @@ Console.ForegroundColor = ConsoleColor.Yellow;
 t2.Change(TimeSpan.Zero, TimeSpan.FromSeconds(1));
 Thread.Sleep(5000);
 
-static int Method(int num) => num > 0 ? num + Method(num -1) : 0;
-Console.WriteLine(Method(3));
+int[] number = new[] { 1, 2, 3, 4, 5 };
+string[] words = new[] { "one", "two", "three", "four" };
+
+foreach (string item in new ZipEnumerable<int, string, string>(numbers, words, (num, word) => $"Number '{num}' pronounces as '{word}'"))
+{
+    Console.WriteLine(item);
+}
+
+foreach (int item in new SelectEnumerable<int, int>(numbers, (num) => num * num))
+{
+    Console.WriteLine(item);
+}
