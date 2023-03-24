@@ -1,0 +1,22 @@
+{
+  "Number": 1,
+  "Money": 1.1,
+  "Text": "Hello",
+  "IsActive": true,
+  "Numbers": [1, 2, 3],
+  "Inners": [
+    {
+      "InnerNumber": 1,
+      "InnerMoney": 1.1,
+      "InnerText": "Hello",
+      "InnerIsActive": true
+    },
+    {
+      "InnerNumber": 2,
+      "InnerMoney": 2.2,
+      "InnerText": "World",
+      "InnerIsActive": false
+    }
+  ],
+  "Null": null
+}
