@@ -12,7 +12,8 @@ Dictionary<int, List<Example>> dictionary = CollExtentions.GroupBy(collection, x
 
 foreach (var item in dictionary)
 {
-    Console.WriteLine(item.Key);
+    Console.WriteLine($"Grouping by: {item.Key}");
+
     foreach (var value in item.Value)
     {
         Console.WriteLine("\t" + value);       

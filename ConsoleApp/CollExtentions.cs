@@ -5,33 +5,27 @@ namespace ConsoleApp
 {
     public static class CollExtentions
     {
-        public static Dictionary<int, List<Example>> GroupBy(this IEnumerable<Example> collection, Func<Example, int> func)
+        public static Dictionary<K, List<T>> GroupBy<T, K>(this IEnumerable<T> collection, Func<T, K> func)
         {
-            Dictionary<int, List<Example>> dictionary = new Dictionary<int, List<Example>>();
-            
-            foreach(int key in new CollEnumerable<Example, int>(collection, func))
+            Dictionary<K, List<T>> dictionary = new Dictionary<K, List<T>>();
+
+            foreach (T item in collection)
             {
+                K key = func(item);
+
                 if (!dictionary.ContainsKey(key))
                 {
-                    dictionary.Add(key, buildValue(collection, key));
-                }    
+                    List<T> list = new List<T>();
+                    list.Add(item); 
+                    dictionary.Add(key, list);    
+                }
+                else
+                {
+                    dictionary[key].Add(item); 
+                }
             }
 
             return dictionary;
         }
-
-        public static List<Example> buildValue(IEnumerable<Example> collection, int key)
-        {
-            List<Example> list = new List<Example>();
-            foreach (var item in collection)
-            {
-                if (key.Equals(item.A))
-                {
-                    list.Add(item);
-                } 
-            }
-
-            return list;
-        } 
     }
 }
