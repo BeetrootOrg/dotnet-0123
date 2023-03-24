@@ -1,13 +1,18 @@
 ﻿using Calendar.Console;
 using Calendar.Console.Controllers;
 
-const string filename = "input.json";
+using CommandLine;
 
-Context context = Context.CreateContext(filename);
-IController controller = new MainMenuController(context);
+_ = Parser.Default.ParseArguments<Options>(args)
+    .WithParsed(options =>
+    {
+        Context context = Context.CreateContext(options.Filename);
+        IController controller = new MainMenuController(context);
 
-while (controller != null)
-{
-    controller.Show();
-    controller = controller.Action();
-}
+        while (controller != null)
+        {
+            controller.Show();
+            controller = controller.Action();
+        }
+    });
+
