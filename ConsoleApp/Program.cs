@@ -8,7 +8,7 @@ Example ex3 = new Example(a: 2, b: 2);
 
 Example[] collection = new Example[] {ex1, ex2, ex3};
 
-Dictionary<int, List<Example>> dictionary = CollExtentions.GroupBy(collection, x => x.A);
+Dictionary<int, List<Example>> dictionary = collection.GroupBy(x => x.A);
 
 foreach (var item in dictionary)
 {
