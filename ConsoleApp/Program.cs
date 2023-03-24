@@ -3,6 +3,8 @@ using System.Xml.Serialization;
 
 using ConsoleApp;
 
+using MessagePack;
+
 using Newtonsoft.Json;
 
 using YamlDotNet.Serialization;
@@ -23,6 +25,11 @@ static void SerializeToYAML<T>(T obj, string filename)
 {
     ISerializer serializer = new SerializerBuilder().Build();
     File.WriteAllText($"{filename}.yaml", serializer.Serialize(obj));
+}
+
+static void SerializeToMessagePack<T>(T obj, string filename)
+{
+    File.WriteAllBytes($"{filename}.bin", MessagePackSerializer.Serialize(obj));
 }
 
 int number = 42;
@@ -55,6 +62,12 @@ Test test = new()
         }
     }
 };
+MyClass myClass = new()
+{
+    Age = 26,
+    FirstName = "Dima",
+    LastName = "Misik"
+};
 
 SerializeToJSON(number, "./json/int");
 SerializeToJSON(isActive, "./json/bool");
@@ -76,3 +89,5 @@ SerializeToYAML(str, "./yaml/str");
 SerializeToYAML(money, "./yaml/float");
 SerializeToYAML(arr, "./yaml/intarr");
 SerializeToYAML(test, "./yaml/test");
+
+SerializeToMessagePack(myClass, "./msgpack/myclass");

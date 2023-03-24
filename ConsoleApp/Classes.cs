@@ -1,3 +1,5 @@
+using MessagePack;
+
 namespace ConsoleApp
 {
     public class Test
@@ -17,5 +19,18 @@ namespace ConsoleApp
         public decimal InnerMoney { get; init; }
         public string InnerText { get; init; }
         public bool InnerIsActive { get; init; }
+    }
+
+    [MessagePackObject]
+    public class MyClass
+    {
+        [Key(0)]
+        public int Age { get; set; }
+
+        [Key(1)]
+        public string FirstName { get; set; }
+
+        [Key(2)]
+        public string LastName { get; set; }
     }
 }
