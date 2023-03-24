@@ -5,6 +5,8 @@ using ConsoleApp;
 
 using Newtonsoft.Json;
 
+using YamlDotNet.Serialization;
+
 static void SerializeToJSON<T>(T obj, string filename)
 {
     File.WriteAllText($"{filename}.json", JsonConvert.SerializeObject(obj));
@@ -15,6 +17,12 @@ static void SerializeToXML<T>(T obj, string filename)
     XmlSerializer serializer = new(typeof(T));
     using FileStream file = File.Create($"{filename}.xml");
     serializer.Serialize(file, obj);
+}
+
+static void SerializeToYAML<T>(T obj, string filename)
+{
+    ISerializer serializer = new SerializerBuilder().Build();
+    File.WriteAllText($"{filename}.yaml", serializer.Serialize(obj));
 }
 
 int number = 42;
@@ -61,3 +69,10 @@ SerializeToXML(str, "./xml/str");
 SerializeToXML(money, "./xml/float");
 SerializeToXML(arr, "./xml/intarr");
 SerializeToXML(test, "./xml/test");
+
+SerializeToYAML(number, "./yaml/int");
+SerializeToYAML(isActive, "./yaml/bool");
+SerializeToYAML(str, "./yaml/str");
+SerializeToYAML(money, "./yaml/float");
+SerializeToYAML(arr, "./yaml/intarr");
+SerializeToYAML(test, "./yaml/test");
