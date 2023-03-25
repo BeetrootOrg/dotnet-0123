@@ -72,3 +72,42 @@ foreach (ConstructorInfo construct in stringBuilder.GetConstructors())
         Console.WriteLine($"\tParameter: {parameter.ParameterType.Name} {parameter.Name}");
     }
 }
+
+Console.WriteLine("Fields of StringBuilder class:");
+
+foreach (FieldInfo field in stringBuilder.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static))
+{
+    Console.Write("\t");
+    
+    if (field.IsPublic)
+    {
+       Console.Write("public");
+    } 
+
+    if (field.IsPrivate)
+    {
+        Console.Write("private");
+    } 
+
+    if (field.IsAssembly)
+    {
+        Console.Write("internal");
+    }
+
+    if (field.IsFamily)
+    {
+        Console.Write("protect");
+    } 
+
+    if (field.IsFamilyAndAssembly)
+    {
+        Console.Write("private protected");
+    }
+
+    if (field.IsFamilyOrAssembly)
+    {
+        Console.Write("protected internal");
+    }
+
+    Console.WriteLine($" {field.FieldType.Name} {field.Name}");
+}
