@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/ConsoleApp/bin/Debug/net7.0/ConsoleApp.dll",
+            "program": "${workspaceFolder}/Calendar.Console/bin/Debug/net7.0/Calendar.Console.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/ConsoleApp",
+            "cwd": "${workspaceFolder}/Calendar.Console",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
