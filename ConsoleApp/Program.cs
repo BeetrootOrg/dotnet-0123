@@ -34,7 +34,7 @@ Console.WriteLine($"Example method from type: {type.Name}");
 
 foreach (MethodInfo method in type.GetMethods())
 {
-    if (method.ToString() == "System.String get_Title()")
+    if (method.Name == "get_Title")
     {
        object? consoleTitle = method.Invoke(method, Array.Empty<object>());
         if (consoleTitle != null)
@@ -43,8 +43,16 @@ foreach (MethodInfo method in type.GetMethods())
         }
     } 
 
-    if (method.ToString() == "Void set_Title(System.String)")
+    if (method.Name == "set_Title")
     {
+        var parameters = method.GetParameters();
+        Console.WriteLine($"Parameters (count: {parameters.Length}) list of the {method.Name} method:");
+        
+        foreach(var parameter in parameters)
+        {
+            Console.WriteLine(parameter.ToString());
+        }
+
         method.Invoke(method, new object[] {"Another console title"});
     }
 }
