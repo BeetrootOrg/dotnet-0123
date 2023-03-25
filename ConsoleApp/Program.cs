@@ -96,7 +96,7 @@ foreach (FieldInfo field in stringBuilder.GetFields(BindingFlags.Instance | Bind
 
     if (field.IsFamily)
     {
-        Console.Write("protect");
+        Console.Write("protected");
     } 
 
     if (field.IsFamilyAndAssembly)
