@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Text;
 
 var assembly = typeof(Console).Assembly;
 Console.WriteLine($"Assembly location: {assembly.Location}");
@@ -54,5 +55,20 @@ foreach (MethodInfo method in type.GetMethods())
         }
 
         method.Invoke(method, new object[] {"Another console title"});
+    }
+}
+
+
+Type stringBuilder = typeof(StringBuilder);
+
+Console.WriteLine("Constructors of StringBuilder class:");
+
+foreach (ConstructorInfo construct in stringBuilder.GetConstructors())
+{
+    Console.WriteLine($"{stringBuilder.Name}");
+
+    foreach (ParameterInfo parameter in construct.GetParameters())
+    {
+        Console.WriteLine($"\tParameter: {parameter.ParameterType.Name} {parameter.Name}");
     }
 }
