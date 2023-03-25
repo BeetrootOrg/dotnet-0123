@@ -13,6 +13,7 @@ foreach(Type item in assembly.GetTypes())
 Type type = list.Where(p => p.FullName == "System.Console").First();
 
 Console.WriteLine($"ConsoleColor properties of type: {type.Name}");
+
 foreach (PropertyInfo prop in type.GetProperties(BindingFlags.Public | BindingFlags.Static))
 {
     if (prop.PropertyType == typeof(ConsoleColor))
@@ -30,14 +31,20 @@ foreach (PropertyInfo prop in type.GetProperties(BindingFlags.Public | BindingFl
 }
 
 Console.WriteLine($"Example method from type: {type.Name}");
+
 foreach (MethodInfo method in type.GetMethods())
 {
     if (method.ToString() == "System.String get_Title()")
     {
-        object? consoleTitle = method.Invoke(method, Array.Empty<object>());
+       object? consoleTitle = method.Invoke(method, Array.Empty<object>());
         if (consoleTitle != null)
         {
             Console.WriteLine(consoleTitle);
         }
-    }    
+    } 
+
+    if (method.ToString() == "Void set_Title(System.String)")
+    {
+        method.Invoke(method, new object[] {"Another console title"});
+    }
 }
