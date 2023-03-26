@@ -1,6 +1,8 @@
-﻿using Calendar.Console.Controllers;
+﻿using Calendar.Console;
+using Calendar.Console.Controllers;
 
-IController controller = new MainMenuController();
+var context = Context.CreateContext();
+IController controller = new MainMenuController(context);
 
 while (controller != null)
 {
