@@ -132,7 +132,6 @@ void UpdateMeeting()
     _ = Console.ReadLine();
 }
 
-
 string EnterMeetingName()
 {
     while (true)
