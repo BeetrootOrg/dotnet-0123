@@ -1,49 +1,55 @@
 ﻿using System;
-using System.Collections.Generic;
+Console.WriteLine("Hello");
+public abstract class GeometricFigure {
+    public abstract string Type { get; }
+    public abstract double Area { get; }
+    public abstract double Perimeter { get; }
+    public abstract int SidesNumber { get; }
+}
 
-BankAccount bankAccount = new BankAccount("frsdf");
-System.Console.WriteLine(bankAccount.GetBalance());
+public class Triangle : GeometricFigure {
+    public double A { get; set; }
+    public double B { get; set; }
+    public double C { get; set; }
 
-
-public class BankAccount
-{
-    private string accountNumber;
-    private decimal balance;
-    private List<string> transactionHistory;
-
-    public BankAccount(string accountNumber)
-    {
-        this.accountNumber = accountNumber;
-        balance = 0;
-        transactionHistory = new List<string>();
-    }
-
-    public void Deposit(decimal amount)
-    {
-        balance += amount;
-        string transaction = $"Deposited {amount:C} on {DateTime.Now}";
-        transactionHistory.Add(transaction);
-    }
-
-    public void Withdraw(decimal amount)
-    {
-        if (amount > balance)
-        {
-            throw new Exception("Insufficient funds.");
+    public override string Type => "Triangle";
+    public override double Area {
+        get {
+            double s = (A + B + C) / 2;
+            return Math.Sqrt(s * (s - A) * (s - B) * (s - C));
         }
+    }
+    public override double Perimeter => A + B + C;
+    public override int SidesNumber => 3;
+}
 
-        balance -= amount;
-        string transaction = $"Withdrew {amount:C} on {DateTime.Now}";
-        transactionHistory.Add(transaction);
+public class Rectangle : GeometricFigure {
+    public double Width { get; set; }
+    public double Height { get; set; }
+
+    public override string Type => "Rectangle";
+    public override double Area => Width * Height;
+    public override double Perimeter => 2 * (Width + Height);
+    public override int SidesNumber => 4;
+}
+
+public class Square : Rectangle {
+    public double Side {
+        get => Width;
+        set {
+            Width = value;
+            Height = value;
+        }
     }
 
-    public decimal GetBalance()
-    {
-        return balance;
-    }
+    public override string Type => "Square";
+}
 
-    public List<string> GetTransactionHistory()
-    {
-        return transactionHistory;
-    }
+public class Circle : GeometricFigure {
+    public double Radius { get; set; }
+
+    public override string Type => "Circle";
+    public override double Area => Math.PI * Math.Pow(Radius, 2);
+    public override double Perimeter => 2 * Math.PI * Radius;
+    public override int SidesNumber => -1;
 }
