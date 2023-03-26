@@ -15,27 +15,37 @@ void Menu()
     Console.WriteLine("4. Show meetings in room");
     Console.WriteLine("0. Exit");
 
-    ConsoleKeyInfo key = Console.ReadKey();
-    if (key.Key == ConsoleKey.D0)
+    try
     {
-        Exit();
+        ConsoleKeyInfo key = Console.ReadKey();
+        if (key.Key == ConsoleKey.D0)
+        {
+            Exit();
+        }
+        else if (key.Key == ConsoleKey.D1)
+        {
+            CreateMeeting();
+        }
+        else if (key.Key == ConsoleKey.D2)
+        {
+            ShowMeetings();
+        }
+        else if (key.Key == ConsoleKey.D3)
+        {
+            UpdateMeeting();
+        }
+        else if (key.Key == ConsoleKey.D4)
+        {
+            ShowMeetingsByRoom();
+        }
     }
-    else if (key.Key == ConsoleKey.D1)
+    catch (Exception e)
     {
-        CreateMeeting();
+        Console.WriteLine(e.Message);
+        throw;
     }
-    else if (key.Key == ConsoleKey.D2)
-    {
-        ShowMeetings();
-    }
-    else if (key.Key == ConsoleKey.D3)
-    {
-        UpdateMeeting();
-    }
-    else if (key.Key == ConsoleKey.D4)
-    {
-        ShowMeetingsByRoom();
-    }
+    
+    
 }
 
 static void Exit()
@@ -45,60 +55,78 @@ static void Exit()
 
 void CreateMeeting()
 {
-    Console.Clear();
-
-    string meetingName = EnterMeetingName();
-    DateTime meetingStart = EnterMeetingStart();
-    int meetingDuration = MeetingDurationInMinutes();
-    string roomName = EnterRoomName();
-
-    (string, DateTime, int, string) meeting = (meetingName, meetingStart, meetingDuration, roomName);
-    if (DoesIntersectWithOther(meeting))
+    try
     {
-        Console.WriteLine("Meeting intersects with another!");
+        Console.Clear();
+
+        string meetingName = EnterMeetingName();
+        DateTime meetingStart = EnterMeetingStart();
+        int meetingDuration = MeetingDurationInMinutes();
+        string roomName = EnterRoomName();
+
+        (string, DateTime, int, string) meeting = (meetingName, meetingStart, meetingDuration, roomName);
+        if (DoesIntersectWithOther(meeting))
+        {
+            Console.WriteLine("Meeting intersects with another!");
+        }
+        else
+        {
+            Array.Resize(ref meetings, meetings.Length + 1);
+            meetings[^1] = meeting;
+
+            DumpToFile();
+
+            Console.WriteLine("Meeting successfully created!");
+        }
+
+        Console.WriteLine("To continue press ENTER...");
+        _ = Console.ReadLine();
+
     }
-    else
+    catch (Exception e)
     {
-        Array.Resize(ref meetings, meetings.Length + 1);
-        meetings[^1] = meeting;
-
-        DumpToFile();
-
-        Console.WriteLine("Meeting successfully created!");
+        Console.WriteLine(e);
+        throw;
     }
-
-    Console.WriteLine("To continue press ENTER...");
-    _ = Console.ReadLine();
 }
 
 void UpdateMeeting()
 {
-    Console.Clear();
-
-    string meetingName = EnterMeetingName();
-    
-    // Read all lines from the file
-    string[] lines = File.ReadAllLines(filename);
-
-    // Loop through each line and find the record with the specified meeting ID
-    for (int i = 0; i < lines.Length; i++)
+    try
     {
-        string[] fields = lines[i].Split(',');
-        string name = fields[0];
+        Console.Clear();
 
-        if (name == meetingName)
+        string meetingName = EnterMeetingName();
+    
+        // Read all lines from the file
+        string[] lines = File.ReadAllLines(filename);
+
+        // Loop through each line and find the record with the specified meeting ID
+        for (int i = 0; i < lines.Length; i++)
         {
-            // Update the record with the new subject and date
-            fields[1] = EnterMeetingStart().ToString();
-            fields[2] =  MeetingDurationInMinutes().ToString();
-            fields[3] =  EnterRoomName();
+            string[] fields = lines[i].Split(',');
+            string name = fields[0];
+
+            if (name == meetingName)
+            {
+                // Update the record with the new subject and date
+                fields[1] = EnterMeetingStart().ToString();
+                fields[2] =  MeetingDurationInMinutes().ToString();
+                fields[3] =  EnterRoomName();
             
-            // Write the updated line back to the file
-            lines[i] = string.Join(",", fields);
-            File.WriteAllLines(filename, lines);
+                // Write the updated line back to the file
+                lines[i] = string.Join(",", fields);
+                File.WriteAllLines(filename, lines);
             
+            }
         }
     }
+    catch (Exception e)
+    {
+        Console.WriteLine(e);
+        throw;
+    }
+    
 
     Console.WriteLine("To continue press ENTER...");
     _ = Console.ReadLine();
