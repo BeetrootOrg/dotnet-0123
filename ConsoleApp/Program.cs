@@ -8,7 +8,7 @@ while (true)
     string s = Console.ReadLine();
     if (s.ToLower() == "ex") Environment.Exit(0);
     var assembly = Type.GetType(s, false, true)?.Assembly;
-    //var assembly=typeof(StringBuilder).Assembly;
+
     if (assembly == null)
     {
         Console.WriteLine("Error!");
@@ -22,7 +22,8 @@ while (true)
         {
             Console.WriteLine($"\tMethod {method.Name} Public:{method.IsPublic} Static:{method.IsPublic} ReturnType:{method.ReturnType.Name}");
             Console.WriteLine($"\tParameters ({method.GetParameters().Count()}):");
-            foreach(var param in method.GetParameters()){
+            foreach (var param in method.GetParameters())
+            {
                 Console.WriteLine($"\t{param.Name} Type:{param.ParameterType.Name}");
             }
         }
