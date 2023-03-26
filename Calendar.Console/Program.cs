@@ -1,3 +1,9 @@
-﻿using System;
-// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Calendar.Console.Controllers;
+
+IController controller = new MainMenuController();
+
+while (controller != null)
+{
+    controller.Show();
+    controller = controller.Action();
+}
