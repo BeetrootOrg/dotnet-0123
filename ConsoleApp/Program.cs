@@ -11,6 +11,8 @@ void Menu()
     Console.WriteLine();
     Console.WriteLine("1. Create a meeting");
     Console.WriteLine("2. Show all meetings");
+    Console.WriteLine("3. Update meeting");
+    Console.WriteLine("4. Show meetings in room");
     Console.WriteLine("0. Exit");
 
     ConsoleKeyInfo key = Console.ReadKey();
@@ -25,6 +27,14 @@ void Menu()
     else if (key.Key == ConsoleKey.D2)
     {
         ShowMeetings();
+    }
+    else if (key.Key == ConsoleKey.D3)
+    {
+        UpdateMeeting();
+    }
+    else if (key.Key == ConsoleKey.D4)
+    {
+        ShowMeetingsByRoom();
     }
 }
 
@@ -61,12 +71,47 @@ void CreateMeeting()
     _ = Console.ReadLine();
 }
 
+void UpdateMeeting()
+{
+    Console.Clear();
+
+    string meetingName = EnterMeetingName();
+    
+    // Read all lines from the file
+    string[] lines = File.ReadAllLines(filename);
+
+    // Loop through each line and find the record with the specified meeting ID
+    for (int i = 0; i < lines.Length; i++)
+    {
+        string[] fields = lines[i].Split(',');
+        string name = fields[0];
+
+        if (name == meetingName)
+        {
+            // Update the record with the new subject and date
+            fields[1] = EnterMeetingStart().ToString();
+            fields[2] =  MeetingDurationInMinutes().ToString();
+            fields[3] =  EnterRoomName();
+            
+            // Write the updated line back to the file
+            lines[i] = string.Join(",", fields);
+            File.WriteAllLines(filename, lines);
+            
+        }
+    }
+
+    Console.WriteLine("To continue press ENTER...");
+    _ = Console.ReadLine();
+}
+
+
 string EnterMeetingName()
 {
     while (true)
     {
         Console.WriteLine("Enter meeting name:");
         string input = Console.ReadLine();
+        
 
         if (string.IsNullOrWhiteSpace(input))
         {
@@ -83,6 +128,7 @@ string EnterMeetingName()
         return input;
     }
 }
+
 
 DateTime EnterMeetingStart()
 {
@@ -193,6 +239,30 @@ void ShowMeetings()
     _ = Console.ReadLine();
 }
 
+void ShowMeetingsByRoom()
+{
+    Console.Clear();
+    string roomName = EnterRoomName();
+    int successCounter = 0;
+    foreach (var meeting in meetings)
+    {
+        if (meeting.Item4 == roomName)
+        {
+            DateTime end = meeting.Item2.AddMinutes(meeting.Item3);
+            Console.WriteLine($"{meeting.Item1,-25}{meeting.Item2,-25}{end,-25}{meeting.Item4,-25}");
+            successCounter++;
+        }
+    }
+    if (successCounter == 0)
+    {
+        Console.WriteLine("No meetings in this room");
+    }
+
+    Console.WriteLine();
+    Console.WriteLine("To continue press ENTER...");
+    _ = Console.ReadLine();
+}
+
 void DumpToFile()
 {
     StringBuilder sb = new();
@@ -204,6 +274,7 @@ void DumpToFile()
 
     File.WriteAllText(filename, sb.ToString());
 }
+
 
 void LoadFromFile()
 {
