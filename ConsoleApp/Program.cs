@@ -1,59 +1,61 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading;
+using System.Threading.Tasks;
 
 Stopwatch sw = new();
 
 sw.Start();
-BoilAKettle();
-HeatUpAPan();
-FryTwoEggs();
-AddButterToBread();
-PrepareCoffee();
-PourAGlassOfWater();
-Breakfast();
+Task boilAKettleTask = BoilAKettle();
+Task heatUpAPanTask = HeatUpAPan();
+Task pourAGlassOfWater = PourAGlassOfWater();
+await AddButterToBread();
+await heatUpAPanTask;
+await FryTwoEggs();
+await Task.WhenAll(boilAKettleTask, pourAGlassOfWater);
+await PrepareCoffee();
+await Breakfast();
 sw.Stop();
 
 Console.WriteLine($"Breakfast took {sw.ElapsedMilliseconds}");
 
-void BoilAKettle()
+async Task BoilAKettle()
 {
-    Thread.Sleep(5000);
+    await Task.Delay(5000);
     Console.WriteLine("Kettle is boiled!");
 }
 
-void HeatUpAPan()
+async Task HeatUpAPan()
 {
-    Thread.Sleep(2000);
+    await Task.Delay(2000);
     Console.WriteLine("Pan ready!");
 }
 
-void FryTwoEggs()
+async Task FryTwoEggs()
 {
-    Thread.Sleep(7000);
+    await Task.Delay(7000);
     Console.WriteLine("Eggs ready!");
 }
 
-void AddButterToBread()
+async Task AddButterToBread()
 {
-    Thread.Sleep(1500);
+    await Task.Delay(1500);
     Console.WriteLine("Bread ready!");
 }
 
-void PrepareCoffee()
+async Task PrepareCoffee()
 {
-    Thread.Sleep(2000);
+    await Task.Delay(2000);
     Console.WriteLine("Coffee ready!");
 }
 
-void PourAGlassOfWater()
+async Task PourAGlassOfWater()
 {
-    Thread.Sleep(1000);
+    await Task.Delay(1000);
     Console.WriteLine("Water in glass!");
 }
 
-void Breakfast()
+async Task Breakfast()
 {
-    Thread.Sleep(10000);
+    await Task.Delay(10000);
     Console.WriteLine("Breakfast eaten!");
 }
