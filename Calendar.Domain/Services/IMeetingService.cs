@@ -8,5 +8,7 @@ namespace Calendar.Domain.Services
     {
         IEnumerable<Meeting> GetAllMeetings();
         void AddMeeting(Meeting meeting);
+        void DumpToFile();
+        bool DoesIntersectWithOtherNonStatic(IEnumerable<Meeting> meetings, Meeting meeting);
     }
 }

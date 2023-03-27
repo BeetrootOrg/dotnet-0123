@@ -19,6 +19,7 @@ namespace Calendar.Console.Controllers
             WriteLine();
             WriteLine("1. Create a meeting");
             WriteLine("2. Show all meetings");
+            WriteLine("3. Update existent meeting");
             WriteLine("0. Exit");
         }
 
@@ -32,6 +33,8 @@ namespace Calendar.Console.Controllers
                 ? new StartCreatingMeetingController(_context)
                 : key.Key == ConsoleKey.D2
                 ? new ShowAllMeetingsController(_context)
+                : key.Key == ConsoleKey.D3
+                ? new UpdateExistentMeetingController(_context)
                 : this;
         }
 

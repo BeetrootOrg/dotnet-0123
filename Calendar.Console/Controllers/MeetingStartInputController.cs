@@ -1,5 +1,6 @@
 using System;
 
+using Calendar.Contracts;
 using Calendar.Domain.Builders;
 
 namespace Calendar.Console.Controllers
@@ -8,16 +9,23 @@ namespace Calendar.Console.Controllers
     {
         private readonly Context _context;
         private readonly MeetingBuilder _meetingBuilder;
+        private readonly Meeting _meeting;
 
-        public MeetingStartInputController(Context context, MeetingBuilder meetingBuilder)
+        public MeetingStartInputController(Context context, MeetingBuilder meetingBuilder, Meeting meeting = null)
         {
             _context = context;
             _meetingBuilder = meetingBuilder;
+            _meeting = meeting;
         }
 
         public void Show()
         {
-            WriteLine("Enter meeting start:");
+            if (_meeting != null)
+            {
+                WriteLine($"Meeting start {_meeting.Start}. Enter new start:");
+            }
+            else
+                WriteLine("Enter meeting start:");
         }
 
         public IController Action()
@@ -34,8 +42,8 @@ namespace Calendar.Console.Controllers
                 WriteLine("Meeting start should be in future!");
                 return this;
             }
-
-            return new MeetingDurationInputController(_context, _meetingBuilder.WithStart(start));
+            if (_meeting != null) _meeting.Start = start;
+            return new MeetingDurationInputController(_context, _meetingBuilder.WithStart(start), _meeting);
         }
     }
 }

@@ -24,12 +24,13 @@ namespace Calendar.Domain.Repositories
             DumpToFile();
         }
 
+
         public IEnumerable<Meeting> GetAllMeetings()
         {
             return _meetings;
         }
 
-        private void DumpToFile()
+        public void DumpToFile()
         {
             File.WriteAllLines(
                 _filename,

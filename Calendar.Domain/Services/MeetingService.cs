@@ -16,6 +16,11 @@ namespace Calendar.Domain.Services
             _repository = repository;
         }
 
+        public void DumpToFile()
+        {
+            _repository.DumpToFile();
+        }
+
         public void AddMeeting(Meeting meeting)
         {
             IEnumerable<Meeting> meetings = GetAllMeetings();
@@ -28,12 +33,22 @@ namespace Calendar.Domain.Services
 
         }
 
+        
+
         public IEnumerable<Meeting> GetAllMeetings()
         {
             return _repository.GetAllMeetings();
         }
 
-        private static bool DoesIntersectWithOther(IEnumerable<Meeting> meetings, Meeting meeting)
+
+        public bool DoesIntersectWithOtherNonStatic(IEnumerable<Meeting> meetings, Meeting meeting)
+        {
+            return DoesIntersectWithOther(meetings, meeting);
+        }
+
+
+
+        public static bool DoesIntersectWithOther(IEnumerable<Meeting> meetings, Meeting meeting)
         {
             foreach ((_, DateTime start, TimeSpan duration, Room room) in meetings)
             {

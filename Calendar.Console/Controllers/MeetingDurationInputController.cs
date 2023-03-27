@@ -1,5 +1,6 @@
 using System;
 
+using Calendar.Contracts;
 using Calendar.Domain.Builders;
 
 namespace Calendar.Console.Controllers
@@ -8,15 +9,21 @@ namespace Calendar.Console.Controllers
     {
         private readonly Context _context;
         private readonly MeetingBuilder _meetingBuilder;
+        private readonly Meeting _meeting;
 
-        public MeetingDurationInputController(Context context, MeetingBuilder meetingBuilder)
+        public MeetingDurationInputController(Context context, MeetingBuilder meetingBuilder, Meeting meeting = null)
         {
             _context = context;
             _meetingBuilder = meetingBuilder;
+            _meeting = meeting;
         }
 
         public void Show()
         {
+            if (_meeting != null)
+            {
+                WriteLine($"Meeting duration {_meeting.Duration}. Enter new duration:");
+            } else
             WriteLine("Enter meeting duration:");
         }
 
@@ -34,8 +41,8 @@ namespace Calendar.Console.Controllers
                 WriteLine("Meeting duration should be positive!");
                 return this;
             }
-
-            return new MeetingRoomInputController(_context, _meetingBuilder.WithDuration(duration));
+            if (_meeting != null) _meeting.Duration = duration;
+            return new MeetingRoomInputController(_context, _meetingBuilder.WithDuration(duration),_meeting);
         }
     }
 }

@@ -8,5 +8,7 @@ namespace Calendar.Domain.Repositories
     {
         IEnumerable<Meeting> GetAllMeetings();
         void AddMeeting(Meeting meeting);
+        void DumpToFile();
+        
     }
 }

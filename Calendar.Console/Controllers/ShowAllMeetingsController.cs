@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Calendar.Contracts;
 
@@ -17,8 +18,13 @@ namespace Calendar.Console.Controllers
         public void Show()
         {
             Clear();
-
-            IEnumerable<Meeting> meetings = _context.Service.GetAllMeetings();
+            WriteLine("Enter the name of the room to be selected. Or leave it blank");
+             IEnumerable<Meeting> meetings;
+            string troom = ReadLine();
+            if (string.IsNullOrEmpty(troom))
+                meetings = _context.Service.GetAllMeetings();
+            else
+                meetings = _context.Service.GetAllMeetings().Where(x=>x.Room.Name.Equals(troom)).AsEnumerable();
 
             WriteLine($"{"Name",-25}{"Start",-25}{"End",-25}{"Room",-25}");
             foreach ((string name, DateTime start, TimeSpan duration, Room room) in meetings)

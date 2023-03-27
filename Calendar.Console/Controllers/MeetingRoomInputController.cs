@@ -1,3 +1,5 @@
+using System.Linq;
+
 using Calendar.Contracts;
 using Calendar.Domain.Builders;
 
@@ -7,16 +9,23 @@ namespace Calendar.Console.Controllers
     {
         private readonly Context _context;
         private readonly MeetingBuilder _meetingBuilder;
+        private readonly Meeting _meeting;
 
-        public MeetingRoomInputController(Context context, MeetingBuilder meetingBuilder)
+        public MeetingRoomInputController(Context context, MeetingBuilder meetingBuilder, Meeting meeting = null)
         {
             _context = context;
             _meetingBuilder = meetingBuilder;
+            _meeting = meeting;
         }
 
         public void Show()
         {
-            WriteLine("Enter room name:");
+            if (_meeting != null)
+            {
+                WriteLine($"Meeting room name {_meeting.Room.Name}. Enter new room name:");
+            }
+            else
+                WriteLine("Enter room name:");
         }
 
         public IController Action()
@@ -32,6 +41,20 @@ namespace Calendar.Console.Controllers
             {
                 WriteLine("Room name length should be less than 20!");
                 return this;
+            }
+
+            if (_meeting != null)
+            {
+                var _room = _context.Service.GetAllMeetings().Select(x => x.Room).Where(x => x.Name.Equals(input)).FirstOrDefault();
+                if (_room == null)
+                {
+                    _room = new()
+                    {
+                        Name = input
+                    };
+                }
+                _meeting.Room= _room;
+                return new UpdateMeetingController(_context, _meeting);
             }
 
             Room room = new()
