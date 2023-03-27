@@ -33,7 +33,7 @@ namespace Calendar.Console.Controllers
             }
 
             WriteLine("To continue press ENTER...");
-            _ = ReadLine();
+            ReadLine();
 
             return new MainMenuController(_context);
         }

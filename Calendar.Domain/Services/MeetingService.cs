@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-
 using Calendar.Contracts;
 using Calendar.Domain.Exceptions;
 using Calendar.Domain.Repositories;
