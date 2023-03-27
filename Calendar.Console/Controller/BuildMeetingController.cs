@@ -1,5 +1,6 @@
 using Calendar.Contracts;
 using Calendar.Domain.Builders;
+using Calendar.Domain.Exceptions;
 
 namespace Calendar.Console.Controllers
 {
@@ -20,7 +21,19 @@ namespace Calendar.Console.Controllers
         public IController Action()
         {
             Meeting meeting = _meetingBuilder.Build();
-            _context.Repository.AddMeeting(meeting);
+
+            try
+            {
+                _context.Service.AddMeeting(meeting);
+                WriteLine("Meeting successfully created!");
+            }
+            catch (CalendarException ce)
+            {
+                WriteLine(ce.Message);
+            }
+
+            WriteLine("To continue press ENTER...");
+            _ = ReadLine();
 
             return new MainMenuController(_context);
         }

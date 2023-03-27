@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+
 using Calendar.Contracts;
 
 namespace Calendar.Console.Controllers
@@ -15,20 +17,21 @@ namespace Calendar.Console.Controllers
         public void Show()
         {
             Clear();
-            var meetings = _context.Repository.GetAllMeetings();
+
+            IEnumerable<Meeting> meetings = _context.Service.GetAllMeetings();
 
             WriteLine($"{"Name",-25}{"Start",-25}{"End",-25}{"Room",-25}");
-            foreach((string name, DateTime start, TimeSpan duration, Room room) in meetings)
+            foreach ((string name, DateTime start, TimeSpan duration, Room room) in meetings)
             {
                 DateTime end = start.Add(duration);
-                WriteLine($"{name,-25}{start,-25}{end,-25}{room,-25}");
+                WriteLine($"{name,-25}{start,-25}{end,-25}{room.Name,-25}");
             }
 
             WriteLine();
-            WriteLine("Press ENTER to continue...");
+            WriteLine("To continue press ENTER...");
         }
 
-        IController IController.Action()
+        public IController Action()
         {
             ReadLine();
             return new MainMenuController(_context);
