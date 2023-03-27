@@ -24,7 +24,7 @@ using HttpClient httpClient = new()
     BaseAddress = new Uri("https://cataas.com/")
 };
 
-CatClient catClient = new(httpClient);
+ICatClient catClient = new CatClient(httpClient);
 using CancellationTokenSource cts = new(TimeSpan.FromSeconds(5));
 
 byte[] content = await catClient.GetCatSaysAsync(text, cts.Token);
