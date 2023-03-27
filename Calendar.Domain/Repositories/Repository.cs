@@ -6,6 +6,17 @@ namespace Calendar.Domain.Repositories
 {
     internal class Repository : IRepository
     {
+        // private List<Meeting> _meetings;
+        // public Repository(List<Meeting> meetings)
+        // {
+        //     _meetings = meetings;
+        // }
+
+        public void AddMeeting(Meeting meeting)
+        {
+            System.Console.WriteLine("Meeting was added...");
+        }
+
         public IEnumerable<Meeting> GetAllMeetings()
         {
             // ToDo read from file

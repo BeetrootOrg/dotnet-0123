@@ -6,5 +6,6 @@ namespace Calendar.Domain.Repositories
     public interface IRepository
     {
         IEnumerable<Meeting> GetAllMeetings();
+        void AddMeeting(Meeting meeting);
     }
 }

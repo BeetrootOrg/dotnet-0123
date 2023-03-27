@@ -1,5 +1,4 @@
 using System;
-using static System.Console;
 using Calendar.Contracts;
 
 namespace Calendar.Console.Controllers

@@ -1,5 +1,4 @@
 using System;
-using static System.Console;
 
 namespace Calendar.Console.Controllers
 {
@@ -28,6 +27,10 @@ namespace Calendar.Console.Controllers
             if (key.Key == ConsoleKey.D0)
             {
                 return null;
+            }
+            if (key.Key == ConsoleKey.D1)
+            {
+                return new CreateMeetingController(_context);
             }
             if (key.Key == ConsoleKey.D2)
             {
