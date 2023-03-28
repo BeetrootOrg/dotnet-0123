@@ -26,14 +26,8 @@ namespace Calendar.Domain.Repositories
 
         public void UpdateMeeting(Meeting meeting, string oldName)
         {
-            for (int i = 0; i < _meetings.Count; i++)
-            {
-                if (_meetings[i].Name.Equals(oldName))
-                {
-                    _meetings[i] = _meetings[i].Rewrite(meeting);
-                    break;
-                }
-            }
+            Meeting currentMeeting = _meetings.Where(m => m.Name.Equals(oldName)).FirstOrDefault();
+            currentMeeting.Rewrite(meeting);
             
             DumpToFile();
         }
