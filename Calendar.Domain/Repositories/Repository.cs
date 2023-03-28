@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using Calendar.Contracts;
 
 namespace Calendar.Domain.Repositories
@@ -44,6 +45,7 @@ namespace Calendar.Domain.Repositories
                 _meetings.Select(meeting => $"{meeting.Name},{meeting.Start},{meeting.Duration},{meeting.Room.Name}")
                     .Prepend("Name,Start,Duration,Room")
             );
+            File.WriteAllText(_filename, JsonSerializer.Serialize(_meetings));
         }
 
         public static IRepository CreateRepository(string filename)
@@ -52,23 +54,7 @@ namespace Calendar.Domain.Repositories
                 ? new Repository(filename, new List<Meeting>())
                 : new Repository(
                 filename,
-                File.ReadAllLines(filename)
-                    .Skip(1)
-                    .Select(line =>
-                    {
-                        string[] items = line.Split(',');
-                        return new Meeting
-                        {
-                            Name = items[0],
-                            Start = DateTime.Parse(items[1]),
-                            Duration = TimeSpan.Parse(items[2]),
-                            Room = new Room
-                            {
-                                Name = items[3]
-                            }
-                        };
-                    })
-                    .ToList()
+                JsonSerializer.Deserialize<List<Meeting>>(File.ReadAllText(filename))
             );
         }
 
