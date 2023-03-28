@@ -41,7 +41,8 @@ namespace Calendar.Console.Controllers
             }
             if (key.Key == ConsoleKey.D3)
             {
-                throw new NotImplementedException();
+                Clear();
+                return new UpdateMeetingController(_context);
             }
             if (key.Key == ConsoleKey.D4)
             {

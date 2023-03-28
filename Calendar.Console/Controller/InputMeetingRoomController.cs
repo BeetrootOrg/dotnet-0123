@@ -40,7 +40,7 @@ namespace Calendar.Console.Controllers
                 Name = input 
             };
 
-            return new BuildMeetingController(_context, _meetingBuilder.WithRoom(room));
+            return new WriteMeetingController(_context, _meetingBuilder.WithRoom(room));
         }
     }
 }

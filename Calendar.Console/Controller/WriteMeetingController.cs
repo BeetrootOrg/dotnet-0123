@@ -4,12 +4,12 @@ using Calendar.Domain.Exceptions;
 
 namespace Calendar.Console.Controllers
 {
-    internal class BuildMeetingController : IController
+    internal class WriteMeetingController : IController
     {
         private readonly Context _context;
         private readonly MeetingBuilder _meetingBuilder;
 
-        public BuildMeetingController(Context context, MeetingBuilder meetingBuilder)
+        public WriteMeetingController(Context context, MeetingBuilder meetingBuilder)
         {
             _context = context;
             _meetingBuilder = meetingBuilder;
@@ -21,11 +21,20 @@ namespace Calendar.Console.Controllers
         public IController Action()
         {
             Meeting meeting = _meetingBuilder.Build();
-
+            string oldName = _context.Service.GetBuffer();  
             try
             {
-                _context.Service.AddMeeting(meeting);
-                WriteLine("Meeting successfully created!");
+                if (oldName == null)
+                {
+                    _context.Service.AddMeeting(meeting);
+                    WriteLine("Meeting successfully created!");
+                }
+                else
+                {
+                    _context.Service.UpdateMeeting(meeting, oldName);
+                    WriteLine($"Meeting with old name: {oldName} was updated!");
+                    _context.Service.SetBuffer(null);
+                }
             }
             catch (CalendarException ce)
             {

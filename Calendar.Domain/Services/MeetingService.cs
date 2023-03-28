@@ -24,7 +24,18 @@ namespace Calendar.Domain.Services
             }
 
             _repository.AddMeeting(meeting);
+        }
 
+        public void UpdateMeeting(Meeting meeting, string oldName)
+        {
+            IEnumerable<Meeting> meetings = GetAllMeetings();
+            
+            if (DoesIntersectWithOther(meetings, meeting, oldName))
+            {
+                throw new CalendarException("Meeting intersect with other!");
+            }
+
+            _repository.UpdateMeeting(meeting, oldName);
         }
 
         public IEnumerable<Meeting> GetAllMeetings()
@@ -32,10 +43,15 @@ namespace Calendar.Domain.Services
             return _repository.GetAllMeetings();
         }
 
-        private static bool DoesIntersectWithOther(IEnumerable<Meeting> meetings, Meeting meeting)
+        private static bool DoesIntersectWithOther(IEnumerable<Meeting> meetings, Meeting meeting, string oldName = null)
         {
             foreach ((_, DateTime start, TimeSpan duration, Room room) in meetings)
             {
+                if (meeting.Name == oldName)
+                {
+                    continue;
+                }
+                
                 if (meeting.Room == room)
                 {
                     DateTime end1 = meeting.Start.Add(meeting.Duration);
@@ -54,6 +70,15 @@ namespace Calendar.Domain.Services
             }
 
             return false;
+        }
+        public void SetBuffer(string buffer)
+        {
+            _repository.SetBuffer(buffer); 
+        }
+
+        public string GetBuffer()
+        {
+            return _repository.GetBuffer();
         }
     }
 }

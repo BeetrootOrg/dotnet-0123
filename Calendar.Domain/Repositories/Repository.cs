@@ -10,6 +10,7 @@ namespace Calendar.Domain.Repositories
     {
         private readonly string _filename;
         private readonly IList<Meeting> _meetings;
+        private string _buffer;
 
         public Repository(string filename, IList<Meeting> meetings)
         {
@@ -20,6 +21,20 @@ namespace Calendar.Domain.Repositories
         public void AddMeeting(Meeting meeting)
         {
             _meetings.Add(meeting);
+            DumpToFile();
+        }
+
+        public void UpdateMeeting(Meeting meeting, string oldName)
+        {
+            for (int i = 0; i < _meetings.Count; i++)
+            {
+                if (_meetings[i].Name.Equals(oldName))
+                {
+                    _meetings[i] = _meetings[i].Rewrite(meeting);
+                    break;
+                }
+            }
+            
             DumpToFile();
         }
 
@@ -61,6 +76,16 @@ namespace Calendar.Domain.Repositories
                     })
                     .ToList()
             );
+        }
+
+        public void SetBuffer(string buffer)
+        {
+            _buffer = buffer;
+        }
+
+        public string GetBuffer()
+        {
+            return _buffer;
         }
     }
 }
