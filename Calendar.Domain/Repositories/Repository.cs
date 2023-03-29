@@ -36,15 +36,15 @@ namespace Calendar.Domain.Repositories
             try
             {
                 if (!File.Exists(_filename)) File.Create(_filename);
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(IList<Meeting>));
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Meeting>));
                 using (var file = new FileStream(_filename, FileMode.Truncate))
                 {
                     xmlSerializer.Serialize(file, _meetings);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                Console.WriteLine($"Can not write file {_filename}");
+                Console.WriteLine($"Can not write file {_filename}\n{ex}");
             }
         }
 
@@ -52,7 +52,7 @@ namespace Calendar.Domain.Repositories
         {
             try
             {
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(IList<Meeting>));
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Meeting>));
                 var list=new List<Meeting>();
                 using (var file = new FileStream(filename, FileMode.OpenOrCreate))
                 {
