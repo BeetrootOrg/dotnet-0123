@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfMeeting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Meeting>
+    <Name>meet1-ch</Name>
+    <Start>2023-03-29T23:00:00</Start>
+    <Duration>PT30M</Duration>
+    <Room>
+      <Name>room1</Name>
+    </Room>
+  </Meeting>
+  <Meeting>
+    <Name>meet2</Name>
+    <Start>2023-03-29T23:30:01</Start>
+    <Duration>PT29M</Duration>
+    <Room>
+      <Name>room1</Name>
+    </Room>
+  </Meeting>
+  <Meeting>
+    <Name>meet3</Name>
+    <Start>2023-03-30T00:00:00</Start>
+    <Duration>PT30M</Duration>
+    <Room>
+      <Name>room2</Name>
+    </Room>
+  </Meeting>
+</ArrayOfMeeting>
