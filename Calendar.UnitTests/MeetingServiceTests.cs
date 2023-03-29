@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
 
+using Bogus;
+
 using Calendar.Contracts;
 using Calendar.Domain.Repositories;
 using Calendar.Domain.Services;
 
 using Moq;
+
+using Shouldly;
 
 namespace Calendar.UnitTests
 {
@@ -15,38 +19,30 @@ namespace Calendar.UnitTests
 
         private readonly IMeetingService _meetingService;
 
+        private readonly Faker<Meeting> _meetingFaker;
+
         public MeetingServiceTests()
         {
             _repository = new Mock<IRepository>();
             _meetingService = new MeetingService(_repository.Object);
+
+            _meetingFaker = new Faker<Meeting>()
+                .RuleFor(m => m.Duration, f => f.Date.Timespan(TimeSpan.FromHours(2)))
+                .RuleFor(m => m.Start, f => f.Date.Future())
+                .RuleFor(m => m.Name, f => f.Database.Random.Guid().ToString())
+                .RuleFor(m => m.Room, f => new Room { Name = f.Database.Random.Guid().ToString() });
+
         }
 
         [Fact]
         public void GetAllMeetingsShouldReturnMeetingsFromRepository()
         {
-            Meeting[] meetings = new[]
-            {
-                new Meeting
-                {
-                    Name = "Meeting 1",
-                    Start = new DateTime(2020, 1, 1, 10, 0, 0),
-                    Duration = new TimeSpan(1, 0, 0),
-                    Room = new Room { Name = "Room 1" }
-                },
-                new Meeting
-                {
-                    Name = "Meeting 2",
-                    Start = new DateTime(2020, 1, 1, 11, 0, 0),
-                    Duration = new TimeSpan(1, 0, 0),
-                    Room = new Room { Name = "Room 2" }
-                }
-            };
-
+            IEnumerable<Meeting> meetings = _meetingFaker.GenerateBetween(5, 15);
             _ = _repository.Setup(x => x.GetAllMeetings()).Returns(meetings);
 
             IEnumerable<Meeting> result = _meetingService.GetAllMeetings();
 
-            Assert.Equal(meetings, result);
+            meetings.ShouldBe(result);
         }
     }
 }
