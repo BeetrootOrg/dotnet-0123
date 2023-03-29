@@ -25,7 +25,6 @@ namespace Calendar.Domain.Services
             }
 
             _repository.AddMeeting(meeting);
-
         }
 
         public IEnumerable<Meeting> GetAllMeetings()

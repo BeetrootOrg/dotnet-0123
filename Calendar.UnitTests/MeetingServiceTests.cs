@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Bogus;
 
@@ -43,6 +44,17 @@ namespace Calendar.UnitTests
             IEnumerable<Meeting> result = _meetingService.GetAllMeetings();
 
             meetings.ShouldBe(result);
+        }
+
+        [Fact]
+        public void AddMeetingShouldAddItSuccessfullyIfNoMeeting()
+        {
+            Meeting meeting = _meetingFaker.Generate();
+            _ = _repository.Setup(x => x.GetAllMeetings()).Returns(Enumerable.Empty<Meeting>());
+
+            _meetingService.AddMeeting(meeting);
+
+            _repository.Verify(x => x.AddMeeting(meeting), Times.Once());
         }
     }
 }
