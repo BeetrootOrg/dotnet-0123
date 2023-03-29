@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ConsoleApp
 {
-    public static class CollExtentions
+    public static class Extentions
     {
         public static Dictionary<K, List<T>> GroupBy<T, K>(this IEnumerable<T> collection, Func<T, K> func)
         {
