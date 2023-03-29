@@ -128,3 +128,65 @@ Console.WriteLine($"First person = {orderedPerson}");
 
 IEnumerable<Friend[]> allFriendsBad = persons.Select(x => x.Friends);
 IEnumerable<Friend> allFriendsGood = persons.SelectMany(x => x.Friends);
+
+// Homework
+
+// 1
+
+Person north = persons.MaxBy(p => p.Latitude);
+Console.WriteLine($"{north.Name} is located farthest north: {north.Latitude}");
+
+Person south = persons.MinBy(p => p.Latitude);
+Console.WriteLine($"{south.Name} is located farthest south: {south.Latitude}");
+
+Person east = persons.MaxBy(p => p.Longitude);
+Console.WriteLine($"{east.Name} is located farthest east: {east.Longitude}");
+
+Person west = persons.MinBy(p => p.Longitude);
+Console.WriteLine($"{west.Name} is located farthest west: {west.Longitude}");
+
+// 2
+
+// var pairs =  Enumerable.Range(0, persons.Count() - 1);
+
+// 3
+
+var personsWithSameWords = persons.Join(
+    persons, 
+    p => true, 
+    p => true, 
+    (p1, p2) => new 
+    {
+        First = p1,
+        Second = p2, 
+        SameAboutWords = p1.About.Split(" ").Intersect(p2.About.Split(" "))
+    })
+    .Where(p => !ReferenceEquals(p.First, p.Second))
+    .OrderBy(p => (p.SameAboutWords.Count()));
+
+foreach (var item in personsWithSameWords)
+{
+    Console.WriteLine($"Person: {item.First.Name}");
+    Console.WriteLine($"\tSame about words: {String.Join(", ", item.SameAboutWords.OrderBy(p => p))}");
+} 
+
+// 4
+
+var personsWithSameFriends = persons.Join(
+    persons, 
+    p => true, 
+    p => true, 
+    (p1, p2) => new 
+    {
+        First = p1,
+        Second = p2,
+        Friends = p1.Friends.Select(p => p.Name).Intersect(p2.Friends.Select(p => p.Name))
+    })
+    .Where(p => !ReferenceEquals(p.First, p.Second))
+    .Where(p => p.Friends.Count() > 0); 
+ 
+foreach (var item in personsWithSameFriends)
+{
+    Console.WriteLine($"Person: {item.First.Name}");
+    Console.WriteLine($"\tFriends: {String.Join(", ", item.Friends)}");
+}
