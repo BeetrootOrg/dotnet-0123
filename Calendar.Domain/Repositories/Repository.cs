@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 
 using Calendar.Contracts;
 
@@ -32,37 +33,38 @@ namespace Calendar.Domain.Repositories
 
         public void DumpToFile()
         {
-            File.WriteAllLines(
-                _filename,
-                _meetings.Select(meeting => $"{meeting.Name},{meeting.Start},{meeting.Duration},{meeting.Room.Name}")
-                    .Prepend("Name,Start,Duration,Room")
-            );
+            try
+            {
+                if (!File.Exists(_filename)) File.Create(_filename);
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(IList<Meeting>));
+                using (var file = new FileStream(_filename, FileMode.Truncate))
+                {
+                    xmlSerializer.Serialize(file, _meetings);
+                }
+            }
+            catch
+            {
+                Console.WriteLine($"Can not write file {_filename}");
+            }
         }
 
         public static IRepository CreateRepository(string filename)
         {
-            return !File.Exists(filename)
-                ? new Repository(filename, new List<Meeting>())
-                : new Repository(
-                filename,
-                File.ReadAllLines(filename)
-                    .Skip(1)
-                    .Select(line =>
-                    {
-                        string[] items = line.Split(',');
-                        return new Meeting
-                        {
-                            Name = items[0],
-                            Start = DateTime.Parse(items[1]),
-                            Duration = TimeSpan.Parse(items[2]),
-                            Room = new Room
-                            {
-                                Name = items[3]
-                            }
-                        };
-                    })
-                    .ToList()
-            );
+            try
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(IList<Meeting>));
+                var list=new List<Meeting>();
+                using (var file = new FileStream(filename, FileMode.OpenOrCreate))
+                {
+                    list  = xmlSerializer.Deserialize(file) as List<Meeting>;
+                }
+                return new Repository(filename,list);
+            }
+            catch
+            {
+                Console.WriteLine($"Can not read file {filename}");
+                return new Repository(filename,new List<Meeting>());
+            }
         }
     }
 }

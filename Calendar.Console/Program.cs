@@ -1,7 +1,7 @@
 ﻿using Calendar.Console;
 using Calendar.Console.Controllers;
 
-const string filename = "input.csv";
+const string filename = "input.xml";
 
 Context context = Context.CreateContext(filename);
 IController controller = new MainMenuController(context);
