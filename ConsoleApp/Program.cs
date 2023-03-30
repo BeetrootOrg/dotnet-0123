@@ -14,5 +14,5 @@ Console.WriteLine("Struct");
 foreach (var item in list.GroupBy<int, SubArray>(g => g.A))
 {
     Console.Write($"{item.Key}: ");
-    Console.WriteLine(String.Join(", ", item.Value));
+    Console.WriteLine(String.Join(", ", item.Value)); 
 }
