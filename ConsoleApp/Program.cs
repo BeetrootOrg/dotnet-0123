@@ -147,7 +147,18 @@ Console.WriteLine($"{west.Name} is located farthest west: {west.Longitude}");
 
 // 2
 
-// var pairs =  Enumerable.Range(0, persons.Count() - 1);
+var pairs = from i in Enumerable.Range(0, persons.Count() - 1)
+let x = persons[i]
+from y in persons.Skip(i + 1)
+select Tuple.Create(
+ $"{x.Name}_{x.SecondName} - {y.Name}_{y.SecondName}",
+x.Location.Distance(y.Location));
+
+var maxD= pairs.Aggregate((x, y) => x.Item2 > y.Item2 ? x : y);
+var minD = pairs.Aggregate((x, y) => x.Item2 > y.Item2 ? y : x);
+
+Console.WriteLine($"Max: {maxD}\nMin: {minD}");
+
 
 // 3
 
@@ -163,6 +174,7 @@ var personsWithSameWords = persons.Join(
     })
     .Where(p => !ReferenceEquals(p.First, p.Second))
     .OrderBy(p => (p.SameAboutWords.Count()));
+    
 
 foreach (var item in personsWithSameWords)
 {
@@ -188,5 +200,5 @@ var personsWithSameFriends = persons.Join(
 foreach (var item in personsWithSameFriends)
 {
     Console.WriteLine($"Person: {item.First.Name}");
-    Console.WriteLine($"\tFriends: {String.Join(", ", item.Friends)}");
+    Console.WriteLine($"Friends: {String.Join(", ", item.Friends)}");
 }
