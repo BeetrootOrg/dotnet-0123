@@ -7,6 +7,11 @@ namespace ConsoleApp
     {
         public static Dictionary<K, List<T>> GroupBy<T, K>(this IEnumerable<T> collection, Func<T, K> func)
         {
+            if (collection == null)
+            {
+                return null;
+            }
+
             Dictionary<K, List<T>> dictionary = new Dictionary<K, List<T>>();
 
             foreach (T item in collection)
