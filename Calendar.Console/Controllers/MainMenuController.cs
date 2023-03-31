@@ -19,6 +19,9 @@ namespace Calendar.Console.Controllers
             WriteLine();
             WriteLine("1. Create a meeting");
             WriteLine("2. Show all meetings");
+            WriteLine("3. Update meeting by name");
+            WriteLine("4. See meeting in certain room");
+            WriteLine("5. Search meeting by date range");
             WriteLine("0. Exit");
         }
 
@@ -32,6 +35,12 @@ namespace Calendar.Console.Controllers
                 ? new StartCreatingMeetingController(_context)
                 : key.Key == ConsoleKey.D2
                 ? new ShowAllMeetingsController(_context)
+                : key.Key == ConsoleKey.D3
+                ? new StartUpdatingMeetingController(_context)
+                : key.Key == ConsoleKey.D4
+                ? new SearchByRoomController(_context)
+                : key.Key == ConsoleKey.D5
+                ? new SearchByDateRange(_context)
                 : this;
         }
 
