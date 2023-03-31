@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ConsoleApp;
 
@@ -17,9 +18,17 @@ public class ExtensionsTest
     }
 
     [Fact]
-    public void GroupByResultIsNull()
+    public void GroupByResultIsEmpty()
     {
+        _collection = Examples.EmptyCollection();
         _dictionary = _collection.GroupBy(x => x.A);
-        Assert.Null(_collection);
+        Assert.Empty(_dictionary);
+    }
+
+     [Fact]
+    public void GroupByResultThrowException()
+    {
+        _collection = null;
+        Assert.Throws<ArgumentNullException>(() => _collection.GroupBy(x => x.A));
     }
 }

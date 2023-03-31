@@ -11,6 +11,11 @@ namespace ConsoleApp.Tests
                 new Example(a: 2, b: 2)
             };
         }
+
+        public static Example[] EmptyCollection()
+        {
+            return new Example[0];
+        }
     }
 
     public class Example

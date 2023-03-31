@@ -9,7 +9,7 @@ namespace ConsoleApp
         {
             if (collection == null)
             {
-                return null;
+                throw new ArgumentNullException("Collection for grouping is empty");
             }
 
             Dictionary<K, List<T>> dictionary = new Dictionary<K, List<T>>();
