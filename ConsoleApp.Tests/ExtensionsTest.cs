@@ -26,7 +26,7 @@ public class ExtensionsTest
     }
 
      [Fact]
-    public void GroupByResultThrowException()
+    public void GroupByResultThrowNullException()
     {
         _collection = null;
         Assert.Throws<ArgumentNullException>(() => _collection.GroupBy(x => x.A));
