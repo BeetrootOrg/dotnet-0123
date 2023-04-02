@@ -11,31 +11,31 @@ namespace ConsoleApp
         {
             snakeCells.Add(new Cell
             {
-                name = counter++,
-                _core = 106,
-                _previous = 107,
-                _next= 105,
+                Name = Counter++,
+                Core = 106,
+                Previous = 107,
+                Next= 105,
                 vector = 1
             });
             snakeCells.Add(new Cell
             {
-                name = counter++,
-                _core = 107,
-                _previous = 108,
-                _next= 106
+                Name = Counter++,
+                Core = 107,
+                Previous = 108,
+                Next= 106
             });
             snakeCells.Add(new Cell
             {
-                name = counter++,
-                _core = 108,
-                _previous = 109,
-                _next= 107
+                Name = Counter++,
+                Core = 108,
+                Previous = 109,
+                Next= 107
             });
             snakeCells.Add(new Cell
             {
-                name = counter++,
-                _core = 109,
-                _next= 108
+                Name = Counter++,
+                Core = 109,
+                Next= 108
             });
         }
 
@@ -48,7 +48,7 @@ namespace ConsoleApp
 
             foreach (Cell cell in snakeCells)
             {
-                if (getX(cell._core) != getX(appleCords) & getY(cell._core) != getY(appleCords))
+                if (getX(cell.Core) != getX(appleCords) & getY(cell.Core) != getY(appleCords))
                 {
                     i++;
                 }
@@ -56,7 +56,7 @@ namespace ConsoleApp
             if (i == snakeCells.Count)
             {
                 Apple apple = new Apple();
-                apple._core = appleCords;
+                apple.Core = appleCords;
                 appleCells.Add(apple);
                 
             }
@@ -75,15 +75,15 @@ namespace ConsoleApp
         }
         public void setVector(Cell cell)
         {
-            if (cell._core - cell._previous == -1)
+            if (cell.Core - cell.Previous == -1)
             {
                 cell.vector = 1;
             }
-            else if (cell._core - cell._previous == 1)
+            else if (cell.Core - cell.Previous == 1)
             {
                 cell.vector = 3;
             }
-            else if (cell._core - cell._previous == 10)
+            else if (cell.Core - cell.Previous == 10)
             {
                 cell.vector = 4;
             }
@@ -94,19 +94,19 @@ namespace ConsoleApp
         }
         public int getVector(Cell cell)
         {
-            if (getY(cell._core) - getY(cell._previous) == -1)
+            if (getY(cell.Core) - getY(cell.Previous) == -1)
             {
                 return 1;
             }
-            else if (getY(cell._core) - getY(cell._previous) == 1)
+            else if (getY(cell.Core) - getY(cell.Previous) == 1)
             {
                 return 3;
             }
-            else if (getX(cell._core) - getX(cell._previous) == 10)
+            else if (getX(cell.Core) - getX(cell.Previous) == 10)
             {
                 return 4;
             }
-            else if (getX(cell._core) - getX(cell._previous) == -10)
+            else if (getX(cell.Core) - getX(cell.Previous) == -10)
             {
                 return 2;
             }
@@ -116,21 +116,21 @@ namespace ConsoleApp
         {
             if (vector == 1)
             {
-                return cell._core - 1;
+                return cell.Core - 1;
             }
             else if (vector == 3)
             {
-                return cell._core + 1;                
+                return cell.Core + 1;                
             }
             else if (vector == 2)
             {
-                return cell._core - 10;
+                return cell.Core - 10;
             }
             else if (vector == 4)
             {
-                return cell._core + 10;
+                return cell.Core + 10;
             }
-            return cell._next;
+            return cell.Next;
         }
 
         public char[,] Execute(char[,] field)
@@ -138,20 +138,20 @@ namespace ConsoleApp
             
             foreach(Apple apple in appleCells)
             {
-                field[getX(apple._core)+1, getY(apple._core)+1] = 'A';
+                field[getX(apple.Core)+1, getY(apple.Core)+1] = 'A';
             }
             foreach (Cell cell in snakeCells)
             {
 
-                if (cell.name == 0)
+                if (cell.Name == 0)
                 {
-                    field[getX(cell._next)+1, getY(cell._next)+1] = '*';
+                    field[getX(cell.Next)+1, getY(cell.Next)+1] = '*';
                 }
                 else
                 {
-                    field[getX(cell._previous)+1, getY(cell._previous)+1] = '.';
+                    field[getX(cell.Previous)+1, getY(cell.Previous)+1] = '.';
                 }
-                field[getX(cell._core)+1, getY(cell._core)+1] = 'W';
+                field[getX(cell.Core)+1, getY(cell.Core)+1] = 'W';
             }
 
 
@@ -168,32 +168,32 @@ namespace ConsoleApp
                 Cell cell = (Cell)snakeCells[i];
 
 
-                int temp1 = cell._core;
-                int temp2 = cell._next;
-                int temp3 = cell._previous;
-                cell._core = temp2;
-                cell._previous = temp1;
-                if (cell.name != 0)
+                int temp1 = cell.Core;
+                int temp2 = cell.Next;
+                int temp3 = cell.Previous;
+                cell.Core = temp2;
+                cell.Previous = temp1;
+                if (cell.Name != 0)
                 {
                     Cell nextCell = (Cell)snakeCells[i-1];
-                    cell._next = nextCell._core;
+                    cell.Next = nextCell.Core;
                 }
                 else
                 {
-                    cell._next = getNextByVector(cell, vector);
+                    cell.Next = getNextByVector(cell, vector);
 
 
                     
                     Apple apple = (Apple)appleCells[0];
-                    if (getX(cell._core) == getX(apple._core) & getY(cell._core) == getY(apple._core))
+                    if (getX(cell.Core) == getX(apple.Core) & getY(cell.Core) == getY(apple.Core))
                     {
                         Cell lastCell = (Cell)snakeCells[snakeCells.Count-1];
                         Cell newCell = new Cell
                         {
-                            name = counter++,
-                            _core = lastCell._core,
-                            _next = lastCell._next,
-                            _previous = lastCell._previous,
+                            Name = Counter++,
+                            Core = lastCell.Core,
+                            Next = lastCell.Next,
+                            Previous = lastCell.Previous,
                         };
                         cellsToAdd.Add(newCell);
                         appleCells.Clear();
@@ -205,9 +205,9 @@ namespace ConsoleApp
                 {
                     foreach (Cell cell1 in snakeCells)
                     {
-                        cell1._core += 100;
-                        cell1._next += 100;
-                        cell1._previous += 100;
+                        cell1.Core += 100;
+                        cell1.Next += 100;
+                        cell1.Previous += 100;
                     }
                     counterBuff = 0;
                 }

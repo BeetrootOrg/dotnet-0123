@@ -109,30 +109,30 @@ void isGameOver()
 {
     foreach (Cell firstCell in snake.snakeCells.ToList())
     {
-        if (firstCell.name == 0)
+        if (firstCell.Name == 0)
         {
-            if (snake.getY(firstCell._core) == 0 & firstCell.vector == 2)
+            if (snake.getY(firstCell.Core) == 0 & firstCell.vector == 2)
             {
                 isLost = true;
             }
-            if (snake.getY(firstCell._core) == 9 & firstCell.vector == 4)
+            if (snake.getY(firstCell.Core) == 9 & firstCell.vector == 4)
             {
                 isLost = true;
             }
-            if (snake.getX(firstCell._core) == 0 & firstCell.vector == 1)
+            if (snake.getX(firstCell.Core) == 0 & firstCell.vector == 1)
             {
                 isLost = true;
             }
-            if (snake.getX(firstCell._core) == 9 & firstCell.vector == 3)
+            if (snake.getX(firstCell.Core) == 9 & firstCell.vector == 3)
             {
                 isLost = true;
             }
 
             foreach (Cell cell in snake.snakeCells.ToList())
             {
-                if (cell.name != 0)
+                if (cell.Name != 0)
                 {
-                    if (snake.getX(cell._core) == snake.getX(firstCell._core) & snake.getY(cell._core) == snake.getY(firstCell._core))
+                    if (snake.getX(cell.Core) == snake.getX(firstCell.Core) & snake.getY(cell.Core) == snake.getY(firstCell.Core))
                     {
                         isLost = true;
                     }

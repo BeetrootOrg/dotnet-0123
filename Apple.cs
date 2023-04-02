@@ -2,9 +2,9 @@ namespace ConsoleApp
 {
     public class Apple
     {
-        public int counter = 0;
-        public int name {get; set;}
-        public int _core {get; set;}
+        public int Counter = 0;
+        public int Name {get; set;}
+        public int Core {get; set;}
         
     }
 }
