@@ -20,6 +20,7 @@ namespace Calendar.Console.Controllers
             WriteLine("1. Create a meeting");
             WriteLine("2. Show all meetings");
             WriteLine("3. Update meeting");
+            WriteLine("4. See meetings by room");
             WriteLine("0. Exit");
         }
 
@@ -32,9 +33,11 @@ namespace Calendar.Console.Controllers
                 : key.Key == ConsoleKey.D1
                 ? new StartCreatingMeetingController(_context)
                 : key.Key == ConsoleKey.D2
-                ? new ShowAllMeetingsController(_context)
+                ? new ShowMeetingsController(_context)
                 : key.Key == ConsoleKey.D3
                 ? new StartUpdatingMeetingController(_context)
+                : key.Key == ConsoleKey.D4
+                ? new MeetingsByRoomInputController(_context)
                 : this;
         }
 

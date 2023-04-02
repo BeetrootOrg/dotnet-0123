@@ -38,7 +38,12 @@ namespace Calendar.Console.Controllers
             if (!_context.Service.GetAllMeetings().Select(x => x.Name).Contains(input))
             {
                 WriteLine($"There's no meeting with name {input}");
-                return this;
+
+                WriteLine();
+                WriteLine("To continue press ENTER...");
+                _ = ReadLine();
+
+                return new MainMenuController(_context);
             }
 
             return new UpdateMeetingStartInputController(_context, new MeetingBuilder().WithName(input));
