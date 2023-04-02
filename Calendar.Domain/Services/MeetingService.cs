@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Calendar.Contracts;
 using Calendar.Domain.Exceptions;
@@ -26,6 +27,22 @@ namespace Calendar.Domain.Services
 
             _repository.AddMeeting(meeting);
 
+        }
+
+        public void UpdateMeeting(Meeting updatedMeeting)
+        {
+            IEnumerable<Meeting> meetings = GetAllMeetings();
+            if (DoesIntersectWithOther(meetings, updatedMeeting))
+            {
+                throw new CalendarException("Your updated meeting intersect with other!");
+            }
+
+            if (!meetings.Select(x => x.Name).Contains(updatedMeeting.Name))
+            {
+                throw new ArgumentException($"There's is no meeting with name {updatedMeeting.Name}.");
+            }
+
+            _repository.UpdateMeeting(updatedMeeting);
         }
 
         public IEnumerable<Meeting> GetAllMeetings()

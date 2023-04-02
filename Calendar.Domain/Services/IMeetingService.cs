@@ -8,5 +8,6 @@ namespace Calendar.Domain.Services
     {
         IEnumerable<Meeting> GetAllMeetings();
         void AddMeeting(Meeting meeting);
+        void UpdateMeeting(Meeting updatedMeeting);
     }
 }

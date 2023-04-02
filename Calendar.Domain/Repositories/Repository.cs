@@ -23,6 +23,19 @@ namespace Calendar.Domain.Repositories
             DumpToFile();
         }
 
+        public void UpdateMeeting(Meeting updatedMeeting)
+        {
+            for (int i = 0; i < _meetings.Count; i++)
+            {
+                if (_meetings[i].Name == updatedMeeting.Name)
+                {
+                    _meetings[i] = updatedMeeting;
+                    DumpToFile();
+                    return;
+                }
+            }
+        }
+
         public IEnumerable<Meeting> GetAllMeetings()
         {
             return _meetings;

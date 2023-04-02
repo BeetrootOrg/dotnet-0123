@@ -15,4 +15,3 @@ _ = Parser.Default.ParseArguments<Options>(args)
             controller = controller.Action();
         }
     });
-

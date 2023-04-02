@@ -1,3 +1,4 @@
+
 using System;
 
 namespace Calendar.Domain.Exceptions
