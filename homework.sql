@@ -19,11 +19,11 @@ SELECT * FROM tbl_books WHERE author IS NULL;
 -- 4. Update the year of every book, add 1 year
 UPDATE tbl_books SET year = year + 1;
 
---delete all books without the author
+-- 5. Delete all books without the author
 DELETE FROM tbl_books WHERE author IS NULL;
 
--- 5. Count the number of rows in the table with the author having the letter 'o'
+-- 6. Count the number of rows in the table with the author having the letter 'o'
 SELECT COUNT(*) FROM tbl_books WHERE author LIKE '%o%';
 
--- 6. Group books by year and show how many books in the same year
+-- 7. Group books by year and show how many books in the same year
 SELECT year, COUNT(*) FROM tbl_books GROUP BY year;
