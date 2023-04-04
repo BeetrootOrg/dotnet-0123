@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS tbl_books (
 );
 
 -- 1. Group by genre and count books in every group
-SELECT genre, COUNT(*) FROM tbl_books  GROUP BY (genre);
+SELECT genre, COUNT(*) FROM tbl_books  GROUP BY genre;
 
 -- 2. Select all books with titles having the letter 'a'
 SELECT * FROM tbl_books WHERE title LIKE '%a%';
