@@ -33,6 +33,11 @@ namespace Calendar.Domain.Services
             return _repository.GetAllMeetings();
         }
 
+        public IEnumerable<Meeting> GetMeetingsByRoomName(string roomName)
+        {
+            return _repository.GetMeetingsByRoomName(roomName);
+        }
+
         private static bool DoesIntersectWithOther(IEnumerable<Meeting> meetings, Meeting meeting)
         {
             foreach ((_, DateTime start, TimeSpan duration, Room room) in meetings)

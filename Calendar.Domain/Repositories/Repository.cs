@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 
 using Calendar.Contracts;
@@ -26,6 +27,11 @@ namespace Calendar.Domain.Repositories
         public IEnumerable<Meeting> GetAllMeetings()
         {
             return _meetings;
+        }
+
+        public IEnumerable<Meeting> GetMeetingsByRoomName(string roomName)
+        {
+            return _meetings.Where(m => m.Room.Name == roomName);
         }
 
         private void DumpToFile()
