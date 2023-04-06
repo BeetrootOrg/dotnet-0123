@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS tbl_phone_book (
     first_name character varying(255) NOT NULL,
     last_name character varying(255),
     created_at timestamp without time zone DEFAULT now(),
-	UNIQUE (code_country, phone_number)
+    UNIQUE (code_country, phone_number)
 );
 
 -- 2. Table to store school schedule
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS tbl_school_schedule (
     subject character varying(255) NOT NULL,
     teacher character varying(255) NOT NULL,
     UNIQUE(date, start, finish, room),
-	CHECK (start < finish)
+    CHECK (start < finish)
 );
 
 -- 3. Table to store user’s login history
@@ -41,11 +41,11 @@ CREATE TABLE IF NOT EXISTS tbl_bank_accounts (
     second_name character varying(255),
     surname character varying(255),
     is_blocked boolean NOT NULL DEFAULT false,
-	is_actual boolean NOT NULL,
+    is_actual boolean NOT NULL,
     date_opened timestamp,
     date_closed timestamp,
     created_at timestamp NOT NULL DEFAULT now(),
-	UNIQUE (account_number)
+    UNIQUE (account_number)
 );
 
 -- 5. Table to store bank transactions data
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS tbl_bank_transactions (
     account_number_receiver character varying(255) NOT NULL,
     currency_name character varying(32) NOT NULL,
     amount numeric(15,5),
-	is_success boolean NOT NULL DEFAULT true,
+    is_success boolean NOT NULL DEFAULT true,
     created_at timestamp without time zone NOT NULL DEFAULT now(),
-	CHECK (account_number_sender <> account_number_receiver AND amount > 0)
+    CHECK (account_number_sender <> account_number_receiver AND amount > 0)
 )
