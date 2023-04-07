@@ -7,7 +7,7 @@ namespace ConsoleApp.Models.Objects
 {
     internal class SnakeObject : IGameObject
     {
-        public char Symbol => '#';
+        public char Symbol => '■';
         public int X { get; init; }
         public int Y { get; init; }
         public SnakeObject(int x, int y)
@@ -17,8 +17,14 @@ namespace ConsoleApp.Models.Objects
         }
         public void Render()
         {
+            Render(ConsoleColor.DarkGreen);
+        }
+        public void Render(ConsoleColor consoleColor)
+        {
+            Console.ForegroundColor = consoleColor;
             Console.SetCursorPosition(X, Y);
             Console.Write(Symbol);
+            Console.ResetColor();
         }
 
         public SnakeObject Move(Direction direction)

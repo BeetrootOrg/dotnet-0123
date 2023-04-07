@@ -4,7 +4,7 @@ namespace ConsoleApp.Models.Objects
 {
     internal class BorderObject : IGameObject
     {
-        public char Symbol => '@';
+        public char Symbol => '■';
         public int X { get; init; }
         public int Y { get; init; }
         public BorderObject(int x, int y)
@@ -14,8 +14,10 @@ namespace ConsoleApp.Models.Objects
         }
         public void Render()
         {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.SetCursorPosition(X, Y);
             Console.Write(Symbol);
+            Console.ResetColor();
         }
     }
 }

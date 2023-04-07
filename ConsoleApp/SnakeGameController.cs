@@ -14,7 +14,7 @@ namespace ConsoleApp
         private Border _border;
         private int _maxSnakeLength;
 
-        public GameState GameState = GameState.Playing;
+        public GameState GameState { get; private set; } = GameState.Playing;
         public SnakeGameController(Snake snake, AppleGenerator appleGenerator, Border border)
         {
             if (snake is null)
@@ -41,9 +41,8 @@ namespace ConsoleApp
 
         public void Step(Direction direction)
         {
-            Console.SetCursorPosition(0, 15);
-            Console.WriteLine($"SCORE: {_snake.Score}\nSNAKE LENGTH: {_snake.Length}\nMAX SNAKE LENGTH: {_maxSnakeLength}\nHEAD: ({_snake.Head.X}, {_snake.Head.Y})");
-            Console.WriteLine($"GAME OVER {GameState}");
+            Console.SetCursorPosition(0, _border.Height + 1);
+            Console.WriteLine($"SCORE: {_snake.Score}\nSNAKE LENGTH: {_snake.Length}\n");
 
             try
             {

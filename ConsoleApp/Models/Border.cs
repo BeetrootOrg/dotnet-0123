@@ -15,9 +15,13 @@ namespace ConsoleApp.Models
         public int Height { get; }
         public Border(int width, int height)
         {
-            if (width < 1 || height < 1)
+            if (width < 5 || height < 5)
             {
-                throw new ArgumentException("The field can't be that small.");
+                throw new InvalidBorderSizeException("Minimum width/height of field can be less than 5.");
+            }
+            if (width > 50 || height > 50)
+            {
+                throw new InvalidBorderSizeException("Maximum width/height of field can be more than 50.");
             }
 
             Width = width;

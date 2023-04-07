@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 
 using ConsoleApp.Enums;
 using ConsoleApp.Models;
@@ -16,6 +17,7 @@ namespace ConsoleApp
         private Snake _snake;
 
         public double Speed { get; } = 500;
+        public GameState State => _controller.GameState;
 
         public SnakeGame(int width, int height)
         {
@@ -38,14 +40,19 @@ namespace ConsoleApp
         public void Update()
         {
             Console.Clear();
-            _controller.Step(_direction);
-            switch (_controller.GameState)
+            if (State == GameState.Playing)
             {
-                case GameState.Win:
-                    break;
-                case GameState.GameOver:
-
-                    break;
+                _controller.Step(_direction);
+            }
+            if (State == GameState.Win)
+            {
+                Console.Clear();
+                Console.WriteLine($"Congratulations, you won! (Press any key)");
+            }
+            if (State == GameState.GameOver)
+            {
+                Console.Clear();
+                Console.WriteLine($"You lose! (Press any key)");
             }
         }
 

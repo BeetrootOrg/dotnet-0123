@@ -4,7 +4,7 @@ namespace ConsoleApp.Models.Objects
 {
     internal class AppleObject : IGameObject
     {
-        public char Symbol => 'o';
+        public char Symbol => '○';
         public int X { get; init; }
         public int Y { get; init; }
         public AppleObject(int x, int y)
@@ -14,8 +14,10 @@ namespace ConsoleApp.Models.Objects
         }
         public void Render()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(X, Y);
             Console.Write(Symbol);
+            Console.ResetColor();
         }
     }
 }

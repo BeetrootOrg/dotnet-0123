@@ -22,7 +22,7 @@ namespace ConsoleApp.Models
         public void Render()
         {
             Console.SetCursorPosition(_appleObject.X, _appleObject.Y);
-            Console.Write(_appleObject.Symbol);
+            _appleObject.Render();
         }
     }
 }

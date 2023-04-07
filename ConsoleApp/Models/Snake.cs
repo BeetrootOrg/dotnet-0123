@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,7 +35,8 @@ namespace ConsoleApp.Models
         }
         public void Render()
         {
-            foreach (SnakeObject snakePart in _body)
+            _body[0].Render(ConsoleColor.Yellow);
+            foreach (SnakeObject snakePart in _body.Skip(1))
             {
                 snakePart.Render();
             }
