@@ -33,3 +33,13 @@ CREATE TABLE IF NOT EXISTS tbl_orders_products (
     FOREIGN KEY (order_id) REFERENCES tbl_orders(id),
     FOREIGN KEY (product_id) REFERENCES tbl_products(id)
 );
+
+CREATE INDEX IF NOT EXISTS tbl_orders_customer_id ON tbl_orders(customer_id);
+CREATE INDEX IF NOT EXISTS tbl_orders_employee_id ON tbl_orders(employee_id);
+
+CREATE INDEX IF NOT EXISTS tbl_orders_products_order_id ON tbl_orders_products(order_id);
+CREATE INDEX IF NOT EXISTS tbl_orders_products_product_id ON tbl_orders_products(product_id);
+
+CREATE INDEX IF NOT EXISTS tbl_customers_last_name_first_name ON tbl_customers(last_name, first_name);
+
+CREATE UNIQUE INDEX IF NOT EXISTS tbl_customers_email ON tbl_customers(email);
