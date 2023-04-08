@@ -5,18 +5,26 @@ CREATE TABLE IF NOT EXISTS tbl_authors (
     last_name character varying(255)
 );
 
+--genres
+CREATE TABLE IF NOT EXISTS tbl_genres (
+    id serial PRIMARY KEY,
+    name character varying(255) NOT NULL
+);
+
 --books
 CREATE TABLE IF NOT EXISTS tbl_books (
     id serial PRIMARY KEY,
     author_id integer,
+    genre_id integer,
     title character varying(255) NOT NULL,
     isbn character varying(255) NOT NULL,
     year integer NOT NULL,
-    genre character varying(255),
-    FOREIGN KEY (author_id) REFERENCES tbl_authors(id)
+    FOREIGN KEY (author_id) REFERENCES tbl_authors(id),
+    FOREIGN KEY (genre_id) REFERENCES tbl_genres(id)
 );
 
 CREATE INDEX IF NOT EXISTS tbl_books_author_id ON tbl_books(author_id);
+CREATE INDEX IF NOT EXISTS tbl_books_genre_id ON tbl_books(genre_id);
 
 --count of each book (query instead table)
 SELECT 
