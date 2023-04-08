@@ -18,7 +18,22 @@ CREATE TABLE IF NOT EXISTS tbl_books (
 
 CREATE INDEX IF NOT EXISTS tbl_books_author_id ON tbl_books(author_id);
 
---count of each book
+--count of each book (query instead table)
+SELECT 
+	h.book_id,
+	b.title,
+	a.first_name,
+	a.last_name,
+	(SELECT SUM(quantity) FROM tbl_history WHERE book_id = h.book_id AND direction = 'IN') AS received,
+	(SELECT SUM(quantity) FROM tbl_history WHERE book_id = h.book_id AND direction = 'OUT') AS returned
+FROM
+	tbl_history AS h
+INNER JOIN
+	tbl_books AS b ON h.book_id = b.id
+INNER JOIN
+	tbl_authors AS a ON b.author_id = a.id	
+GROUP BY
+	h.book_id, b.title, a.first_name, a.last_name
 
 --customers
 CREATE TABLE IF NOT EXISTS tbl_customers (
