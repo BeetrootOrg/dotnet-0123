@@ -1,3 +1,15 @@
 {
-    "omnisharp.enableRoslynAnalyzers": true
+    "omnisharp.enableRoslynAnalyzers": true,
+    "omnisharp.useEditorFormattingSettings": true,
+    "omnisharp.enableEditorConfigSupport": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.organizeImports": true
+    },
+    "[chsarp]": {
+        "editor.defaultFormatter": "ms-dotnettools.csharp",
+        "editor.autoIndent": "advanced",
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true
+    },
 }

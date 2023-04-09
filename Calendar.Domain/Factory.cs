@@ -1,12 +1,13 @@
 using Calendar.Domain.Repositories;
+using Calendar.Domain.Services;
 
 namespace Calendar.Domain
 {
     public static class Factory
     {
-        public static IRepository CreateRepository()
+        public static IMeetingService CreateService(string filename)
         {
-            return new Repository();
+            return new MeetingService(Repository.CreateRepository(filename));
         }
     }
 }

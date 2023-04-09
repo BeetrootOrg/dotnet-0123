@@ -1,7 +1,9 @@
 ﻿using Calendar.Console.Controllers;
 using Calendar.Console;
 
-Context context = Context.CreateContext();
+const string filename = "input.csv";
+
+Context context = Context.CreateContext(filename);
 IController controller = new MainMenuController(context);
 while (controller != null)
 {

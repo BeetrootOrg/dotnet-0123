@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 
 using Calendar.Contracts;
-namespace Calendar.Domain.Repositories
+
+namespace Calendar.Domain.Services
 {
-    internal interface IRepository
+    public interface IMeetingService
     {
         IEnumerable<Meeting> GetAllMeetings();
         void AddMeeting(Meeting meeting);

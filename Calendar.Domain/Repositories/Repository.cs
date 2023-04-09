@@ -1,37 +1,67 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
 using Calendar.Contracts;
 
-namespace  Calendar.Domain.Repositories
+namespace Calendar.Domain.Repositories
 {
     internal class Repository : IRepository
     {
-        public IEnumerable<Meeting>GetAllMeetings()
+        private readonly string _filename;
+        private readonly IList<Meeting> _meetings;
+
+        public Repository(string filename, IList<Meeting> meetings)
         {
-            // ToDo: read from file
-            return new Meeting[]
-            {
-                new()
-                {
-                    Name = "meeting1",
-                    Start = new DateTime(2024, 01, 01),
-                    Duration = TimeSpan.FromMinutes(60),
-                    Room = new Room
+            _filename = filename;
+            _meetings = meetings;
+        }
+
+        public void AddMeeting(Meeting meeting)
+        {
+            _meetings.Add(meeting);
+            DumpToFile();
+        }
+
+        public IEnumerable<Meeting> GetAllMeetings()
+        {
+            return _meetings;
+        }
+
+        private void DumpToFile()
+        {
+            File.WriteAllLines(
+                _filename,
+                _meetings.Select(meeting => $"{meeting.Name},{meeting.Start},{meeting.Duration},{meeting.Room.Name}")
+                    .Prepend("Name,Start,Duration,Room")
+            );
+        }
+
+        public static IRepository CreateRepository(string filename)
+        {
+            return !File.Exists(filename)
+                ? new Repository(filename, new List<Meeting>())
+                : new Repository(
+                filename,
+                File.ReadAllLines(filename)
+                    .Skip(1)
+                    .Select(line =>
                     {
-                        Name = "room1"
-                    }
-                },
-                new()
-                {
-                    Name = "meeting2",
-                    Start = new DateTime(2025, 03, 10),
-                    Duration = TimeSpan.FromMinutes(15),
-                    Room = new Room
-                    {
-                        Name = "room2"
-                    }
-                }
-            };
+                        string[] items = line.Split(',');
+                        return new Meeting
+                        {
+                            Name = items[0],
+                            Start = DateTime.Parse(items[1]),
+                            Duration = TimeSpan.Parse(items[2]),
+                            Room = new Room
+                            {
+                                Name = items[3]
+                            }
+                        };
+                    })
+                    .ToList()
+            );
         }
     }
 }
