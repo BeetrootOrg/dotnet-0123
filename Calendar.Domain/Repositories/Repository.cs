@@ -24,6 +24,17 @@ namespace Calendar.Domain.Repositories
             DumpToFile();
         }
 
+        public void UpdateMeeting(Meeting meeting, IEnumerable<Meeting> oldMeetings)
+        {
+            foreach (Meeting item in oldMeetings)
+            {
+                _ = _meetings.Remove(item);
+            }
+
+            _meetings.Add(meeting);
+            DumpToFile();
+        }
+
         public IEnumerable<Meeting> GetAllMeetings()
         {
             return _meetings;
