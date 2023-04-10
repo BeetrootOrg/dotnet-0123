@@ -1,49 +1,50 @@
--- 01. init table
-CREATE TABLE IF NOT EXISTS tbl_books (
-
- id BIGSERIAL PRIMARY KEY,
-
- title VARCHAR(255) NOT NULL,
-
- author VARCHAR(255),
-
- genre VARCHAR(255) NOT NULL,
-
- year INT NOT NULL
-
+-- 01. Create table for ‘phone book’
+CREATE TABLE IF NOT EXISTS tbl_phone_book (
+    id BIGSERIAL NOT NULL ,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    phone VARCHAR(12) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
 );
 
--- 02. select data by condition
+-- 02. Create table to store school schedule
+CREATE TABLE IF NOT EXISTS tbl_school_schedule (
+    id BIGSERIAL NOT NULL,
+    class_name VARCHAR(50) NOT NULL,
+    class_time TIMESTAMP NOT NULL,
+    class_room VARCHAR(50) NOT NULL,
+    teacher_name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
 
--- 02.1. group by genre and count books in every group
-SELECT genre, Count(genre)
-FROM tbl_books
-GROUP BY genre;
+--03. Create table to store user’s login history
+CREATE TABLE IF NOT EXISTS tbl_login_history (
+    id BIGSERIAL NOT NULL,
+    user_nickname VARCHAR(50) NOT NULL,
+    user_email VARCHAR(50) NOT NULL,
+    login_time TIMESTAMP NOT NULL,
+    logout_time TIMESTAMP NOT NULL,
+    PRIMARY KEY (id)
+);
 
---02.2 select all books with titles having the letter 'a'
-SELECT *
-FROM tbl_books
-where title like '%a%';
+-- 04. Create table to store bank accounts
+CREATE TABLE IF NOT EXISTS tbl_bank_accounts (
+    id BIGSERIAL NOT NULL,
+    account_number BIGINT NOT NULL,
+    account_owner_first_name VARCHAR(50) NOT NULL,
+    account_owner_last_name VARCHAR(50) NOT NULL,
+    account_balance MONEY NOT NULL,
+    PRIMARY KEY (id)
+);
 
---02.3 select all books without an author
-SELECT *
-FROM tbl_books
-where author is NULL;
-
---02.4 update the year of every book, add 1 year
-UPDATE tbl_books
-SET year = year+1;
-
---02.5 delete all books without the author
-DELETE FROM tbl_books
-WHERE author is null;
-
---02.6 count the number of rows in the table with the author having the letter 'o'
-SELECT COUNT(*)
-FROM tbl_books
-WHERE author like '%o%';
-
---02.7 group books by year and show how many books in the same year
-SELECT year, COUNT(year)
-FROM tbl_books
-GROUP BY year;
+-- 05. Create table to store bank transactions data
+CREATE TABLE IF NOT EXISTS tbl_bank_transactions (
+    id BIGSERIAL NOT NULL,
+    account_number BIGINT NOT NULL,
+    transaction_date TIMESTAMP NOT NULL,
+    transaction_type VARCHAR(50) NOT NULL,
+    transaction_amount MONEY NOT NULL,
+    transaction_description VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
