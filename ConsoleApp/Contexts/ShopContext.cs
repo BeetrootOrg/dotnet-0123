@@ -1,3 +1,5 @@
+using System;
+
 using ConsoleApp.Models;
 
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +19,7 @@ namespace ConsoleApp.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             _ = optionsBuilder.UseNpgsql("User ID=user;Password=password;Host=localhost;Port=5432;Database=shop2;");
+            _ = optionsBuilder.LogTo(Console.WriteLine);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
