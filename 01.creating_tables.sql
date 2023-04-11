@@ -1,52 +1,42 @@
-CREATE TABLE IF NOT EXISTS tbl_phonebook
+
+CREATE TABLE IF NOT EXISTS tbl_authors
 (
-    id BIGSERIAL PRIMARY KEY,
-    firstname VARCHAR(100),
-    lastname VARCHAR(100),
-	country_code VARCHAR(4) NOT NULL CHECK(length(country_code) < 5),
-	phone_number VARCHAR(10) NOT NULL CHECK(length(phone_number) = 10),
-	UNIQUE (country_code, phone_number),
-	CHECK (firstname IS NOT NULL OR lastname IS NOT NULL)
+    id SERIAL PRIMARY KEY,
+	first_name VARCHAR(100) DEFAULT 'UNKNOWN',
+	last_name VARCHAR(100) DEFAULT 'UNKNOWN'
 );
 
-CREATE TABLE IF NOT EXISTS tbl_schedule
+CREATE TABLE IF NOT EXISTS tbl_books
 (
-    id BIGSERIAL PRIMARY KEY,
-    lesson_subject VARCHAR(100) DEFAULT 'LECTURE',
-    lecturer VARCHAR(200) NOT NULL,
-	lesson_start TIMESTAMP NOT NULL,
-	lesson_end TIMESTAMP NOT NULL,
-	CHECK (lesson_start < lesson_end),  
-	UNIQUE (lecturer, lesson_start)
+    id SERIAL PRIMARY KEY,
+	isbn INTEGER NOT NULL,
+    title VARCHAR(100) NOT NULL,
+	author_id INTEGER NOT NULL, 
+	publish_year DATE CHECK(publish_year < CURRENT_DATE), 
+	FOREIGN KEY (author_id) REFERENCES tbl_authors(id)
 );
 
-CREATE TABLE IF NOT EXISTS tbl_bank_accounts
+CREATE TABLE IF NOT EXISTS tbl_customers 
 (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	iban VARCHAR(34) NOT NULL UNIQUE, 
-	account_holder VARCHAR(250) NOT NULL,
-	opening_date TIMESTAMP NOT NULL CHECK(opening_date <= NOW()),
-	balance MONEY NOT NULL CHECK(balance + credit_line >= 0::money),
-	credit_line MONEY DEFAULT '0' CHECK(credit_line >= 0::money)
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(255) NOT NULL,
+    address VARCHAR(1000) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS tbl_transactions
+CREATE TABLE IF NOT EXISTS tbl_counting 
 (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	operation VARCHAR NOT NULL CHECK(operation = 'DEPOSIT' OR operation = 'WITHDROW'),
-	counterparties VARCHAR(250) DEFAULT 'UNKNOWN',
-	date TIMESTAMP NOT NULL CHECK(date <= NOW()),
-	sum MONEY NOT NULL CHECK (sum > 0::money)
-); 
-
-CREATE TABLE IF NOT EXISTS tbl_login_history
-(
-    id BIGSERIAL PRIMARY KEY,
-    browser VARCHAR(20) DEFAULT 'UNKNOWN',
-	ipaddress VARCHAR(45) NOT NULL,
-	date TIMESTAMP NOT NULL CHECK(date <= NOW()),
-	type VARCHAR(6) CHECK (type = 'login' OR type = 'logout') 
+    id SERIAL PRIMARY KEY,
+	book_id INTEGER NOT NULL,
+	customer_id INTEGER NOT NULL,
+	issue_date TIMESTAMP NOT NULL,
+	return_date TIMESTAMP NOT NULL CHECK(issue_date < return_date),
+	FOREIGN KEY (book_id) REFERENCES tbl_books(id),
+	FOREIGN KEY (customer_id) REFERENCES tbl_customers(id)
 );
 
-
-
+CREATE INDEX IF NOT EXISTS tbl_books_author_id ON tbl_books(author_id);
+CREATE INDEX IF NOT EXISTS tbl_counting_book_id ON tbl_counting(book_id);
+CREATE INDEX IF NOT EXISTS tbl_authors_customer_id ON tbl_counting(customer_id)
