@@ -23,7 +23,7 @@ namespace ConsoleApp.Models
         public int CustomerId { get; set; }
 
         [ForeignKey(nameof(CustomerId))]
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
 
         [Required]
         [Column("quantity")]
@@ -31,12 +31,12 @@ namespace ConsoleApp.Models
 
         [Required]
         [Column("date")]
-        public int Date { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? Date { get; set; }
 
         [Required]
         [MaxLength(3)]
         [Column("direction")]
-        public int Direction { get; set; }
-
+        public string Direction { get; set; }
     }
 }

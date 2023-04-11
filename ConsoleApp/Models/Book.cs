@@ -16,14 +16,14 @@ namespace ConsoleApp.Models
         public int AuthorId { get; set; }
 
         [ForeignKey(nameof(AuthorId))]
-        public Author Author { get; set; }
+        public virtual Author Author { get; set; }
 
         [Required]
         [Column("genre_id")]
         public int GenreId { get; set; }
 
         [ForeignKey(nameof(GenreId))]
-        public Genre Genre { get; set; }
+        public virtual Genre Genre { get; set; }
 
         [Required]
         [MaxLength(255)]
