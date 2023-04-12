@@ -1,0 +1,15 @@
+a {
+  color: #89cff0;
+}
+
+a:hover {
+  color: #46b3e7;
+}
+
+body {
+  margin: 1em 10em;
+  /* background-image: url("background.jpeg"); */
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.2em;
+}
