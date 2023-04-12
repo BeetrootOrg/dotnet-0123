@@ -1,34 +1,85 @@
-﻿
-ConsoleApp.Stack<string> stack = new ConsoleApp.Stack<string>();
-Console.WriteLine(stack.Count);
+﻿using System;
+using System.Collections.Generic;
 
-stack.Push("Hello");
-stack.Push("World");
-stack.Push("!");
+namespace VoteApp
+{
+    class VoteOption
+    {
+        public string Option { get; set; }
+        public int VoteCount { get; set; }
+    }
 
-Console.WriteLine(stack.Count);
+    class Vote
+    {
+        static void Main(string[] args)
+        {
+            List<VoteOption> voteOptions = new List<VoteOption>();
+            List<string> votedUsers = new List<string>();
 
-string[] arr1 = new string[3];
+            Console.Write("Enter vote topic: ");
+            string topic = Console.ReadLine();
 
-stack.CopyTo(arr1, 0);
+            Console.WriteLine("Enter vote options (enter 'done' when finished):");
+            string option = Console.ReadLine();
+            while (option != "done")
+            {
+                voteOptions.Add(new VoteOption { Option = option, VoteCount = 0 });
+                option = Console.ReadLine();
+            }
 
-Console.WriteLine(String.Join("-*-", arr1));
+            Console.WriteLine("Vote topic: " + topic);
+            Console.WriteLine("Vote options:");
+            foreach (VoteOption voteOption in voteOptions)
+            {
+                Console.WriteLine(voteOption.Option);
+            }
 
-string b = stack.Peek();
+            while (true)
+            {
+                Console.WriteLine("Enter 'vote' to vote or 'exit' to exit:");
+                string voteOrExit = Console.ReadLine();
+                if (voteOrExit.ToLower() == "exit")
+                {
+                    break;
+                }
+                else if (voteOrExit.ToLower() == "vote")
+                {
+                    Console.Write("Enter your name: ");
+                    string name = Console.ReadLine();
 
-Console.WriteLine(b);
+                    if (votedUsers.Contains(name))
+                    {
+                        Console.WriteLine("You have already voted!");
+                    }
+                    else
+                    {
+                        Console.Write("Enter your vote: ");
+                        string vote = Console.ReadLine();
 
-stack.CopyTo(arr1, 0);
+                        VoteOption selectedOption = voteOptions.Find(v => v.Option == vote);
+                        if (selectedOption != null)
+                        {
+                            selectedOption.VoteCount++;
+                            votedUsers.Add(name);
+                            Console.WriteLine("Vote recorded!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid vote option.");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid command.");
+                }
+            }
 
-Console.WriteLine(String.Join("-!-", arr1));
-
-stack.Pop();
-
-string[] arr2 = new string[2];
-
-stack.CopyTo(arr2, 0);
-
-Console.WriteLine(String.Join("(*)", arr2));
-
-stack.Clear();
-
+            Console.WriteLine("Final voting results:");
+            foreach (VoteOption voteOption in voteOptions)
+            {
+                Console.WriteLine(voteOption.Option + ": " + voteOption.VoteCount);
+            }
+        }
+    }
+}
