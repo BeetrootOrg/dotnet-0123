@@ -2,7 +2,13 @@
 using System.IO;
 using System.Xml.Serialization;
 
+using ConsoleApp;
+
+using MessagePack;
+
 using Newtonsoft.Json;
+
+using YamlDotNet.Serialization;
 
 static void SerializeToJSON<T>(T obj, string filename)
 {
@@ -14,6 +20,17 @@ static void SerializeToXML<T>(T obj, string filename)
     XmlSerializer serializer = new(typeof(T));
     using FileStream file = File.Create($"{filename}.xml");
     serializer.Serialize(file, obj);
+}
+
+static void SerializeToYAML<T>(T obj, string filename)
+{
+    var serializer = new SerializerBuilder().Build();
+    File.WriteAllText($"{filename}.yaml", serializer.Serialize(obj));
+}
+
+static void SerializeToMessagePack<T>(T obj, string filename)
+{
+    File.WriteAllBytes($"{filename}.bin", MessagePackSerializer.Serialize(obj));
 }
 
 int number = 42;
@@ -48,6 +65,13 @@ Test test = new()
     }
 };
 
+MyClass myClass = new()
+{
+    Age = 26,
+    FirstName = "Dima",
+    LastName = "Misik",
+};
+
 SerializeToJSON(number, "./json/int");
 SerializeToJSON(isActive, "./json/bool");
 SerializeToJSON(str, "./json/string");
@@ -62,21 +86,11 @@ SerializeToXML(money, "./xml/float");
 SerializeToXML(arr, "./xml/intarr");
 SerializeToXML(test, "./xml/test");
 
-class Test
-{
-    public int Number { get; init; }
-    public decimal Money { get; init; }
-    public string Text { get; init; }
-    public bool IsActive {get; init; }
-    public IEnumerable<int> Numbers { get; init; } 
-    public Inner[] Inners { get; init; }
-    public object Null { get; init; }
-}
+SerializeToYAML(number, "./yaml/int");
+SerializeToYAML(isActive, "./yaml/bool");
+SerializeToYAML(str, "./yaml/string");
+SerializeToYAML(money, "./yaml/float");
+SerializeToYAML(arr, "./yaml/intarr");
+SerializeToYAML(test, "./yaml/test");
 
-class Inner
-{
-    public int InnerNumber { get; init; }
-    public decimal InnerMoney { get; init; }
-    public string InnerText { get; init; }
-    public bool InnerIsActive {get; init; }
-}
+SerializeToMessagePack(myClass, "./msgpack/myclass");
