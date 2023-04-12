@@ -1,87 +1,61 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 
-using ConsoleApp;
+var sw = new Stopwatch();
 
-AddOverflowDelegate overflow = (long result) => { return (int)result;}; //AddOverflowDelegate overflow = (long result) => (int)result;
-AddSuccessDelegate success = (int result) => Console.WriteLine(result);
+sw.Start();
 
-int result1 = Test.Add(1, 2, overflow, success);
-int result2 = Test.Add(int.MaxValue, 1, overflow, success);
+BoilAKettle();
+HeatUpaPan();
+FryTwoEggs();
+AddButterToBread();
+PrepareCoffee();
+PourAGlassOfWater();
+Breakfast();
 
-int result3 = Test.Add(10, 20, 
-    (long result) => throw new Exception("Unexpected"), 
-    (int result) => Console.WriteLine($"10 + 20 ={result}"));
-
-List<int> numbers = new List<int>();
-
-OnChangeableChange writeLine = (obj, args) =>
-
-        Console.WriteLine($"Number changed from {args.Old} to {args.New}");
-
-OnChangeableChange tracker = (obj, args) =>
-
-        numbers.Add(args.Old);
+sw.Stop();
+Console.WriteLine($"Breakfast took {sw.ElapsedMilliseconds}");
 
 
-Changeable c1 = new Changeable
+void BoilAKettle()
 {
-    Number = 42
-};
-
-c1.OnChangeableChange += writeLine;
-c1.OnChangeableChange += tracker;
-
-c1.Number = 43;
-c1.Number = 44;
-c1.Number = 44;
-c1.Number = 42;
-
-Console.WriteLine(string.Join(", ", numbers));
-
-foreach (int item in new WhereEnumerable<int>(new[] { 1, 2, 3, 4 }, (item) => item % 2 == 0))
-{
-    Console.WriteLine(item);
+    Thread.Sleep(5000);
+    Console.WriteLine("Kettle is boild!");
 }
 
-foreach (string item in new WhereEnumerable<string>(new[] { "hello", "world", "!" }, (item) => item.Length > 3))
+void HeatUpaPan()
 {
-    Console.WriteLine(item);
+    Thread.Sleep(2000);
+    Console.WriteLine("Pan ready!");
 }
 
-#pragma warning disable
-foreach (string item in new WhereEnumerable<object>(new object[] { "hello", 1, "world", 2, "!", 3 }, (item) => item is string))
-#pragma warning restore
+void FryTwoEggs()
 {
-    Console.WriteLine(item);
+    Thread.Sleep(7000);
+    Console.WriteLine("Eggs ready!");
 }
 
-int called = 0;
-Timer t1 = new((state) => Console.WriteLine($"Called: {++called}"),
-    null,
-    TimeSpan.Zero, //0
-    TimeSpan.FromSeconds(1));
-
-Timer t2 = new((state) => Console.WriteLine("Second timer"),
-    null,
-    Timeout.Infinite,
-    Timeout.Infinite);
-
-Thread.Sleep(5000);
-Console.ForegroundColor = ConsoleColor.Yellow;
-t2.Change(TimeSpan.Zero, TimeSpan.FromSeconds(1));
-Thread.Sleep(5000);
-
-int[] number = new[] { 1, 2, 3, 4, 5 };
-string[] words = new[] { "one", "two", "three", "four" };
-
-foreach (string item in new ZipEnumerable<int, string, string>(numbers, words, (num, word) => $"Number '{num}' pronounces as '{word}'"))
+void AddButterToBread()
 {
-    Console.WriteLine(item);
+    Thread.Sleep(1500);
+    Console.WriteLine("Bread ready!");
 }
 
-foreach (int item in new SelectEnumerable<int, int>(numbers, (num) => num * num))
+void PrepareCoffee()
 {
-    Console.WriteLine(item);
+    Thread.Sleep(2000);
+    Console.WriteLine("Coffee ready!");
+}
+
+void PourAGlassOfWater()
+{
+    Thread.Sleep(2000);
+    Console.WriteLine("Water in glass!");
+}
+
+void Breakfast()
+{
+    Thread.Sleep(10000);
+    Console.WriteLine("Breakfast eaten!");
 }
