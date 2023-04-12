@@ -3,63 +3,20 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
-var sw = new Stopwatch();
+var t1 = DelayAMessage(TimeSpan.FromSeconds(1), "First message");
+var t2 = DelayAMessage(TimeSpan.FromSeconds(2), "Second message");
+var t3 = DelayAMessage(TimeSpan.FromSeconds(3), "Third message");
+
+Stopwatch sw = new();
 
 sw.Start();
-
-var boilAKettleTask = BoilAKettle();
-var heatUpAPanTask = HeatUpAPan();
-var pourAGlassOfWaterTask = PourAGlassOfWater();
-await AddButterToBread();
-await heatUpAPanTask;
-await FryTwoEggs();
-await Task.WhenAll(boilAKettleTask, pourAGlassOfWaterTask);
-await PrepareCoffee();
-await Breakfast();
-
+await Task.WhenAll(t1, t2, t3);
 sw.Stop();
-Console.WriteLine($"Breakfast took {sw.ElapsedMilliseconds}");
 
+Console.WriteLine($"Finished in {sw.ElapsedMilliseconds}");
 
-async Task BoilAKettle()
+static async Task DelayAMessage(TimeSpan delay, string message)
 {
-    //Thread.Sleep(5000);
-    await Task.Delay(5000);
-    Console.WriteLine("Kettle is boild!");
-}
-
-async Task HeatUpAPan()
-{
-    await Task.Delay(2000);
-    Console.WriteLine("Pan ready!");
-}
-
-async Task FryTwoEggs()
-{
-    await Task.Delay(7000);
-    Console.WriteLine("Eggs ready!");
-}
-
-async Task AddButterToBread()
-{
-    await Task.Delay(1500);
-    Console.WriteLine("Bread ready!");
-}
-
-async Task PrepareCoffee()
-{
-    await Task.Delay(2000);
-    Console.WriteLine("Coffee ready!");
-}
-
-async Task PourAGlassOfWater()
-{
-    await Task.Delay(2000);
-    Console.WriteLine("Water in glass!");
-}
-
-async Task Breakfast()
-{
-    await Task.Delay(10000);
-    Console.WriteLine("Breakfast eaten!");
+    await Task.Delay(delay);
+    Console.WriteLine(message);
 }
