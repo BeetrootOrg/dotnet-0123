@@ -58,30 +58,36 @@ a:hover {
 }
 
 .post-footer {
-    color: white;
+    background-color: whitesmoke;
     display: flex;
     justify-content: space-between;
 }
 
 .post-footer span {
-    border-radius: 4px;
     display: inline-block;
-    padding: 8px;
+    padding: 8px 0;
 }
 
 .post-footer span.date {
-    background-color: gray;
+    border-top: 1px solid purple;
+    border-bottom: 1px solid purple;
+    color: purple;
 }
 
 .post-footer span.time {
-    border: 1px solid gray;
-    color: gray;
+    border-top: 1px solid darkolivegreen;
+    border-bottom: 1px solid darkolivegreen;
+    color: darkolivegreen;
 }
 
 .post-footer span.completed {
-    background-color: green;
+    border-top: 1px solid green;
+    border-bottom: 1px solid green;
+    color: green;
 }
 
 .post-footer span.waiting {
-    background-color: steelblue;
+    border-top: 1px solid darkblue;
+    border-bottom: 1px solid darkblue;
+    color: darkblue;
 }
