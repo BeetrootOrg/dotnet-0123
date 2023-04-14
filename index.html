@@ -7,9 +7,16 @@
     <title>Document</title>
   </head>
   <body>
-    <input type="number" name="Number 1" id="number1" />
-    <input type="number" name="Number 2" id="number2" />
-    <button onclick="add()">Add</button>
+    <div>
+      <input type="number" name="Number 1" id="number1" />
+      <input type="number" name="Number 2" id="number2" />
+      <button onclick="add()">Add</button>
+    </div>
+
+    <div>
+      <input type="number" name="Number" id="number" />
+      <button id="coutnSumBtn">Count sum</button>
+    </div>
 
     <script>
       console.log("Hello, world!");
@@ -35,6 +42,25 @@
 
         console.log(number1 + number2);
       }
+
+      const countSumBtn = document.getElementById("coutnSumBtn");
+      countSumBtn.addEventListener("click", () => {
+        const number = document.getElementById("number").value;
+        const numberInt = parseInt(number);
+
+        if (isNaN(numberInt)) {
+          console.error("Invalid input");
+          return;
+        }
+
+        let sum = 0;
+        for (let i = 1; i <= numberInt; i++) {
+          sum += i;
+        }
+
+        // C# Analogue: $"Sum of numbers from 1 to {numberInt} is {sum}."
+        alert(`Sum of numbers from 1 to ${numberInt} is ${sum}.`);
+      });
     </script>
   </body>
 </html>
