@@ -28,6 +28,11 @@
         const number1 = parseInt(value1);
         const number2 = parseInt(value2);
 
+        if (isNaN(number1) || isNaN(number2)) {
+          console.error("Invalid input");
+          return;
+        }
+
         console.log(number1 + number2);
       }
     </script>
