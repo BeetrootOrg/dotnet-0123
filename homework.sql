@@ -1,19 +1,42 @@
--- Homework SQL DDL
--- Create few tables schemas:
---     table for ‘phone book’
---     table to store school schedule
---     table to store user’s login history
---     table to store bank accounts
---     table to store bank transactions data
+-- Homework 29-Key Index SQL DDL
+--Create normalized tables for the library domain. it should include:
+--    books
+--    authors
+--    count of each book
+--    customers
+--    history which book was taken by whom and when
 
---1 table for ‘phone book’
-CREATE TABLE IF NOT EXISTS tbl_phone_book
+--1 table book
+CREATE TABLE IF NOT EXISTS tbl_book
 (
-    Id BIGSERIAL PRIMARY KEY,
-    FirstName VARCHAR(100) NOT NULL,
-    LastName VARCHAR(100) NOT NULL,
-    phone VARCHAR(12) NOT NULL
+    id BIGSERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description VARCHAR(1000) NOT NULL,
+    author_id SERIAL NOT NULL, 
+    year TIMESTAMP NOT NULL,
+    FOREIGN KEY (author_id) REFERENCES tbl_author(id)
 );
+
+--2 table authors
+CREATE TABLE IF NOT EXISTS tbl_author
+(
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    birthday TIMESTAMP NOT Null
+);
+
+--4 table customers
+CREATE TABLE IF NOT EXISTS tbl_customer
+(
+    id BIGSERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    adress VARCHAR(255) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    birthday TIMESTAMP NOT Null
+);
+
 
 --2 table to store school schedule
 CREATE TABLE IF NOT EXISTS tbl_school_schedule 
