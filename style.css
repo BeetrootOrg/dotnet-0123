@@ -1,5 +1,6 @@
-* {
-    font-family: 'Roboto', sans-serif;   
+html {
+    font-family: 'Roboto', sans-serif;  
+    font-size: 1em; 
 }
 
 a:link, a:visited {
@@ -35,6 +36,8 @@ a:hover {
 .nav {
     border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
+    display: flex;
+    justify-content: space-between;
     margin: 32px 0;
 }
 
@@ -72,4 +75,8 @@ a:hover {
 
 .post-footer span.duration {
     background-color: darkgray;
+}
+
+button {
+    cursor: pointer;
 }
