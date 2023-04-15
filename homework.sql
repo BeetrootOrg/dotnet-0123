@@ -6,71 +6,53 @@
 --    customers
 --    history which book was taken by whom and when
 
---1 table book
-CREATE TABLE IF NOT EXISTS tbl_book
-(
-    id BIGSERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    description VARCHAR(1000) NOT NULL,
-    author_id SERIAL NOT NULL, 
-    year TIMESTAMP NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES tbl_author(id)
-);
 
 --2 table authors
 CREATE TABLE IF NOT EXISTS tbl_author
 (
     id SERIAL PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
     birthday TIMESTAMP NOT Null
+);
+
+--1 table book
+CREATE TABLE IF NOT EXISTS tbl_book
+(
+    id BIGSERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description VARCHAR(500) NOT NULL,
+    author_id SERIAL NOT NULL, 
+    year TIMESTAMP NOT NULL,
+    initialcount INT NOT NULL Default 1,
+    availablecount INT ,
+    borrowedcount INT,
+    FOREIGN KEY (author_id) REFERENCES tbl_author(id)
 );
 
 --4 table customers
 CREATE TABLE IF NOT EXISTS tbl_customer
 (
     id BIGSERIAL PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
     adress VARCHAR(255) NOT NULL,
     phone VARCHAR(15) NOT NULL,
     birthday TIMESTAMP NOT Null
 );
 
-
---2 table to store school schedule
-CREATE TABLE IF NOT EXISTS tbl_school_schedule 
+--5 history which book was taken by whom and when
+CREATE TABLE IF NOT EXISTS tbl_history
 (
-    Id SMALLSERIAL PRIMARY KEY,
-    DayCode SMALLINT NOT NULL,
-    StartLesson TIME NOT NULL,
-    EndLesson TIME NOT NULL,
-    Lesson VARCHAR(100) NOT NULL
+    id BIGSERIAL PRIMARY KEY,
+    customer_id BIGSERIAL NOT NULL, 
+    book_id BIGSERIAL NOT NULL, 
+    taken TIMESTAMP NOT Null Default now(),
+    returned TIMESTAMP,
+    FOREIGN KEY (customer_id) REFERENCES tbl_customer(id),
+    FOREIGN KEY (book_id) REFERENCES tbl_book(id)
 );
---3 table to store user’s login history
-CREATE TABLE IF NOT EXISTS tbl_users_login_history
-(
-    Id BIGSERIAL PRIMARY KEY,
-    UserLogin VARCHAR(100) NOT NULL,
-    LoginAt TIMESTAMP NOT NULL DEFAULT now()
-); 
-
---4 table to store bank accounts
-CREATE TABLE IF NOT EXISTS tbl_bank_account
-(
-    Id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    Account VARCHAR(100) NOT NULL,
-    OwnerData VARCHAR(500) NOT NULL,
-    CreateAt TIMESTAMP NOT NULL DEFAULT now(),
-    Balance MONEY NOT NULL
-);
-
---5  table to store bank transactions data
-CREATE TABLE IF NOT EXISTS tbl_bank_transactions_data
-(
-    Id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    Account UUID NOT NULL,
-    DebitCredit boolean Not Null, 
-    Summ MONEY NOT NULL,
-    CreateAt TIMESTAMP NOT NULL DEFAULT now()
-);
+--6 count of each book
+UPDATE tbl_book
+SET availablecount = initialcount - (SELECT COUNT(*) FROM tbl_history WHERE tbl_history.book_id = tbl_book.id AND tbl_history.returned IS NULL),
+    borrowedcount = (SELECT COUNT(*) FROM tbl_history WHERE tbl_history.book_id = tbl_book.id AND tbl_history.returned IS NULL);
