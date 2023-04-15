@@ -64,30 +64,12 @@ a:hover {
 }
 
 .post-footer span {
+    background-color: gray;
+    color: white;
     display: inline-block;
-    padding: 8px 0;
-}
-
-.post-footer span.date {
-    border-top: 1px solid purple;
-    border-bottom: 1px solid purple;
-    color: purple;
+    padding: 4px;
 }
 
 .post-footer span.time {
-    border-top: 1px solid darkolivegreen;
-    border-bottom: 1px solid darkolivegreen;
-    color: darkolivegreen;
-}
-
-.post-footer span.completed {
-    border-top: 1px solid green;
-    border-bottom: 1px solid green;
-    color: green;
-}
-
-.post-footer span.waiting {
-    border-top: 1px solid darkblue;
-    border-bottom: 1px solid darkblue;
-    color: darkblue;
+    background-color: darkgray;
 }
