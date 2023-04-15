@@ -19,3 +19,13 @@ function zoomFont(direction) {
     fontSize += direction == 'in' ? step : -step;
     document.querySelector('html').style.fontSize = `${fontSize}px`;
 } 
+
+document.querySelectorAll('.btn-hiding').forEach(function(currentBtn) {
+    currentBtn.addEventListener('click', displayingContent);
+});
+
+function displayingContent(e) {
+    const content = e.target.parentElement.nextElementSibling;
+    content.classList.toggle('hidden');
+    e.target.textContent = content.classList.contains('hidden') ? 'Show' : 'Hide';
+}
