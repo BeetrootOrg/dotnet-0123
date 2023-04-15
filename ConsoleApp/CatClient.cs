@@ -10,18 +10,16 @@ namespace ConsoleApp
     }
     internal class CatClient : ICatClient
     {
-        private readonly string _baseUri;
         private readonly HttpClient _httpClient;
 
-        public CatClient(string baseUri, HttpClient httpClient)
+        public CatClient(HttpClient httpClient)
         {
-            _baseUri = baseUri;
             _httpClient = httpClient;
         }
 
         public async Task<byte[]> GetCatSaysAsync(string text, CancellationToken cancellationToken = default)
         {
-           var response = await _httpClient.GetAsync($"{_baseUri}/cat/says/{text}", cancellationToken);
+           using HttpResponseMessage response = await _httpClient.GetAsync($"/cat/says/{text}", cancellationToken);
            return await response.Content.ReadAsByteArrayAsync(cancellationToken);
         }
     }
