@@ -2,6 +2,9 @@ const inputFirstName = document.getElementById("inputFirstName");
 const inputLastName = document.getElementById("inputLastName");
 const inputEmail = document.getElementById("inputEmail");
 const inputPassword = document.getElementById("inputPassword");
+const inputBirthDate = document.getElementById("inputBirthDate");
+const inputFavoriteColor = document.getElementById("inputFavoriteColor");
+const inputRange = document.getElementById("inputRange");
 const rememberMeCheck = document.getElementById("rememberMeCheck");
 const submitButton = document.getElementById("submitButton");
 
@@ -14,6 +17,9 @@ submitButton.addEventListener("click", (e) => {
   const lastName = inputLastName.value;
   const email = inputEmail.value;
   const password = inputPassword.value;
+  const birthDate = inputBirthDate.value;
+  const favoriteColor = inputFavoriteColor.value;
+  const range = inputRange.value;
   const rememberMe = rememberMeCheck.checked;
 
   if (!firstName || !lastName || !email || !password) {
@@ -26,6 +32,9 @@ submitButton.addEventListener("click", (e) => {
     lastName,
     email,
     password,
+    birthDate,
+    favoriteColor,
+    range,
     rememberMe,
   };
 
