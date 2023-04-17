@@ -5,6 +5,8 @@ const inputPassword = document.getElementById("inputPassword");
 const rememberMeCheck = document.getElementById("rememberMeCheck");
 const submitButton = document.getElementById("submitButton");
 
+const registrationsKey = "registrations";
+
 submitButton.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -22,5 +24,12 @@ submitButton.addEventListener("click", (e) => {
     rememberMe,
   };
 
-  console.log(data);
+  let value = localStorage.getItem(registrationsKey);
+  let registrations = JSON.parse(value);
+  if (!registrations) {
+    registrations = [];
+  }
+
+  registrations.push(data);
+  localStorage.setItem(registrationsKey, JSON.stringify(registrations));
 });
