@@ -16,6 +16,11 @@ submitButton.addEventListener("click", (e) => {
   const password = inputPassword.value;
   const rememberMe = rememberMeCheck.checked;
 
+  if (!firstName || !lastName || !email || !password) {
+    alert("Please fill all the fields");
+    return;
+  }
+
   const data = {
     firstName,
     lastName,
@@ -28,6 +33,11 @@ submitButton.addEventListener("click", (e) => {
   let registrations = JSON.parse(value);
   if (!registrations) {
     registrations = [];
+  }
+
+  if (registrations.some((r) => r.email === email)) {
+    alert("Email already exists");
+    return;
   }
 
   registrations.push(data);
