@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS tbl_phone_book
+(
+    id BIGSERIAL PRIMARY KEY,
+	phone VARCHAR(12) NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL
+);
