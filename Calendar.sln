@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendar.Contracts", "Calendar.Contracts\Calendar.Contracts.csproj", "{7C92B54D-926E-4C84-8999-B7A5F6E34F28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendar.Domain", "Calendar.Domain\Calendar.Domain.csproj", "{C8C9BE50-3015-4B21-AB10-CC822C9C904E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendar.Console", "Calendar.Console\Calendar.Console.csproj", "{40B7FED1-6475-4DC2-A8F8-BB4EAB9DE888}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C92B54D-926E-4C84-8999-B7A5F6E34F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C92B54D-926E-4C84-8999-B7A5F6E34F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C92B54D-926E-4C84-8999-B7A5F6E34F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C92B54D-926E-4C84-8999-B7A5F6E34F28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8C9BE50-3015-4B21-AB10-CC822C9C904E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8C9BE50-3015-4B21-AB10-CC822C9C904E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8C9BE50-3015-4B21-AB10-CC822C9C904E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8C9BE50-3015-4B21-AB10-CC822C9C904E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40B7FED1-6475-4DC2-A8F8-BB4EAB9DE888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40B7FED1-6475-4DC2-A8F8-BB4EAB9DE888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40B7FED1-6475-4DC2-A8F8-BB4EAB9DE888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40B7FED1-6475-4DC2-A8F8-BB4EAB9DE888}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
