@@ -37,3 +37,8 @@ ul {
   margin: 1em;
   margin-left: 2em;
 }
+
+.catimg{
+  border-radius: 5%;
+  filter:drop-shadow(16px 10px 10px grey);
+}
