@@ -1,0 +1,44 @@
+a {
+  font-size:larger;
+}
+
+a:hover {
+  color: #46b3e7;
+}
+
+body {
+  margin-bottom: 60px;
+  margin-left: 5em;
+  margin-right: 5em;
+  background-color: lightgray;
+}
+
+H1 {
+  font-style: italic;
+  font-weight: bold;
+  margin-left: 4em;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.indent {
+  text-indent: 20px;
+}
+
+.hmargin {
+  margin-left: 2em;
+  font-style: italic;
+}
+
+.img{
+  width: 50%;
+  margin: 1em;
+  margin-left: 2em;
+}
+
+.catimg{
+  border-radius: 5%;
+  filter:drop-shadow(16px 10px 10px grey);
+}
