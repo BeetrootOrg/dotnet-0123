@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Коте</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <h1>Приколи про котів. Жарти, гумор, меми</h1>
+  <p class="indent"><b><i>"Вічна"</i></b> тема про цих пронозливих тварин ніколи не втрачає своєї актуальності
+    Жодні відключення світла і погана погода не страшні, якщо у вашому житті є пухнастий розбійник кіт. Якщо ж ні, то
+    вам на допомогу з гарним настроєм прийдуть приколи та анекдоти про цих вусатих-хвостатих. Дивно, але ці маленькі і
+    не дуже грудочки вміють підіймати настрій миттєво.</p>
+  <h2 class="hmargin">Добірки з життя котів.</h2>
+  <ul>
+    <li><a href="image.html">Подивитись</a></li>
+    <li><a href="joke.html">Почитати</a></li>
+  </ul>
+  <table>
+    <tr style="display:inline-block;text-align: center;">
+      <td >
+        <h3><i>Погладь мене:</i></h3>
+        <img id="pet_me" class="catimg" src="wwwroot/Img/cat_lapy_.jpg" alt="Погладь мене" onmouseover="OnOver()"
+          onmouseleave="OnLeave()" />
+      </td>
+      <td style="margin-left: 2em; padding: 1em">
+        <h3 id="pushmetext"><i>Натицні на нас:</i></h3>
+        <img id="pushme" class="catimg" src="wwwroot/Img/pushme.gif" alt="Погладь мене" onclick="CatsOnClick()" />
+      </td>
+    </tr>
+  </table>
+  <script>
+    function OnOver() {
+      const im = document.getElementById("pet_me");
+      im.src = "wwwroot/Img/cat_lapy_.gif";
+    }
+    function OnLeave() {
+      const im = document.getElementById("pet_me");
+      im.src = "wwwroot/Img/cat_lapy_.jpg";
+    }
+    function CatsOnClick() {
+      const text = document.getElementById("pushmetext");
+      text.textContent = "ВІЗЬМИ НАС ЗСОБОЮ!!!!БУДЬЛАСОЧКА ВІЗЬМИ!!!";
+      var cat = document.getElementById("pushme");
+      cat.style.position = 'fixed';
+      document.onmousemove = function (event) {
+        cat.style.left = event.clientX - 250 + 'px';
+        cat.style.top = event.clientY - 100 + 'px';
+      };
+    }
+  </script>
+</body>
+
+</html>
