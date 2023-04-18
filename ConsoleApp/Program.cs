@@ -1,29 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using ConsoleApp;
 
 Person[] people =
 {
-      new Person("Aaron", "Bank of India"), // 3
-      new Person("Finn", "Amazon"), // 1
-      new Person("Bernard", "Canara Bank"), // 5 
-      new Person("Asher", "Canara Bank"), // 6
-      new Person("Kate", "Bank of India"), // 4
-      new Person("Alice", "Amazon"), // 2
+      new Person("Aaron", "Bank of India"),
+      new Person("Finn", "Amazon"),
+      new Person("Bernard", "Canara Bank"),
+      new Person("Asher", "Canara Bank"),
+      new Person("Kate", "Bank of India"),
+      new Person("Alice", "Amazon"),
   };
 
-var companies = people.GroupByEnumerable(p => p.Company);
-foreach (var company in companies)
+IDictionary<string, IEnumerable<Person>> companies = people.GroupByEnumerable(p => p.Company);
+foreach (KeyValuePair<string, IEnumerable<Person>> company in companies)
 {
     Console.WriteLine(company.Key);
-    foreach (var person in company)
+    foreach (Person? person in company.Value)
     {
         Console.WriteLine(person.Name);
     }
     Console.WriteLine();
 }
 
-record class Person(string Name, string Company);
+internal record class Person(string Name, string Company);
 
 
 

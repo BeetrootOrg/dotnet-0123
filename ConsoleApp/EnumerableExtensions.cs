@@ -1,35 +1,35 @@
-using System.Collections;
 using System.Linq;
 using System;
 using System.Collections.Generic;
 
 namespace ConsoleApp
 {
-    internal static class IEnumerableExtensions
+    public static class EnumerableExtensions
     {
-        public static IEnumerable<IGrouping<TKey, TSource>> GroupByEnumerable<TSource, TKey>(this IEnumerable<TSource> collection, Func<TSource, TKey> keySelector) where TKey : notnull
+        public static IDictionary<TKey, IEnumerable<TSource>> GroupByEnumerable<TSource, TKey>(this IEnumerable<TSource> collection,
+            Func<TSource, TKey> keySelector) where TKey : notnull
         {
-            if (collection.Count() == 0)
+            if (collection == null)
             {
-                return new List<IGrouping<TKey, TSource>>();
+                throw new NullReferenceException("Collection should not be null.");
             }
 
-            IEnumerable<TKey> selectedKeys = collection.Select(keySelector);
-            selectedKeys = selectedKeys.Distinct();
-
-            List<IGrouping<TKey, TSource>> result = new List<IGrouping<TKey, TSource>>(0);
-            foreach (TKey key in selectedKeys)
+            if (!collection.Any())
             {
-                List<TSource> list = new List<TSource>();
-                foreach (TSource item in collection)
+                return new Dictionary<TKey, IEnumerable<TSource>>();
+            }
+
+            IDictionary<TKey, IEnumerable<TSource>> result = new Dictionary<TKey, IEnumerable<TSource>>();
+            foreach (TSource item in collection)
+            {
+                TKey key = keySelector(item);
+                if (!result.ContainsKey(key))
                 {
-                    if (keySelector(item).Equals(key))
-                    {
-                        list.Add(item);
-                    }
+                    result[key] = new List<TSource>();
                 }
-                result.Add(new Grouping<TKey, TSource>(key, list));
+                ((IList<TSource>)result[key]).Add(item);
             }
+
             return result;
         }
     }
