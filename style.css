@@ -1,0 +1,8 @@
+body {
+    background-color: whitesmoke;
+}
+
+.logo-img {
+    cursor: pointer;
+    height: 50px;
+}
