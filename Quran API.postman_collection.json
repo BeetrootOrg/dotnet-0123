@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "3d2591b9-0efa-4f22-9602-b113569b13c9",
+		"name": "Quran API",
+		"description": "# Collection Description\n\nCollection describes API located on [https://alquran.cloud/](https://alquran.cloud/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "866602"
+	},
+	"item": [
+		{
+			"name": "Formats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.alquran.cloud/v1/edition/format",
+					"protocol": "http",
+					"host": [
+						"api",
+						"alquran",
+						"cloud"
+					],
+					"path": [
+						"v1",
+						"edition",
+						"format"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Types",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.alquran.cloud/v1/edition/type",
+					"protocol": "http",
+					"host": [
+						"api",
+						"alquran",
+						"cloud"
+					],
+					"path": [
+						"v1",
+						"edition",
+						"type"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Languages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.alquran.cloud/v1/edition/language",
+					"protocol": "http",
+					"host": [
+						"api",
+						"alquran",
+						"cloud"
+					],
+					"path": [
+						"v1",
+						"edition",
+						"language"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.alquran.cloud/v1/edition?format={{format}}&type={{type}}&language={{language}}",
+					"protocol": "http",
+					"host": [
+						"api",
+						"alquran",
+						"cloud"
+					],
+					"path": [
+						"v1",
+						"edition"
+					],
+					"query": [
+						{
+							"key": "format",
+							"value": "{{format}}"
+						},
+						{
+							"key": "type",
+							"value": "{{type}}"
+						},
+						{
+							"key": "language",
+							"value": "{{language}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edition",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.alquran.cloud/v1/quran/{{edition}}",
+					"protocol": "http",
+					"host": [
+						"api",
+						"alquran",
+						"cloud"
+					],
+					"path": [
+						"v1",
+						"quran",
+						"{{edition}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Juz",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.alquran.cloud/v1/juz/{{juz}}/{{edition}} ",
+					"protocol": "http",
+					"host": [
+						"api",
+						"alquran",
+						"cloud"
+					],
+					"path": [
+						"v1",
+						"juz",
+						"{{juz}}",
+						"{{edition}} "
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "format",
+			"value": "audio",
+			"type": "string"
+		},
+		{
+			"key": "language",
+			"value": "en",
+			"type": "string"
+		},
+		{
+			"key": "type",
+			"value": "versebyverse",
+			"type": "string"
+		},
+		{
+			"key": "edition",
+			"value": "en.ahmedali",
+			"type": "string"
+		},
+		{
+			"key": "juz",
+			"value": "1"
+		}
+	]
+}
