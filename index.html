@@ -7,35 +7,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Коте</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 
 <body>
-  <h1>Приколи про котів. Жарти, гумор, меми</h1>
-  <p class="indent"><b><i>"Вічна"</i></b> тема про цих пронозливих тварин ніколи не втрачає своєї актуальності
-    Жодні відключення світла і погана погода не страшні, якщо у вашому житті є пухнастий розбійник кіт. Якщо ж ні, то
-    вам на допомогу з гарним настроєм прийдуть приколи та анекдоти про цих вусатих-хвостатих. Дивно, але ці маленькі і
-    не дуже грудочки вміють підіймати настрій миттєво.</p>
-  <h2 class="hmargin">Добірки з життя котів.</h2>
-  <ul>
-    <li><a href="image.html">Подивитись</a></li>
-    <li><a href="joke.html">Почитати</a></li>
-  </ul>
-  <table>
-    <tr style="display:inline-block;text-align: center;">
-      <td >
-        <h3><i>Погладь мене:</i></h3>
-        <img id="pet_me" class="catimg" src="wwwroot/Img/cat_lapy_.jpg" alt="Погладь мене" onmouseover="OnOver()"
-          onmouseleave="OnLeave()" />
-      </td>
-      <td style="margin-left: 2em; padding: 1em">
-        <h3 id="pushmetext"><i>Натицні на нас:</i></h3>
-        <img id="pushme" class="catimg" src="wwwroot/Img/pushme.gif" alt="Погладь мене" onclick="CatsOnClick()" />
-      </td>
-    </tr>
-  </table>
+  <header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">З життя котів</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+          <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="image.html">Подивитись</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="joke.html">Почитати</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="login.html">Увійти</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="question.html">Опитування</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="order.html">Замовити котика</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="container">
+    <main class="pb-3">
+      <h1>Приколи про котів. Жарти, гумор, меми</h1>
+      <p class="indent"><b><i>"Вічна"</i></b> тема про цих пронозливих тварин ніколи не втрачає своєї актуальності
+        Жодні відключення світла і погана погода не страшні, якщо у вашому житті є пухнастий розбійник кіт. Якщо ж ні,
+        то
+        вам на допомогу з гарним настроєм прийдуть приколи та анекдоти про цих вусатих-хвостатих. Дивно, але ці маленькі
+        і
+        не дуже грудочки вміють підіймати настрій миттєво.</p>
+      <h2 class="hmargin">Добірки з життя котів.</h2>
+      <ul class="list-group">
+        <li class="list-group-item"><a class="btn btn-info m-1" href="image.html">Подивитись</a></li>
+        <li class="list-group-item"><a class="btn btn-info m-1" href="joke.html">Почитати</a></li>
+      </ul>
+      <div class="row d-flex justify-content-center text-center">
+        <!-- <div style="display:inline-block;text-align: center;"> -->
+        <div class="col-4 pr-1 d-block">
+          <h3><i>Погладь мене:</i></h3>
+          <img id="pet_me" class="catimg" src="wwwroot/Img/cat_lapy_.jpg" alt="Погладь мене" onmouseover="OnOver()"
+            onmouseleave="OnLeave()" />
+        </div>
+        <div class="col-6 pl-1 d-block">
+          <h3 id="pushmetext"><i>Натицні на нас:</i></h3>
+          <img id="pushme" class="catimg" src="wwwroot/Img/pushme.gif" alt="Погладь мене" onclick="CatsOnClick()" />
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="border-top footer text-muted pb-3 pt-3">
+    <div class="container d-sm-inline-flex justify-content-center">
+      <img class="catimg" src="wwwroot/Img/cat_see.gif" height="60px">
+      <span class="m-3">  &copy; 2023 - Котики - Скільки кота не годуй, а в його шлунку місце для папуги завжди знайдеться</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
   <script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
     function OnOver() {
       const im = document.getElementById("pet_me");
       im.src = "wwwroot/Img/cat_lapy_.gif";

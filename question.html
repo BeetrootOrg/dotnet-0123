@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Твій любий котішка, чекає!</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">З життя котів</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="image.html">Подивитись</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="joke.html">Почитати</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="login.html">Увійти</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="question.html">Опитування</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="order.html">Замовити котика</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <img id="imcat" class="catimg" src="wwwroot/Img/catprof.avif" style="width: 95%" />
+            </div>
+            <div class="col-md-6">
+                <h2 id="itext" class="text-info">Наскільки добре ви знаєте котів? Перевірте себе!</h2>
+                <section id="sect" hidden="true">
+                    <h4 id="itext"></h4>
+                    <div class="btn-group">
+                        <input type="checkbox" />
+                        <label class="m-1" id="q1"></label>
+                    </div><br />
+                    <div class="btn-group">
+                        <input type="checkbox" />
+                        <label class="m-1" id="q2"></label>
+                    </div><br />
+                    <div class="btn-group">
+                        <input type="checkbox" />
+                        <label class="m-1" id="q3"></label>
+                    </div>
+                </section>
+                <button id="btnsub" class="btn btn-primary m-3">Поїхали</button>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted pb-3 pt-3 mt-5">
+        <div class="container d-sm-inline-flex justify-content-center">
+            <img class="catimg" src="wwwroot/Img/cat_see.gif" height="60px">
+            <span class="m-3"> &copy; 2023 - Котики - Скільки кота не годуй, а в його шлунку місце для папуги завжди
+                знайдеться</span>
+        </div>
+    </footer>
+    <script>
+        const images = ["wwwroot/Img/1.gif", "wwwroot/Img/2.gif", "wwwroot/Img/3.gif", "wwwroot/Img/4.gif",
+            "wwwroot/Img/1.gif", "wwwroot/Img/1.gif", "wwwroot/Img/1.gif", "wwwroot/Img/1.gif"];
+        const texts = ["1. Чому коти не бояться лишатися самими?", "2. Нащо коти мурчать?", "3. Чому коти не люблять, коли їхній лоток пахне?",
+        "4. Нащо коти залазять у шпарини?"];
+        const qests = [["Знають, що в разі чого не дадуть себе образити!", "Просто вони егоїсти!", "Ніхто не заважає обдумувати план захоплення світу."],
+        ["Висловлюють емоції: від радості, стресу чи голоду.", "Мурчання допомагає їм заснути", "Правильно і те, і інше."],
+        ["А хто, скажіть мені, любить??","Вони бояться, що їх хтось вполює.","Якщо пахне - значить брудний. Бояться забруднитися."],
+    ["Полюють :)","Ховаються від господаря. На всякий випадок.","Їм просто нудно, вони так розважаються."]];
+        const imcat = document.getElementById("imcat");
+        const itext = document.getElementById("itext");
+        const sect = document.getElementById("sect");
+        const q1 = document.getElementById("q1");
+        const q2 = document.getElementById("q2");
+        const q3 = document.getElementById("q3");
+        const btnsub = document.getElementById("btnsub");
+        let i = 0;
+
+        btnsub.addEventListener("click", (e) => {
+            e.preventDefault();
+            sect.hidden = false;
+            btnsub.textContent = "Далі";
+            imcat.src = images[i];
+            itext.textContent = texts[i];
+            q1.textContent = qests[i][0];
+            q2.textContent = qests[i][1];
+            q3.textContent = qests[i][2];
+            i = i + 1;
+            if (i>=4) i=0;
+        });
+        function order() {
+            itext.textContent = "Пізно! Ми вже вирахували твій IP та адресу, Твоє Счатьє вже в путі! Та ще в нас є бонус для тебе...";
+            iform.hidden = true;
+            hideimg.hidden = false;
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
