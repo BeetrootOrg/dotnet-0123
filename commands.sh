@@ -10,3 +10,4 @@ dotnet ef database update
 dotnet tool install --local dotnet-aspnet-codegenerator
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet aspnet-codegenerator view Index List -m Person -outDir Views/Person -l _Layout --referenceScriptLibraries
+dotnet aspnet-codegenerator view Create Create -m Person -outDir Views/Person -l _Layout --referenceScriptLibraries
