@@ -22,6 +22,12 @@ namespace PersonsSite.Controllers
             return View(await _context.Persons.ToArrayAsync(cancellationToken));
         }
 
+        public async Task<IActionResult> Details([FromRoute] int id, CancellationToken cancellationToken = default)
+        {
+            Person person = await _context.Persons.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+            return person == null ? NotFound() : View(person);
+        }
+
         public IActionResult Create()
         {
             return View();

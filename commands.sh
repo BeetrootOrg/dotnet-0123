@@ -12,3 +12,4 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet aspnet-codegenerator view Index List -m Person -outDir Views/Person -l _Layout --referenceScriptLibraries
 dotnet aspnet-codegenerator view Create Create -m Person -outDir Views/Person -l _Layout --referenceScriptLibraries
 dotnet aspnet-codegenerator view Delete Delete -m Person -outDir Views/Person -l _Layout --referenceScriptLibraries
+dotnet aspnet-codegenerator view Details Details -m Person -outDir Views/Person -l _Layout --referenceScriptLibraries
