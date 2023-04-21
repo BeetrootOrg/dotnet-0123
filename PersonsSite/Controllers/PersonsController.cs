@@ -47,6 +47,27 @@ namespace PersonsSite.Controllers
             return View(person);
         }
 
+        public async Task<IActionResult> Edit([FromRoute] int id, CancellationToken cancellationToken = default)
+        {
+            Person person = await _context.Persons.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+            return person == null ? NotFound() : View(person);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit([FromRoute] int id, [FromForm] Person person, CancellationToken cancellationToken = default)
+        {
+            if (ModelState.IsValid)
+            {
+                person.Id = id;
+                _ = _context.Persons.Update(person);
+                _ = await _context.SaveChangesAsync(cancellationToken);
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(person);
+        }
+
         public async Task<IActionResult> Delete([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             Person person = await _context.Persons.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
