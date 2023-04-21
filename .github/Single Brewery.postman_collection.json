@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "66e64a41-82f1-4c74-812e-aeb260eaa706",
+		"name": "Single Brewery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26956166",
+		"_collection_link": "https://grey-crater-170769.postman.co/workspace/Team-Workspace~f4bff9ae-a554-4031-87fc-f521862bc851/collection/26956166-66e64a41-82f1-4c74-812e-aeb260eaa706?action=share&creator=26956166&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "All_breweries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openbrewerydb.org/v1/breweries",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openbrewerydb",
+						"org"
+					],
+					"path": [
+						"v1",
+						"breweries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sorting_by_city",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.openbrewerydb.org/v1/breweries?by_city={{city}}&per_page={{page}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openbrewerydb",
+						"org"
+					],
+					"path": [
+						"v1",
+						"breweries"
+					],
+					"query": [
+						{
+							"key": "by_city",
+							"value": "{{city}}"
+						},
+						{
+							"key": "per_page",
+							"value": "{{page}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sorting_by_type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openbrewerydb.org/v1/breweries?by_type={{type}}&per_page={{page}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openbrewerydb",
+						"org"
+					],
+					"path": [
+						"v1",
+						"breweries"
+					],
+					"query": [
+						{
+							"key": "by_type",
+							"value": "{{type}}"
+						},
+						{
+							"key": "per_page",
+							"value": "{{page}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Random_brewery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openbrewerydb.org/v1/breweries/random",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openbrewerydb",
+						"org"
+					],
+					"path": [
+						"v1",
+						"breweries",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openbrewerydb.org/v1/breweries/search?query={{search}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openbrewerydb",
+						"org"
+					],
+					"path": [
+						"v1",
+						"breweries",
+						"search"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "{{search}}",
+							"description": "Search for breweries based on a search term"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sorting_asc_desc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openbrewerydb.org/v1/breweries?by_state={{state}}&sort={{sort}}&per_page=page",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openbrewerydb",
+						"org"
+					],
+					"path": [
+						"v1",
+						"breweries"
+					],
+					"query": [
+						{
+							"key": "by_state",
+							"value": "{{state}}"
+						},
+						{
+							"key": "sort",
+							"value": "{{sort}}",
+							"description": "\"asc\" or \"desc\""
+						},
+						{
+							"key": "per_page",
+							"value": "page"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "by_city",
+			"value": "{{city}}",
+			"type": "string"
+		},
+		{
+			"key": "type",
+			"value": "{{type}}"
+		},
+		{
+			"key": "page",
+			"value": "{{page}}"
+		},
+		{
+			"key": "search",
+			"value": "{{search}}"
+		},
+		{
+			"key": "sort",
+			"value": "{{sort}}"
+		},
+		{
+			"key": "state",
+			"value": "{{state}}"
+		}
+	]
+}
