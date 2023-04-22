@@ -24,3 +24,7 @@ body {
 .image-preview {
   width: 100px;
 }
+
+.image-full {
+  width: 100%;
+}

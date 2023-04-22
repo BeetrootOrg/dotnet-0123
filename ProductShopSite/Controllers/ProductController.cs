@@ -22,6 +22,12 @@ namespace ProductShopSite.Controllers
             return View(await _context.Products.ToArrayAsync(cancellationToken));
         }
 
+        public async Task<IActionResult> Details([FromRoute] int id, CancellationToken cancellationToken = default)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+            return product == null ? NotFound() : View(product);
+        }
+
         public IActionResult Create()
         {
             return View();
