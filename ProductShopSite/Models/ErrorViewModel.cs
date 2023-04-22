@@ -1,4 +1,4 @@
-namespace dotnet_0123.Models;
+namespace ProductShopSite.Models;
 
 public class ErrorViewModel
 {

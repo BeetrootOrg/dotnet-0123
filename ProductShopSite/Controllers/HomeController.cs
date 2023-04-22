@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using dotnet_0123.Models;
+using ProductShopSite.Models;
 
-namespace dotnet_0123.Controllers;
+namespace ProductShopSite.Controllers;
 
 public class HomeController : Controller
 {
