@@ -47,6 +47,26 @@ namespace ProductShopSite.Controllers
             return View(product);
         }
 
+        public async Task<IActionResult> Edit([FromRoute] int id, CancellationToken cancellationToken = default)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+            return product == null ? NotFound() : View(product);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit([FromRoute] int id, [FromForm] Product product, CancellationToken cancellationToken = default)
+        {
+            if (ModelState.IsValid)
+            {
+                product.Id = id;
+                _context.Products.Update(product);
+                await _context.SaveChangesAsync(cancellationToken);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(product);
+        }    
+
         public async Task<IActionResult> Delete([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
