@@ -23,6 +23,7 @@ button {
   border-radius: 10px;
   background-color: #9FABF3;
   border: none;
+  cursor: pointer;
 }
 
 button i {
