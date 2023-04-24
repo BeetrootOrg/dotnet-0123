@@ -2,6 +2,14 @@
 
 This is a simple task management system that allows you to create tasks, assign them to users, and track their statuses.
 
+## User Stories
+
+- As a user, I want to be able to create a task;
+- As a user, I want to be able to assign a task to some user;
+- As a user, I want to be able to update the status of a task;
+- As a user, I want to be able to cancel a task;
+- As a user, I want to be able to retrieve a task by its ID.
+
 ## Task Statuses
 
 Tasks can be in one of the following statuses:
