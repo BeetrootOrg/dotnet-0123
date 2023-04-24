@@ -9,7 +9,6 @@ namespace TaskManagement.Domain.Models.Database
     {
         [Key]
         [Column("id")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         [Column("title")]
@@ -31,7 +30,7 @@ namespace TaskManagement.Domain.Models.Database
         public int Status { get; set; }
 
         [Column("assignee_id")]
-        public long AssigneeId { get; set; }
+        public long? AssigneeId { get; set; }
 
         [ForeignKey(nameof(AssigneeId))]
         public virtual User Assignee { get; set; }

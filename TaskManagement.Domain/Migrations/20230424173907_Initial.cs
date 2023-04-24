@@ -35,7 +35,7 @@ namespace TaskManagement.Domain.Migrations
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     status = table.Column<int>(type: "integer", nullable: false),
-                    assignee_id = table.Column<long>(type: "bigint", nullable: false)
+                    assignee_id = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,8 +44,7 @@ namespace TaskManagement.Domain.Migrations
                         name: "FK_tasks_users_assignee_id",
                         column: x => x.assignee_id,
                         principalTable: "users",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateIndex(

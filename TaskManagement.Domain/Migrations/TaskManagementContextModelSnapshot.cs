@@ -29,7 +29,7 @@ namespace TaskManagement.Domain.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<long>("AssigneeId")
+                    b.Property<long?>("AssigneeId")
                         .HasColumnType("bigint")
                         .HasColumnName("assignee_id");
 
@@ -87,9 +87,7 @@ namespace TaskManagement.Domain.Migrations
                 {
                     b.HasOne("TaskManagement.Domain.Models.Database.User", "Assignee")
                         .WithMany()
-                        .HasForeignKey("AssigneeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AssigneeId");
 
                     b.Navigation("Assignee");
                 });

@@ -16,7 +16,7 @@ Tasks can be in one of the following statuses:
 - `new` - The task has been created but not yet assigned to a user;
 - `assigned` - The task has been assigned to a user;
 - `in_progress` - The task is being worked on by the assigned user;
-- `complete` - The task has been completed;
+- `completed` - The task has been completed;
 - `cancelled` - The task has been cancelled.
 
 ## Task Fields
@@ -41,7 +41,7 @@ The following endpoints are available for interacting with tasks:
 ## Task API Limitations
 
 The following limitations apply to the task API:
-- Tasks status can only be updated in the following order: `new` -> `assigned` -> `in_progress` -> `complete`;
+- Tasks status can only be updated in the following order: `new` -> `assigned` -> `in_progress` -> `completed`;
 - Tasks transition from `new` to `in_progress` must be done by the user assigned to the task;
 - Task can be cancelled at any time;
 - Tasks status can only be updated when task is assigned to a user.
