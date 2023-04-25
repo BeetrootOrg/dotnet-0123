@@ -1,0 +1,24 @@
+﻿@using WebApp.Models;
+@model List<Good>;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@if (Model == null) return;
+@foreach (Good cat in Model)
+{
+    <div class="row text-center">
+        <div class="col-md-2">
+            <img src="/@cat.GoodImage?.Path" />
+        </div>
+        <div class="col-md-6 d-block">
+            <h3>@cat.Name</h3>
+            <p>@cat.Brend.Name</p>
+        </div>
+        <div class="col-md-2 d-block">
+            <h4>@cat.Price</h4>
+            <p>@cat.Stock</p>
+        </div>
+    </div>
+    <hr/>
+}
