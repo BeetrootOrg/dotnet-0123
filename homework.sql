@@ -25,9 +25,18 @@ CREATE TABLE IF NOT EXISTS tbl_customers(
 CREATE TABLE IF NOT EXISTS tbl_orders(
     id SERIAL PRIMARY KEY,
     take_date TIMESTAMP NOT NULL CHECK(take_date <= NOW()),
-    return_date TIMESTAMP NOT NULL CHECK(return_date >= take_date),
+    return_date TIMESTAMP NOT NULL CHECK(
+        return_date >= take_date
+        AND return_date <= NOW()
+    ),
     book_id INT NOT NULL,
     customer_email VARCHAR(300) NOT NULL,
     FOREIGN KEY (book_id) REFERENCES tbl_books(id),
     FOREIGN KEY (customer_email) REFERENCES tbl_customers(email)
 );
+
+CREATE INDEX IF NOT EXISTS tbl_books_author_id ON tbl_books(author_id);
+
+CREATE INDEX IF NOT EXISTS tbl_orders_book_id ON tbl_orders(book_id);
+
+CREATE INDEX IF NOT EXISTS tbl_orders_customer_email ON tbl_orders(customer_email);
