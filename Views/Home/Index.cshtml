@@ -1,0 +1,17 @@
+﻿@using WebApp.Models;
+@model List<Category>;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row text-center">
+    @foreach (var cat in Model)
+    {
+        <div class="col-md-4 d-block">
+            <a asp-action="goods" asp-route-id="@cat.Id">
+            <img class="img" src="@cat.Image?.Path"/>
+            <h4>@cat.Name</h4>
+            </a>
+        </div>
+    }
+</div>
