@@ -6,8 +6,9 @@ using MediatR;
 
 using Moq;
 
+using Shouldly;
+
 using TaskManagement.Domain.Commands;
-using TaskManagement.Domain.Helpers;
 using TaskManagement.Domain.Repositories;
 
 using DatabaseTask = TaskManagement.Domain.Models.Database.Task;
@@ -17,18 +18,12 @@ namespace TaskManagement.UnitTests.Commands
     public class CreateTaskCommandTests
     {
         private readonly Mock<IRepository> _repositoryMock = new();
-        private readonly Mock<IDateTimeProvider> _dateTimeProviderMock = new();
-        private readonly Mock<IIdentifierGenerator> _identifierGeneratorMock = new();
 
         private readonly IRequestHandler<CreateTaskCommand, CreateTaskResult> _handler;
 
         public CreateTaskCommandTests()
         {
-            _handler = new CreateTaskCommandHandler(
-                _repositoryMock.Object,
-                _dateTimeProviderMock.Object,
-                _identifierGeneratorMock.Object
-            );
+            _handler = new CreateTaskCommandHandler(_repositoryMock.Object);
         }
 
         [Fact]
@@ -44,24 +39,19 @@ namespace TaskManagement.UnitTests.Commands
                 Description = description
             };
 
-            DateTime now = DateTime.Now;
-            _ = _dateTimeProviderMock.Setup(x => x.Now).Returns(now);
-
             Guid id = Guid.NewGuid();
-            _ = _identifierGeneratorMock.Setup(x => x.Generate()).Returns(id);
+
+            _ = _repositoryMock.Setup(x => x.CreateTask(title, description, It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(new DatabaseTask
+                {
+                    Id = id
+                }));
 
             // Act
-            _ = await _handler.Handle(command, CancellationToken.None);
+            CreateTaskResult result = await _handler.Handle(command, CancellationToken.None);
 
             // Assert
-            _repositoryMock.Verify(x => x.AddTask(It.Is<DatabaseTask>(t => t.Assignee == null &&
-                t.AssigneeId == null &&
-                t.Description == description &&
-                t.Status == 0 &&
-                t.Title == title &&
-                t.UpdatedAt == null &&
-                t.CreatedAt == now &&
-                t.Id == id), It.IsAny<CancellationToken>()), Times.Once);
+            result.Id.ShouldBe(id.ToString());
         }
     }
 }
