@@ -2,6 +2,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+using AutoMapper;
+
 using MediatR;
 
 using Moq;
@@ -14,18 +16,23 @@ using TaskManagement.Domain.Repositories;
 using DatabaseTask = TaskManagement.Domain.Models.Database.Task;
 using DatabaseUser = TaskManagement.Domain.Models.Database.User;
 using ContractsTaskStatus = TaskManagement.Contracts.Models.TaskStatus;
+using ContractsTask = TaskManagement.Contracts.Models.Task;
 
 namespace TaskManagement.UnitTests.Queries
 {
     public class GetTaskByIdQueryHandlerTests
     {
         private readonly Mock<IRepository> _repositoryMock = new();
+        private readonly Mock<IMapper> _mapperMock = new();
 
         private readonly IRequestHandler<GetTaskByIdQuery, GetTaskByIdResult> _handler;
 
         public GetTaskByIdQueryHandlerTests()
         {
-            _handler = new GetTaskByIdQueryHandler(_repositoryMock.Object);
+            _handler = new GetTaskByIdQueryHandler(
+                _repositoryMock.Object,
+                _mapperMock.Object
+            );
         }
 
         [Fact]
@@ -34,6 +41,9 @@ namespace TaskManagement.UnitTests.Queries
             // Arrange
             _ = _repositoryMock.Setup(x => x.GetTaskById(It.IsAny<string>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<DatabaseTask>(null));
+
+            _ = _mapperMock.Setup(x => x.Map<ContractsTask>(null))
+                .Returns((ContractsTask)null);
 
             GetTaskByIdQuery query = new() { Id = Guid.NewGuid().ToString() };
 
@@ -71,6 +81,18 @@ namespace TaskManagement.UnitTests.Queries
                         Email = assigneeEmail
                     }
                 }));
+
+            _ = _mapperMock.Setup(x => x.Map<ContractsTask>(It.IsAny<DatabaseTask>()))
+                .Returns(new ContractsTask
+                {
+                    Id = id,
+                    Title = title,
+                    Description = description,
+                    CreatedAt = createdAt,
+                    UpdatedAt = updatedAt,
+                    Status = (ContractsTaskStatus)status,
+                    AssigneeEmail = assigneeEmail
+                });
 
             GetTaskByIdQuery query = new() { Id = id };
 
