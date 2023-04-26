@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
+using TaskManagement.Api;
 using TaskManagement.Domain;
 using TaskManagement.Domain.DbContexts;
 
@@ -29,14 +31,19 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+builder.Services.AddOptions<TaskManagementOptions>()
+    .Bind(builder.Configuration);
+
 builder.Services.AddDomain();
 builder.Services.AddDbContext<TaskManagementContext>(
-    c => c.UseNpgsql("Host=localhost;Database=task_management;Username=user;Password=password")
-);
+    (IServiceProvider sp, DbContextOptionsBuilder c) =>
+    {
+        IOptionsMonitor<TaskManagementOptions> options = sp.GetRequiredService<IOptionsMonitor<TaskManagementOptions>>();
+        _ = c.UseNpgsql(options.CurrentValue.TaskManagementConnectionString);
+    });
 
 WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     _ = app.UseSwagger();
