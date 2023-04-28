@@ -9,6 +9,8 @@ using TaskManagement.Domain.Repositories;
 
 using DatabaseTask = TaskManagement.Domain.Models.Database.Task;
 using ContractsTask = TaskManagement.Contracts.Models.Task;
+using TaskManagement.Domain.Base;
+using Microsoft.Extensions.Logging;
 
 namespace TaskManagement.Domain.Queries
 {
@@ -22,18 +24,18 @@ namespace TaskManagement.Domain.Queries
         public ContractsTask Task { get; init; }
     }
 
-    internal class GetTaskByIdQueryHandler : IRequestHandler<GetTaskByIdQuery, GetTaskByIdResult>
+    internal class GetTaskByIdQueryHandler : BaseRequestHandler<GetTaskByIdQuery, GetTaskByIdResult>
     {
         private readonly IRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetTaskByIdQueryHandler(IRepository repository, IMapper mapper)
+        public GetTaskByIdQueryHandler(IRepository repository, IMapper mapper, ILogger<GetTaskByIdQueryHandler> logger) : base(logger)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<GetTaskByIdResult> Handle(GetTaskByIdQuery request, CancellationToken cancellationToken)
+        protected override async Task<GetTaskByIdResult> HandleInternal(GetTaskByIdQuery request, CancellationToken cancellationToken)
         {
             DatabaseTask dbResult = await _repository.GetTaskById(request.Id, cancellationToken);
             return new GetTaskByIdResult

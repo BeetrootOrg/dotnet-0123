@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 
 using MediatR;
 
+using Microsoft.Extensions.Logging;
+
 using Moq;
 
 using Shouldly;
@@ -23,7 +25,10 @@ namespace TaskManagement.UnitTests.Commands
 
         public CreateTaskCommandTests()
         {
-            _handler = new CreateTaskCommandHandler(_repositoryMock.Object);
+            _handler = new CreateTaskCommandHandler(
+                _repositoryMock.Object,
+                Mock.Of<ILogger<CreateTaskCommandHandler>>()
+            );
         }
 
         [Fact]

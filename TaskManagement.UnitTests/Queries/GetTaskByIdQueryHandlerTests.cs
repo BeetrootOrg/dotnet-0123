@@ -17,6 +17,7 @@ using DatabaseTask = TaskManagement.Domain.Models.Database.Task;
 using DatabaseUser = TaskManagement.Domain.Models.Database.User;
 using ContractsTaskStatus = TaskManagement.Contracts.Models.TaskStatus;
 using ContractsTask = TaskManagement.Contracts.Models.Task;
+using Microsoft.Extensions.Logging;
 
 namespace TaskManagement.UnitTests.Queries
 {
@@ -31,7 +32,8 @@ namespace TaskManagement.UnitTests.Queries
         {
             _handler = new GetTaskByIdQueryHandler(
                 _repositoryMock.Object,
-                _mapperMock.Object
+                _mapperMock.Object,
+                Mock.Of<ILogger<GetTaskByIdQueryHandler>>()
             );
         }
 

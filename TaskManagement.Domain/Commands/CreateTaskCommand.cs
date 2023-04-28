@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 using MediatR;
 
+using Microsoft.Extensions.Logging;
+
+using TaskManagement.Domain.Base;
 using TaskManagement.Domain.Repositories;
 
 using DatabaseTask = TaskManagement.Domain.Models.Database.Task;
@@ -20,16 +23,16 @@ namespace TaskManagement.Domain.Commands
         public string Id { get; init; }
     }
 
-    internal class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand, CreateTaskResult>
+    internal class CreateTaskCommandHandler : BaseRequestHandler<CreateTaskCommand, CreateTaskResult>
     {
         private readonly IRepository _repository;
 
-        public CreateTaskCommandHandler(IRepository repository)
+        public CreateTaskCommandHandler(IRepository repository, ILogger<CreateTaskCommandHandler> logger) : base(logger)
         {
             _repository = repository;
         }
 
-        public async Task<CreateTaskResult> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
+        protected override async Task<CreateTaskResult> HandleInternal(CreateTaskCommand request, CancellationToken cancellationToken)
         {
             DatabaseTask task = await _repository.CreateTask(request.Title, request.Description, cancellationToken);
             return new CreateTaskResult
