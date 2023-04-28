@@ -1,4 +1,7 @@
+using Marketplace.ProductContexts;
+
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -6,6 +9,10 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ProductContext>(options =>
+ _ = options.UseNpgsql("Host=localhost;Database=marketplace;Username=postgres;Password=db_learn")
+);
 
 WebApplication app = builder.Build();
 
