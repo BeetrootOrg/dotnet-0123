@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "dc7ccd2a-5ad1-41be-87e7-9d4312bec949",
+		"name": "PoetryDB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26999522"
+	},
+	"item": [
+		{
+			"name": "List of poets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://poetrydb.org/author",
+					"protocol": "https",
+					"host": [
+						"poetrydb",
+						"org"
+					],
+					"path": [
+						"author"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Poets titles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://poetrydb.org/author/:author/title",
+					"protocol": "https",
+					"host": [
+						"poetrydb",
+						"org"
+					],
+					"path": [
+						"author",
+						":author",
+						"title"
+					],
+					"variable": [
+						{
+							"key": "author",
+							"value": "Jane Austen"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List of titles by part of the title",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://poetrydb.org/title/:part_of_title/title",
+					"protocol": "https",
+					"host": [
+						"poetrydb",
+						"org"
+					],
+					"path": [
+						"title",
+						":part_of_title",
+						"title"
+					],
+					"variable": [
+						{
+							"key": "part_of_title",
+							"value": "Summer"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
