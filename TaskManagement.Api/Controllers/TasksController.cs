@@ -93,5 +93,41 @@ namespace TaskManagement.Api.Controllers
                 });
         }
 
+        /// <summary>
+        /// Assign task to user
+        /// </summary>
+        /// <param name="taskId">Task identifier</param>
+        /// <param name="request">Assign information</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
+        /// <returns>Nothing</returns>
+        /// <remarks>
+        /// 
+        /// Sample request:
+        /// 
+        ///   POST /tasks/{taskId}
+        ///   {
+        ///     "email": "user@example"
+        ///   }
+        /// 
+        /// </remarks>
+        /// <response code="204">If task assigned successfully</response>
+        /// <response code="400">If request is invalid</response>
+        /// <response code="500">If something went wrong</response>
+        [HttpPost("{taskId}")]
+        [ProducesResponseType(204)]
+        public async Task<IActionResult> AssignToUser([FromRoute] string taskId,
+            [FromBody] AssignTaskRequest request,
+            CancellationToken cancellationToken = default)
+        {
+            AssignTaskToUserCommand command = new()
+            {
+                TaskId = taskId,
+                Email = request.Email
+            };
+
+            _ = await _mediator.Send(command, cancellationToken);
+            return NoContent();
+        }
+
     }
 }

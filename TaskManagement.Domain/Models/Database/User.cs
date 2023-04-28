@@ -1,9 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace TaskManagement.Domain.Models.Database
 {
     [Table("users")]
+    [Index(nameof(Email), IsUnique = true)]
     public class User
     {
         [Key]
