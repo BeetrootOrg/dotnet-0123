@@ -42,6 +42,17 @@ builder.Services.AddDbContext<TaskManagementContext>(
         _ = c.UseNpgsql(options.CurrentValue.TaskManagementConnectionString);
     });
 
+builder.Services
+    .AddHealthChecks()
+    .AddNpgSql(
+        sp =>
+        {
+            IOptionsMonitor<TaskManagementOptions> options = sp.GetRequiredService<IOptionsMonitor<TaskManagementOptions>>();
+            return options.CurrentValue.TaskManagementConnectionString;
+        },
+        timeout: TimeSpan.FromSeconds(1)
+    );
+
 WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -51,6 +62,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
+app.MapHealthChecks("/health");
 
 app.Run();
 

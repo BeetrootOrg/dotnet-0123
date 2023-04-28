@@ -32,7 +32,6 @@ namespace TaskManagement.Domain.Commands
         public async Task<CreateTaskResult> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
             DatabaseTask task = await _repository.CreateTask(request.Title, request.Description, cancellationToken);
-
             return new CreateTaskResult
             {
                 Id = task.Id.ToString()
