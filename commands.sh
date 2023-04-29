@@ -1,0 +1,18 @@
+dotnet new sln -n BatteryMonitorSln
+dotnet new editorconfig
+
+dotnet new mvc -n BatteryMonitorWebApp
+dotnet sln add PersonsSite/PersonsSite.csproj
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet new tool-manifest
+dotnet tool install --local dotnet-ef
+dotnet ef migrations add Initial
+dotnet ef database update
+dotnet tool install --local dotnet-aspnet-codegenerator
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet aspnet-codegenerator view Index List -m Person -outDir Views/Person -l _Layout --referenceScriptLibraries
+dotnet aspnet-codegenerator view Create Create -m Person -outDir Views/Person -l _Layout --referenceScriptLibraries
+dotnet aspnet-codegenerator view Delete Delete -m Person -outDir Views/Person -l _Layout --referenceScriptLibraries
+dotnet aspnet-codegenerator view Details Details -m Person -outDir Views/Person -l _Layout --referenceScriptLibraries
+dotnet aspnet-codegenerator view Edit Edit -m Person -outDir Views/Person -l _Layout --referenceScriptLibraries
