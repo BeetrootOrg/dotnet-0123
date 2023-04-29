@@ -33,5 +33,5 @@ This is a simple system for capturing voltage and current events. Applicable for
 
 The following endpoints are available in the API
 
-    -'PUT /api/data/putdata/?Id=id&V=v' simple format for sending data
-    -'GET /api/data/getdata/?Id=id&From=data' simple format for get data
+    -'PUT /api/data/putdata?Id=id&V=v' simple format for sending data
+    -'GET /api/data/getdata?Id=id&From=data' simple format for get data
