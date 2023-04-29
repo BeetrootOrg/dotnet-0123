@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "be18e990-f90f-40bc-9eed-2de9f1134a8f",
+		"name": "Random Duck",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27172237"
+	},
+	"item": [
+		{
+			"name": "https://random-d.uk/api/random",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://random-d.uk/api/random",
+					"protocol": "https",
+					"host": [
+						"random-d",
+						"uk"
+					],
+					"path": [
+						"api",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://random-d.uk/api/randomimg",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://random-d.uk/api/randomimg",
+					"protocol": "https",
+					"host": [
+						"random-d",
+						"uk"
+					],
+					"path": [
+						"api",
+						"randomimg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://random-d.uk/api/list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://random-d.uk/api/list",
+					"protocol": "https",
+					"host": [
+						"random-d",
+						"uk"
+					],
+					"path": [
+						"api",
+						"list"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
