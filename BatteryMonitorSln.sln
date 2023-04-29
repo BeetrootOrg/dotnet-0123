@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatteryMonitorApp.Integrati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatteryMonitorApp.WebApp", "BatteryMonitorApp.WebApp\BatteryMonitorApp.WebApp.csproj", "{48F2B80C-7420-4FBC-975A-4AF747F02891}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatteryMonitorApp.WebApi", "BatteryMonitorApp.WebApi\BatteryMonitorApp.WebApi.csproj", "{34184A34-9255-4306-BD4A-B5BB02AD1EA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{48F2B80C-7420-4FBC-975A-4AF747F02891}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48F2B80C-7420-4FBC-975A-4AF747F02891}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48F2B80C-7420-4FBC-975A-4AF747F02891}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34184A34-9255-4306-BD4A-B5BB02AD1EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34184A34-9255-4306-BD4A-B5BB02AD1EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34184A34-9255-4306-BD4A-B5BB02AD1EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34184A34-9255-4306-BD4A-B5BB02AD1EA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
