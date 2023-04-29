@@ -24,8 +24,9 @@ namespace Marketplace.Models
         [Required]
         [MaxLength(250)]
         public string Description { get; set; }
-        [Column("is_available")]
+        [Column("amount")]
         [Required]
-        public bool IsAvailable { get; set; }
+        [Range(0, int.MaxValue)]
+        public int Amount { get; set; }
     }
 }

@@ -30,15 +30,15 @@ namespace Marketplace.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("integer")
+                        .HasColumnName("amount");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)")
                         .HasColumnName("description");
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_available");
 
                     b.Property<string>("Name")
                         .IsRequired()
