@@ -28,3 +28,10 @@ This is a simple system for capturing voltage and current events. Applicable for
     'VC': voltage in the charger circuit. Typically used to indicate that a charger is present but not connected to the battery circuit. Not required field. Default 0.
     'DT': DateTime. Not required field. Default current Date Time.
     'S': Event status. Not required field. Default 0.
+
+## Endpoints
+
+The following endpoints are available in the API
+
+    -'PUT /api/data/putdata/?Id=id&V=v' simple format for sending data
+    -'GET /api/data/getdata/?Id=id&From=data' simple format for get data
