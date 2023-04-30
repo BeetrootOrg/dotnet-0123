@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BatteryMonitorApp.Domain\BatteryMonitorApp.Domain.csproj" />
+    <ProjectReference Include="..\BatteryMonitorApp.WebApi\BatteryMonitorApp.WebApi.csproj" />
   </ItemGroup>
 
 </Project>
