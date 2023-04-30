@@ -44,60 +44,7 @@ namespace BatteryMonitorApp.IntegrationTests
             _ = response.EnsureSuccessStatusCode();
             string responseString = await response.Content.ReadAsStringAsync();
             BatteryDataResponse responseModel = JsonConvert.DeserializeObject<BatteryDataResponse>(responseString);
-
             responseModel.Result.ShouldBeTrue();
-//            response.Headers.Location.ToString().ShouldBe($"api/data/{responseModel.Result}");
         }
-
-        //[Fact]
-        //public async Task GetTaskByIdShouldDoItSuccessfully()
-        //{
-        //    // Arrange
-        //    HttpClient client = _factory.CreateClient();
-
-        //    string title = Guid.NewGuid().ToString();
-        //    string description = Guid.NewGuid().ToString();
-
-        //    HttpResponseMessage createResponse = await client.PutAsync("tasks", new StringContent(
-        //        JsonConvert.SerializeObject(new CreateTaskRequest
-        //        {
-        //            Title = title,
-        //            Description = description
-        //        }), Encoding.UTF8, "application/json"));
-
-        //    _ = createResponse.EnsureSuccessStatusCode();
-        //    string createResponseString = await createResponse.Content.ReadAsStringAsync();
-        //    CreateTaskResponse createResponseModel = JsonConvert.DeserializeObject<CreateTaskResponse>(createResponseString);
-
-        //    // Act
-        //    HttpResponseMessage getResponse = await client.GetAsync($"tasks/{createResponseModel.Id}");
-
-        //    // Assert
-        //    _ = getResponse.EnsureSuccessStatusCode();
-        //    string getResponseString = await getResponse.Content.ReadAsStringAsync();
-        //    GetTaskByIdResponse getResponseModel = JsonConvert.DeserializeObject<GetTaskByIdResponse>(getResponseString);
-        //    ContractsTask task = getResponseModel.Task;
-
-        //    _ = task.ShouldNotBeNull();
-        //    task.Id.ShouldBe(createResponseModel.Id);
-        //    task.Title.ShouldBe(title);
-        //    task.Description.ShouldBe(description);
-        //    task.Status.ShouldBe(ContractsTaskStatus.New);
-        //    task.AssigneeEmail.ShouldBeNull();
-        //    task.UpdatedAt.ShouldBeNull();
-        //}
-
-        //[Fact]
-        //public async Task GetTaskByIdShouldReturnNotFound()
-        //{
-        //    // Arrange
-        //    HttpClient client = _factory.CreateClient();
-
-        //    // Act
-        //    HttpResponseMessage response = await client.GetAsync($"tasks/{Guid.NewGuid()}");
-
-        //    // Assert
-        //    response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
-        //}
     }
 }
