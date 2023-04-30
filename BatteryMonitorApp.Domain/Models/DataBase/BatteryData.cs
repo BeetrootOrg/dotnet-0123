@@ -22,16 +22,8 @@ namespace BatteryMonitorApp.Domain.Models.DataBase
         [NotNull]
         public DateTime DateTime { get; set; } = DateTime.Now;
         [NotNull]
-        public BatteryEventStatus Status { get; set; } = BatteryEventStatus.Default;
+        public int Status { get; set; } = 0;
     }
 
-    public enum BatteryEventStatus
-    {
-        Default = 0,
-        Alarm = 1,
-        LoadOfChargeOf = 2,
-        LoadOnChargeOf = 3,
-        LoadOnChargeOn = 4,
-        LoadOfChargeOn = 5
-    }
+
 }

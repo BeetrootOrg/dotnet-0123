@@ -20,7 +20,7 @@ namespace BatteryMonitorApp.Domain.DbContexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(LocalDb)MSSQLLocalDB;DataBase=battery_mon;User Id=batt_app;Password=batt_app");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;DataBase=battery_mon;User Id=batt_app;Password=batt_app;");
             base.OnConfiguring(optionsBuilder);
         }
 
