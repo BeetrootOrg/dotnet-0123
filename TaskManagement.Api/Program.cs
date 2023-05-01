@@ -2,6 +2,9 @@ using System;
 using System.IO;
 using System.Reflection;
 
+using FluentValidation;
+using FluentValidation.AspNetCore;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +15,7 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 
 using TaskManagement.Api;
+using TaskManagement.Api.Validators;
 using TaskManagement.Domain;
 using TaskManagement.Domain.DbContexts;
 
@@ -49,6 +53,9 @@ builder.Services.AddDbContext<TaskManagementContext>(
         IOptionsMonitor<TaskManagementOptions> options = sp.GetRequiredService<IOptionsMonitor<TaskManagementOptions>>();
         _ = c.UseNpgsql(options.CurrentValue.TaskManagementConnectionString);
     });
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<AssignTaskRequestValidator>();
 
 builder.Services
     .AddHealthChecks()
