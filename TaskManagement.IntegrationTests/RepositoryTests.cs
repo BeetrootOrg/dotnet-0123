@@ -8,7 +8,6 @@ using Moq;
 using Shouldly;
 
 using TaskManagement.Domain.DbContexts;
-using TaskManagement.Domain.Exceptions;
 using TaskManagement.Domain.Helpers;
 using TaskManagement.Domain.Repositories;
 
@@ -147,7 +146,44 @@ namespace TaskManagement.IntegrationTests
         }
 
         [Fact]
-        public async Task AssignToUserShouldDoIt()
+        public async Task CreateUserIfNotExistsShouldCreateUser()
+        {
+            // Arrange
+            string email = $"{Guid.NewGuid():N}@gmail.com";
+
+            // Act
+            DatabaseUser result = await _repository.CreateUserIfNotExists(email);
+
+            await using TaskManagementContext testContext = CreateContext();
+            bool userExist = await testContext.Users.AnyAsync(x => x.Email == email);
+
+            // Assert
+            userExist.ShouldBeTrue();
+        }
+
+        [Fact]
+        public async Task CreateUserIfNotExistsShouldReturnUser()
+        {
+            // Arrange
+            DatabaseUser user = new()
+            {
+                Email = $"{Guid.NewGuid():N}@gmail.com",
+            };
+
+            await using TaskManagementContext testContext = CreateContext();
+            _ = await testContext.Users.AddAsync(user);
+            _ = await testContext.SaveChangesAsync();
+
+            // Act
+            DatabaseUser result = await _repository.CreateUserIfNotExists(user.Email);
+
+            // Assert
+            _ = result.ShouldNotBeNull();
+            result.Id.ShouldBe(user.Id);
+        }
+
+        [Fact]
+        public async Task AssignToUserShouldDoItSuccessfully()
         {
             // Arrange
             DatabaseTask task = new()
@@ -170,138 +206,19 @@ namespace TaskManagement.IntegrationTests
             _ = await testContext.SaveChangesAsync();
 
             // Act
-            await _repository.AssignToUser(task.Id.ToString(), user.Email);
+            await _repository.AssignToUser(task.Id.ToString(), user.Id);
 
-            await using TaskManagementContext assertContext = CreateContext();
-            DatabaseTask result = await assertContext.Tasks.Include(x => x.Assignee).SingleAsync(x => x.Id == task.Id);
+            await using TaskManagementContext testContext2 = CreateContext();
+            DatabaseTask result = await testContext2.Tasks
+                .Include(x => x.Assignee)
+                .FirstOrDefaultAsync(x => x.Id == task.Id);
 
             // Assert
+            _ = result.ShouldNotBeNull();
             result.AssigneeId.ShouldBe(user.Id);
             result.Assignee.Id.ShouldBe(user.Id);
             result.Assignee.Email.ShouldBe(user.Email);
             result.Status.ShouldBe((int)ContractsTaskStatus.Assigned);
-        }
-
-        [Fact]
-        public async Task AssignToUserShouldThrowIfTaskDoesNotExist()
-        {
-            // Arrange
-            Guid taskId = Guid.NewGuid();
-
-            DatabaseUser user = new()
-            {
-                Email = $"{Guid.NewGuid():N}@gmail.com"
-            };
-
-            await using TaskManagementContext testContext = CreateContext();
-            _ = await testContext.Users.AddAsync(user);
-            _ = await testContext.SaveChangesAsync();
-
-            // Act
-            Func<Task> action = () => _repository.AssignToUser(taskId.ToString(), user.Email);
-
-            // Assert
-            _ = await action.ShouldThrowAsync<Exception>();
-        }
-
-        [Fact]
-        public async Task AssignToUserShouldCreateUserIfUserDoesNotExist()
-        {
-            // Arrange
-            DatabaseTask task = new()
-            {
-                Id = Guid.NewGuid(),
-                CreatedAt = new DateTime(2021, 1, 1, 2, 3, 4, DateTimeKind.Utc),
-                Title = Guid.NewGuid().ToString(),
-                Description = Guid.NewGuid().ToString(),
-                UpdatedAt = new DateTime(2022, 2, 3, 4, 5, 6, DateTimeKind.Utc),
-            };
-
-            string email = $"{Guid.NewGuid():N}@gmail.com";
-
-            await using TaskManagementContext testContext = CreateContext();
-            _ = await testContext.Tasks.AddAsync(task);
-            _ = await testContext.SaveChangesAsync();
-
-            long maxUserId = await testContext.Users.MaxAsync(x => x.Id);
-
-            // Act
-            await _repository.AssignToUser(task.Id.ToString(), email);
-
-            await using TaskManagementContext assertContext = CreateContext();
-            DatabaseTask result = await assertContext.Tasks.Include(x => x.Assignee).SingleAsync(x => x.Id == task.Id);
-
-            // Assert
-            result.Assignee.Email.ShouldBe(email);
-        }
-
-        [Theory]
-        [InlineData(ContractsTaskStatus.InProgress)]
-        [InlineData(ContractsTaskStatus.Assigned)]
-        [InlineData(ContractsTaskStatus.Completed)]
-        [InlineData(ContractsTaskStatus.Cancelled)]
-        public async Task AssignToUserShouldThrowIfStatusIsNotNew(ContractsTaskStatus status)
-        {
-            // Arrange
-            DatabaseTask task = new()
-            {
-                Id = Guid.NewGuid(),
-                CreatedAt = new DateTime(2021, 1, 1, 2, 3, 4, DateTimeKind.Utc),
-                Title = Guid.NewGuid().ToString(),
-                Description = Guid.NewGuid().ToString(),
-                Status = (int)status,
-                UpdatedAt = new DateTime(2022, 2, 3, 4, 5, 6, DateTimeKind.Utc),
-            };
-
-            DatabaseUser user = new()
-            {
-                Email = $"{Guid.NewGuid():N}@gmail.com"
-            };
-
-            await using TaskManagementContext testContext = CreateContext();
-            _ = await testContext.Tasks.AddAsync(task);
-            _ = await testContext.Users.AddAsync(user);
-            _ = await testContext.SaveChangesAsync();
-
-            // Act
-            Func<Task> action = () => _repository.AssignToUser(task.Id.ToString(), user.Email);
-
-            // Assert
-            _ = await action.ShouldThrowAsync<TaskManagementException>();
-        }
-
-        [Fact]
-        public async Task AssignToUserShouldThrowIfTaskAlreadyAssigned()
-        {
-            // Arrange
-            DatabaseTask task = new()
-            {
-                Id = Guid.NewGuid(),
-                CreatedAt = new DateTime(2021, 1, 1, 2, 3, 4, DateTimeKind.Utc),
-                Title = Guid.NewGuid().ToString(),
-                Description = Guid.NewGuid().ToString(),
-                UpdatedAt = new DateTime(2022, 2, 3, 4, 5, 6, DateTimeKind.Utc),
-                Assignee = new()
-                {
-                    Email = $"{Guid.NewGuid():N}@gmail.com"
-                }
-            };
-
-            DatabaseUser user = new()
-            {
-                Email = $"{Guid.NewGuid():N}@gmail.com"
-            };
-
-            await using TaskManagementContext testContext = CreateContext();
-            _ = await testContext.Tasks.AddAsync(task);
-            _ = await testContext.Users.AddAsync(user);
-            _ = await testContext.SaveChangesAsync();
-
-            // Act
-            Func<Task> action = () => _repository.AssignToUser(task.Id.ToString(), user.Email);
-
-            // Assert
-            _ = await action.ShouldThrowAsync<TaskManagementException>();
         }
 
         private static TaskManagementContext CreateContext()

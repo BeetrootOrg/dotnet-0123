@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 using TaskManagement.Domain.DbContexts;
-using TaskManagement.Domain.Exceptions;
 using TaskManagement.Domain.Helpers;
 
 using DatabaseTask = TaskManagement.Domain.Models.Database.Task;
@@ -17,7 +16,8 @@ namespace TaskManagement.Domain.Repositories
     {
         Task<DatabaseTask> CreateTask(string title, string description, CancellationToken cancellationToken = default);
         Task<DatabaseTask> GetTaskById(string id, CancellationToken cancellationToken = default);
-        Task AssignToUser(string taskId, string email, CancellationToken cancellationToken = default);
+        Task<DatabaseUser> CreateUserIfNotExists(string email, CancellationToken cancellationToken = default);
+        Task AssignToUser(string taskId, long userId, CancellationToken cancellationToken = default);
     }
 
     internal class Repository : IRepository
@@ -35,38 +35,11 @@ namespace TaskManagement.Domain.Repositories
             _identifierGenerator = identifierGenerator;
         }
 
-        public async Task AssignToUser(string taskId, string email, CancellationToken cancellationToken = default)
+        public async Task AssignToUser(string taskId, long userId, CancellationToken cancellationToken = default)
         {
-            DatabaseUser user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Email == email, cancellationToken);
-            if (user is null)
-            {
-                user = new DatabaseUser
-                {
-                    Email = email,
-                };
-
-                _ = await _dbContext.Users.AddAsync(user, cancellationToken);
-                _ = await _dbContext.SaveChangesAsync(cancellationToken);
-            }
-
             DatabaseTask task = await _dbContext.Tasks.SingleAsync(x => x.Id.ToString() == taskId, cancellationToken);
-            if (task.Status != (int)ContractsTaskStatus.New)
-            {
-                throw new TaskManagementException(
-                    TaskManagementError.TaskStatusIsNotNew,
-                    $"Task status is not {ContractsTaskStatus.New} but {task.Status}"
-                );
-            }
 
-            if (task.AssigneeId is not null)
-            {
-                throw new TaskManagementException(
-                    TaskManagementError.TaskAlreadyAssignedToUser,
-                    $"Task is already assigned to user with id {task.AssigneeId}"
-                );
-            }
-
-            task.AssigneeId = user.Id;
+            task.AssigneeId = userId;
             task.Status = (int)ContractsTaskStatus.Assigned;
 
             _ = await _dbContext.SaveChangesAsync(cancellationToken);

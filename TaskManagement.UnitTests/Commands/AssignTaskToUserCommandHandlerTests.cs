@@ -9,7 +9,12 @@ using Microsoft.Extensions.Logging;
 using Moq;
 
 using TaskManagement.Domain.Commands;
+using TaskManagement.Domain.Exceptions;
 using TaskManagement.Domain.Repositories;
+
+using DatabaseTask = TaskManagement.Domain.Models.Database.Task;
+using DatabaseUser = TaskManagement.Domain.Models.Database.User;
+using ContractsTaskStatus = TaskManagement.Contracts.Models.TaskStatus;
 
 namespace TaskManagement.UnitTests.Commands
 {
@@ -27,24 +32,81 @@ namespace TaskManagement.UnitTests.Commands
             );
         }
 
+        [Theory]
+        [InlineData(ContractsTaskStatus.Assigned)]
+        [InlineData(ContractsTaskStatus.InProgress)]
+        [InlineData(ContractsTaskStatus.Completed)]
+        [InlineData(ContractsTaskStatus.Cancelled)]
+        public async Task HandleShouldThrowExceptionIfTaskStatusIsNotNew(ContractsTaskStatus status)
+        {
+            // Arrange
+            DatabaseTask task = new()
+            {
+                Id = Guid.NewGuid(),
+                Status = (int)status
+            };
+
+            _ = _repositoryMock.Setup(x => x.GetTaskById(task.Id.ToString(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(task));
+
+            // Act
+            Task Action()
+            {
+                return _handler.Handle(new AssignTaskToUserCommand { TaskId = task.Id.ToString() }, CancellationToken.None);
+            }
+
+            // Assert
+            _ = await Assert.ThrowsAsync<TaskManagementException>(Action);
+        }
+
+        [Fact]
+        public async Task HandleShouldThrowExceptionIfTaskIsAlreadyAssignedToUser()
+        {
+            // Arrange
+            DatabaseTask task = new()
+            {
+                Id = Guid.NewGuid(),
+                Status = (int)ContractsTaskStatus.New,
+                AssigneeId = 42
+            };
+
+            _ = _repositoryMock.Setup(x => x.GetTaskById(task.Id.ToString(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(task));
+
+            // Act
+            Task Action()
+            {
+                return _handler.Handle(new AssignTaskToUserCommand { TaskId = task.Id.ToString() }, CancellationToken.None);
+            }
+
+            // Assert
+            _ = await Assert.ThrowsAsync<TaskManagementException>(Action);
+        }
+
         [Fact]
         public async Task HandleShouldAssignTaskToUser()
         {
             // Arrange
-            string taskId = Guid.NewGuid().ToString();
-            string email = Guid.NewGuid().ToString();
-
-            AssignTaskToUserCommand command = new()
+            DatabaseTask task = new()
             {
-                TaskId = taskId,
-                Email = email
+                Id = Guid.NewGuid(),
+                Status = (int)ContractsTaskStatus.New
             };
 
+            long userId = 42;
+
+            _ = _repositoryMock.Setup(x => x.GetTaskById(task.Id.ToString(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(task));
+
+            _ = _repositoryMock.Setup(x => x.CreateUserIfNotExists(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(new DatabaseUser { Id = userId }));
+
             // Act
-            AssignTaskToUserCommandResult result = await _handler.Handle(command, CancellationToken.None);
+            AssignTaskToUserCommandResult result = await _handler.Handle(new AssignTaskToUserCommand { TaskId = task.Id.ToString() }, CancellationToken.None);
 
             // Assert
-            _repositoryMock.Verify(x => x.AssignToUser(taskId, email, It.IsAny<CancellationToken>()), Times.Once);
+            Assert.NotNull(result);
+            _repositoryMock.Verify(x => x.AssignToUser(task.Id.ToString(), userId, It.IsAny<CancellationToken>()), Times.Once);
         }
     }
 }

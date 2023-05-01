@@ -6,7 +6,12 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 
 using TaskManagement.Domain.Base;
+using TaskManagement.Domain.Exceptions;
 using TaskManagement.Domain.Repositories;
+
+using DatabaseTask = TaskManagement.Domain.Models.Database.Task;
+using DatabaseUser = TaskManagement.Domain.Models.Database.User;
+using ContractsTaskStatus = TaskManagement.Contracts.Models.TaskStatus;
 
 namespace TaskManagement.Domain.Commands
 {
@@ -31,7 +36,26 @@ namespace TaskManagement.Domain.Commands
 
         protected override async Task<AssignTaskToUserCommandResult> HandleInternal(AssignTaskToUserCommand request, CancellationToken cancellationToken)
         {
-            await _repository.AssignToUser(request.TaskId, request.Email, cancellationToken);
+            DatabaseTask task = await _repository.GetTaskById(request.TaskId, cancellationToken);
+            if (task.Status != (int)ContractsTaskStatus.New)
+            {
+                throw new TaskManagementException(
+                    TaskManagementError.TaskStatusIsNotNew,
+                    $"Task status is not {ContractsTaskStatus.New} but {task.Status}"
+                );
+            }
+
+            if (task.AssigneeId is not null)
+            {
+                throw new TaskManagementException(
+                    TaskManagementError.TaskAlreadyAssignedToUser,
+                    $"Task is already assigned to user with id {task.AssigneeId}"
+                );
+            }
+
+            DatabaseUser user = await _repository.CreateUserIfNotExists(request.Email, cancellationToken);
+            await _repository.AssignToUser(task.Id.ToString(), user.Id, cancellationToken);
+
             return new();
         }
     }
