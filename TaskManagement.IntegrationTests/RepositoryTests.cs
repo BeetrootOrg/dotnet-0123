@@ -38,7 +38,7 @@ namespace TaskManagement.IntegrationTests
         {
             // Arrange
             Guid id = Guid.NewGuid();
-            DateTime now = DateTime.UtcNow;
+            DateTime now = new(2021, 1, 1, 2, 3, 4, DateTimeKind.Utc);
 
             string title = Guid.NewGuid().ToString();
             string description = Guid.NewGuid().ToString();
@@ -59,6 +59,11 @@ namespace TaskManagement.IntegrationTests
             result.CreatedAt.ShouldBe(now);
             result.Title.ShouldBe(title);
             result.Description.ShouldBe(description);
+            result.AssigneeId.ShouldBeNull();
+            result.Assignee.ShouldBeNull();
+            result.Status.ShouldBe((int)ContractsTaskStatus.New);
+            result.UpdatedAt.ShouldBeNull();
+            result.CreatedAt.ShouldBe(now);
         }
 
         [Fact]
@@ -200,6 +205,9 @@ namespace TaskManagement.IntegrationTests
                 Email = $"{Guid.NewGuid():N}@gmail.com"
             };
 
+            DateTime now = new(2021, 1, 1, 2, 3, 4, DateTimeKind.Utc);
+            _ = _dateTimeProviderMock.SetupGet(x => x.Now).Returns(now);
+
             await using TaskManagementContext testContext = CreateContext();
             _ = await testContext.Tasks.AddAsync(task);
             _ = await testContext.Users.AddAsync(user);
@@ -219,6 +227,7 @@ namespace TaskManagement.IntegrationTests
             result.Assignee.Id.ShouldBe(user.Id);
             result.Assignee.Email.ShouldBe(user.Email);
             result.Status.ShouldBe((int)ContractsTaskStatus.Assigned);
+            result.UpdatedAt.ShouldBe(now);
         }
 
         private static TaskManagementContext CreateContext()

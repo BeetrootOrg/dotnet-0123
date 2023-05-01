@@ -40,6 +40,7 @@ namespace TaskManagement.Domain.Repositories
             DatabaseTask task = await _dbContext.Tasks.SingleAsync(x => x.Id.ToString() == taskId, cancellationToken);
 
             task.AssigneeId = userId;
+            task.UpdatedAt = _dateTimeProvider.Now;
             task.Status = (int)ContractsTaskStatus.Assigned;
 
             _ = await _dbContext.SaveChangesAsync(cancellationToken);
