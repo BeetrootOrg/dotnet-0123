@@ -8,6 +8,7 @@ namespace BatteryMonitorApp.Domain.Models.DataBase
     public record BatteryData
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         [Required]
         [NotNull]

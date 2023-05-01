@@ -15,7 +15,7 @@ namespace BatteryMonitorApp.Domain
         public static IServiceCollection AddDomain(this IServiceCollection services)
         {
             _=services.AddScoped<IRepository, Repository>();
-            services.AddMediatR(c => c.RegisterServicesFromAssembly(
+            _=services.AddMediatR(c => c.RegisterServicesFromAssembly(
     typeof(BatteryMonitorApp.Domain.Commands.BatteryDataCommand).Assembly));
             return services;
         }
