@@ -37,6 +37,14 @@ namespace TaskManagement.Domain.Commands
         protected override async Task<AssignTaskToUserCommandResult> HandleInternal(AssignTaskToUserCommand request, CancellationToken cancellationToken)
         {
             DatabaseTask task = await _repository.GetTaskById(request.TaskId, cancellationToken);
+            if (task is null)
+            {
+                throw new TaskManagementException(
+                    TaskManagementError.TaskNotFound,
+                    $"Task with id {request.TaskId} not found"
+                );
+            }
+
             if (task.Status != (int)ContractsTaskStatus.New)
             {
                 throw new TaskManagementException(

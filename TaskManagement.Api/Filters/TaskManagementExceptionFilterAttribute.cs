@@ -1,3 +1,5 @@
+using System;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -12,10 +14,26 @@ namespace TaskManagement.Api.Filters
         {
             if (context.Exception is TaskManagementException exception)
             {
-                context.Result = new BadRequestObjectResult(new ErrorModel
+                context.Result = exception.Error switch
                 {
-                    Message = exception.Message,
-                });
+                    TaskManagementError.TaskNotFound => new NotFoundObjectResult(new ErrorModel
+                    {
+                        Message = exception.Message,
+                    }),
+                    TaskManagementError.TaskStatusIsNotNew => new BadRequestObjectResult(new ErrorModel
+                    {
+                        Message = exception.Message,
+                    }),
+                    TaskManagementError.TaskAlreadyAssignedToUser => new BadRequestObjectResult(new ErrorModel
+                    {
+                        Message = exception.Message,
+                    }),
+                    TaskManagementError.TaskStatusCannotBeChanged => new BadRequestObjectResult(new ErrorModel
+                    {
+                        Message = exception.Message,
+                    }),
+                    _ => throw new ArgumentOutOfRangeException(nameof(context), exception.Error, null),
+                };
             }
         }
     }

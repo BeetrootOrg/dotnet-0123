@@ -60,6 +60,25 @@ namespace TaskManagement.UnitTests.Commands
         }
 
         [Fact]
+        public async Task HandleShouldThrowExceptionIfTaskDoesNotExist()
+        {
+            // Arrange
+            Guid taskId = Guid.NewGuid();
+
+            _ = _repositoryMock.Setup(x => x.GetTaskById(taskId.ToString(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult<DatabaseTask>(null));
+
+            // Act
+            Task Action()
+            {
+                return _handler.Handle(new AssignTaskToUserCommand { TaskId = taskId.ToString() }, CancellationToken.None);
+            }
+
+            // Assert
+            _ = await Assert.ThrowsAsync<TaskManagementException>(Action);
+        }
+
+        [Fact]
         public async Task HandleShouldThrowExceptionIfTaskIsAlreadyAssignedToUser()
         {
             // Arrange

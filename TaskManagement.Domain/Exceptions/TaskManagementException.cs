@@ -4,8 +4,10 @@ namespace TaskManagement.Domain.Exceptions
 {
     public enum TaskManagementError
     {
+        TaskNotFound,
         TaskStatusIsNotNew,
         TaskAlreadyAssignedToUser,
+        TaskStatusCannotBeChanged,
     }
 
     public class TaskManagementException : Exception

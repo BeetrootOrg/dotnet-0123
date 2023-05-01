@@ -46,6 +46,7 @@ namespace TaskManagement.Api.Controllers
         /// <response code="500">If something went wrong</response>
         [HttpPut]
         [ProducesResponseType(typeof(CreateTaskResponse), 201)]
+        [ProducesResponseType(typeof(ErrorModel), 400)]
         public async Task<IActionResult> CreateTask([FromBody] CreateTaskRequest request,
             CancellationToken cancellationToken = default)
         {
@@ -74,6 +75,7 @@ namespace TaskManagement.Api.Controllers
         /// <response code="500">If something went wrong</response>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(GetTaskByIdResponse), 200)]
+        [ProducesResponseType(typeof(ErrorModel), 400)]
         [ProducesResponseType(typeof(ErrorModel), 404)]
         public async Task<IActionResult> GetTaskById(string id, CancellationToken cancellationToken = default)
         {
@@ -114,9 +116,12 @@ namespace TaskManagement.Api.Controllers
         /// </remarks>
         /// <response code="204">If task assigned successfully</response>
         /// <response code="400">If request is invalid</response>
+        /// <response code="404">If task with given id not found</response>
         /// <response code="500">If something went wrong</response>
         [HttpPost("{taskId}")]
         [ProducesResponseType(204)]
+        [ProducesResponseType(typeof(ErrorModel), 400)]
+        [ProducesResponseType(typeof(ErrorModel), 404)]
         public async Task<IActionResult> AssignToUser([FromRoute] string taskId,
             [FromBody] AssignTaskRequest request,
             CancellationToken cancellationToken = default)
@@ -131,5 +136,43 @@ namespace TaskManagement.Api.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Update task status
+        /// </summary>
+        /// <param name="taskId">Task identifier</param>
+        /// <param name="request">Update information</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
+        /// <returns>Nothing</returns>
+        /// <remarks>
+        /// 
+        /// Sample request:
+        /// 
+        ///  PATCH /tasks/{taskId}/status
+        ///  {
+        ///     "status": "InProgress"
+        ///  }
+        /// 
+        /// </remarks>
+        /// <response code="204">If task status updated successfully</response>
+        /// <response code="400">If request is invalid</response>
+        /// <response code="404">If task with given id not found</response>
+        /// <response code="500">If something went wrong</response>
+        [HttpPatch("{taskId}/status")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(typeof(ErrorModel), 400)]
+        [ProducesResponseType(typeof(ErrorModel), 404)]
+        public async Task<IActionResult> UpdateTaskStatus([FromRoute] string taskId,
+            [FromBody] UpdateTaskStatusRequest request,
+            CancellationToken cancellationToken = default)
+        {
+            UpdateTaskStatusCommand command = new()
+            {
+                TaskId = taskId,
+                Status = request.Status
+            };
+
+            _ = await _mediator.Send(command, cancellationToken);
+            return NoContent();
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace TaskManagement.Domain.Repositories
         Task<DatabaseTask> GetTaskById(string id, CancellationToken cancellationToken = default);
         Task<DatabaseUser> CreateUserIfNotExists(string email, CancellationToken cancellationToken = default);
         Task AssignToUser(string taskId, long userId, CancellationToken cancellationToken = default);
+        Task UpdateTaskStatus(string taskId, ContractsTaskStatus status, CancellationToken cancellationToken = default);
     }
 
     internal class Repository : IRepository
@@ -87,6 +88,16 @@ namespace TaskManagement.Domain.Repositories
             return _dbContext.Tasks
                 .Include(t => t.Assignee)
                 .SingleOrDefaultAsync(t => t.Id.ToString() == id, cancellationToken);
+        }
+
+        public async Task UpdateTaskStatus(string taskId, ContractsTaskStatus status, CancellationToken cancellationToken = default)
+        {
+            DatabaseTask task = await _dbContext.Tasks.SingleAsync(x => x.Id.ToString() == taskId, cancellationToken);
+
+            task.Status = (int)status;
+            task.UpdatedAt = _dateTimeProvider.Now;
+
+            _ = await _dbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }
