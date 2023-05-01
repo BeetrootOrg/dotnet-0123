@@ -8,7 +8,7 @@ namespace TaskManagement.Api.Validators
     {
         public AssignTaskRequestValidator()
         {
-            _ = RuleFor(x => x.Email).EmailAddress();
+            _ = RuleFor(x => x.Email).EmailAddress().NotNull();
         }
     }
 }

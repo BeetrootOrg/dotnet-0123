@@ -41,7 +41,7 @@ namespace TaskManagement.Domain.Commands
             {
                 throw new TaskManagementException(
                     TaskManagementError.TaskStatusIsNotNew,
-                    $"Task status is not {ContractsTaskStatus.New} but {task.Status}"
+                    $"Task status is not {ContractsTaskStatus.New} but {(ContractsTaskStatus)task.Status}"
                 );
             }
 

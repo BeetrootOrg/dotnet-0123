@@ -8,8 +8,8 @@ namespace TaskManagement.Api.Validators
     {
         public CreateTaskRequestValidator()
         {
-            _ = RuleFor(x => x.Title).Length(1, 255);
-            _ = RuleFor(x => x.Description).NotEmpty();
+            _ = RuleFor(x => x.Title).Length(1, 255).NotNull();
+            _ = RuleFor(x => x.Description).NotEmpty().NotNull();
         }
     }
 }

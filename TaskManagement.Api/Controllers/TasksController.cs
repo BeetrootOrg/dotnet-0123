@@ -5,6 +5,7 @@ using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
+using TaskManagement.Api.Filters;
 using TaskManagement.Contracts.Http;
 using TaskManagement.Domain.Commands;
 using TaskManagement.Domain.Queries;
@@ -14,6 +15,7 @@ namespace TaskManagement.Api.Controllers
     [ApiController]
     [Route("[controller]")]
     [Produces("application/json")]
+    [TaskManagementExceptionFilter]
     public class TasksController : ControllerBase
     {
         private readonly IMediator _mediator;
