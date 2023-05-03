@@ -36,11 +36,11 @@ namespace BatteryMonitorApp.UnitTests
             // Act 
             var countb =await repo.GetBatteryData(data.DeviceId,
                 data.DateTime.Subtract(new TimeSpan(12, 1, 1)),
-                DateTime.UtcNow, new int[] { data.Status });
+                DateTime.Now, new int[] { data.Status });
             await repo.AddData(data);
             var counta = await repo.GetBatteryData(data.DeviceId,
                 data.DateTime.Subtract(new TimeSpan(12, 1, 1)),
-                DateTime.UtcNow, new int[] { data.Status });
+                DateTime.Now, new int[] { data.Status });
             // Assert
             Assert.True(countb.Length < counta.Length);
         }
@@ -57,7 +57,7 @@ namespace BatteryMonitorApp.UnitTests
             repo = CreateRepo();
             BatteryData[] arrdata = await repo.GetBatteryData(data.DeviceId,
                 data.DateTime.Subtract(new TimeSpan(24, 12, 1)),
-                DateTime.UtcNow, new int[] { 0,1,2,3,4 });
+                DateTime.Now, new int[] { 0,1,2,3,4 });
             BatteryData datafromdb = arrdata.LastOrDefault();
             // Assert
             Assert.True(arrdata?.Length > 0);
