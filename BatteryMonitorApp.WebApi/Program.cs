@@ -1,4 +1,7 @@
-using BatteryMonitorApp.Domain;
+
+using AutoMapper;
+
+using BatteryMonitorApp.Contracts.MapperConfigs;
 using BatteryMonitorApp.Domain.DbContexts;
 using BatteryMonitorApp.UnitTests.Repositories;
 
@@ -18,6 +21,12 @@ var connectionString = builder.Configuration.GetConnectionString("SqlConnection"
 
 builder.Services.AddDbContext<BatteryMonitorContext>(c => c.UseSqlServer(connectionString));
 builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddSingleton(_ =>
+{
+    MapperConfiguration mc = new(cfg => cfg.AddProfile<MapperConfigProfiles>());
+    return mc.CreateMapper();
+}
+);
 //builder.Services.AddDomain();
 
 var app = builder.Build();

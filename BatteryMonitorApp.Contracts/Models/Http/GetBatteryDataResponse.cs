@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using BatteryMonitorApp.Contracts.Models;
 
-namespace BatteryMonitorApp.Contracts.Http
+namespace BatteryMonitorApp.Contracts.Models.Http
 {
     public class GetBatteryDataResponse
     {

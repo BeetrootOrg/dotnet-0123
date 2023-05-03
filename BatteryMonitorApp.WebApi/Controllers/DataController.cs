@@ -1,6 +1,12 @@
 ﻿
 
 
+using AutoMapper;
+
+using BatteryMonitorApp.Contracts;
+using BatteryMonitorApp.Contracts.Models.Http;
+using BatteryMonitorApp.UnitTests.Repositories;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -11,28 +17,23 @@ namespace BatteryMonitorApp.WebApi.Controllers
     [ApiController]
     public class DataController : ControllerBase
     {
-        //private readonly IMediator _mediator;
+        private readonly IRepository _repository;
+        private readonly IMapper _mapper;
 
-        //public DataController(IMediator mediator)
-        //{
-        //    _mediator = mediator;
-        //}
-        //[HttpPut]
-        //public async Task<IActionResult> PutData([FromBody] BatteryDataRequest request, CancellationToken cancellationToken = default)
-        //{
-        //    //var command = new BatteryDataCommand
-        //    //{
-        //    //    Current = request.Current,
-        //    //    DateTime = request.DateTime,
-        //    //    DeviceId = request.DeviceId,
-        //    //    Status = request.Status,
-        //    //    Voltage = request.Voltage,
-        //    //    VoltageCharger = request.VoltageCharger,
-        //    //};
 
-        //    //BatteryDataResult result = await _mediator.Send(command, cancellationToken);
-        //    //return Ok(result);
-        //}
+        public DataController(IRepository repository, IMapper mapper)
+        {
+            _repository = repository;
+            _mapper = mapper;
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> PutData([FromBody] BatteryDataShortFormat request, CancellationToken cancellationToken = default)
+        {
+            var res = await BatteryMonitorAppContracts.AddData(_repository, _mapper, request);
+            if (res) return Ok();
+            return BadRequest();
+        }
         //[HttpGet]
         //public async Task<IActionResult> GetData([FromQuery] GetBatteryDataRequest request, CancellationToken cancellationToken = default)
         //{

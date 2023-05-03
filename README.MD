@@ -34,7 +34,16 @@ Datas has the following fields:
 ## Endpoints
 
 The following endpoints are available in the API:
-- 'PUT /api/data/putdata' simple format for sending data
+
+- 'PUT /api/data' simple format for sending data
+        To save device traffic, the request format FromBody:
+            -'Di': (DeviceId). Required field. guid string;
+            -'V': (Voltage). Required field. float;
+            -'C': (Current). Optional parameter. float;
+            -'VC': (VoltageCharger). Optional parameter. float;
+            -'Dt': (DateTime). Optional parameter. DateTime;
+            -'S': (Status). Optional parameter. byte;
+        
 - 'GET /api/data/getdata?Id=id&From=data' simple format for get data
 
 ## Solution scheme
