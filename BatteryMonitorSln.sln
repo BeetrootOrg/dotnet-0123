@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatteryMonitorApp.Contracts", "BatteryMonitorApp.Contracts\BatteryMonitorApp.Contracts.csproj", "{D0A876BE-8120-4A20-A0A5-C00CC16D6EFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatteryMonitorApp.Contracts", "BatteryMonitorApp.Contracts\BatteryMonitorApp.Contracts.csproj", "{D0A876BE-8120-4A20-A0A5-C00CC16D6EFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatteryMonitorApp.Domain", "BatteryMonitorApp.Domain\BatteryMonitorApp.Domain.csproj", "{1FB72559-3918-478C-8A2B-4584E958E18D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatteryMonitorApp.Domain", "BatteryMonitorApp.Domain\BatteryMonitorApp.Domain.csproj", "{1FB72559-3918-478C-8A2B-4584E958E18D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatteryMonitorApp.UnitTests", "BatteryMonitorApp.UnitTests\BatteryMonitorApp.UnitTests.csproj", "{C10EE4DE-6EC1-4FEC-8ABD-91DC4B142C97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatteryMonitorApp.UnitTests", "BatteryMonitorApp.UnitTests\BatteryMonitorApp.UnitTests.csproj", "{C10EE4DE-6EC1-4FEC-8ABD-91DC4B142C97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatteryMonitorApp.IntegrationTests", "BatteryMonitorApp.IntegrationTests\BatteryMonitorApp.IntegrationTests.csproj", "{CBD939EA-E874-4A1E-B2B1-1B252A2D792B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatteryMonitorApp.IntegrationTests", "BatteryMonitorApp.IntegrationTests\BatteryMonitorApp.IntegrationTests.csproj", "{CBD939EA-E874-4A1E-B2B1-1B252A2D792B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatteryMonitorApp.WebApp", "BatteryMonitorApp.WebApp\BatteryMonitorApp.WebApp.csproj", "{48F2B80C-7420-4FBC-975A-4AF747F02891}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatteryMonitorApp.WebApp", "BatteryMonitorApp.WebApp\BatteryMonitorApp.WebApp.csproj", "{48F2B80C-7420-4FBC-975A-4AF747F02891}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatteryMonitorApp.WebApi", "BatteryMonitorApp.WebApi\BatteryMonitorApp.WebApi.csproj", "{34184A34-9255-4306-BD4A-B5BB02AD1EA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatteryMonitorApp.WebApi", "BatteryMonitorApp.WebApi\BatteryMonitorApp.WebApi.csproj", "{34184A34-9255-4306-BD4A-B5BB02AD1EA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatteryMonitorApp.PhysicalDeviceEmulator", "BatteryMonitorApp.PhysicalDeviceEmulator\BatteryMonitorApp.PhysicalDeviceEmulator.csproj", "{FA93CD91-2E2B-4B16-8BBC-648B88AF4670}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{34184A34-9255-4306-BD4A-B5BB02AD1EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34184A34-9255-4306-BD4A-B5BB02AD1EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34184A34-9255-4306-BD4A-B5BB02AD1EA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA93CD91-2E2B-4B16-8BBC-648B88AF4670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA93CD91-2E2B-4B16-8BBC-648B88AF4670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA93CD91-2E2B-4B16-8BBC-648B88AF4670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA93CD91-2E2B-4B16-8BBC-648B88AF4670}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -18,4 +18,8 @@
     <ProjectReference Include="..\BatteryMonitorApp.Contracts\BatteryMonitorApp.Contracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

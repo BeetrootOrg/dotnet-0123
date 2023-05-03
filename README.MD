@@ -36,3 +36,20 @@ Datas has the following fields:
 The following endpoints are available in the API:
 - 'PUT /api/data/putdata' simple format for sending data
 - 'GET /api/data/getdata?Id=id&From=data' simple format for get data
+
+## Solution scheme
+
+Description of the projects included in the solution.
+- 'BatteryMonitorApp.WebApi' - provides interaction with the user (devices). 
+    Provides API access. Returns data representations.
+- 'BatteryMonitorApp.WebApp' - Not implemented yet. Should provide an API solution
+    and Front End for data visualization.
+- 'BatteryMonitorApp.Contracts' - is responsible for processing the data received 
+    from the views, implements all the necessary logic, interacts with the database 
+    and passes the processing result to the view. Implements business logic.
+- 'BatteryMonitorApp.Domain' - responsible for storing data in the database. 
+    Contains repositories, data models.
+- 'BatteryMonitorApp.PhysicalDeviceEmulator' - emulates the operation of a real device. 
+    Provides a lot of physical data.
+- 'BatteryMonitorApp.UnitTests' and 'BatteryMonitorApp.IntegrationTests' - 
+    appropriate solution tests
