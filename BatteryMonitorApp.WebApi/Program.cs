@@ -18,7 +18,7 @@ var connectionString = builder.Configuration.GetConnectionString("SqlConnection"
 
 builder.Services.AddDbContext<BatteryMonitorContext>(c => c.UseSqlServer(connectionString));
 builder.Services.AddScoped<IRepository, Repository>();
-builder.Services.AddDomain();
+//builder.Services.AddDomain();
 
 var app = builder.Build();
 

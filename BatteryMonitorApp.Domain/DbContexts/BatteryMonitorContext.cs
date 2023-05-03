@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BatteryMonitorApp.Domain.DbContexts
 {
-    public class BatteryMonitorContext:DbContext
+    public class BatteryMonitorContext : DbContext
     {
         public DbSet<BatteryData> BatteryDatas { get; set; }
         public BatteryMonitorContext() { }

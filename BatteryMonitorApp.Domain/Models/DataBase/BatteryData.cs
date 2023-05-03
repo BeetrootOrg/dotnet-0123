@@ -21,7 +21,7 @@ namespace BatteryMonitorApp.Domain.Models.DataBase
         [NotNull]
         public float VoltageCharger { get; set; } = 0;
         [NotNull]
-        public DateTime DateTime { get; set; } = DateTime.Now;
+        public DateTime DateTime { get; set; } = DateTime.UtcNow;
         [NotNull]
         public int Status { get; set; } = 0;
     }
