@@ -38,6 +38,7 @@ namespace BatteryMonitorApp.WebApi.Controllers
         /// <response code="415">UnsupportedMediaType</response>
         /// <response code="500">InternalServerError</response>
         [HttpPut]
+        [ProducesResponseType(200)]
         public async Task<IActionResult> PutData([FromBody] BatteryDataShortFormat request, CancellationToken token = default)
         {
             if (request == null) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
@@ -52,7 +53,8 @@ namespace BatteryMonitorApp.WebApi.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-        }/// <summary>
+        }
+        /// <summary>
          /// simple format for get data
          /// </summary>
          /// <param name="request">BatteryDataRequest</param>
@@ -62,6 +64,7 @@ namespace BatteryMonitorApp.WebApi.Controllers
          /// <response code="415">UnsupportedMediaType</response>
          /// <response code="500">InternalServerError</response>
         [HttpGet]
+        [ProducesResponseType(typeof(BatteryDataView[]),200)]
         public async Task<IActionResult> GetData([FromQuery] BatteryDataRequest request, CancellationToken cancellationToken = default)
         {
             var result = Array.Empty<BatteryDataView>();
