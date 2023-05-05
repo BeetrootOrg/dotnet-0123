@@ -1,9 +1,15 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+using AutoMapper;
 
 using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Models.DataBase;
 using BatteryMonitorApp.Domain.Repositories;
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -11,6 +17,7 @@ namespace BatteryMonitorApp.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class DataController : ControllerBase
     {
         private readonly IRepository _repository;
@@ -21,7 +28,15 @@ namespace BatteryMonitorApp.WebApi.Controllers
             _repository = repository;
             _mapper = mapper;
         }
-
+        /// <summary>
+        /// simple format for sending data
+        /// </summary>
+        /// <param name="request">BatteryDataShortFormat data for send</param>
+        /// <param name="token">CancellationToken</param>
+        /// <returns></returns>
+        /// <response code="200">Data sending</response>
+        /// <response code="415">UnsupportedMediaType</response>
+        /// <response code="500">InternalServerError</response>
         [HttpPut]
         public async Task<IActionResult> PutData([FromBody] BatteryDataShortFormat request, CancellationToken token = default)
         {
@@ -37,7 +52,15 @@ namespace BatteryMonitorApp.WebApi.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-        }
+        }/// <summary>
+         /// simple format for get data
+         /// </summary>
+         /// <param name="request">BatteryDataRequest</param>
+         /// <param name="cancellationToken">cancellationToken</param>
+         /// <returns>Array of Battery Data</returns>
+         /// <response code="200">Data sending</response>
+         /// <response code="415">UnsupportedMediaType</response>
+         /// <response code="500">InternalServerError</response>
         [HttpGet]
         public async Task<IActionResult> GetData([FromQuery] BatteryDataRequest request, CancellationToken cancellationToken = default)
         {
