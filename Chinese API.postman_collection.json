@@ -1,0 +1,55 @@
+{
+  "info": {
+    "_postman_id": "afb2a7cb-8679-4a9c-81e5-f8e1890684fe",
+    "name": "Chinese API",
+    "description": "# **Provides a programmatic way to get information about Chinese characters**",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27254782"
+  },
+  "item": [
+    {
+      "name": "Version",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://ccdb.hemiola.com/version",
+          "protocol": "http",
+          "host": ["ccdb", "hemiola", "com"],
+          "path": ["version"]
+        },
+        "description": "# **Returns date information about the CCDB service, the Unicode version/date the data came from, as well as the PHP and MySQL versions running.**"
+      },
+      "response": []
+    },
+    {
+      "name": "Fields",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://ccdb.hemiola.com/fields",
+          "protocol": "http",
+          "host": ["ccdb", "hemiola", "com"],
+          "path": ["fields"]
+        },
+        "description": "# **Returns a list of all field names in the database. These come directly from the SQL schema.**"
+      },
+      "response": []
+    },
+    {
+      "name": "Characters",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://ccdb.hemiola.com/characters",
+          "protocol": "http",
+          "host": ["ccdb", "hemiola", "com"],
+          "path": ["characters"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
