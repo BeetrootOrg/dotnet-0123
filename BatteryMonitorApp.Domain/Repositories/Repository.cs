@@ -3,12 +3,13 @@ using BatteryMonitorApp.Domain.Models.DataBase;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace BatteryMonitorApp.UnitTests.Repositories
+namespace BatteryMonitorApp.Domain.Repositories
 {
+
     public interface IRepository
     {
         Task<int> AddData(BatteryData batteryData, CancellationToken cancellationToken = default);
-        Task <BatteryData[]> GetBatteryData(Guid devise, DateTime start, DateTime End, int[] status, CancellationToken cancellationToken = default);
+        Task<BatteryData[]> GetBatteryData(Guid devise, DateTime start, DateTime End, int[] status, CancellationToken cancellationToken = default);
     }
 
     public class Repository : IRepository

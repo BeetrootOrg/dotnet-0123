@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AutoMapper;
-
+﻿using AutoMapper;
 using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Models.DataBase;
-using BatteryMonitorApp.UnitTests.Repositories;
+using BatteryMonitorApp.Domain.Repositories;
 
 namespace BatteryMonitorApp.Contracts
 {
@@ -19,7 +12,7 @@ namespace BatteryMonitorApp.Contracts
         {
             if (data==null) return false;
             var battdata= mapper.Map<BatteryData>(data);
-            return (await repo.AddData(battdata))>0;
+            return (await repo.AddData(battdata, token))>0;
         }
     }
 }

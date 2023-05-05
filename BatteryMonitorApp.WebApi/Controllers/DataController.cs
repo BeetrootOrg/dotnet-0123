@@ -5,7 +5,8 @@ using AutoMapper;
 
 using BatteryMonitorApp.Contracts;
 using BatteryMonitorApp.Contracts.Models.Http;
-using BatteryMonitorApp.UnitTests.Repositories;
+using BatteryMonitorApp.Domain.Repositories;
+
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;

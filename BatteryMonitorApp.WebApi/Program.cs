@@ -3,7 +3,7 @@ using AutoMapper;
 
 using BatteryMonitorApp.Contracts.MapperConfigs;
 using BatteryMonitorApp.Domain.DbContexts;
-using BatteryMonitorApp.UnitTests.Repositories;
+using BatteryMonitorApp.Domain.Repositories;
 
 using Microsoft.EntityFrameworkCore;
 

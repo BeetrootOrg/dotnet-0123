@@ -13,11 +13,11 @@ using Shouldly;
 
 namespace BatteryMonitorApp.IntegrationTests
 {
-    public class DatApiTests : IClassFixture<WebApplicationFactory<Program>>
+    public class DataApiTests : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly WebApplicationFactory<Program> _factory;
 
-        public DatApiTests(WebApplicationFactory<Program> factory)
+        public DataApiTests(WebApplicationFactory<Program> factory)
         {
             _factory = factory;
         }

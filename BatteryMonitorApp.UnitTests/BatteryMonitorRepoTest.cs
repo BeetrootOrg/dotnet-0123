@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using BatteryMonitorApp.Domain;
+﻿
 using BatteryMonitorApp.Domain.DbContexts;
 using BatteryMonitorApp.Domain.Models.DataBase;
-using BatteryMonitorApp.UnitTests.Repositories;
+using BatteryMonitorApp.Domain.Repositories;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
+
 
 namespace BatteryMonitorApp.UnitTests
 {

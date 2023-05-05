@@ -1,7 +1,7 @@
 ﻿
 using BatteryMonitorApp.Domain.DbContexts;
 using BatteryMonitorApp.Domain.Models.DataBase;
-using BatteryMonitorApp.UnitTests.Repositories;
+using BatteryMonitorApp.Domain.Repositories;
 
 using Microsoft.EntityFrameworkCore;
 
