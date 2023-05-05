@@ -61,6 +61,22 @@ namespace BatteryMonitorApp.UnitTests
             Assert.True(data.Status == datafromdb?.Status);
         }
 
+        [Fact]
+        public async Task RepoGetBatteryDataNotEmptyAndCorrect()
+        {
+            // Arrange
+            var repo = CreateRepo();
+            var data = PhysicalDeviceEmulator.PhysicalDeviceEmulator.TestBatteryData;
+            // Act 
+            repo = CreateRepo();
+            BatteryData[] arrdata = await repo.GetBatteryData(data.DeviceId,
+                data.DateTime.Subtract(new TimeSpan(24, 12, 1)),
+                DateTime.Now, new int[] { 0, 1, 2, 3, 4 });
+            // Assert
+            Assert.True(arrdata.Length > 0);
+            Assert.IsType<BatteryData>(arrdata[0]);
+        }
+
 
         internal static IRepository CreateRepo()
         {

@@ -42,9 +42,29 @@ The following endpoints are available in the API:
             -'C': (Current). Optional parameter. float;
             -'VC': (VoltageCharger). Optional parameter. float;
             -'Dt': (DateTime). Optional parameter. DateTime;
-            -'S': (Status). Optional parameter. byte;
-        
-- 'GET /api/data/getdata?Id=id&From=data' simple format for get data
+            -'S': (Status). Optional parameter. int;
+        Return: 
+            -'Staus Ok' - if data added
+            -'Status BadRequest' - if not data added
+            -'Status 500InternalServerError' - if any errors    
+- 'GET /api/data?Di=id' simple format for get data
+        Request short format:
+            -'Di': (DeviceId). Required field. guid string;
+            -'F': (From). Optional parameter. DateTime;
+            -'T': (To). Optional parameter. DateTime;
+            -'S': (Array of Status). Optional parameter. int[];
+        Return:
+            - 'Staus Ok'
+                Contnent - array of Battery Data short format:
+                    --'V': (Voltage). Required field. float;
+                    --'C': (Current). Optional parameter. float;
+                    --'VC': (VoltageCharger). Optional parameter. float;
+                    --'Dt': (DateTime). Optional parameter. DateTime;
+                    --'S': (Status). Optional parameter. int;
+            -'Status BadRequest' - if not data in Request
+            -'Status 500InternalServerError' - if any errors
+
+            
 
 ## Solution scheme
 
@@ -53,9 +73,7 @@ Description of the projects included in the solution.
     Provides API access. Returns data representations.
 - 'BatteryMonitorApp.WebApp' - Not implemented yet. Should provide an API solution
     and Front End for data visualization.
-- 'BatteryMonitorApp.Contracts' - is responsible for processing the data received 
-    from the views, implements all the necessary logic, interacts with the database 
-    and passes the processing result to the view. Implements business logic.
+- 'BatteryMonitorApp.Contracts' -Contains data contract models.
 - 'BatteryMonitorApp.Domain' - responsible for storing data in the database. 
     Contains repositories, data models.
 - 'BatteryMonitorApp.PhysicalDeviceEmulator' - emulates the operation of a real device. 

@@ -50,6 +50,17 @@ namespace BatteryMonitorApp.UnitTests
             Assert.True(data.Status == datafromdb.Status);
         }
 
+        [Fact]
+        public async Task BatteryMonitorContextBatteryDatasNotEmpty()
+        {
+            // Arrange
+            using var context = CreateContext();
+            // Act 
+            var data=await context.BatteryDatas.FirstOrDefaultAsync(x=>true);
+            // Assert
+            Assert.NotNull(data);
+        }
+
         internal static BatteryMonitorContext CreateContext()
         {
             var builder = new DbContextOptionsBuilder().UseSqlServer(

@@ -1,12 +1,8 @@
-﻿
-
-using System.Net;
+﻿using System.Net;
+using System.Text;
 
 using BatteryMonitorApp.Contracts.Models.Http;
-
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
-
 using Newtonsoft.Json;
 
 using Shouldly;
@@ -60,27 +56,57 @@ namespace BatteryMonitorApp.IntegrationTests
             // Assert
             Assert.True(code == HttpStatusCode.UnsupportedMediaType);
         }
+        [Fact]
+        public async Task PutDataChectOkStatus()
+        {
+            // Arrange
+            HttpClient client = _factory.CreateClient();
+            // Act
+               HttpResponseMessage response = await client.PutAsync("api/data", new StringContent(
+                   JsonConvert.SerializeObject(PhysicalDeviceEmulator.PhysicalDeviceEmulator.TestBatteryData), Encoding.UTF8, "application/json"));
 
-        //[Fact]
-        //public async Task PutDataShouldDoItSuccessfully()
-        //{
-        //    // Arrange
-        //    HttpClient client = _factory.CreateClient();
-        //    float volt = 5;
-        //    Guid device = Guid.NewGuid();
+            var code = response.StatusCode;
+            // Assert
+            Assert.True(code == HttpStatusCode.OK);
+        }
 
-        //    // Act
-        //    HttpResponseMessage response = await client.PutAsync("api/data", new StringContent(
-        //        JsonConvert.SerializeObject(new BatteryDataRequest
-        //        {
-        //             DeviceId= device, Voltage=volt
-        //        }), Encoding.UTF8, "application/json"));
+        [Fact]
+        public async Task GetDataCheckUri()
+        {
+            // Arrange
+            HttpClient client = _factory.CreateClient();
+            // Act
+            HttpResponseMessage response = await client.GetAsync("api/data");
+            var code = response.StatusCode;
+            // Assert
+            Assert.True(code != HttpStatusCode.NotFound);
+        }
+        [Fact]
+        public async Task GetDataCheckEmptyRequest()
+        {
+            // Arrange
+            HttpClient client = _factory.CreateClient();
+            // Act
+            HttpResponseMessage response = await client.GetAsync("api/data");
+            var code = response.StatusCode;
+            string content=await response.Content.ReadAsStringAsync();
+            // Assert
+            Assert.True(code == HttpStatusCode.UnsupportedMediaType);
+        }
 
-        //    // Assert
-        //    _ = response.EnsureSuccessStatusCode();
-        //    string responseString = await response.Content.ReadAsStringAsync();
-        //    BatteryDataResponse responseModel = JsonConvert.DeserializeObject<BatteryDataResponse>(responseString);
-        //    responseModel.Result.ShouldBeTrue();
-        //}
+        [Fact]
+        public async Task GetDataChectOkStatus()
+        {
+            // Arrange
+            HttpClient client = _factory.CreateClient();
+            // Act
+            HttpResponseMessage response = await client.GetAsync(
+                $"api/data?di={PhysicalDeviceEmulator.PhysicalDeviceEmulator.
+                TestBatteryData.DeviceId}");
+            var code = response.StatusCode;
+            string content = await response.Content.ReadAsStringAsync();
+            // Assert
+            Assert.True(code == HttpStatusCode.OK);
+        }
     }
 }

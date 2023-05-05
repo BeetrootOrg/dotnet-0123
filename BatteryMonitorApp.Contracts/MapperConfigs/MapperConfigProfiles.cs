@@ -11,7 +11,7 @@ namespace BatteryMonitorApp.Contracts.MapperConfigs
     {
         public MapperConfigProfiles()
         {
-            CreateMap<BatteryData, BatteryDataGet>();
+            CreateMap<BatteryData, BatteryDataView>();
             CreateMap<BatteryDataShortFormat, BatteryData>().
                     ForMember(d => d.DeviceId, s => s.MapFrom(t => t.Di)).
                     ForMember(d => d.Voltage, s => s.MapFrom(t => t.V)).
