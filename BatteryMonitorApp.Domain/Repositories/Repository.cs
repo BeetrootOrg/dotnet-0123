@@ -2,6 +2,7 @@
 using BatteryMonitorApp.Domain.Models.DataBase;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace BatteryMonitorApp.Domain.Repositories
 {
@@ -14,21 +15,50 @@ namespace BatteryMonitorApp.Domain.Repositories
 
     public class Repository : IRepository
     {
+        private readonly ILogger<Repository> _logger;
         private readonly BatteryMonitorContext _dbcontext;
-        public Repository(BatteryMonitorContext dbcontext)
-        { _dbcontext = dbcontext; }
+        public Repository(BatteryMonitorContext dbcontext, ILogger<Repository> logger)
+        {
+            _dbcontext = dbcontext;
+            _logger = logger;
+        }
 
         public async Task<int> AddData(BatteryData batteryData, CancellationToken cancellationToken = default)
         {
-            _ = await _dbcontext.AddAsync(batteryData, cancellationToken);
-            return await _dbcontext.SaveChangesAsync(cancellationToken);
+            try
+            {
+                _logger.LogDebug($"Repository AddData {batteryData}");
+                _ = await _dbcontext.AddAsync(batteryData, cancellationToken);
+                var result = await _dbcontext.SaveChangesAsync(cancellationToken);
+                _logger.LogInformation($"Repository AddData {batteryData} Resullt={result}");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Repository AddData Error\n{ex}\n BatteryData {batteryData}");
+                throw;
+            }
         }
 
         public Task<BatteryData[]> GetBatteryData(Guid devise, DateTime start, DateTime end, int[] status, CancellationToken cancellationToken = default)
         {
-            return _dbcontext.BatteryDatas.Where(x=>x.DeviceId==devise).
-                Where(x => x.DateTime >= start && x.DateTime <= end).
-                Where(x => status.Contains(x.Status)).OrderBy(x => x.DateTime).ToArrayAsync(cancellationToken); 
+            try
+            {
+                _logger.LogDebug($"Repository GetBatteryData for device {devise}");
+                var result = _dbcontext.BatteryDatas.Where(x => x.DeviceId == devise).
+                    Where(x => x.DateTime >= start && x.DateTime <= end).
+                    Where(x => status.Contains(x.Status)).OrderBy(x => x.DateTime).
+                    ToArrayAsync(cancellationToken);
+                _logger.LogInformation($"Repository GetBatteryData for device {devise}. " +
+                    $"Result={string.Join('\n', result)}");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Repository GetBatteryData Error\n{ex}\nDevise " +
+                    $"{devise} start {start} end {end}");
+                throw;
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ using BatteryMonitorApp.Domain.Repositories;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.Extensions.Logging;
 
 namespace BatteryMonitorApp.WebApi.Controllers
 {
@@ -23,10 +23,12 @@ namespace BatteryMonitorApp.WebApi.Controllers
         private readonly IRepository _repository;
         private readonly IMapper _mapper;
 
+
         public DataController(IRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
+
         }
         /// <summary>
         /// simple format for sending data

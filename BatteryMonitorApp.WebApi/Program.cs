@@ -45,7 +45,7 @@ builder.Services.AddSingleton(_ =>
     return mc.CreateMapper();
 }
 );
-//builder.Services.AddDomain();
+builder.Services.AddHealthChecks().AddSqlServer(connectionString, timeout: TimeSpan.FromSeconds(1));
 
 var app = builder.Build();
 
@@ -59,6 +59,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapControllers();
+
+app.MapHealthChecks("/helth");
 
 app.Run();
 

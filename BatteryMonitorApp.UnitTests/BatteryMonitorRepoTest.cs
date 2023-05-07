@@ -4,7 +4,9 @@ using BatteryMonitorApp.Domain.Models.DataBase;
 using BatteryMonitorApp.Domain.Repositories;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
+using Moq;
 
 namespace BatteryMonitorApp.UnitTests
 {
@@ -84,7 +86,8 @@ namespace BatteryMonitorApp.UnitTests
             var builder = new DbContextOptionsBuilder().UseSqlServer(
                 "Server=(localdb)\\MSSQLLocalDB;DataBase=battery_mon;User Id=batt_app;Password=batt_app;");
             var context=new BatteryMonitorContext(builder.Options);
-            return new Repository(context);
+            var logger = new Mock<ILogger<Repository>>();
+            return new Repository(context,logger.Object);
         }
     }
 }

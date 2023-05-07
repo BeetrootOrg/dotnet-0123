@@ -4,6 +4,9 @@ using BatteryMonitorApp.Domain.Models.DataBase;
 using BatteryMonitorApp.Domain.Repositories;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+
+using Moq;
 
 using Shouldly;
 
@@ -19,7 +22,8 @@ namespace BatteryMonitorApp.IntegrationTests
                 UseSqlServer(
                 "Server=(localdb)\\MSSQLLocalDB;DataBase=battery_mon;User Id=batt_app;Password=batt_app;").
                 Options;
-            _repository = new Repository(new(options));
+            var logger = new Mock<ILogger<Repository>>();
+            _repository = new Repository(new(options),logger.Object);
         }
 
         [Fact]
