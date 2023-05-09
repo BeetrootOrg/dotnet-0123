@@ -1,19 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using AutoMapper;
+﻿using AutoMapper;
 
 using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Models.DataBase;
 using BatteryMonitorApp.Domain.Repositories;
 
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace BatteryMonitorApp.WebApi.Controllers
+namespace BatteryMonitorApp.WebApp.Areas.Api
 {
     [Route("api/[controller]")]
     [ApiController]

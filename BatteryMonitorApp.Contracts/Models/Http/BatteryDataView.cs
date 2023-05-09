@@ -7,14 +7,14 @@ namespace BatteryMonitorApp.Contracts.Models.Http
         public float V { get; private set; } = 0;
         public float? C { get; private set; } = 0;
         public float? VC { get; private set; } = 0;
-        public DateTime? DT { get; private set; } = DateTime.UtcNow;
+        public DateTime? DT { get; private set; } = DateTime.Now;
         public BatteryEventStatus? S { get; private set; } = BatteryEventStatus.Default;
         public static BatteryDataView FromBatteryData(BatteryData data)
         {
             return new()
             {
                 C = data.Current,
-                V = data.VoltageCharger,
+                V = data.Voltage,
                 VC = data.VoltageCharger,
                 DT = data.DateTime,
                 S = (BatteryEventStatus)data.Status

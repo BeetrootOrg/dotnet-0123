@@ -49,7 +49,7 @@ The following endpoints are available in the API:
             -'Status 500InternalServerError' - if any errors    
 - 'GET /api/data?Di=id' simple format for get data
         Request short format:
-            -'Di': (DeviceId). Required field. guid string;
+            -'Di': (DeviceId). Required field. Guid string;
             -'F': (From). Optional parameter. DateTime;
             -'T': (To). Optional parameter. DateTime;
             -'S': (Array of Status). Optional parameter. int[];
@@ -64,15 +64,12 @@ The following endpoints are available in the API:
             -'Status BadRequest' - if not data in Request
             -'Status 500InternalServerError' - if any errors
 
-            
-
 ## Solution scheme
 
 Description of the projects included in the solution.
-- 'BatteryMonitorApp.WebApi' - provides interaction with the user (devices). 
-    Provides API access. Returns data representations.
-- 'BatteryMonitorApp.WebApp' - Not implemented yet. Should provide an API solution
-    and Front End for data visualization.
+- 'BatteryMonitorApp.WebApp':
+    -Front End for data visualization.
+    -Api Area provides interaction with the user (devices). Provides API access. Returns data representations. 
 - 'BatteryMonitorApp.Contracts' -Contains data contract models.
 - 'BatteryMonitorApp.Domain' - responsible for storing data in the database. 
     Contains repositories, data models.

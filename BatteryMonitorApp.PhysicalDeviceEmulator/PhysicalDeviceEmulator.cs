@@ -10,7 +10,7 @@ namespace BatteryMonitorApp.PhysicalDeviceEmulator
             DeviceId = Id,
             Voltage = 12,
             DateTime = new DateTime(2000, 1, 1, 0, 0, 0, 0, 0),
-            Status = 0
+            Status = 0, Current=1, VoltageCharger=0,
         };
     }
 }
