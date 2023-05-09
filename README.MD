@@ -11,8 +11,20 @@ Applicable for any Internet things that control the power supply of devices.
     As a user, I want to be able to receive event notifications
     As a user, I want to be able to change notification subscription
 
-## Events status
+## Solution scheme
+Description of the projects included in the solution.
+- 'BatteryMonitorApp.WebApp':
+    -Front End for data visualization.
+    -Api Area provides interaction with the user (devices). Provides API access. Returns data representations. 
+- 'BatteryMonitorApp.Contracts' -Contains data contract models.
+- 'BatteryMonitorApp.Domain' - responsible for storing data in the database. 
+    Contains repositories, data models.
+- 'BatteryMonitorApp.PhysicalDeviceEmulator' - emulates the operation of a real device. 
+    Provides a lot of physical data.
+- 'BatteryMonitorApp.UnitTests' and 'BatteryMonitorApp.IntegrationTests' - 
+    appropriate solution tests
 
+## Events status
 - 'Default=0' Assigned to any entry unless explicitly specified
 - 'Alarm=1' Usually applied if voltages or currents are above/below allowable values
 - 'LoadOfChargeOf=2' Charger and load circuit are disconnected. Battery at idle
@@ -32,7 +44,6 @@ Datas has the following fields:
 - 'Status': Event status. Not required field. Default 0.
 
 ## Endpoints
-
 The following endpoints are available in the API:
 
     'PUT /api/data' simple format for sending data
@@ -63,17 +74,3 @@ The following endpoints are available in the API:
                     'S': (Status). Optional parameter. int;
             'Status BadRequest' - if not data in Request
             'Status 500InternalServerError' - if any errors
-
-## Solution scheme
-
-Description of the projects included in the solution.
-- 'BatteryMonitorApp.WebApp':
-    -Front End for data visualization.
-    -Api Area provides interaction with the user (devices). Provides API access. Returns data representations. 
-- 'BatteryMonitorApp.Contracts' -Contains data contract models.
-- 'BatteryMonitorApp.Domain' - responsible for storing data in the database. 
-    Contains repositories, data models.
-- 'BatteryMonitorApp.PhysicalDeviceEmulator' - emulates the operation of a real device. 
-    Provides a lot of physical data.
-- 'BatteryMonitorApp.UnitTests' and 'BatteryMonitorApp.IntegrationTests' - 
-    appropriate solution tests
