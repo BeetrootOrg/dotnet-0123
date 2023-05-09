@@ -8,6 +8,7 @@ namespace BatteryMonitorApp.Domain.DbContexts
     public class BatteryMonitorContext : DbContext
     {
         public DbSet<BatteryData> BatteryDatas { get; set; }
+        public DbSet<BatteryRegisteredDevice> Devices { get; set; }
         public BatteryMonitorContext() { }
         public BatteryMonitorContext(DbContextOptions options) : base(options)
         {

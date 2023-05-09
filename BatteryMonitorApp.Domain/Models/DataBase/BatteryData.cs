@@ -14,6 +14,8 @@ namespace BatteryMonitorApp.Domain.Models.DataBase
         [NotNull]
         public Guid DeviceId { get; set; }
         [Required]
+        public BatteryRegisteredDevice Device { get; set; }
+        [Required]
         [NotNull]
         public float Voltage { get; set; } = 0;
         [NotNull]
