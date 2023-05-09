@@ -35,34 +35,34 @@ Datas has the following fields:
 
 The following endpoints are available in the API:
 
-- 'PUT /api/data' simple format for sending data
+    'PUT /api/data' simple format for sending data
         To save device traffic, the request format FromBody:
-            -'Di': (DeviceId). Required field. guid string;
-            -'V': (Voltage). Required field. float;
-            -'C': (Current). Optional parameter. float;
-            -'VC': (VoltageCharger). Optional parameter. float;
-            -'Dt': (DateTime). Optional parameter. DateTime;
-            -'S': (Status). Optional parameter. int;
+            'Di': (DeviceId). Required field. guid string;
+            'V': (Voltage). Required field. float;
+            'C': (Current). Optional parameter. float;
+            'VC': (VoltageCharger). Optional parameter. float;
+            'Dt': (DateTime). Optional parameter. DateTime;
+            'S': (Status). Optional parameter. int;
         Return: 
-            -'Staus Ok' - if data added
-            -'Status BadRequest' - if not data added
-            -'Status 500InternalServerError' - if any errors    
-- 'GET /api/data?Di=id' simple format for get data
+            'Staus Ok' - if data added
+            'Status BadRequest' - if not data added
+            'Status 500InternalServerError' - if any errors    
+    'GET /api/data?Di=id' simple format for get data
         Request short format:
-            -'Di': (DeviceId). Required field. Guid string;
-            -'F': (From). Optional parameter. DateTime;
-            -'T': (To). Optional parameter. DateTime;
-            -'S': (Array of Status). Optional parameter. int[];
+            'Di': (DeviceId). Required field. Guid string;
+            'F': (From). Optional parameter. DateTime;
+            'T': (To). Optional parameter. DateTime;
+            'S': (Array of Status). Optional parameter. int[];
         Return:
-            - 'Staus Ok'
+            'Staus Ok'
                 Contnent - array of Battery Data short format:
-                    --'V': (Voltage). Required field. float;
-                    --'C': (Current). Optional parameter. float;
-                    --'VC': (VoltageCharger). Optional parameter. float;
-                    --'Dt': (DateTime). Optional parameter. DateTime;
-                    --'S': (Status). Optional parameter. int;
-            -'Status BadRequest' - if not data in Request
-            -'Status 500InternalServerError' - if any errors
+                    'V': (Voltage). Required field. float;
+                    'C': (Current). Optional parameter. float;
+                    'VC': (VoltageCharger). Optional parameter. float;
+                    'Dt': (DateTime). Optional parameter. DateTime;
+                    'S': (Status). Optional parameter. int;
+            'Status BadRequest' - if not data in Request
+            'Status 500InternalServerError' - if any errors
 
 ## Solution scheme
 
