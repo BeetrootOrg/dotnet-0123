@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace BatteryMonitorApp.WebApp.Areas.Identity.Pages.Account
 {
+    [IgnoreAntiforgeryToken(Order = 1001)]
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;

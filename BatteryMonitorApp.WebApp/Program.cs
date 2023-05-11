@@ -15,7 +15,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using BatteryMonitorApp.WebApp.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using BatteryMonitorApp.WebApp;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
@@ -43,16 +46,76 @@ var connectionString = builder.Configuration.GetConnectionString("SqlConnection"
 //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<BatteryMonitorContext>(c => c.UseSqlServer(connectionString,
     b => b.MigrationsAssembly("BatteryMonitorApp.WebApp")));
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseSqlServer(connectionString));
+
 builder.Services.AddScoped<IRepository, Repository>();
 
 builder.Services.AddHealthChecks().AddSqlServer(connectionString, timeout: TimeSpan.FromSeconds(1));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddScoped<TokenService, TokenService>();
+
+//builder.Services
+//    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddJwtBearer(options =>
+//    {
+//        options.TokenValidationParameters = new TokenValidationParameters()
+//        {
+//            ClockSkew = TimeSpan.Zero,
+//            ValidateIssuer = true,
+//            ValidateAudience = true,
+//            ValidateLifetime = true,
+//            ValidateIssuerSigningKey = true,
+//            ValidIssuer = "BatteryMonitorApp",
+//            ValidAudience = "BatteryMonitorApp",
+//            IssuerSigningKey = new SymmetricSecurityKey(
+//                Encoding.UTF8.GetBytes("!SomethingSecret!")
+//            ),
+//        };
+//    });
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.SignIn.RequireConfirmedEmail = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+})
+    .AddEntityFrameworkStores<BatteryMonitorContext>();
+
+//builder.Services.AddAuthorization();
 builder.Services.AddControllersWithViews();
+//.AddGoogle(options =>
+//{
+//    IConfigurationSection googleAuthNSection =
+//    config.GetSection("Authentication:Google");
+//    options.ClientId = googleAuthNSection["ClientId"];
+//    options.ClientSecret = googleAuthNSection["ClientSecret"];
+//})
+//.AddFacebook(options =>
+//{
+//    IConfigurationSection FBAuthNSection =
+//    config.GetSection("Authentication:FB");
+//    options.ClientId = FBAuthNSection["ClientId"];
+//    options.ClientSecret = FBAuthNSection["ClientSecret"];
+//})
+//.AddMicrosoftAccount(microsoftOptions =>
+//{
+//    microsoftOptions.ClientId = config["Authentication:Microsoft:ClientId"];
+//    microsoftOptions.ClientSecret = config["Authentication:Microsoft:ClientSecret"];
+//})
+//.AddTwitter(twitterOptions =>
+//{
+//    twitterOptions.ConsumerKey = config["Authentication:Twitter:ConsumerAPIKey"];
+//    twitterOptions.ConsumerSecret = config["Authentication:Twitter:ConsumerSecret"];
+//    twitterOptions.RetrieveUserDetails = true;
+//});
+//builder.Services.AddScoped<TokenProviderDescriptor>();
+builder.Services.AddRazorPages();
+
 
 var app = builder.Build();
 
@@ -75,7 +138,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapHealthChecks("/helth");
 
 app.MapControllerRoute(
     name: "areas",
@@ -86,6 +152,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
-app.MapHealthChecks("/helth");
+
 
 app.Run();

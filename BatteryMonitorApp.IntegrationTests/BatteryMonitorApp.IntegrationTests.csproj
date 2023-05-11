@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BatteryMonitorApp.PhysicalDeviceEmulator\BatteryMonitorApp.PhysicalDeviceEmulator.csproj" />
-    <ProjectReference Include="..\BatteryMonitorApp.WebApi\BatteryMonitorApp.WebApi.csproj" />
   </ItemGroup>
 
 </Project>

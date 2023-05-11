@@ -27,7 +27,6 @@
     <ProjectReference Include="..\BatteryMonitorApp.Contracts\BatteryMonitorApp.Contracts.csproj" />
     <ProjectReference Include="..\BatteryMonitorApp.Domain\BatteryMonitorApp.Domain.csproj" />
     <ProjectReference Include="..\BatteryMonitorApp.PhysicalDeviceEmulator\BatteryMonitorApp.PhysicalDeviceEmulator.csproj" />
-    <ProjectReference Include="..\BatteryMonitorApp.WebApi\BatteryMonitorApp.WebApi.csproj" />
   </ItemGroup>
 
 </Project>

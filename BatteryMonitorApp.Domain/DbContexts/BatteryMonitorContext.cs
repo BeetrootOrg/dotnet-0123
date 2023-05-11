@@ -1,11 +1,12 @@
 ﻿
 using BatteryMonitorApp.Domain.Models.DataBase;
 
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BatteryMonitorApp.Domain.DbContexts
 {
-    public class BatteryMonitorContext : DbContext
+    public class BatteryMonitorContext : IdentityDbContext
     {
         public DbSet<BatteryData> BatteryDatas { get; set; }
         public DbSet<BatteryRegisteredDevice> Devices { get; set; }
