@@ -1,8 +1,32 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Recharge and battery monitoring system";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>
+    Recharge and battery monitoring system.
+</h1>
+<p>This is a simple system for capturing voltage and current events. Applicable for any Internet things that control the power supply of devices.</p>
+<hr />
+<h2>
+    This system provides easy access to:
+</h2>
+<ul>
+    <li>Simple API, Swagger</li>
+    <li>Responsive reporting and graphing system</li>
+    <li>collect current data on voltage and current in the battery circuit</li>
+    <li>record events and date time of events</li>
+    <li>collect data only for register device</li>
+    <li>generate reports</li>
+    <li>receive event notifications</li>
+</ul>
+<hr />
+<h3>
+    Quick start:
+</h3>
+<ul>
+    <li><a asp-area="Identity" asp-page="/Account/Register">Register with your email and password</a></li>
+    <li>Or use login: <i>test@test.com</i> password: <i>tester</i></li>
+    <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    <li><a asp-area="Identity" asp-page="/Account/Login">Register your device and write its ID</a></li>
+    <li><a asp-area="Identity" asp-page="/Account/Login">View a list of registered devices for you</a></li>
+</ul>

@@ -1,0 +1,21 @@
+﻿@using BatteryMonitorApp.Contracts.Models.Http;
+@model IEnumerable<BatteryDevice>;
+
+@{
+    ViewData["Title"] = "Registered Devices";
+}
+<a asp-action="CreateRegisteredDevices" asp-controller="home"><h2>Create new</h2></a>
+<hr/>
+<h4>
+    Your registered devices:
+</h4>
+<hr />
+@foreach (var item in Model)
+{
+    <div>
+        <h4>@item.DeviceName</h4>
+        <h5>id: @item.Id</h5>
+        <p>@item.DeviceDescription</p>
+        <hr />
+    </div>
+}

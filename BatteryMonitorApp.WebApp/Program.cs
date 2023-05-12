@@ -50,7 +50,7 @@ builder.Services.AddDbContext<BatteryMonitorContext>(c => c.UseSqlServer(connect
 builder.Services.AddScoped<IRepository, Repository>();
 
 builder.Services.AddHealthChecks().AddSqlServer(
-    connectionString, timeout: TimeSpan.FromSeconds(1));
+    connectionString, timeout: TimeSpan.FromSeconds(5));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

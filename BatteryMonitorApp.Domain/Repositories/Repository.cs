@@ -11,6 +11,8 @@ namespace BatteryMonitorApp.Domain.Repositories
     {
         Task<int> AddData(BatteryData batteryData, CancellationToken cancellationToken = default);
         Task<BatteryData[]> GetBatteryData(Guid devise, DateTime start, DateTime End, int[] status, CancellationToken cancellationToken = default);
+        Task<BatteryRegisteredDevice[]> GetRegisteredDevices(Guid userId, CancellationToken cancellationToken = default);
+        Task<int> AddRegisteredDevices(BatteryRegisteredDevice device, CancellationToken cancellationToken = default);
     }
 
     public class Repository : IRepository
@@ -40,6 +42,12 @@ namespace BatteryMonitorApp.Domain.Repositories
             }
         }
 
+        public async Task<int> AddRegisteredDevices(BatteryRegisteredDevice device, CancellationToken cancellationToken = default)
+        {
+             await _dbcontext.Devices.AddAsync(device, cancellationToken);
+            return _dbcontext.SaveChanges();
+        }
+
         public Task<BatteryData[]> GetBatteryData(Guid devise, DateTime start, DateTime end, int[] status, CancellationToken cancellationToken = default)
         {
             try
@@ -57,6 +65,20 @@ namespace BatteryMonitorApp.Domain.Repositories
             {
                 _logger.LogError($"Repository GetBatteryData Error\n{ex}\nDevise " +
                     $"{devise} start {start} end {end}");
+                throw;
+            }
+        }
+
+        public Task<BatteryRegisteredDevice[]> GetRegisteredDevices(Guid userId, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                _logger.LogDebug($"Repository GetBatteryData for user {userId}");
+                return _dbcontext.Devices.Where(x => x.UserId == userId).ToArrayAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Repository GetBatteryData for user {userId}\n{ex}");
                 throw;
             }
         }
