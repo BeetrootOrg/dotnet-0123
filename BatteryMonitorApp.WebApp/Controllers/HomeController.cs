@@ -2,6 +2,7 @@
 
 using BatteryMonitorApp.WebApp.Models;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BatteryMonitorApp.WebApp.Controllers
@@ -19,7 +20,7 @@ namespace BatteryMonitorApp.WebApp.Controllers
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();
