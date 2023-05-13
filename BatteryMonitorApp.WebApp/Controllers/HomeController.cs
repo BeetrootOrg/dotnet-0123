@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
+using Newtonsoft.Json;
+
 namespace BatteryMonitorApp.WebApp.Controllers
 {
     public class HomeController : Controller
@@ -80,6 +82,16 @@ namespace BatteryMonitorApp.WebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public async Task PutData(CancellationToken token = default)
+        {
+            using var _client = new HttpClient() { BaseAddress = new Uri("~/api/data") };
+            HttpResponseMessage response = await _client.PutAsync("api/data", 
+                new StringContent(@"{""Di"":""DE88CE88-E888-8A88-8888-888888888888"",""V"":""12""}"),token);
+            if (!response.IsSuccessStatusCode)
+            {
+                //ToDo Something in your local storage
+            }
+        }
 
     }
 }

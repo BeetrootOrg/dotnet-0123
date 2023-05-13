@@ -76,3 +76,16 @@ The following endpoints are available in the API:
             </ul>
      </li>
 </ul>
+<hr/>
+<p>Inject code for your device like this:</p>
+<pre style="background-color:lightgray">
+<code>  public async Task PutData(CancellationToken token = default)
+    {
+        using var _client = new HttpClient() { BaseAddress = new Uri(this site) };
+        HttpResponseMessage response = await _client.PutAsync("api/data", 
+        new StringContent("{"Di":"DE88CE88-E888-8A88-8888-888888888888","V":"12"}"),token);
+        if (!response.IsSuccessStatusCode)
+        {
+            //ToDo Something in your local storage
+        }
+    }</code></pre>

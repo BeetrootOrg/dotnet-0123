@@ -11,7 +11,7 @@
     This system provides easy access to:
 </h2>
 <ul>
-    <li>Simple API, Swagger</li>
+    <li><a asp-action="WikiApi">Simple API, Swagger</a></li>
     <li>Responsive reporting and graphing system</li>
     <li>collect current data on voltage and current in the battery circuit</li>
     <li>record events and date time of events</li>
@@ -27,6 +27,19 @@
     <li><a asp-area="Identity" asp-page="/Account/Register">Register with your email and password</a></li>
     <li>Or use login: <i>test@test.com</i> password: <i>tester</i></li>
     <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-    <li><a asp-area="Identity" asp-page="/Account/Login">Register your device and write its ID</a></li>
-    <li><a asp-area="Identity" asp-page="/Account/Login">View a list of registered devices for you</a></li>
+    <li><a asp-action="CreateRegisteredDevices">Register your device and write its ID</a></li>
+    <li><a asp-action="GetRegisteredDevices">View a list of registered devices for you</a></li>
+    <li>Inject code for your device like this:
+        <pre style="background-color:lightgray">
+<code>  public async Task PutData(CancellationToken token = default)
+    {
+        using var _client = new HttpClient() { BaseAddress = new Uri(this site) };
+        HttpResponseMessage response = await _client.PutAsync("api/data", 
+        new StringContent("{"Di":"DE88CE88-E888-8A88-8888-888888888888","V":"12"}"),token);
+        if (!response.IsSuccessStatusCode)
+        {
+            //ToDo Something in your local storage
+        }
+    }</code></pre>
+    </li>
 </ul>
