@@ -1,7 +1,6 @@
 ﻿
 using AutoMapper;
 
-using BatteryMonitorApp.Contracts.Models;
 using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Models.DataBase;
 
