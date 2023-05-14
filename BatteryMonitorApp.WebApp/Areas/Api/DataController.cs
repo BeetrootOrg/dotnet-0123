@@ -4,6 +4,7 @@ using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Models.DataBase;
 using BatteryMonitorApp.Domain.Repositories;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BatteryMonitorApp.WebApp.Areas.Api
@@ -11,6 +12,7 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
+    [AllowAnonymous]
     public class DataController : ControllerBase
     {
         private readonly IRepository _repository;
