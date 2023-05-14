@@ -10,6 +10,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Content Remove="wwwroot\swaggersett.xml" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
@@ -27,6 +31,11 @@
         <ProjectReference Include="..\BatteryMonitorApp.Contracts\BatteryMonitorApp.Contracts.csproj" />
         <ProjectReference Include="..\BatteryMonitorApp.Domain\BatteryMonitorApp.Domain.csproj" />
         <ProjectReference Include="..\BatteryMonitorApp.PhysicalDeviceEmulator\BatteryMonitorApp.PhysicalDeviceEmulator.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="wwwroot\swaggersett.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
     
 </Project>

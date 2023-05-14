@@ -17,8 +17,9 @@ builder.Services.AddSwaggerGen(options =>
         Title = "Battery Monitor API",
         Description = "An ASP.NET Core Web API for managing battery"
     });
-    string xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    string xmlFilename = $"swaggersett.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
 });
 builder.Services.AddSingleton(_ =>
 {
@@ -64,11 +65,14 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(opt=>opt.SwaggerEndpoint("/swagger/v1/swagger.json", "swagger"));
     app.UseMigrationsEndPoint();
 }
 else
 {
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    app.UseMigrationsEndPoint();
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
