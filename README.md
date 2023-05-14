@@ -24,10 +24,10 @@ Application can handle following tasks:
 
 Every your accounting have the following fields:
 - `id` - The unique identifier of the accounting;
+- `title` - Name of accounting;
 - `value` - Amount of money;
 - `iterations` - List of all iterations that was done
 - `created_at` - The date and time when accounting was created;
-- `updated_at` - The date and time when accounting was updated;
 
 ## Iteration Fields
 
