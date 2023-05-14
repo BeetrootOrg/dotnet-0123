@@ -37,7 +37,7 @@ namespace BatteryMonitorApp.WebApp.Controllers
         {
             var dev = device;
             var start = dev.start;
-            string site = $"{HttpContext.Request.Scheme.ToString()}://{Request.Host.Value}";
+            string site = @$"http://{Request.Host.Value}";
 
             var end = await PhysicalDeviceEmulator.PhysicalDeviceEmulator.DischargeApi(dev, site, token);
             var date = new ReportGet()
