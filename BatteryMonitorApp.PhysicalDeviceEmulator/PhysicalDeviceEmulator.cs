@@ -68,12 +68,11 @@ namespace BatteryMonitorApp.PhysicalDeviceEmulator
 
         internal static List<CapVolts> arr = new()
             {
-                new() {c=1, r=1.25 },
-                new() {c=0.98, r=1.2 },new() {c= 0.95,r= 1.15 }, new(){c= 0.93,r= 1.1 },
-                new() { c=0.92,r= 1.05 },new() {c= 0.91, r=1 },new(){c= 0.90,r= 0.95 },new() {c= 0.7,r= 0.9 },
+                new() {c=1, r=1.15 },
+                new() {c=0.98, r=1.1 },new() {c= 0.96,r= 1.05 }, new(){c= 0.94,r= 1.02 },
+                new() { c=0.92,r= 1.01 },new() {c= 0.91, r=1 },new(){c= 0.90,r= 0.99 },new() {c= 0.7,r= 0.9 },
                 new() {c= 0.5, r=0.85 },new() {c= 0.3,r= 0.75 }, new() {c= 0.15,r= .65 }, new(){ c=0.1,r= .35 },
-                new() { c=0.09,r= 0.2}, new(){c= 0.07, r=0.1 },new(){c= 0.05,r= 0.08 }, new(){ c=0.25,r= 0.06 },
-                new() {c= 0.0,r=0.01 }
+                new() { c=0.09,r= 0.2}, new(){c= 0.07, r=0.1 }, new() {c= 0.0,r=0.00 }
             };
 
         public static double GetVoltsIndex(double capacityindex)
