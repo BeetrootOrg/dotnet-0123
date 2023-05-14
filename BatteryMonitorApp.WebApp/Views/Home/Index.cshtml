@@ -34,7 +34,8 @@
     {
         using var _client = new HttpClient() { BaseAddress = new Uri(this site) };
         HttpResponseMessage response = await _client.PutAsync("api/data", 
-        new StringContent("{"Di":"DE88CE88-E888-8A88-8888-888888888888","V":"12"}"),token);
+        new StringContent("{"Di":"DE88CE88-E888-8A88-8888-888888888888","V":"12"}", 
+        Encoding.UTF8, "application/json"), token);
         if (!response.IsSuccessStatusCode)
         {
             //ToDo Something in your local storage

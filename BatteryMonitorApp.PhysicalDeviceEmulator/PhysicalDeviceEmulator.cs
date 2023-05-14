@@ -2,6 +2,8 @@
 using BatteryMonitorApp.Domain.Models.DataBase;
 
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Text.Json;
 
 namespace BatteryMonitorApp.PhysicalDeviceEmulator
@@ -24,43 +26,42 @@ namespace BatteryMonitorApp.PhysicalDeviceEmulator
             VoltageCharger = 0,
         };
 
-        public async Task<long> DischargeApi(Guid id, double current, string urisite, int delaysecs, DateTime start, CancellationToken token = default)
+        public static async Task<DateTime> DischargeApi(PhysicalDevice device, string urisite, CancellationToken token = default)
         {
             using var _client = new HttpClient() { BaseAddress = new Uri(urisite) };
             double _stepcapacity = 0;
-            double _capacity = NominalCapacity;
+            double _capacity = device. NominalCapacity;
             long i = 0;
+
             HttpResponseMessage res;
             do
             {
-                _currentVolts = GetVoltsIndex(_capacity / NominalCapacity) * NominalVolts;
-                _stepcapacity = current * delaysecs / 3600;
+                var _currentVolts = GetVoltsIndex(_capacity / device. NominalCapacity) * device.NominalVolts;
+                _stepcapacity = device.Current * device.delaysecs / 3600;
 
                 BatteryDataShortFormat data = new()
                 {
-                    C = (float)current,
-                    Di = id,
+                    C = (float)device.Current,
+                    Di = device.DeviceId,
                     V = (float)_currentVolts,
-                    Dt = start,
-                    S=0
+                    Dt =device.start,
+                    S = 0
                 };
                 try
                 {
                     res = await PutDataAsync(_client, data, token);
                 }
                 catch (Exception ex) { break; }
-                start = start.AddSeconds(delaysecs);
-                _capacity -=_stepcapacity;
+                device.start = device.start.AddSeconds(device.delaysecs);
+                _capacity -= _stepcapacity;
                 i++;
             } while (!token.IsCancellationRequested && _capacity > 0 && res.IsSuccessStatusCode);
-            return i;
+            return device.start;
         }
 
-        public async Task<HttpResponseMessage> PutDataAsync(HttpClient client, BatteryDataShortFormat data, CancellationToken token = default)
-        {
-            string json = JsonSerializer.Serialize(data);
-            return await client.PutAsync("api/data", new StringContent(json), token);
-        }
+        public static async Task<HttpResponseMessage> PutDataAsync(HttpClient client, BatteryDataShortFormat data, CancellationToken token = default)=>
+             await client.PutAsync("api/data", new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json"),token);
+
 
 
         internal static List<CapVolts> arr = new()

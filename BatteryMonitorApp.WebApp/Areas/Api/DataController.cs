@@ -37,6 +37,7 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
         [ProducesResponseType(200)]
         public async Task<IActionResult> PutData([FromBody] BatteryDataShortFormat request, CancellationToken token = default)
         {
+            
             if (request == null) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
             try
             {
