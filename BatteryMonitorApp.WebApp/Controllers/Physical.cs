@@ -40,16 +40,19 @@ namespace BatteryMonitorApp.WebApp.Controllers
         public async Task<IActionResult> EmulatorAsync(PhysicalDevice device, CancellationToken token = default)
         {
             var dev = device;
+            var start = dev.start;
             string site = $"{HttpContext.Request.Scheme.ToString()}://{Request.Host.Value}";
 
             var end = await PhysicalDeviceEmulator.PhysicalDeviceEmulator.DischargeApi(dev, site, token);
+            var date = new ReportGet()
+            {
+                DeviceId = dev.DeviceId,
+                From = start,
+                To = end
+            };
 
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null) { return Unauthorized(); }
-            var data = new PhysicalDevice();
-            data.Devices = (await _repository.GetRegisteredDevices(new Guid(user.Id), default)).Select(x =>
-            new NameGuidDevice() { Name = x.DeviceName, Id = x.Id }).ToList();
-            return View(data);
+
+            return RedirectToAction("Report", "report", date);
         }
     }
 }
