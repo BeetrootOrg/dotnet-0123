@@ -92,7 +92,6 @@ namespace BatteryMonitorApp.PhysicalDeviceEmulator
                 }
                 temp = item;
             }
-            //res = arr.FirstOrDefault(x => capacityindex >= x.c);
             return res != null ? res.r : -1;
         }
 

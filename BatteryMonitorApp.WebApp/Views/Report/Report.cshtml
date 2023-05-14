@@ -2,6 +2,16 @@
 @model ReportGet;
 @{
     ViewData["Title"] = "Battery discharge emulation";
+    var list = new List<string>();
+    string graph = string.Empty;
+    if (Model.BatteryDataViews != null)
+    {
+        foreach (var item in Model.BatteryDataViews)
+        {
+            list.Add($"{{x:'{item.DT}',y:{item.V.ToString().Replace(',', '.')}}}");
+        }
+        graph= string.Join(",", list);
+    }
 }
 <div class="row">
     <div class="col-md-6">
@@ -34,6 +44,11 @@
     </div>
 </div>
 
+<h4>Graph Voltage/Time.</h4>
+<div>
+    <canvas id="TimeVolts"></canvas>
+</div>
+
 <h3>Battrey data:</h3>
 <h5>Calculated ca[acity @Model.Capacity Ah</h5>
 <table class="table-borderless">
@@ -60,3 +75,21 @@
         }
     }
 </table>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const vtime = document.getElementById('TimeVolts');
+
+    const cfvtime = {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: 'Voltage, V',
+                data: [@Html.Raw(graph)]
+            }]
+        }
+    };
+    new Chart(vtime, cfvtime);
+    console.log("start chart");
+
+</script>
