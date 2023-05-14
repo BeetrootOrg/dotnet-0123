@@ -1,11 +1,7 @@
-﻿using System.Security.Policy;
-
-using BatteryMonitorApp.Contracts.Models.Http;
+﻿using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Repositories;
-using BatteryMonitorApp.PhysicalDeviceEmulator;
 
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

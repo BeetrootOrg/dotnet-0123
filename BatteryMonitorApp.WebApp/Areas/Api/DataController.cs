@@ -5,7 +5,6 @@ using BatteryMonitorApp.Domain.Models.DataBase;
 using BatteryMonitorApp.Domain.Repositories;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace BatteryMonitorApp.WebApp.Areas.Api
 {

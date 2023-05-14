@@ -1,25 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.IO;
 using System.Reflection;
-
 using AutoMapper;
-
 using BatteryMonitorApp.Contracts.MapperConfigs;
 using BatteryMonitorApp.Domain.DbContexts;
 using BatteryMonitorApp.Domain.Repositories;
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using BatteryMonitorApp.WebApp;
-using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();

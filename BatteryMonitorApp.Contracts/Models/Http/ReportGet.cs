@@ -1,7 +1,4 @@
 ﻿
-
-using BatteryMonitorApp.Domain.Models.DataBase;
-
 namespace BatteryMonitorApp.Contracts.Models.Http
 {
     public record ReportGet

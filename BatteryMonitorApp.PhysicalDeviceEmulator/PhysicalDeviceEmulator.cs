@@ -1,8 +1,6 @@
 ﻿using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Models.DataBase;
 
-using System.Linq;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -93,8 +91,6 @@ namespace BatteryMonitorApp.PhysicalDeviceEmulator
             }
             return res != null ? res.r : -1;
         }
-
-
     }
 
     internal record CapVolts
