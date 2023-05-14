@@ -1,12 +1,16 @@
 ﻿
 
+using BatteryMonitorApp.Domain.Models.DataBase;
+
 namespace BatteryMonitorApp.Contracts.Models.Http
 {
     public record ReportGet
     {
-        public Guid DeviceId { get; set; }
-        public DateTime From { get; set; }= DateTime.Now;
-        public DateTime T { get; set; } = DateTime.Now.AddDays(-7);
+        public Guid DeviceId { get; set; } = Guid.Empty;
+        public DateTime From { get; set; }= DateTime.Now.AddDays(-1);
+        public DateTime To { get; set; } = DateTime.Now;
+        public double Capacity { get; set; }
         public List<NameGuidDevice> Devices { get; set; } = new();
+        public List<BatteryDataView> BatteryDataViews { get; set; } = null;
     }
 }

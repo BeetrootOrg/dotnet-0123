@@ -30,13 +30,13 @@ namespace BatteryMonitorApp.PhysicalDeviceEmulator
         {
             using var _client = new HttpClient() { BaseAddress = new Uri(urisite) };
             double _stepcapacity = 0;
-            double _capacity = device. NominalCapacity;
+            double _capacity = device.NominalCapacity;
             long i = 0;
 
             HttpResponseMessage res;
             do
             {
-                var _currentVolts = GetVoltsIndex(_capacity / device. NominalCapacity) * device.NominalVolts;
+                var _currentVolts = GetVoltsIndex(_capacity / device.NominalCapacity) * device.NominalVolts;
                 _stepcapacity = device.Current * device.delaysecs / 3600;
 
                 BatteryDataShortFormat data = new()
@@ -44,8 +44,8 @@ namespace BatteryMonitorApp.PhysicalDeviceEmulator
                     C = (float)device.Current,
                     Di = device.DeviceId,
                     V = (float)_currentVolts,
-                    Dt =device.start,
-                    S = 0
+                    Dt = device.start,
+                    S = 3
                 };
                 try
                 {
@@ -59,14 +59,17 @@ namespace BatteryMonitorApp.PhysicalDeviceEmulator
             return device.start;
         }
 
-        public static async Task<HttpResponseMessage> PutDataAsync(HttpClient client, BatteryDataShortFormat data, CancellationToken token = default)=>
-             await client.PutAsync("api/data", new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json"),token);
-
+        public static async Task<HttpResponseMessage> PutDataAsync(HttpClient client, BatteryDataShortFormat data, CancellationToken token = default)
+        {
+            string json = JsonSerializer.Serialize(data);
+            return await client.PutAsync("api/data", new StringContent(json, Encoding.UTF8, "application/json"), token);
+        }
 
 
         internal static List<CapVolts> arr = new()
             {
-                new() {c=0.98, r=1.35 },new() {c= 0.95,r= 1.15 }, new(){c= 0.93,r= 1.1 },
+                new() {c=1, r=1.25 },
+                new() {c=0.98, r=1.2 },new() {c= 0.95,r= 1.15 }, new(){c= 0.93,r= 1.1 },
                 new() { c=0.92,r= 1.05 },new() {c= 0.91, r=1 },new(){c= 0.90,r= 0.95 },new() {c= 0.7,r= 0.9 },
                 new() {c= 0.5, r=0.85 },new() {c= 0.3,r= 0.75 }, new() {c= 0.15,r= .65 }, new(){ c=0.1,r= .35 },
                 new() { c=0.09,r= 0.2}, new(){c= 0.07, r=0.1 },new(){c= 0.05,r= 0.08 }, new(){ c=0.25,r= 0.06 },
@@ -75,7 +78,21 @@ namespace BatteryMonitorApp.PhysicalDeviceEmulator
 
         public static double GetVoltsIndex(double capacityindex)
         {
-            var res = arr.FirstOrDefault(x => x.c >= capacityindex);
+            CapVolts res=null;
+            CapVolts temp = arr[0];
+            foreach(var item in arr)
+            {
+                if (item.c <= capacityindex)
+                {
+                    res =new() {r=item.r,c=item.c };
+                    if (res.c == 1) break; 
+                    var delta=(capacityindex-item.c)/(temp.c-item.c)*(temp.r-item.r);
+                    res.r =item.r+delta;
+                    break;
+                }
+                temp = item;
+            }
+            //res = arr.FirstOrDefault(x => capacityindex >= x.c);
             return res != null ? res.r : -1;
         }
 

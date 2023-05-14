@@ -1,8 +1,13 @@
-﻿using BatteryMonitorApp.Domain.Repositories;
+﻿using BatteryMonitorApp.Contracts.Models.Http;
+using BatteryMonitorApp.Domain.Models.DataBase;
+using BatteryMonitorApp.Domain.Repositories;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BatteryMonitorApp.WebApp.Controllers
 {
@@ -21,9 +26,39 @@ namespace BatteryMonitorApp.WebApp.Controllers
         }
         [Authorize]
         [HttpGet]
-        public IActionResult Report()
+        public async Task<ActionResult> Report(ReportGet data=null, CancellationToken token = default)
         {
-            return View();
+            if (data==null) data = new();
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) { return Unauthorized(); }
+            if (data.DeviceId != Guid.Empty)
+            {
+                var _devices = (await _repository.GetRegisteredDevices(new Guid(user.Id), default)).Select(x =>
+                new NameGuidDevice() { Name = x.DeviceName, Id = x.Id }).ToList();
+                if (!_devices.Any(x => x.Id == data.DeviceId)) return BadRequest();
+                data.Devices = _devices;
+                var battdata = (await _repository.GetBatteryData(data.DeviceId, data.From, data.To,
+                    new[] { 0, 1, 2, 3, 4, 5, 6 }, token)).
+                    Select(x => BatteryDataView.FromBatteryData(x)).ToList();
+                data.BatteryDataViews = battdata.Where(x=>x!=null).ToList();
+                double capacity = 0;
+                BatteryDataView previewitem = null;
+                foreach(BatteryDataView? item in battdata)
+                {
+                    if (previewitem == null)
+                    {
+                        previewitem = item;
+                        continue;
+                    }
+                    capacity+=(double) item.C / 3600 * ((DateTime)item.DT).Subtract((DateTime)previewitem.DT).TotalSeconds;
+                    previewitem = item;
+                }
+                data.Capacity = capacity;
+            } else
+            data.Devices = (await _repository.GetRegisteredDevices(new Guid(user.Id), default)).Select(x =>
+            new NameGuidDevice() { Name = x.DeviceName, Id = x.Id }).ToList();
+            return View(data);
         }
+
     }
 }
