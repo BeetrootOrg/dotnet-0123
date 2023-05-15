@@ -13,6 +13,7 @@ namespace BatteryMonitorApp.Domain.Repositories
         Task<BatteryData[]> GetBatteryData(Guid devise, DateTime start, DateTime End, int[] status, CancellationToken cancellationToken = default);
         Task<BatteryRegisteredDevice[]> GetRegisteredDevices(Guid userId, CancellationToken cancellationToken = default);
         Task<int> AddRegisteredDevices(BatteryRegisteredDevice device, CancellationToken cancellationToken = default);
+        Task<bool> DeviseIsRegistered(Guid devise, CancellationToken cancellationToken = default);
     }
 
     public class Repository : IRepository
@@ -46,6 +47,11 @@ namespace BatteryMonitorApp.Domain.Repositories
         {
              await _dbcontext.Devices.AddAsync(device, cancellationToken);
             return _dbcontext.SaveChanges();
+        }
+
+        public async Task<bool> DeviseIsRegistered(Guid devise, CancellationToken cancellationToken = default)
+        {
+            return await _dbcontext.Devices.AnyAsync(x=>x.Id == devise); 
         }
 
         public Task<BatteryData[]> GetBatteryData(Guid devise, DateTime start, DateTime end, int[] status, CancellationToken cancellationToken = default)

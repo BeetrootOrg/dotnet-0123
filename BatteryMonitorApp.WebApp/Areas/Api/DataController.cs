@@ -41,6 +41,7 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
         /// The PUT method may not start up some servers.Alternative to use POST method
         /// </remarks>
         /// <response code="200">Data sending</response>
+        /// <response code="401">Device not registered</response>
         /// <response code="415">UnsupportedMediaType</response>
         /// <response code="500">InternalServerError</response>
         [HttpPut]
@@ -51,6 +52,8 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
             if (request == null) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
             try
             {
+                if (!(await _repository.DeviseIsRegistered(request.Di))) return
+                        StatusCode(StatusCodes.Status401Unauthorized);
                 var battdata = _mapper.Map<BatteryData>(request);
                 return (await _repository.AddData(battdata, token)) > 0 ?
                     Ok() :
@@ -72,6 +75,7 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
         /// 
         /// </remarks>
         /// <response code="200">Data sending</response>
+        /// <response code="401">Device not registered</response>
         /// <response code="415">UnsupportedMediaType</response>
         /// <response code="500">InternalServerError</response>
         [HttpPost]
@@ -82,6 +86,8 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
             if (request == null) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
             try
             {
+                if (!(await _repository.DeviseIsRegistered(request.Di))) return
+                       StatusCode(StatusCodes.Status401Unauthorized);
                 var battdata = _mapper.Map<BatteryData>(request);
                 return (await _repository.AddData(battdata, token)) > 0 ?
                     Ok() :
@@ -103,6 +109,7 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
         ///     /api/Data?Di=DE88CE88-E888-8A88-8888-888888888888
         /// </remarks>
         /// <response code="200">Data sending</response>
+        /// <response code="401">Device not registered</response>
         /// <response code="415">UnsupportedMediaType</response>
         /// <response code="500">InternalServerError</response>
         [HttpGet]
@@ -113,6 +120,8 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
             if (request == null || request.Di==Guid.Empty) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
             try
             {
+                if (!(await _repository.DeviseIsRegistered(request.Di))) return
+                       StatusCode(StatusCodes.Status401Unauthorized);
                 result = (await _repository.GetBatteryData(request.Di, request.F, request.T, request.S))
                    .Select(x => BatteryDataView.FromBatteryData(x)).ToArray();
             }
