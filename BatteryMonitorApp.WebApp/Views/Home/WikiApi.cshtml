@@ -35,7 +35,7 @@ Datas has the following fields:
 <h4>## Endpoints</h4>
 The following endpoints are available in the API:
 <ul>
-    <li>'PUT /api/data' simple format for sending data
+    <li>'POST /api/data' simple format for sending data
          <ul>To save device traffic, the request format FromBody:
             <li>'Di': (DeviceId). Required field. guid string;</li>
             <li>'V': (Voltage). Required field. float;</li>
@@ -46,6 +46,7 @@ The following endpoints are available in the API:
          </ul>
          <ul>Return:
             <li>'Staus Ok' - if data added</li>
+            <li>'Status401Unauthorized' - Device not registed</li>
             <li>'Status BadRequest' - if not data added</li>
             <li>'Status 500InternalServerError' - if any errors</li>
           </ul>
@@ -69,6 +70,7 @@ The following endpoints are available in the API:
                      <li>'VC': (VoltageCharger). Optional parameter. float;</li>
                      <li>'Dt': (DateTime). Optional parameter. DateTime;</li>
                      <li>'S': (Status). Optional parameter. int;</li>
+             <li>'Status401Unauthorized' - Device not registed</li>
              <li>'Status BadRequest' - if not data in Request</li>
              <li>'Status 500InternalServerError' - if any errors</li>
             </ul>

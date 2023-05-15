@@ -45,7 +45,23 @@ Datas has the following fields:
 
 ## Endpoints
 The following endpoints are available in the API:
+    
+    POST Method recommended
+    'POST /api/data' simple format for sending data
+        To save device traffic, the request format FromBody:
+            'Di': (DeviceId). Required field. guid string;
+            'V': (Voltage). Required field. float;
+            'C': (Current). Optional parameter. float;
+            'VC': (VoltageCharger). Optional parameter. float;
+            'Dt': (DateTime). Optional parameter. DateTime;
+            'S': (Status). Optional parameter. int;
+        Return: 
+            'Staus Ok' - if data added
+            'Status401Unauthorized' - Device not registed
+            'Status BadRequest' - if not data added
+            'Status 500InternalServerError' - if any errors  
 
+    PUT Method - may not work on some servers
     'PUT /api/data' simple format for sending data
         To save device traffic, the request format FromBody:
             'Di': (DeviceId). Required field. guid string;
@@ -56,8 +72,10 @@ The following endpoints are available in the API:
             'S': (Status). Optional parameter. int;
         Return: 
             'Staus Ok' - if data added
+            'Status401Unauthorized' - Device not registed
             'Status BadRequest' - if not data added
             'Status 500InternalServerError' - if any errors    
+    
     'GET /api/data?Di=id' simple format for get data
         Request short format:
             'Di': (DeviceId). Required field. Guid string;
@@ -72,5 +90,6 @@ The following endpoints are available in the API:
                     'VC': (VoltageCharger). Optional parameter. float;
                     'Dt': (DateTime). Optional parameter. DateTime;
                     'S': (Status). Optional parameter. int;
+            'Status401Unauthorized' - Device not registed
             'Status BadRequest' - if not data in Request
             'Status 500InternalServerError' - if any errors

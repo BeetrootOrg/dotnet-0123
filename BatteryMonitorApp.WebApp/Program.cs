@@ -8,7 +8,9 @@ using BatteryMonitorApp.Domain.Repositories;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -19,8 +21,8 @@ builder.Services.AddSwaggerGen(options =>
     });
     string xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-
 });
+
 builder.Services.AddSingleton(_ =>
 {
     MapperConfiguration mc = new(cfg => cfg.AddProfile<MapperConfigProfiles>());
@@ -60,19 +62,18 @@ builder.Services.AddRazorPages();
 
 
 var app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI(opt => opt.SwaggerEndpoint("/swagger/v1/swagger.json", "swagger"));
+app.UseMigrationsEndPoint();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(opt=>opt.SwaggerEndpoint("/swagger/v1/swagger.json", "swagger"));
     app.UseMigrationsEndPoint();
 }
 else
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    app.UseMigrationsEndPoint();
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
@@ -97,6 +98,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
-
 
 app.Run();
