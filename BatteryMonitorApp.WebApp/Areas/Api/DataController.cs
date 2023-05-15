@@ -6,6 +6,7 @@ using BatteryMonitorApp.Domain.Repositories;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGeneration.CommandLine;
 
 namespace BatteryMonitorApp.WebApp.Areas.Api
 {
@@ -13,6 +14,7 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
     [ApiController]
     [Produces("application/json")]
     [AllowAnonymous]
+    [AutoValidateAntiforgeryToken]
     public class DataController : ControllerBase
     {
         private readonly IRepository _repository;
@@ -31,6 +33,10 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
         /// <param name="request">BatteryDataShortFormat data for send</param>
         /// <param name="token">CancellationToken</param>
         /// <returns></returns>
+        /// <remarks>
+        /// For test use DeviceId  DE88CE88-E888-8A88-8888-888888888888
+        /// 
+        /// </remarks>
         /// <response code="200">Data sending</response>
         /// <response code="415">UnsupportedMediaType</response>
         /// <response code="500">InternalServerError</response>
