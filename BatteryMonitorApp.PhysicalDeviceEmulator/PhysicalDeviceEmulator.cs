@@ -60,7 +60,7 @@ namespace BatteryMonitorApp.PhysicalDeviceEmulator
         public static async Task<HttpResponseMessage> PutDataAsync(HttpClient client, BatteryDataShortFormat data, CancellationToken token = default)
         {
             string json = JsonSerializer.Serialize(data);
-            return await client.PutAsync("api/data", new StringContent(json, Encoding.UTF8, "application/json"), token);
+            return await client.PostAsync("api/data", new StringContent(json, Encoding.UTF8, "application/json"), token);
         }
 
 

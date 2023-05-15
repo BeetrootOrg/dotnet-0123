@@ -1,10 +1,13 @@
-﻿using AutoMapper;
+﻿using System.Runtime.Intrinsics.X86;
+
+using AutoMapper;
 
 using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Models.DataBase;
 using BatteryMonitorApp.Domain.Repositories;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGeneration.CommandLine;
 
@@ -14,7 +17,7 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
     [ApiController]
     [Produces("application/json")]
     [AllowAnonymous]
-    [AutoValidateAntiforgeryToken]
+
     public class DataController : ControllerBase
     {
         private readonly IRepository _repository;
@@ -25,17 +28,17 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
         {
             _repository = repository;
             _mapper = mapper;
-
         }
         /// <summary>
-        /// simple format for sending data
+        /// simple format for sending data. 
+        /// The PUT method may not start up some servers.Alternative to use POST method
         /// </summary>
         /// <param name="request">BatteryDataShortFormat data for send</param>
         /// <param name="token">CancellationToken</param>
         /// <returns></returns>
         /// <remarks>
-        /// For test use DeviceId  DE88CE88-E888-8A88-8888-888888888888
-        /// 
+        /// For test use DeviceId  'DE88CE88-E888-8A88-8888-888888888888'. 
+        /// The PUT method may not start up some servers.Alternative to use POST method
         /// </remarks>
         /// <response code="200">Data sending</response>
         /// <response code="415">UnsupportedMediaType</response>
@@ -45,6 +48,37 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
         public async Task<IActionResult> PutData([FromBody] BatteryDataShortFormat request, CancellationToken token = default)
         {
             
+            if (request == null) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+            try
+            {
+                var battdata = _mapper.Map<BatteryData>(request);
+                return (await _repository.AddData(battdata, token)) > 0 ?
+                    Ok() :
+                    BadRequest();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        /// <summary>
+        /// simple format for sending data
+        /// </summary>
+        /// <param name="request">BatteryDataShortFormat data for send</param>
+        /// <param name="token">CancellationToken</param>
+        /// <returns></returns>
+        /// <remarks>
+        /// For test use DeviceId  "DE88CE88-E888-8A88-8888-888888888888"
+        /// 
+        /// </remarks>
+        /// <response code="200">Data sending</response>
+        /// <response code="415">UnsupportedMediaType</response>
+        /// <response code="500">InternalServerError</response>
+        [HttpPost]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> PostData([FromBody] BatteryDataShortFormat request, CancellationToken token = default)
+        {
+
             if (request == null) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
             try
             {
