@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen(options =>
         Title = "Battery Monitor API",
         Description = "An ASP.NET Core Web API for managing battery"
     });
-    string xmlFilename = $"swaggersett.xml";
+    string xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 
 });
