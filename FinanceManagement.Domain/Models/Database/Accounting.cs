@@ -1,14 +1,14 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using FinanceManagement.Domain.Database;
 
-namespace FinanceManagement.Domain.Database
+namespace FinanceManagement.Domain.Models.Database
 {
     public class Accounting
     {
         [Key]
         [Column("id")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id {get; set;}
 
         [Column("title")]
@@ -22,17 +22,19 @@ namespace FinanceManagement.Domain.Database
         public float Value {get; set;}
 
         [Column("iterations")]
-        [Required]
         public long[] Iterations {get; set;}
 
         [Column("created_at")]
         [Required]
-        public TimeSpan Created_at {get; set;}
+        public DateTime Created_at {get; set;}
 
         [Column("assignee_id")]
-        public long AssigneeId {get;set;}
+        public long? AssigneeId {get;set;}
 
         [ForeignKey(nameof(AssigneeId))]
         public virtual User Assignee {get;set;}
+
+        // [Column("status")]
+        // public int AccountingStatus { get; internal set; }
     }
 }

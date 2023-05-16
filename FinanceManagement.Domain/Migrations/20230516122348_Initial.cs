@@ -32,9 +32,9 @@ namespace FinanceManagement.Domain.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     title = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     value = table.Column<float>(type: "real", maxLength: 255, nullable: false),
-                    iterations = table.Column<long[]>(type: "bigint[]", nullable: false),
-                    created_at = table.Column<TimeSpan>(type: "interval", nullable: false),
-                    assignee_id = table.Column<long>(type: "bigint", nullable: false)
+                    iterations = table.Column<long[]>(type: "bigint[]", nullable: true),
+                    created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    assignee_id = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,8 +43,7 @@ namespace FinanceManagement.Domain.Migrations
                         name: "FK_Accountings_users_assignee_id",
                         column: x => x.assignee_id,
                         principalTable: "users",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateIndex(

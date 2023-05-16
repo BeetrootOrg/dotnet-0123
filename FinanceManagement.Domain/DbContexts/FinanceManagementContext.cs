@@ -1,8 +1,9 @@
 using FinanceManagement.Domain.Database;
+using FinanceManagement.Domain.Models.Database;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Name
+namespace FinanceManagement.Context.DbContexts
 {
     public class FinanceManagementContext : DbContext
     {
