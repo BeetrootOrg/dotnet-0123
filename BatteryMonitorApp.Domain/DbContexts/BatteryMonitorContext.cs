@@ -1,26 +1,40 @@
-﻿
-using BatteryMonitorApp.Domain.Models.DataBase;
-
+﻿using BatteryMonitorApp.Domain.Models.DataBase;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace BatteryMonitorApp.Domain.DbContexts
 {
-    public class BatteryMonitorContext : IdentityDbContext
+    public interface IBatteryMonitorContext:IDisposable
     {
-        public DbSet<BatteryData> BatteryDatas { get; set; }
-        public DbSet<BatteryRegisteredDevice> Devices { get; set; }
+        DbSet<BatteryData> BatteryDatas { get; set; }
+        DbSet<BatteryRegisteredDevice> Devices { get; set; }
+        Task<int> SaveChangesAsync(CancellationToken token=default);
+        int SaveChanges();
+        ValueTask<EntityEntry> AddAsync(object entity, CancellationToken cancellationToken = default);
+    }
+
+    public class BatteryMonitorContext : IdentityDbContext, IBatteryMonitorContext
+    {
+        virtual public DbSet<BatteryData> BatteryDatas { get; set; }
+        virtual public DbSet<BatteryRegisteredDevice> Devices { get; set; }
+
         public BatteryMonitorContext() { }
         public BatteryMonitorContext(DbContextOptions options) : base(options)
         {
         }
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
-    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //    {
-    //        optionsBuilder.UseSqlServer(
-    //"Server=(localdb)\\MSSQLLocalDB;DataBase=battery_mon;User Id=batt_app;Password=batt_app;");
-    //        base.OnConfiguring(optionsBuilder);
-    //    }
-
+        public override int SaveChanges()
+        {
+            return base.SaveChanges();
+        }
+        public override ValueTask<EntityEntry> AddAsync(object entity, CancellationToken cancellationToken = default)
+        {
+            return base.AddAsync(entity, cancellationToken);
+        }
     }
 }

@@ -7,6 +7,7 @@ using BatteryMonitorApp.Domain.DbContexts;
 using BatteryMonitorApp.Domain.Repositories;
 using Microsoft.OpenApi.Models;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -33,7 +34,7 @@ builder.Services.AddSingleton(_ =>
 var connectionString = builder.Configuration.GetConnectionString("SqlConnection") ??
     throw new InvalidOperationException("Connection string 'SqlConnection' not found.");
 
-builder.Services.AddDbContext<BatteryMonitorContext>(c => c.UseSqlServer(connectionString,
+builder.Services.AddDbContext<IBatteryMonitorContext, BatteryMonitorContext>(c => c.UseSqlServer(connectionString,
     b => b.MigrationsAssembly("BatteryMonitorApp.WebApp")));
 
 builder.Services.AddScoped<IRepository, Repository>();
@@ -100,3 +101,4 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+public partial class Program { }

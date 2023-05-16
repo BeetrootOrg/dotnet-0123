@@ -8,11 +8,6 @@
         <NoWarn>$(NoWarn);1591</NoWarn>
         <UserSecretsId>aspnet-BatteryMonitorApp.WebApp-2060fcd8-6782-4657-990f-52f3d556ec8a</UserSecretsId>
     </PropertyGroup>
-
-    <ItemGroup>
-      <Content Remove="wwwroot\swaggersett.xml" />
-    </ItemGroup>
-
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.5" />
@@ -32,10 +27,5 @@
         <ProjectReference Include="..\BatteryMonitorApp.Domain\BatteryMonitorApp.Domain.csproj" />
         <ProjectReference Include="..\BatteryMonitorApp.PhysicalDeviceEmulator\BatteryMonitorApp.PhysicalDeviceEmulator.csproj" />
     </ItemGroup>
-    <ItemGroup>
-      <Resource Include="wwwroot\swaggersett.xml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
-    </ItemGroup>
-    
+     
 </Project>

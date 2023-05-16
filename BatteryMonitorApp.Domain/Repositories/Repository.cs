@@ -18,9 +18,9 @@ namespace BatteryMonitorApp.Domain.Repositories
 
     public class Repository : IRepository
     {
-        private readonly ILogger<Repository> _logger;
-        private readonly BatteryMonitorContext _dbcontext;
-        public Repository(BatteryMonitorContext dbcontext, ILogger<Repository> logger)
+        private readonly ILogger<IRepository> _logger;
+        private readonly IBatteryMonitorContext _dbcontext;
+        public Repository(IBatteryMonitorContext dbcontext, ILogger<IRepository> logger)
         {
             _dbcontext = dbcontext;
             _logger = logger;
@@ -31,7 +31,7 @@ namespace BatteryMonitorApp.Domain.Repositories
             try
             {
                 _logger.LogDebug($"Repository AddData {batteryData}");
-                _ = await _dbcontext.AddAsync(batteryData, cancellationToken);
+                var res = await _dbcontext.BatteryDatas.AddAsync(batteryData, cancellationToken);
                 var result = await _dbcontext.SaveChangesAsync(cancellationToken);
                 _logger.LogInformation($"Repository AddData {batteryData} Resullt={result}");
                 return result;
@@ -74,7 +74,6 @@ namespace BatteryMonitorApp.Domain.Repositories
                 throw;
             }
         }
-
         public Task<BatteryRegisteredDevice[]> GetRegisteredDevices(Guid userId, CancellationToken cancellationToken = default)
         {
             try

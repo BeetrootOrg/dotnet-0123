@@ -1,93 +1,121 @@
-﻿
-using BatteryMonitorApp.Domain.DbContexts;
-using BatteryMonitorApp.Domain.Models.DataBase;
+﻿using BatteryMonitorApp.Domain.Models.DataBase;
 using BatteryMonitorApp.Domain.Repositories;
-
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-
 using Moq;
 
 namespace BatteryMonitorApp.UnitTests
 {
     public class BatteryMonitorRepoTest
     {
+        private readonly ILogger<IRepository> _logger;
+        //private readonly IBatteryMonitorContext _context ;
+        public BatteryMonitorRepoTest()
+        {
+            _logger = new Mock<ILogger<IRepository>>().Object;
+            
+        }
         [Fact]
         public void RepoIsCreated()
         {
             // Arrange
-            var repo = CreateRepo();
+            using var _context = Helper.CreateMemoryContext();
+             var repo =new Repository(_context,_logger);
             // Act
             // Assert
             Assert.NotNull(repo);
         }
         [Fact]
-        public async Task RepoCanAddDataAndCountChanges()
+        public async Task RepoAddData_CanAdd_RusultTrue_AndCorrect()
         {
             // Arrange
-            var repo = CreateRepo();
+            using var _context = Helper.CreateMemoryContext();
+             var repo = new Repository(_context, _logger);
             var data = PhysicalDeviceEmulator.PhysicalDeviceEmulator.TestBatteryData;
-            data.Current = 12;
-            data.Status = 1;
-            // Act 
-            var countb =await repo.GetBatteryData(data.DeviceId,
-                data.DateTime.Subtract(new TimeSpan(12, 1, 1)),
-                DateTime.Now, new int[] { data.Status });
-            await repo.AddData(data);
-            var counta = await repo.GetBatteryData(data.DeviceId,
-                data.DateTime.Subtract(new TimeSpan(12, 1, 1)),
-                DateTime.Now, new int[] { data.Status });
+            // Act
+            int res = await repo.AddData(data);
             // Assert
-            Assert.True(countb.Length < counta.Length);
-        }
-        [Fact]
-        public async Task RepoCanAddDataAndDataIsCorrect()
-        {
-            // Arrange
-            var repo = CreateRepo();
-            var data = new BatteryData() { DeviceId = Guid.NewGuid() };
-            data.Current = 12;
-            data.Status = 0;
-            // Act 
-            var changes=await repo.AddData(data);
-            repo = CreateRepo();
-            BatteryData[] arrdata = await repo.GetBatteryData(data.DeviceId,
-                data.DateTime.Subtract(new TimeSpan(24, 12, 1)),
-                DateTime.Now, new int[] { 0,1,2,3,4 });
-            BatteryData datafromdb = arrdata.LastOrDefault();
-            // Assert
-            Assert.True(arrdata?.Length > 0);
-            Assert.NotNull(datafromdb);
-            Assert.True(data.DeviceId == datafromdb?.DeviceId);
-            Assert.True(data.Current == datafromdb?.Current);
-            Assert.True(data.Status == datafromdb?.Status);
+            Assert.True(res > 0);
+            Assert.Contains(_context.BatteryDatas, x => x == data);
         }
 
         [Fact]
-        public async Task RepoGetBatteryDataNotEmptyAndCorrect()
+        public async Task RepoGetBatteryData_DataNotEmpty_AndCorrect()
         {
             // Arrange
-            var repo = CreateRepo();
-            var data = PhysicalDeviceEmulator.PhysicalDeviceEmulator.TestBatteryData;
-            // Act 
-            repo = CreateRepo();
-            BatteryData[] arrdata = await repo.GetBatteryData(data.DeviceId,
-                data.DateTime.Subtract(new TimeSpan(24, 12, 1)),
-                DateTime.Now, new int[] { 0, 1, 2, 3, 4 });
-            // Assert
-            Assert.True(arrdata.Length > 0);
-            Assert.IsType<BatteryData>(arrdata[0]);
+            using var _context = Helper.CreateMemoryContext();
+            var repo = new Repository(_context, _logger);
+            var data =new BatteryData();
+            var devid=Guid.NewGuid();
+            var dev = new BatteryRegisteredDevice() { Id = devid, DeviceName = "Test", UserId = Guid.NewGuid() };
+            _context.Devices.Add(dev);
+            await _context.SaveChangesAsync();
+            data.DeviceId= devid;
+            _ = await repo.AddData(data);
+            // Act
+            var res=await repo.GetBatteryData(data.DeviceId,data.DateTime.AddDays(-1),
+                data.DateTime.AddDays(1), new int[] {data.Status });
+            //Assert
+            Assert.True(res.Length > 0);
+            Assert.Contains(res, x => x == data);
         }
-
-
-        internal static IRepository CreateRepo()
+        [Fact]
+        public async Task AddRegisteredDevices_DeviceAdded_AndCorrect()
         {
-            
-            var builder = new DbContextOptionsBuilder().UseSqlServer(
-                "Server=(localdb)\\MSSQLLocalDB;DataBase=battery_mon;User Id=batt_app;Password=batt_app;");
-            var context=new BatteryMonitorContext(builder.Options);
-            var logger = new Mock<ILogger<Repository>>();
-            return new Repository(context,logger.Object);
+            // Arrange
+            using var _context = Helper.CreateMemoryContext();
+             var repo = new Repository(_context, _logger);
+            // Act
+            var dev = new BatteryRegisteredDevice() {DeviceName = "Test", UserId = Guid.NewGuid() };
+            var res=await repo.AddRegisteredDevices(dev);
+            //Assert
+            Assert.True(res > 0);
+            Assert.Contains(_context.Devices, x => x == dev);
         }
+
+        [Fact]
+        public async Task GetRegisteredDevices_NotNull_AndArrayCorrect()
+        {
+            // Arrange
+            using var _context = Helper.CreateMemoryContext();
+             var repo = new Repository(_context, _logger);
+            var usredId =Guid.NewGuid();
+            var dev = new BatteryRegisteredDevice() { UserId = usredId, DeviceName = "Test" };
+            var dev1 = new BatteryRegisteredDevice() { DeviceName = "Test", UserId = usredId };
+            var dev2 = new BatteryRegisteredDevice() { UserId = usredId, DeviceName = "Test3" };
+            await repo.AddRegisteredDevices(dev);
+            await repo.AddRegisteredDevices(dev1);
+            await repo.AddRegisteredDevices(dev2);
+            // Act
+            var res=await repo.GetRegisteredDevices(usredId);
+            //Assert
+            Assert.NotNull(res);
+            Assert.NotEmpty(res);
+            Assert.True(res.Length == 3);
+            Assert.Contains(res, x=> x == dev);
+        }
+
+
+        [Fact]
+        public async Task DeviseIsRegistered()
+        {
+            // Arrange
+            using var _context = Helper.CreateMemoryContext();
+             var repo = new Repository(_context, _logger);
+            var usredId = Guid.NewGuid();
+            var dev = new BatteryRegisteredDevice() { UserId = usredId, DeviceName = "Test" };
+            var dev1 = new BatteryRegisteredDevice() { DeviceName = "Test", UserId = usredId };
+            var dev2 = new BatteryRegisteredDevice() { UserId = usredId, DeviceName = "Test3" };
+            await repo.AddRegisteredDevices(dev);
+            await repo.AddRegisteredDevices(dev1);
+            // Act
+            var res = await repo.DeviseIsRegistered(dev.Id);
+            var res1 = await repo.DeviseIsRegistered(dev1.Id);
+            var res2 = await repo.DeviseIsRegistered(dev2.Id);
+            //Assert
+            Assert.True(res);
+            Assert.True(res1);
+            Assert.True(!res2);
+        }
+
     }
 }
