@@ -1,4 +1,4 @@
-using FinanceManagement.Domain.Database;
+
 using FinanceManagement.Domain.Models.Database;
 
 using Microsoft.EntityFrameworkCore;

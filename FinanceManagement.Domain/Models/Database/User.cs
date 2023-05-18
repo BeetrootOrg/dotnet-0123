@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace FinanceManagement.Domain.Database
+namespace FinanceManagement.Domain.Models.Database
 {
     [Table("users")]
     public class User

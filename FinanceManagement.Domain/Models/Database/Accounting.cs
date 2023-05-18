@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using FinanceManagement.Domain.Database;
 
 namespace FinanceManagement.Domain.Models.Database
 {

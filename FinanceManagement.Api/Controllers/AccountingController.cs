@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using AccountingManagement.Contracts.Http;
 using AccountingManagement.Domain.Commands;
 
+using FinanceManagement.Contracts.Http;
+using FinanceManagement.Domain.Queries;
+
 using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
@@ -33,11 +36,32 @@ namespace FinanceManagement.Api.Controllers
             };
             CreateAccountingResult result = await _mediator.Send(command, cancellationToken);
 
-            return Created($"tasks/{result.Id}", new CreateAccountingResponse
+            return Created($"accounting/{result.Id}", new CreateAccountingResponse
             {
                 Id = result.Id
             });
 
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAccountingById(string id, CancellationToken cancellationToken = default)
+        {
+            GetAccountingByIdQuery query = new()
+            {
+                Id = id
+            };
+
+            GetAccountingByIdResult result = await _mediator.Send(query, cancellationToken);
+
+            return result.Accounting == null
+                ? NotFound(new ErrorModel
+                {
+                    Message = $"Accounting with id {id} not found"
+                })
+                : Ok(new GetAccountingByIdResponse
+                {
+                    Accounting = result.Accounting
+                });
         }
     }
 }
