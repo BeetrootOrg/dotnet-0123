@@ -1,15 +1,12 @@
-﻿using System.Runtime.Intrinsics.X86;
-
+﻿
 using AutoMapper;
-
 using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Models.DataBase;
 using BatteryMonitorApp.Domain.Repositories;
-
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting.Server;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Web.CodeGeneration.CommandLine;
+
 
 namespace BatteryMonitorApp.WebApp.Areas.Api
 {
