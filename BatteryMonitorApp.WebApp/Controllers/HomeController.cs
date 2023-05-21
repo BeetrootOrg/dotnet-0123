@@ -1,4 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Models.DataBase;
@@ -8,19 +12,17 @@ using BatteryMonitorApp.WebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.Extensions.Logging;
 
 namespace BatteryMonitorApp.WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IRepository _repository;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager, IRepository repository)
+        public HomeController( UserManager<IdentityUser> userManager, IRepository repository)
         {
-            _logger = logger;
             _userManager = userManager;
             _repository = repository;
         }
@@ -47,7 +49,12 @@ namespace BatteryMonitorApp.WebApp.Controllers
             if (user != null)
             {
                 result = (await _repository.GetRegisteredDevices(new Guid(user.Id), token))
-               .Select(x => new BatteryDevice(x)).ToArray();
+               .Select(x => new BatteryDevice()
+               {
+                   Id = x.Id,
+                   DeviceDescription = x.DeviceDescription,
+                   DeviceName = x.DeviceName
+               }).ToArray();
             }
             return View(result);
         }
@@ -60,7 +67,7 @@ namespace BatteryMonitorApp.WebApp.Controllers
         [HttpPost]
         [Authorize]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> CreateRegisteredDevices(BatteryDevice device,CancellationToken token=default)
+        public async Task<IActionResult> CreateRegisteredDevices(BatteryDevice device, CancellationToken token = default)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null) return RedirectToAction("Error");

@@ -1,34 +1,40 @@
-﻿using BatteryMonitorApp.Contracts.Models.Http;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Repositories;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace BatteryMonitorApp.WebApp.Controllers
 {
     [Authorize]
     public class Physical : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IRepository _repository;
 
-        public Physical(ILogger<HomeController> logger, UserManager<IdentityUser> userManager, IRepository repository)
+        public Physical( UserManager<IdentityUser> userManager, IRepository repository)
         {
-            _logger = logger;
             _userManager = userManager;
             _repository = repository;
         }
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> EmulatorAsync(CancellationToken token=default)
+        public async Task<IActionResult> EmulatorAsync(CancellationToken token = default)
         {
             var user = await _userManager.GetUserAsync(User);
-            if (user == null) {return Unauthorized();}
-            var data = new PhysicalDevice();
-            data.Devices = (await _repository.GetRegisteredDevices(new Guid (user.Id), default)).Select(x => 
-            new NameGuidDevice() {Name=x.DeviceName, Id=x.Id  }).ToList();
+            if (user == null) { return Unauthorized(); }
+            PhysicalDevice data = new()
+            {
+                Devices = (await _repository.GetRegisteredDevices(new Guid(user.Id), token)).Select(x =>
+            new NameGuidDevice() { Name = x.DeviceName, Id = x.Id }).ToList()
+            };
             return View(data);
         }
         [Authorize]
@@ -36,8 +42,8 @@ namespace BatteryMonitorApp.WebApp.Controllers
         public async Task<IActionResult> EmulatorAsync(PhysicalDevice device, CancellationToken token = default)
         {
             var dev = device;
-            var start = dev.start;
-             //http://user21507.realhost-free.net/
+            var start = dev.Start;
+            //http://user21507.realhost-free.net/
             string site = @$"http://{Request.Host.Value}";
             //string site = @$"http://user21507.realhost-free.net/";
             var end = await PhysicalDeviceEmulator.PhysicalDeviceEmulator.DischargeApi(dev, site, token);

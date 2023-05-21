@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Collections.Generic;
+
 namespace BatteryMonitorApp.Contracts.Models.Http
 {
     public record PhysicalDevice
@@ -7,8 +10,8 @@ namespace BatteryMonitorApp.Contracts.Models.Http
         public double NominalVolts { get; set; } = 12.7;
         public Guid DeviceId { get; set; }
         public double Current { get; set; } = 5;
-        public int delaysecs { get; set; } = 60;
-        public DateTime start { get; set; }= DateTime.Now.AddHours(-24);
+        public int Delaysecs { get; set; } = 60;
+        public DateTime Start { get; set; }= DateTime.Now.AddHours(-24);
         public List<NameGuidDevice> Devices { get; set; } = new();
     }
 

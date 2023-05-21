@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
@@ -14,14 +15,15 @@ namespace BatteryMonitorApp.Domain.Models.DataBase
         [NotNull]
         public Guid DeviceId { get; set; }
         [Required]
+        [AllowNull]
         public BatteryRegisteredDevice Device { get; set; }
         [Required]
         [NotNull]
-        public float Voltage { get; set; } = 0;
+        public float Voltage { get; set; }
         [NotNull]
-        public float Current { get; set; } = 0;
+        public float Current { get; set; }
         [NotNull]
-        public float VoltageCharger { get; set; } = 0;
+        public float VoltageCharger { get; set; }
         [NotNull]
         public DateTime DateTime { get; set; } = DateTime.Now;
         [NotNull]

@@ -1,4 +1,9 @@
-﻿using BatteryMonitorApp.Domain.DbContexts;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+using BatteryMonitorApp.Domain.DbContexts;
 using BatteryMonitorApp.Domain.Models.DataBase;
 
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +15,7 @@ namespace BatteryMonitorApp.Domain.Repositories
     public interface IRepository
     {
         Task<int> AddData(BatteryData batteryData, CancellationToken cancellationToken = default);
-        Task<BatteryData[]> GetBatteryData(Guid devise, DateTime start, DateTime End, int[] status, CancellationToken cancellationToken = default);
+        Task<BatteryData[]> GetBatteryData(Guid devise, DateTime start, DateTime end, int[] status, CancellationToken cancellationToken = default);
         Task<BatteryRegisteredDevice[]> GetRegisteredDevices(Guid userId, CancellationToken cancellationToken = default);
         Task<int> AddRegisteredDevices(BatteryRegisteredDevice device, CancellationToken cancellationToken = default);
         Task<bool> DeviseIsRegistered(Guid devise, CancellationToken cancellationToken = default);
@@ -51,7 +56,7 @@ namespace BatteryMonitorApp.Domain.Repositories
 
         public async Task<bool> DeviseIsRegistered(Guid devise, CancellationToken cancellationToken = default)
         {
-            return await _dbcontext.Devices.AnyAsync(x=>x.Id == devise); 
+            return await _dbcontext.Devices.AnyAsync(x=>x.Id == devise,cancellationToken); 
         }
 
         public Task<BatteryData[]> GetBatteryData(Guid devise, DateTime start, DateTime end, int[] status, CancellationToken cancellationToken = default)

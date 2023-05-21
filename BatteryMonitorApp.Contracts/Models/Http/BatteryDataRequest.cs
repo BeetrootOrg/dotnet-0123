@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace BatteryMonitorApp.Contracts.Models.Http
 {
     public class BatteryDataRequest

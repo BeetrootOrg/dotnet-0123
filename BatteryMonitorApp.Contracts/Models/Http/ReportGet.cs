@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Collections.Generic;
+
 namespace BatteryMonitorApp.Contracts.Models.Http
 {
     public record ReportGet

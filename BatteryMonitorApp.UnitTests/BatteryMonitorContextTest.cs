@@ -5,19 +5,14 @@ namespace BatteryMonitorApp.UnitTests
 {
      public class BatteryMonitorContextTest
     {
-        private readonly MemoryContext _context;
-        public BatteryMonitorContextTest()
-        {
-            var options = new DbContextOptionsBuilder<MemoryContext>()
-            .UseInMemoryDatabase(databaseName: "MovieListDatabase")
-            .Options;
-            _context = new MemoryContext(options);
-        }
+
         [Fact]
+#pragma warning disable CS1998 
         public async Task CreateContextTestAndDbsetsNotEmpty()
+#pragma warning restore CS1998 
         {
             var options = new DbContextOptionsBuilder<MemoryContext>()
-            .UseInMemoryDatabase(databaseName: "MovieListDatabase")
+            .UseInMemoryDatabase(databaseName: "ListDatabase")
             .Options;
             var con =new MemoryContext(options);
             var dev1 = new BatteryRegisteredDevice() { Id = PhysicalDeviceEmulator.PhysicalDeviceEmulator.Id, DeviceName = "Test", UserId = Guid.NewGuid() };

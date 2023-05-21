@@ -1,24 +1,14 @@
-﻿using BatteryMonitorApp.Domain.Models.DataBase;
+﻿using System;
+
 
 namespace BatteryMonitorApp.Contracts.Models.Http
 {
     public class BatteryDataView
     {
-        public float V { get; private set; } = 0;
-        public float? C { get; private set; } = 0;
-        public float? VC { get; private set; } = 0;
-        public DateTime? DT { get; private set; } = DateTime.Now;
-        public BatteryEventStatus? S { get; private set; } = BatteryEventStatus.Default;
-        public static BatteryDataView FromBatteryData(BatteryData data)
-        {
-            return new()
-            {
-                C = data.Current,
-                V = data.Voltage,
-                VC = data.VoltageCharger,
-                DT = data.DateTime,
-                S = (BatteryEventStatus)data.Status
-            };
-        }
+        public float V { get; set; }
+        public float C { get; set; }
+        public float VC { get; set; }
+        public DateTime? DT { get;  set; } = DateTime.Now;
+        public BatteryEventStatus? S { get;  set; } = BatteryEventStatus.Default;
     }
 }

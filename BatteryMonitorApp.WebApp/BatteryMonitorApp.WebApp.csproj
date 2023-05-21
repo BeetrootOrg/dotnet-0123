@@ -2,8 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NoWarn>$(NoWarn);1591</NoWarn>
         <UserSecretsId>aspnet-BatteryMonitorApp.WebApp-2060fcd8-6782-4657-990f-52f3d556ec8a</UserSecretsId>

@@ -1,4 +1,8 @@
-﻿using BatteryMonitorApp.Domain.Models.DataBase;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+using BatteryMonitorApp.Domain.Models.DataBase;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;

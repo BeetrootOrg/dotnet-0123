@@ -1,9 +1,16 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+using AutoMapper;
+
 using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Models.DataBase;
 using BatteryMonitorApp.Domain.Repositories;
-using Microsoft.AspNetCore.Authorization;
 
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -44,11 +51,11 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
         [ProducesResponseType(200)]
         public async Task<IActionResult> PutData([FromBody] BatteryDataShortFormat request, CancellationToken token = default)
         {
-            
+
             if (request == null) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
             try
             {
-                if (!(await _repository.DeviseIsRegistered(request.Di))) return
+                if (!(await _repository.DeviseIsRegistered(request.Di,token))) return
                         StatusCode(StatusCodes.Status401Unauthorized);
                 var battdata = _mapper.Map<BatteryData>(request);
                 return (await _repository.AddData(battdata, token)) > 0 ?
@@ -82,7 +89,7 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
             if (request == null) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
             try
             {
-                if (!(await _repository.DeviseIsRegistered(request.Di))) return
+                if (!(await _repository.DeviseIsRegistered(request.Di,token))) return
                        StatusCode(StatusCodes.Status401Unauthorized);
                 var battdata = _mapper.Map<BatteryData>(request);
                 return (await _repository.AddData(battdata, token)) > 0 ?
@@ -109,17 +116,25 @@ namespace BatteryMonitorApp.WebApp.Areas.Api
         /// <response code="415">UnsupportedMediaType</response>
         /// <response code="500">InternalServerError</response>
         [HttpGet]
-        [ProducesResponseType(typeof(BatteryDataView[]),200)]
+        [ProducesResponseType(typeof(BatteryDataView[]), 200)]
         public async Task<IActionResult> GetData([FromQuery] BatteryDataRequest request, CancellationToken cancellationToken = default)
         {
             var result = Array.Empty<BatteryDataView>();
-            if (request == null || request.Di==Guid.Empty) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+            if (request == null || request.Di == Guid.Empty) return StatusCode(StatusCodes.Status415UnsupportedMediaType);
             try
             {
-                if (!(await _repository.DeviseIsRegistered(request.Di))) return
+                if (!(await _repository.DeviseIsRegistered(request.Di,cancellationToken))) return
                        StatusCode(StatusCodes.Status401Unauthorized);
-                result = (await _repository.GetBatteryData(request.Di, request.F, request.T, request.S))
-                   .Select(x => BatteryDataView.FromBatteryData(x)).ToArray();
+                result = (await _repository.GetBatteryData(request.Di, request.F, request.T, request.S,cancellationToken))
+                   .Select(x => new BatteryDataView()
+                   {
+                       C = x.Current,
+                       V = x.Voltage,
+                       S = (Contracts.Models.BatteryEventStatus)x.Status,
+                       VC = x.VoltageCharger,
+                       DT = x.DateTime
+                   }
+                   ).ToArray();
             }
             catch
             {

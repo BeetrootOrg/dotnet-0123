@@ -33,14 +33,14 @@
                     <span asp-validation-for="@Model.Current" class="text-danger"></span>
                 </div>
                 <div class="form-floating mb-3">
-                    <input asp-for="@Model.delaysecs" class="form-control" aria-required="true" placeholder="Delay, secs" />
-                    <label asp-for="@Model.delaysecs" class="form-label">Delay, secs</label>
-                    <span asp-validation-for="@Model.delaysecs" class="text-danger"></span>
+                    <input asp-for="@Model.Delaysecs" class="form-control" aria-required="true" placeholder="Delay, secs" />
+                    <label asp-for="@Model.Delaysecs" class="form-label">Delay, secs</label>
+                    <span asp-validation-for="@Model.Delaysecs" class="text-danger"></span>
                 </div>
                 <div class="form-floating mb-3">
-                    <input asp-for="@Model.start" type="datetime-local" pattern="dd.dd.dddd dd:dd:dd" class="form-control" aria-required="true" placeholder="DateTime start" />
-                    <label asp-for="@Model.start" class="form-label">DateTime start </label>
-                    <span asp-validation-for="@Model.start" class="text-danger"></span>
+                    <input asp-for="@Model.Start" type="datetime-local" pattern="dd.dd.dddd dd:dd:dd" class="form-control" aria-required="true" placeholder="DateTime start" />
+                    <label asp-for="@Model.Start" class="form-label">DateTime start </label>
+                    <span asp-validation-for="@Model.Start" class="text-danger"></span>
                 </div>
                 <div>
                     <button type="submit" class="w-100 btn btn-lg btn-primary">Emulation Discharge</button>

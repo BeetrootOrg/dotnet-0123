@@ -1,6 +1,5 @@
 ﻿using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Models.DataBase;
-
 using System.Text;
 using System.Text.Json;
 
@@ -10,10 +9,10 @@ namespace BatteryMonitorApp.PhysicalDeviceEmulator
     {
         public double NominalCapacity { get; set; }
         public double NominalVolts { get; set; }
-        private double _currentVolts = 0;
+        
 
 
-        public static readonly Guid Id = new Guid("DE88CE88-E888-8A88-8888-888888888888");
+        public static readonly Guid Id = new ("DE88CE88-E888-8A88-8888-888888888888");
         public static readonly BatteryData TestBatteryData = new()
         {
             DeviceId = Id,
@@ -26,35 +25,35 @@ namespace BatteryMonitorApp.PhysicalDeviceEmulator
 
         public static async Task<DateTime> DischargeApi(PhysicalDevice device, string urisite, CancellationToken token = default)
         {
-            using var _client = new HttpClient() { BaseAddress = new Uri(urisite) };
-            double _stepcapacity = 0;
-            double _capacity = device.NominalCapacity;
+            using var client = new HttpClient() { BaseAddress = new Uri(urisite) };
+            double stepcapacity = 0;
+            double capacity = device.NominalCapacity;
             long i = 0;
 
             HttpResponseMessage res;
             do
             {
-                var _currentVolts = GetVoltsIndex(_capacity / device.NominalCapacity) * device.NominalVolts;
-                _stepcapacity = device.Current * device.delaysecs / 3600;
+                var currentVolts = GetVoltsIndex(capacity / device.NominalCapacity) * device.NominalVolts;
+                stepcapacity = device.Current * device.Delaysecs / 3600;
 
                 BatteryDataShortFormat data = new()
                 {
                     C = (float)device.Current,
                     Di = device.DeviceId,
-                    V = (float)_currentVolts,
-                    Dt = device.start,
+                    V = (float)currentVolts,
+                    Dt = device.Start,
                     S = 3
                 };
                 try
                 {
-                    res = await PutDataAsync(_client, data, token);
+                    res = await PutDataAsync(client, data, token);
                 }
-                catch (Exception ex) { break; }
-                device.start = device.start.AddSeconds(device.delaysecs);
-                _capacity -= _stepcapacity;
+                catch  { break; }
+                device.Start = device.Start.AddSeconds(device.Delaysecs);
+                capacity -= stepcapacity;
                 i++;
-            } while (!token.IsCancellationRequested && _capacity > 0 && res.IsSuccessStatusCode);
-            return device.start;
+            } while (!token.IsCancellationRequested && capacity > 0 && res.IsSuccessStatusCode);
+            return device.Start;
         }
 
         public static async Task<HttpResponseMessage> PutDataAsync(HttpClient client, BatteryDataShortFormat data, CancellationToken token = default)
@@ -64,39 +63,39 @@ namespace BatteryMonitorApp.PhysicalDeviceEmulator
         }
 
 
-        internal static List<CapVolts> arr = new()
+        internal static List<CapVolts> Arr = new()
             {
-                new() {c=1, r=1.15 },
-                new() {c=0.98, r=1.1 },new() {c= 0.96,r= 1.05 }, new(){c= 0.94,r= 1.02 },
-                new() { c=0.92,r= 1.01 },new() {c= 0.91, r=1 },new(){c= 0.90,r= 0.99 },new() {c= 0.7,r= 0.9 },
-                new() {c= 0.5, r=0.85 },new() {c= 0.3,r= 0.75 }, new() {c= 0.15,r= .65 }, new(){ c=0.1,r= .35 },
-                new() { c=0.09,r= 0.2}, new(){c= 0.07, r=0.1 }, new() {c= 0.0,r=0.00 }
+                new() {C=1, R=1.15 },
+                new() {C=0.98, R=1.1 },new() {C= 0.96,R= 1.05 }, new(){C= 0.94,R= 1.02 },
+                new() { C=0.92,R= 1.01 },new() {C= 0.91, R=1 },new(){C= 0.90,R= 0.99 },new() {C= 0.7,R= 0.9 },
+                new() {C= 0.5, R=0.85 },new() {C= 0.3,R= 0.75 }, new() {C= 0.15,R= .65 }, new(){C=0.1,R= .35 },
+                new() { C=0.09,R= 0.2}, new(){C= 0.07, R=0.1 }, new() {C= 0.0,R=0.00 }
             };
 
         public static double GetVoltsIndex(double capacityindex)
         {
-            CapVolts res=null;
-            CapVolts temp = arr[0];
-            foreach(var item in arr)
+            CapVolts res=new();
+            CapVolts temp = Arr[0];
+            foreach(var item in Arr)
             {
-                if (item.c <= capacityindex)
+                if (item.C <= capacityindex)
                 {
-                    res =new() {r=item.r,c=item.c };
-                    if (res.c == 1) break; 
-                    var delta=(capacityindex-item.c)/(temp.c-item.c)*(temp.r-item.r);
-                    res.r =item.r+delta;
+                    res =new() {R=item.R,C=item.C };
+                    if (res.C == 1) break; 
+                    var delta=(capacityindex-item.C)/(temp.C - item.C) *(temp.R-item.R);
+                    res.R =item.R+delta;
                     break;
                 }
                 temp = item;
             }
-            return res != null ? res.r : -1;
+            return res.R ;
         }
     }
 
     internal record CapVolts
     {
-        public double c { get; set; }
-        public double r { get; set; }
+        public double C { get; set; }
+        public double R { get; set; } = -1;
     }
 
 }

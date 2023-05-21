@@ -2,11 +2,16 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using AutoMapper;
-using BatteryMonitorApp.Contracts.MapperConfigs;
 using BatteryMonitorApp.Domain.DbContexts;
 using BatteryMonitorApp.Domain.Repositories;
 using Microsoft.OpenApi.Models;
-
+using BatteryMonitorApp.WebApp.MapperConfigs;
+using System;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 

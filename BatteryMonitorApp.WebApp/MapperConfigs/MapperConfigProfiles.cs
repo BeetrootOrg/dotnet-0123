@@ -4,7 +4,7 @@ using AutoMapper;
 using BatteryMonitorApp.Contracts.Models.Http;
 using BatteryMonitorApp.Domain.Models.DataBase;
 
-namespace BatteryMonitorApp.Contracts.MapperConfigs
+namespace BatteryMonitorApp.WebApp.MapperConfigs
 {
     public class MapperConfigProfiles : Profile
     {
