@@ -46,7 +46,7 @@ namespace FinanceManagement.Domain.Queries
                 {
                     Title = dbResult.Title,
                     Value = dbResult.Value,
-                    Created_at = dbResult.Created_at,
+                    Created_at = dbResult.CreatedAt,
                     AssigneeEmail = dbResult.Assignee?.Email,
                     Iterations = dbResult.Iterations,
                     Id = dbResult.Id.ToString()

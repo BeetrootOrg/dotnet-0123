@@ -40,11 +40,11 @@ namespace AccountingManagement.Domain.Commands
             {
                 Title = request.Title,
                 Value = request.Value,
-                Created_at = _dateTimeProvider.Now,
+                CreatedAt = _dateTimeProvider.Now,
                 Id = _identifierGenerator.Generate()
             };
 
-            await _repository.AddTask(accounting, cancellationToken);
+            await _repository.AddAccounting(accounting, cancellationToken);
 
             return new CreateAccountingResult
             {

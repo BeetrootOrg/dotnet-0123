@@ -28,7 +28,7 @@ namespace FinanceManagement.IntegrationTests
             HttpClient client = _factory.CreateClient();
 
             // Act
-            HttpResponseMessage response = await client.PutAsync("tasks", new StringContent(
+            HttpResponseMessage response = await client.PutAsync("accountings", new StringContent(
                 JsonConvert.SerializeObject(new CreateAccountingRequest
                 {
                     Title = "Title",

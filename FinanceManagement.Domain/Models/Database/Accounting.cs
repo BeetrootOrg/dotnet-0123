@@ -25,7 +25,7 @@ namespace FinanceManagement.Domain.Models.Database
 
         [Column("created_at")]
         [Required]
-        public DateTime Created_at {get; set;}
+        public DateTime CreatedAt {get; set;}
 
         [Column("assignee_id")]
         public long? AssigneeId {get;set;}

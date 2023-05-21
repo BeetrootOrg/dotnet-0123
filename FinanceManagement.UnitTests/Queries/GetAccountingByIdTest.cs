@@ -61,7 +61,7 @@ namespace FinanceManagement.UnitTests.Queries
                     Id = Guid.Parse(id),
                     Title = title,
                     Value = value,
-                    Created_at = createdAt,
+                    CreatedAt = createdAt,
                     Assignee = new DatabaseUser
                     {
                         Email = assigneeEmail

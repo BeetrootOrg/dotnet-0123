@@ -25,7 +25,7 @@ namespace FinanceManagement.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPut]
+        [HttpPut("")]
         public async Task<IActionResult> CreateAccounting([FromBody] CreateAccountingRequest request, CancellationToken cancellationToken = default)
         {
 
