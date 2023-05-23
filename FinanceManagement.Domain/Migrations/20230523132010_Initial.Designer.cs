@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinanceManagement.Domain.Migrations
 {
     [DbContext(typeof(FinanceManagementContext))]
-    [Migration("20230516122348_Initial")]
+    [Migration("20230523132010_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -25,26 +25,6 @@ namespace FinanceManagement.Domain.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FinanceManagement.Domain.Database.User", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasColumnName("email");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("users");
-                });
-
             modelBuilder.Entity("FinanceManagement.Domain.Models.Database.Accounting", b =>
                 {
                     b.Property<Guid>("Id")
@@ -56,7 +36,7 @@ namespace FinanceManagement.Domain.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("assignee_id");
 
-                    b.Property<DateTime>("Created_at")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -82,9 +62,29 @@ namespace FinanceManagement.Domain.Migrations
                     b.ToTable("Accountings");
                 });
 
+            modelBuilder.Entity("FinanceManagement.Domain.Models.Database.User", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("email");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("users");
+                });
+
             modelBuilder.Entity("FinanceManagement.Domain.Models.Database.Accounting", b =>
                 {
-                    b.HasOne("FinanceManagement.Domain.Database.User", "Assignee")
+                    b.HasOne("FinanceManagement.Domain.Models.Database.User", "Assignee")
                         .WithMany()
                         .HasForeignKey("AssigneeId");
 

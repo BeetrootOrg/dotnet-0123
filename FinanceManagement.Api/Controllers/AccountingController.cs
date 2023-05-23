@@ -16,6 +16,7 @@ namespace FinanceManagement.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class AccountingsController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -25,7 +26,32 @@ namespace FinanceManagement.Api.Controllers
             _mediator = mediator;
         }
 
+
+
+
+
+
+        /// <summary>
+        /// Create new accounting
+        /// </summary>
+        /// <param name="request">Accounting information</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
+        /// <returns>Identifier of newly created accountings</returns>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///    PUT /accountings
+        ///    {
+        ///        "title": "Accounting title",
+        ///        "value": "Accounting value"
+        ///    }   
+        /// 
+        /// </remarks> 
+        /// <response code="201">Returns newly created accounting identifier</response>
+        /// <response code="400">If request is invalid</response>
+        /// <response code="500">If something went wrong</response>
         [HttpPut("")]
+        [ProducesResponseType(typeof(CreateAccountingResponse), 201)]
         public async Task<IActionResult> CreateAccounting([FromBody] CreateAccountingRequest request, CancellationToken cancellationToken = default)
         {
 
@@ -43,7 +69,18 @@ namespace FinanceManagement.Api.Controllers
 
         }
 
+        /// <summary>
+        /// Get accounting by id
+        /// </summary>
+        /// <param name="id">Accounting identifier</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
+        /// <returns>Accounting information</returns>
+        /// <response code="200">Returns accounting information</response>
+        /// <response code="404">If accounting with given id not found</response>
+        /// <response code="500">If something went wrong</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(GetAccountingByIdResponse), 200)]
+        [ProducesResponseType(typeof(ErrorModel), 404)]
         public async Task<IActionResult> GetAccountingById(string id, CancellationToken cancellationToken = default)
         {
             GetAccountingByIdQuery query = new()
