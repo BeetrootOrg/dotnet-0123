@@ -11,6 +11,8 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
 using System;
+using FinanceManagement.Api;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,9 +36,16 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+builder.Services.AddOptions<FinanceManagementOptions>()
+    .Bind(builder.Configuration);
 
 builder.Services.AddDomain();
-builder.Services.AddDbContext<FinanceManagementContext>(c => c.UseNpgsql("Host=localhost;Database=finance_management;User ID=postgres;Password=sloshy;Host=localhost;Port=5432;"));
+builder.Services.AddDbContext<FinanceManagementContext>(
+    (IServiceProvider sp, DbContextOptionsBuilder c) =>
+    {
+        IOptionsMonitor<FinanceManagementOptions> options = sp.GetRequiredService<IOptionsMonitor<FinanceManagementOptions>>();
+        _ = c.UseNpgsql(options.CurrentValue.FinanceManagementConnectionString);
+    });
 
 
 var app = builder.Build();
@@ -50,7 +59,6 @@ if (app.Environment.IsDevelopment())
 
 
 
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
