@@ -100,5 +100,45 @@ namespace FinanceManagement.Api.Controllers
                     Accounting = result.Accounting
                 });
         }
+
+
+        /// <summary>
+        /// Update accounting value
+        /// </summary>
+        /// <param name="accountingId">Accounting identifier</param>
+        /// <param name="request">Update information</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
+        /// <returns>Nothing</returns>
+        /// <remarks>
+        /// 
+        /// Sample request:
+        /// 
+        ///  PATCH /accountings/{accountingId}/value
+        ///  {
+        ///     "value": 100
+        ///  }
+        /// 
+        /// </remarks>
+        /// <response code="204">If accounting value updated successfully</response>
+        /// <response code="400">If request is invalid</response>
+        /// <response code="404">If accounting with given id not found</response>
+        /// <response code="500">If something went wrong</response>
+        [HttpPatch("{accountingId}/value")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(typeof(ErrorModel), 400)]
+        [ProducesResponseType(typeof(ErrorModel), 404)]
+        public async Task<IActionResult> UpdateAccountingValue([FromRoute] string accountingId,
+            [FromBody] UpdateAccountingValueRequest request,
+            CancellationToken cancellationToken = default)
+            {
+                UpdateAccountingValueCommand command = new()
+                {
+                    AccountingId = accountingId,
+                    Value = request.Value
+                };
+
+                await _mediator.Send(command, cancellationToken);
+                return NoContent();
+            }
     }
 }

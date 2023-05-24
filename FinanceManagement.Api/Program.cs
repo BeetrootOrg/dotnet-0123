@@ -47,6 +47,18 @@ builder.Services.AddDbContext<FinanceManagementContext>(
         _ = c.UseNpgsql(options.CurrentValue.FinanceManagementConnectionString);
     });
 
+builder.Services
+    .AddHealthChecks()
+    .AddNpgSql(
+        sp =>
+        {
+            IOptionsMonitor<FinanceManagementOptions> options = sp.GetRequiredService<IOptionsMonitor<FinanceManagementOptions>>();
+            return options.CurrentValue.FinanceManagementConnectionString;
+        },
+        timeout: TimeSpan.FromSeconds(1)
+    );
+
+
 
 var app = builder.Build();
 
@@ -63,6 +75,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHealthChecks("/health");
 
 app.Run();
 

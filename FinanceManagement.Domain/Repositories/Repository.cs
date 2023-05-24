@@ -12,6 +12,8 @@ namespace FinanceManagement.Domain.Repositories
     {
         Task AddAccounting(DatabaseAccounting accounting, CancellationToken cancellationToken = default);
         Task<DatabaseAccounting> GetAccountingById(string id, CancellationToken cancellationToken = default);
+
+        Task UpdateAccountingValue(string id, int value, CancellationToken cancellationToken = default);
     }
     internal class Repository : IRepository
     {
@@ -31,8 +33,16 @@ namespace FinanceManagement.Domain.Repositories
         public Task<DatabaseAccounting> GetAccountingById(string id, CancellationToken cancellationToken = default)
         {
             return _dbContext.Accountings
-                .Include(t => t.Assignee)
                 .SingleOrDefaultAsync(t => t.Id.ToString() == id, cancellationToken);
+        }
+
+        public async Task UpdateAccountingValue(string id, int value, CancellationToken cancellationToken = default)
+        {
+            DatabaseAccounting accounting = await _dbContext.Accountings.SingleAsync(x => x.Id.ToString() == id, cancellationToken);
+
+            accounting.Value = (int)value;
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

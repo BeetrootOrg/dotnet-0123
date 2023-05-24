@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinanceManagement.Domain.Migrations
 {
     [DbContext(typeof(FinanceManagementContext))]
-    [Migration("20230523132010_Initial")]
+    [Migration("20230524101859_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -31,10 +31,6 @@ namespace FinanceManagement.Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    b.Property<long?>("AssigneeId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("assignee_id");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -57,12 +53,10 @@ namespace FinanceManagement.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AssigneeId");
-
                     b.ToTable("Accountings");
                 });
 
-            modelBuilder.Entity("FinanceManagement.Domain.Models.Database.User", b =>
+            modelBuilder.Entity("FinanceManagement.Domain.Models.Database.Iteration", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,24 +65,14 @@ namespace FinanceManagement.Domain.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Email")
-                        .IsRequired()
+                    b.Property<int>("money")
                         .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasColumnName("email");
+                        .HasColumnType("integer")
+                        .HasColumnName("money");
 
                     b.HasKey("Id");
 
-                    b.ToTable("users");
-                });
-
-            modelBuilder.Entity("FinanceManagement.Domain.Models.Database.Accounting", b =>
-                {
-                    b.HasOne("FinanceManagement.Domain.Models.Database.User", "Assignee")
-                        .WithMany()
-                        .HasForeignKey("AssigneeId");
-
-                    b.Navigation("Assignee");
+                    b.ToTable("Iterations");
                 });
 #pragma warning restore 612, 618
         }

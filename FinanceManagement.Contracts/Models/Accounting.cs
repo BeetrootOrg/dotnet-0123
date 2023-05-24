@@ -9,7 +9,6 @@ namespace FinanceManagement.Contracts.Models
         public float Value {get; init;}
         public long[]? Iterations {get; init;}
         public DateTime Created_at {get; init;}
-        public string AssigneeEmail { get; init; }
 
     }
 }

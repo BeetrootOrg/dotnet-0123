@@ -27,13 +27,5 @@ namespace FinanceManagement.Domain.Models.Database
         [Required]
         public DateTime CreatedAt {get; set;}
 
-        [Column("assignee_id")]
-        public long? AssigneeId {get;set;}
-
-        [ForeignKey(nameof(AssigneeId))]
-        public virtual User Assignee {get;set;}
-
-        // [Column("status")]
-        // public int AccountingStatus { get; internal set; }
     }
 }

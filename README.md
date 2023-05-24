@@ -8,7 +8,7 @@ This is a simple finance management system, that allows you to easily manage you
 - As a user, I want to be able to keep financial records;
 - As a user, I wnat to be able to split financial accountings;
 - As a user, I want to be able to see visualisation of spendings;
-- As a user, I want to be able to delete financial accounting;
+- As a user, I want to be able to see history of spendings;
 
 
 ## Features
@@ -18,7 +18,6 @@ Application can handle following tasks:
 - `set_value` - Setting initial capital;
 - `add` - Adding money to this accounting;
 - `subtract` - Subtract money from this accounting;
-- `delete` - Removing accounting;
 
 ## Accounting Fields
 
@@ -34,11 +33,8 @@ Every your accounting have the following fields:
 Every iteration of adding or subtracting have the following fields:
 - `id` - The unique identifier for the iteration;
 - `name` - The name of iteration;
-- `type` - Type of transaction;
-- `sum` - Amount of money;
+- `money` - Amount of money;
 - `created_at` - The date and time when iteration was done;
-- `sign` - Minus or plus depending on what operation was done;
-- `account_id` - The unique identifier of the accounting;
 
 ## Accounting Endpoints
 

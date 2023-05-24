@@ -3,18 +3,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FinanceManagement.Domain.Models.Database
 {
-    [Table("users")]
-    public class User
+    [Table("Iterations")]
+    public class Iteration
     {
         [Key]
         [Column("id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id {get; set;}
 
-        [Column("email")]
+        [Column("money")]
         [Required]
         [MaxLength(255)]
-        [EmailAddress]
-        public string Email {get; set;}
+        public int money {get; set;}
     }
 }

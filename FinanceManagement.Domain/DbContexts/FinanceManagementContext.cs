@@ -9,7 +9,7 @@ namespace FinanceManagement.Context.DbContexts
     {
         public DbSet<Accounting> Accountings {get;set;}
 
-        public DbSet<User> Users {get;set;}
+        public DbSet<Iteration> Iterations {get;set;}
 
         public FinanceManagementContext()
         {
@@ -20,12 +20,6 @@ namespace FinanceManagement.Context.DbContexts
 
         }
 
-        // protected override void OnModelCreating(ModelBuilder modelBuilder)
-        // {
-        //     modelBuilder.Entity<Accounting>()
-        //         .Property(t =>  t.Created_at)
-        //         .HasDefaultValue("now()");
-        // }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

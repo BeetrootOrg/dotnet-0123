@@ -12,7 +12,6 @@ using System.Threading;
 
 using DatabaseAccounting = FinanceManagement.Domain.Models.Database.Accounting;
 
-using DatabaseUser = FinanceManagement.Domain.Models.Database.User;
 
 namespace FinanceManagement.UnitTests.Queries
 {
@@ -62,10 +61,6 @@ namespace FinanceManagement.UnitTests.Queries
                     Title = title,
                     Value = value,
                     CreatedAt = createdAt,
-                    Assignee = new DatabaseUser
-                    {
-                        Email = assigneeEmail
-                    }
                 }));
 
             GetAccountingByIdQuery query = new() { Id = id };
@@ -80,7 +75,6 @@ namespace FinanceManagement.UnitTests.Queries
             result.Accounting.Title.ShouldBe(title);
             result.Accounting.Value.ShouldBe(value);
             result.Accounting.Created_at.ShouldBe(createdAt);
-            result.Accounting.AssigneeEmail.ShouldBe(assigneeEmail);
         }
     }
 }

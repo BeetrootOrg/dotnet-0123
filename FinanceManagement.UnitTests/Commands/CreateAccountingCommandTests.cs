@@ -53,8 +53,6 @@ namespace FinanceManagement.UnitTests.Commands
             _ = await _handler.Handle(command, CancellationToken.None);
 
             _repositoryMock.Verify(x => x.AddAccounting(It.Is<DatabaseTask>(t => 
-            t.Assignee == null &&
-            t.AssigneeId == null &&
             t.Value == value &&
             t.Iterations == null &&
             t.Title == title &&
