@@ -33,8 +33,8 @@ namespace FinanceManagement.Domain.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
-                    b.Property<long[]>("Iterations")
-                        .HasColumnType("bigint[]")
+                    b.Property<int>("Iterations")
+                        .HasColumnType("integer")
                         .HasColumnName("iterations");
 
                     b.Property<string>("Title")
@@ -51,25 +51,6 @@ namespace FinanceManagement.Domain.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Accountings");
-                });
-
-            modelBuilder.Entity("FinanceManagement.Domain.Models.Database.Iteration", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<int>("money")
-                        .HasMaxLength(255)
-                        .HasColumnType("integer")
-                        .HasColumnName("money");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Iterations");
                 });
 #pragma warning restore 612, 618
         }

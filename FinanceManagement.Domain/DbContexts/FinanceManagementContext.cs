@@ -9,7 +9,6 @@ namespace FinanceManagement.Context.DbContexts
     {
         public DbSet<Accounting> Accountings {get;set;}
 
-        public DbSet<Iteration> Iterations {get;set;}
 
         public FinanceManagementContext()
         {

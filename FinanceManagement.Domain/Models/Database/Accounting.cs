@@ -21,7 +21,7 @@ namespace FinanceManagement.Domain.Models.Database
         public float Value {get; set;}
 
         [Column("iterations")]
-        public long[] Iterations {get; set;}
+        public int Iterations {get; set;}
 
         [Column("created_at")]
         [Required]

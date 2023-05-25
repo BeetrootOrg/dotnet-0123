@@ -54,7 +54,7 @@ namespace FinanceManagement.UnitTests.Commands
 
             _repositoryMock.Verify(x => x.AddAccounting(It.Is<DatabaseTask>(t => 
             t.Value == value &&
-            t.Iterations == null &&
+            t.Iterations == 0 &&
             t.Title == title &&
             t.CreatedAt == now &&
             t.Id == id), It.IsAny<CancellationToken>()),Times.Once);

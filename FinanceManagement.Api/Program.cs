@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using FluentValidation;
+using FinanceManagement.Api.Validators;
+
 using FinanceManagement.Domain;
 using FinanceManagement.Context.DbContexts;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +16,7 @@ using System.IO;
 using System;
 using FinanceManagement.Api;
 using Microsoft.Extensions.Options;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +40,8 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+
+
 builder.Services.AddOptions<FinanceManagementOptions>()
     .Bind(builder.Configuration);
 
@@ -46,6 +52,11 @@ builder.Services.AddDbContext<FinanceManagementContext>(
         IOptionsMonitor<FinanceManagementOptions> options = sp.GetRequiredService<IOptionsMonitor<FinanceManagementOptions>>();
         _ = c.UseNpgsql(options.CurrentValue.FinanceManagementConnectionString);
     });
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateAccountingValueValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateAccountingRequestValidator>();
+
 
 builder.Services
     .AddHealthChecks()

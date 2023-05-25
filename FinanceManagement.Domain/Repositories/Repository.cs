@@ -41,6 +41,7 @@ namespace FinanceManagement.Domain.Repositories
             DatabaseAccounting accounting = await _dbContext.Accountings.SingleAsync(x => x.Id.ToString() == id, cancellationToken);
 
             accounting.Value = (int)value;
+            accounting.Iterations += 1;
 
             await _dbContext.SaveChangesAsync(cancellationToken);
         }

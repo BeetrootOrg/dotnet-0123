@@ -7,7 +7,7 @@ namespace FinanceManagement.Contracts.Models
         public string Id {get; init;}
         public string Title {get; init;}
         public float Value {get; init;}
-        public long[]? Iterations {get; init;}
+        public int Iterations {get; init;}
         public DateTime Created_at {get; init;}
 
     }
