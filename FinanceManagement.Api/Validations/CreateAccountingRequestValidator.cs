@@ -9,7 +9,7 @@ namespace FinanceManagement.Api.Validators
         public CreateAccountingRequestValidator()
         {
             RuleFor(x => x.Title).Length(1, 255);
-            RuleFor(x => x.Value).NotEmpty().GreaterThan(0);
+            RuleFor(x => x.Value).NotEmpty().GreaterThan(-1);
         }
     }
 }
