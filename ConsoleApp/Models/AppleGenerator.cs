@@ -1,17 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using ConsoleApp.Enums;
-using ConsoleApp.Exceptions;
 
 namespace ConsoleApp.Models
 {
     internal class AppleGenerator
     {
-        private int _borderWidth;
-        private int _borderHeight;
-        private Snake _snake;
+        private readonly int _borderWidth;
+        private readonly int _borderHeight;
+        private readonly Snake _snake;
         public AppleGenerator(Border border, Snake snake)
         {
             if (border == null || snake == null)
@@ -25,9 +20,9 @@ namespace ConsoleApp.Models
         }
         public Apple Generate()
         {
-            Random random = new Random(DateTime.Now.Millisecond);
+            Random random = new(DateTime.Now.Millisecond);
 
-            Apple apple = new Apple(x: random.Next(0, _borderWidth), y: random.Next(0, _borderHeight));
+            Apple apple = new(x: random.Next(0, _borderWidth), y: random.Next(0, _borderHeight));
             while (_snake.CheckWrongAppleGeneration(apple))
             {
                 apple = new Apple(x: random.Next(0, _borderWidth), y: random.Next(0, _borderHeight));

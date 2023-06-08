@@ -8,7 +8,7 @@ namespace ConsoleApp.Models
     {
         public int X => _appleObject.X;
         public int Y => _appleObject.Y;
-        private AppleObject _appleObject;
+        private readonly AppleObject _appleObject;
         public Apple(int x, int y)
         {
             if (x < 0 || y < 0)

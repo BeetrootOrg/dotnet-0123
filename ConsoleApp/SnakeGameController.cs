@@ -8,11 +8,11 @@ namespace ConsoleApp
 {
     internal class SnakeGameController
     {
-        private Snake _snake;
-        private AppleGenerator _appleGenerator;
+        private readonly Snake _snake;
+        private readonly AppleGenerator _appleGenerator;
         private Apple _currentApple;
-        private Border _border;
-        private int _maxSnakeLength;
+        private readonly Border _border;
+        private readonly int _maxSnakeLength;
 
         public GameState GameState { get; private set; } = GameState.Playing;
         public SnakeGameController(Snake snake, AppleGenerator appleGenerator, Border border)

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 using ConsoleApp.Enums;
-using ConsoleApp.Exceptions;
 using ConsoleApp.Models.Objects;
 
 namespace ConsoleApp.Models
@@ -12,9 +11,9 @@ namespace ConsoleApp.Models
     {
         private List<SnakeObject> _body;
         public Direction Direction { get; private set; }
-        private SnakeObject _tail => _body.Last();
+
         public SnakeObject Head => _body.First();
-        public int Score = 0;
+        public int Score;
         public int Length => _body.Count;
         public Snake(Border border)
         {
@@ -96,6 +95,8 @@ namespace ConsoleApp.Models
                     }
                     Direction = direction;
                     break;
+                default:
+                    break;
             }
         }
         // Grow snake if it possible, if not the snake just moves.
@@ -108,8 +109,10 @@ namespace ConsoleApp.Models
 
             SnakeObject newHead = Head.Move(Direction);
 
-            List<SnakeObject> newBody = new List<SnakeObject>();
-            newBody.Add(newHead);
+            List<SnakeObject> newBody = new()
+            {
+                newHead
+            };
 
             if (newHead.X == apple.X && newHead.Y == apple.Y)
             {

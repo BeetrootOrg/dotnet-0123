@@ -27,16 +27,16 @@ while (!isValid)
 do
 {
     Console.Clear();
-    SnakeGame game = new SnakeGame(width, height);
+    SnakeGame game = new(width, height);
 
-    Timer timer = new((_) => { game.Update(); }, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(game.Speed));
+    Timer timer = new((_) => game.Update(), null, TimeSpan.Zero, TimeSpan.FromMilliseconds(game.Speed));
 
     while (game.State == GameState.Playing)
     {
         game.Listen();
     }
 
-    timer.Change(Timeout.Infinite, Timeout.Infinite);
+    _ = timer.Change(Timeout.Infinite, Timeout.Infinite);
 
     Console.SetCursorPosition(0, 2);
     Console.WriteLine("To restart the game press any key \nTo close press SPACE BAR");
