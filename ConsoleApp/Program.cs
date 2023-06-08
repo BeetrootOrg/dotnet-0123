@@ -9,14 +9,14 @@ int height = 0;
 bool isValid = false;
 while (!isValid)
 {
-    Console.Write("Please enter the width of field [5-50] (recommendated is 10): ");
-    if (!int.TryParse(Console.ReadLine(), out width) || width < 5 || width > 50)
+    Console.Write("Please enter the width of field [5-20] (recommendated is 10): ");
+    if (!int.TryParse(Console.ReadLine(), out width) || width < 5 || width > 20)
     {
         Console.Clear();
         continue;
     }
-    Console.Write("Enter the height of field [5-50] (recommendated is 10) and BE READY: ");
-    if (!int.TryParse(Console.ReadLine(), out height) || height < 5 || height > 50)
+    Console.Write("Enter the height of field [5-20] (recommendated is 10) and BE READY: ");
+    if (!int.TryParse(Console.ReadLine(), out height) || height < 5 || height > 20)
     {
         Console.Clear();
         continue;

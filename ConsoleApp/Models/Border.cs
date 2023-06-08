@@ -16,9 +16,9 @@ namespace ConsoleApp.Models
             {
                 throw new InvalidBorderSizeException("Minimum width/height of field can be less than 5.");
             }
-            if (width > 50 || height > 50)
+            if (width > 20 || height > 20)
             {
-                throw new InvalidBorderSizeException("Maximum width/height of field can be more than 50.");
+                throw new InvalidBorderSizeException("Maximum width/height of field can be more than 20.");
             }
 
             Width = width;
