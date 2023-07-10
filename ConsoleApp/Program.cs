@@ -1,31 +1,105 @@
-﻿int a = 42;
-int b = 41;
-int c = a + b;
-Console.WriteLine(a + b);
-Console.WriteLine(c);
+﻿// Console.WriteLine("Enter the X value:");
+// bool successX = int.TryParse(Console.ReadLine(), out int X);
+// Console.WriteLine("Enter the Y value:");
+// bool successY = int.TryParse(Console.ReadLine(), out int Y);
+// if(successX && successY)
+// {
+//     Console.WriteLine($"You entered this values ({X} , {Y})");
+//     return;
+// }
+// Console.WriteLine("Invalid input");
 
-Console.WriteLine(6 / 3);
-Console.WriteLine(7 / 3);
-Console.WriteLine(8 / 3);
-Console.WriteLine(9 / 3);
+// int min, max;
+// if(X > Y)
+// {
+//     max = X;
+//     min = Y;
+    
+// }
+// else
+// {
+//     max = Y;
+//     min = X;
+// }
+// int sum = 0;
+// for(int i = min; i <= max;  i++)
+// {
+//     sum += i;
+// }
+// Console.WriteLine(sum);
+// int x = 3;
+// int y = 4;
+// Console.WriteLine($"-6*x^3+5*x^2-10*x+15 = {-6 * Math.Pow(x , 3) + 5 * Math.Pow(x , 2) - 10 * x + 15}");
+// Console.WriteLine(Math.Max(x , y));
+// Console.WriteLine(Math.Min(x , y));
+// Console.WriteLine(Math.Abs(x));
+// float i = 4F;
+// decimal j = 5;
+// double k = 6;
+// Console.WriteLine(j ); 
 
-Console.WriteLine("Result of %");
-Console.WriteLine(6 % 3);
-Console.WriteLine(7 % 3);
-Console.WriteLine(8 % 3);
-Console.WriteLine(9 % 3);
+DateTime dateTime1 = new DateTime(2024, 01, 01);
+DateTime dateTime2 = DateTime.Now;
+Console.WriteLine($"Days left to New Year {dateTime1 - dateTime2}");
+Console.WriteLine($"Days passed fron New Year {dateTime2.DayOfYear}");
 
-Console.WriteLine("COMPARISON");
-int i1 = 42;
-int i2 = 42;
-int i3 = 43;
-Console.WriteLine($"i1 == i2 = {i1 == i2}");
-Console.WriteLine($"i1 == i3 = {i1 == i3}");
-Console.WriteLine($"i1 != i2 = {i1 != i2}");
-Console.WriteLine($"i1 != i3 = {i1 != i3}");
-int x = 2;
-int y = 4;
-Console.WriteLine($"-6*x^3+5*x^2-10*x+15 = {-6 * Math.Pow(x, 3) + 5 * Math.Pow(x, 2) - 10 * x + 15} ");
-Console.WriteLine($"abs(x)*sin(x) = {Math.Abs(x) * Math.Sin(x)}");
-Console.WriteLine($"2*pi*x = {2 * Math.PI * x}");
-Console.WriteLine($"max(x,y) = {Math.Max(x, y)}");
+// int sum = 0;
+// for(int l = 0; l <= 42; l++)
+// {
+//     if(l % 2 == 1)
+//     {
+//         continue;
+//     }
+
+//     sum += l;
+// }
+// Console.WriteLine(sum);
+
+Console.WriteLine("Enter the number");
+string? input = Console.ReadLine();
+int num1 = int.Parse(input);
+
+DateTime currentDateTime = DateTime.Now;
+string formattedDateTime = currentDateTime.ToString("MM/dd/yyyy");
+Console.WriteLine("Current date and time: " + formattedDateTime);
+
+Console.WriteLine("Enter x");
+input = Console.ReadLine();
+bool success = int.TryParse(input, out int x);
+{
+    if(!success)
+    {
+        Console.WriteLine("Invalid input"); 
+        return;
+    }
+}
+
+Console.WriteLine("Enter y");
+input = Console.ReadLine();
+bool success1 = int.TryParse(input, out int y);
+{
+    if(!success1)
+    {
+        Console.WriteLine("Invalid input");
+        return;
+    }
+}
+
+int min , max;
+if (x > y)
+{
+    max = x;
+    min = y;
+}
+else
+{
+    max = y;
+    min = x;
+}
+
+int sum = 0;
+for(int i = min; i <= max; i++)
+{
+    sum += i;
+}
+Console.WriteLine(sum);
