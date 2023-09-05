@@ -15,6 +15,7 @@ namespace ConsoleApp
             FirstName = firtsName;
             LastName = lastName;
             Username = username;
+            Email = email;
             Position = position;
             Salary = salary;
         }
