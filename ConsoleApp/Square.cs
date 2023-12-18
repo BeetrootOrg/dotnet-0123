@@ -2,43 +2,27 @@ namespace Geometry
 {
     public class Square : Figures
     {
-        private double _a;
-        public override double Perimeter
-        {
-            get => _a * 4;
-        }
-        public override double Area
-        {
-            get => Math.Pow(_a, 2);
-        }
+        private readonly double _a;
         public Square(double a)
         {
-            if( a < 0)
-            {
-                throw new ArgumentException("The value is incorrectly");
-            }
             _a = a;
             Type = "Square";
             SidesNumber = 4;
         }
-        public override string ToString()
+
+        public override double Perimeter()
         {
-            return $"Type: {Type}  Area: {Area}  Perimeter: {Perimeter}  SidesNumber: {SidesNumber}";
+            return _a * 4;
         }
 
-        public override bool Equals(object obj)
+        public override double Area()
         {
-            return obj is Square square &&
-            base.Equals(obj) &&
-            Type == square.Type &&
-            Area == square.Area &&
-            Perimeter == square.Perimeter &&
-            SidesNumber == square.SidesNumber;
+            return Math.Pow(_a, 2);
         }
 
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(base.GetHashCode());
-        }
+        // public override string ToString()
+        // {
+        //     return base.ToString();
+        // }
     }
 }

@@ -2,10 +2,16 @@ namespace Geometry
 {
     public class Figures
     {
-        protected string Type {get; init;}
-        public virtual double Area{get; set;}
-        public virtual double Perimeter{get; init;}
-        protected int SidesNumber{get; init;}
+        public string Type {get; init;}
+        public int SidesNumber {get; init;}
+        public virtual double Area() 
+        {
+            return 0;
+        }
+        public virtual double Perimeter()
+        {
+            return 0;
+        }
 
         public void PrintInfo()
         {
@@ -14,21 +20,21 @@ namespace Geometry
 
         public override string ToString()
         {
-            return $"Type: {Type}  Area: {Area}  Perimeter: {Perimeter}  SidesNumber: {SidesNumber}";
+            return $"Type: {Type}, Area: {Area()}, Perimeter: {Perimeter()}, Sides:{SidesNumber}";
         }
 
         public override bool Equals(object obj)
         {
             return obj is Figures figures &&
             Type == figures.Type &&
-            Area == figures.Area &&
-            Perimeter == figures.Perimeter &&
-            SidesNumber == figures.SidesNumber;
+            SidesNumber == figures.SidesNumber &&
+            Perimeter() == figures.Perimeter() &&
+            Area() == figures.Area();
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Type, Area, Perimeter, SidesNumber);
+            return HashCode.Combine(Type, SidesNumber, Perimeter(), Area());
         }
     }
 }

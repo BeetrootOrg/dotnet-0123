@@ -1,55 +1,54 @@
+
 namespace Geometry
 {
     public class Triangle : Figures
     {
-        private double _a;
-        private double _b;
-        private double _c;
-
-         public override double Perimeter
-        {
-            get => _a + _b + _c;
-        }
-
-        public override double Area
-        {
-            get 
-            {
-               double _p = Perimeter / 2;
-               return Area = Math.Sqrt(_p*(_p - _a)*(_p - _b)*(_p - _c));
-            }
-        }
+        private readonly double _a;
+        private readonly double _b;
+        private readonly double _c;
         public Triangle(double a, double b, double c)
         {
             if (((a + b) < c) || ((b + c) < a) || ((a + c) < b) || (a < 0) || (b < 0) || (c < 0))
             {
-                throw new ArgumentException("The value is incorrectly");
+                throw new ArgumentException("The sides are incorrect!");
             }
-                _a = a;
-                _b = b;
-                _c = c;
-                Type = "Triangle";
-                SidesNumber = 3;  
+
+            _a = a;
+            _b = b;
+            _c = c;
+            Type = "Triangle";
+            SidesNumber = 3;
         }
 
-        public override string ToString()
+        public override double Perimeter()
         {
-            return $"Type: {Type}  Area: {Area}  Perimeter: {Perimeter}  SidesNumber: {SidesNumber}";
+            return _a + _b + _c;
         }
+
+        public override double Area()
+        {
+            double _p = Perimeter() / 2;
+            return Math.Sqrt(_p*(_p - _a)*(_p - _b)*(_p - _c));
+        }
+        // public override string ToString()
+        // {
+        //     return $"Type: {Type}, Area: {Area()}, Perimeter: {Perimeter()}, SidesNumber:{SidesNumber}";
+        // }
 
         public override bool Equals(object obj)
         {
-            return obj is Triangle triangle &&
+           return obj is Triangle triangle &&
             base.Equals(obj) &&
-            Type == triangle.Type &&
-            Area == triangle.Area &&
-            Perimeter == triangle.Perimeter &&
-            SidesNumber == triangle.SidesNumber;
+            _a == triangle._a &&
+            _b == triangle._b &&
+            _c == triangle._c; 
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(base.GetHashCode());
+            return HashCode.Combine(base.GetHashCode(), _a, _b, _c);
         }
+
+
     }
 }
