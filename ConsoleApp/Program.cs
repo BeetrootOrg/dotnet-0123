@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
+using System.Reflection.Metadata;
 
 namespace ConsoleApp
 {
@@ -159,4 +160,67 @@ namespace Name
     }
 }
 
+namespace Name
+{
+    public interface IDocument
+    {
+        void Type();
+    }
 
+    public class PDF : IDocument
+    {
+        public void Type()
+        {
+            Console.WriteLine("Type of document - PDF");
+        }
+    }
+
+    public class Word : IDocument
+    {
+        public void Type()
+        {
+            Console.WriteLine("Type of document - Word");
+        }
+    }
+    public class Excel : IDocument
+    {
+        public void Type()
+        {
+            Console.WriteLine("Type of document - Excel");
+        }
+    }
+
+    abstract class DocumentProcessor
+    {
+        public void PlanDocument()
+        {
+            IDocument document = CreateDocument();
+            document.Type();
+        }
+        
+        protected abstract IDocument CreateDocument();
+    }
+
+    class PagePDF : DocumentProcessor
+    {
+        protected override IDocument CreateDocument()
+        {
+            return new PDF();
+        }
+    }
+
+    class PageWord : DocumentProcessor
+    {
+        protected override IDocument CreateDocument()
+        {
+            return new Word();
+        }
+    }
+    class PageExcel : DocumentProcessor
+    {
+        protected override IDocument CreateDocument()
+        {
+            return new Excel();
+        }
+    }
+}
