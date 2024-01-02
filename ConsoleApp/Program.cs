@@ -304,5 +304,16 @@ namespace Name
             return new Juice();
         }
     }
+    
+}
+
+class Program 
+{
+    static void Main()
+    {
+        int i = 42;       // значимий тип
+        object obj = i;   // boxing: int перетворено в object
+        int j = (int)obj; // unboxing: object перетворено в int
+    }
 }
 
