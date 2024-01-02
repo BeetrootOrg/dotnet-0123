@@ -224,3 +224,85 @@ namespace Name
         }
     }
 }
+
+namespace Name
+{
+    // Абстрактний клас для гарячого напою
+    public abstract class HotDrink
+    {
+    public abstract void Prepare();
+    }
+
+    // Конкретний продукт - чай
+    public class Tea : HotDrink
+    {
+        public override void Prepare()
+        {
+            Console.WriteLine("Prepare Tea");
+        }
+    }
+
+    // Конкретний продукт - кава
+    public class Coffee : HotDrink
+    {
+        public override void Prepare()
+        {
+            Console.WriteLine("Prepare Coffee");
+        }
+    }
+
+    // Абстрактний клас для холодного напою
+    public abstract class ColdDrink
+    {
+        public abstract void Serve();
+    }
+
+    // Конкретний продукт - сік
+    public class Juice : ColdDrink
+    {
+        public override void Serve()
+        {
+            Console.WriteLine("Serve Juice");
+        }
+    }
+
+    public class Lemonade : ColdDrink
+    {
+        public override void Serve()
+        {
+            Console.WriteLine("Serve Lemonade");
+        }
+    }
+
+    public abstract class AbstractFactory
+    {
+        public abstract HotDrink CreateHotDrink();
+        public abstract ColdDrink CreateColdDrink();
+    }
+
+    public class MenuDrink1 : AbstractFactory
+    {
+        public override HotDrink CreateHotDrink()
+        {
+            return new Tea();
+        }
+        public override ColdDrink CreateColdDrink()
+        {
+            return new Lemonade();
+        }
+    }
+
+    public class MenuDrink2 : AbstractFactory
+    {
+        public override HotDrink CreateHotDrink()
+        {
+            return new Coffee();
+        }
+
+        public override ColdDrink CreateColdDrink()
+        {
+            return new Juice();
+        }
+    }
+}
+
