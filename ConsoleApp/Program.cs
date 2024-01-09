@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
 using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 
 namespace ConsoleApp
 {
@@ -314,6 +315,33 @@ class Program
         int i = 42;       // значимий тип
         object obj = i;   // boxing: int перетворено в object
         int j = (int)obj; // unboxing: object перетворено в int
+    }
+}
+
+
+// Generic
+
+namespace Name
+{
+    public class Pair<T>
+    {
+        public T Item1 { get; set; }
+        public T Item2 { get; set; }
+
+        public Pair(T item1, T item2)
+        {
+            Item1 = item1;
+            Item2 = item2;
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            Pair<int> intPair = new Pair<int>(10, 20);
+            Pair<string> stringPair = new Pair<string>("Hello", "World");
+        }
     }
 }
 
