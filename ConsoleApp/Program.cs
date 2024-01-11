@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
+using System.Linq.Expressions;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 
@@ -308,15 +309,15 @@ namespace Name
     
 }
 
-class Program 
-{
-    static void Main()
-    {
-        int i = 42;       // значимий тип
-        object obj = i;   // boxing: int перетворено в object
-        int j = (int)obj; // unboxing: object перетворено в int
-    }
-}
+// class Program 
+// {
+//     static void Main()
+//     {
+//         int i = 42;       // значимий тип
+//         object obj = i;   // boxing: int перетворено в object
+//         int j = (int)obj; // unboxing: object перетворено в int
+//     }
+// }
 
 
 // Generic
@@ -335,13 +336,74 @@ namespace Name
         }
     }
 
-    class Program
+    // class Program
+    // {
+    //     static void Main()
+    //     {
+    //         Pair<int> intPair = new Pair<int>(10, 20);
+    //         Pair<string> stringPair = new Pair<string>("Hello", "World");
+    //     }
+    // }
+}
+
+namespace Generics
+{
+    public class Container<T>
     {
-        static void Main()
+        public T Value1 {get; set;}
+
+        public void Add(T item)
         {
-            Pair<int> intPair = new Pair<int>(10, 20);
-            Pair<string> stringPair = new Pair<string>("Hello", "World");
+            Value1 = item;
+        }
+        public void Remove()
+        {
+            
+        }
+        public T Get()
+        {
+            return Value1;
         }
     }
 }
 
+
+namespace Generics
+{
+    public class Pair<T1, T2>
+    {
+        private T1 _item1;
+        private T2 _item2;
+
+        public Pair(T1 item1, T2 item2)
+        {
+            _item1 = item1;
+            _item2 = item2;
+        }
+        public void Swap(Pair<T1, T2> otherPair)
+        {
+            (this._item1, this._item2, otherPair._item1, otherPair._item2) =
+                (otherPair._item1, otherPair._item2, this._item1, this._item2);
+        }
+
+        public override string ToString()
+        {
+            return $"{_item1}, {_item2}";
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            Pair<int, string> pair1 = new Pair<int, string>(42, "hello");
+            Pair<int, string> pair2 = new Pair<int, string>(100, "world");
+
+            pair1.Swap(pair2);
+
+            Console.WriteLine(pair1.ToString()); // виведе "100, world"
+            Console.WriteLine(pair2.ToString()); // виведе "42, hello"
+        }
+    }
+
+}
