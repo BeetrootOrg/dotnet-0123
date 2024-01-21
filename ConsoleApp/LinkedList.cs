@@ -2,113 +2,50 @@ using System;
 
 namespace ConsoleApp
 {
-    public class LinkedList<T>
+    public class Stack<T>
     {
-        private class Element
+        private class StackItem
         {
             public T Value { get; init; }
-            public Element Next { get; set; }
+            public StackItem Next { get; init; }
         }
 
-        private Element _head;
-        public int Length { get; private set; }
+        private StackItem _stackItem;
+        public int Count { get; private set; }
 
-        public void Add(T item)
+        public void Push(T value)
         {
-            Insert(item, Length);
-        }
-
-        public void Clear()
-        {
-            _head = null;
-            Length = 0;
-        }
-
-        public void RemoveAt(int position)
-        {
-            if (position < 0 || position >= Length)
+            StackItem stackItem = new()
             {
-                throw new IndexOutOfRangeException($"Index is outside of list");
-            }
-
-            if (position == 0)
-            {
-                _head = _head.Next;
-            }
-            else
-            {
-                Element current = _head;
-                for (int i = 0; i < position - 1; i++)
-                {
-                    current = current.Next;
-                }
-
-                current.Next = current.Next.Next;
-            }
-
-            --Length;
-        }
-
-        public void Insert(T item, int position)
-        {
-            if (position < 0 || position > Length)
-            {
-                throw new IndexOutOfRangeException($"Index is outside of list");
-            }
-
-            Element element = new()
-            {
-                Value = item
+                Value = value,
+                Next = _stackItem
             };
-
-            if (position == 0)
-            {
-                element.Next = _head;
-                _head = element;
-            }
-            else
-            {
-                Element current = _head;
-                for (int i = 0; i < position - 1; i++)
-                {
-                    current = current.Next;
-                }
-
-                element.Next = current.Next;
-                current.Next = element;
-            }
-
-            ++Length;
+            _stackItem = stackItem;
+            ++Count;
         }
 
-        public T[] ToArray()
+        public T Pop()
         {
-            T[] arr = new T[Length];
-
-            Element current = _head;
-            for (int i = 0; i < Length; i++)
+            if (Count == 0)
             {
-                arr[i] = current.Value;
-                current = current.Next;
+                throw new InvalidOperationException("Stack is empty");
             }
 
-            return arr;
+            StackItem item = _stackItem;
+            _stackItem = _stackItem.Next;
+            --Count;
+
+            return item.Value;
         }
 
-        public void CopyTo(T[] arr)
+        public T Peek()
         {
-            int length = Length < arr.Length ? Length : arr.Length;
-            Element current = _head;
-            for (int i = 0; i < length; i++)
+            if (Count == 0)
             {
-                arr[i] = current.Value;
-                current = current.Next;
+                throw new InvalidOperationException("Stack is empty");
             }
-        }
 
-        public override string ToString()
-        {
-            return string.Join(", ", ToArray());
+            return _stackItem.Value;
         }
     }
 }

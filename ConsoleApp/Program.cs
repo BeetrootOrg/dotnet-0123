@@ -1,341 +1,338 @@
-﻿using System.ComponentModel;
-using System.Drawing;
-using System.Linq.Expressions;
-using System.Reflection.Metadata;
-using System.Runtime.CompilerServices;
-using System.Xml;
+﻿using ConsoleApp;
+using System.Linq;
+using System;
 
-namespace ConsoleApp
-{
-    public interface IElectronicDevice
-    {
-        void TurnOn();
-        void TurnOff();
-        string GetInfo();
-    }
-
-    public class Television : IElectronicDevice
-    {
-        public string Brand { get; set; }
-        public Television(string brand)
-        {
-            Brand = brand;
-        }
-        public void ChangeChannel(){}
-        public void TurnOff(){}
-        public void TurnOn(){}
-        public string GetInfo()
-        {
-            return Brand;
-        }
-    }
-
-    public class Smartphone : IElectronicDevice
-    {
-        public string Manufacturer { get; set; }
-        public Smartphone(string manufacturer)
-        {
-            Manufacturer = manufacturer;
-        }
-        public void MakeCall(){}
-        public void TurnOff(){}
-        public void TurnOn(){}
-        public string GetInfo()
-        {
-            return Manufacturer;
-        }
-
-    }
-}
-
-
-namespace Name
-{
-    public interface IShape
-    {
-        double CalculateArea();
-    }
-
-    public interface IVolume
-    {
-        double CalculateVolume();
-    }
-
-    public class ShapeCalculator
-    {
-        public void PrintArea(IShape shape)
-        {
-            double area = shape.CalculateArea();
-            Console.WriteLine($"Area: {area}");
-        }
-
-        public void PrintVolume(IVolume volume)
-        {
-            double number = volume.CalculateVolume();
-            Console.WriteLine($"Volume: {number}");
-        }
-    }
-
-    public class Circle : IShape, IVolume
-    {
-        public double Radius {get;set;}
-        public Circle(double radius)
-        {
-            Radius = radius;
-        }
-
-        public double CalculateArea()
-        {
-            return Math.PI * Math.Pow(Radius, 2);
-        }
-
-        public double CalculateVolume()
-        {
-            return 0;
-        }
-    }
-
-    public class Rectangle : IShape, IVolume
-    {
-        public double Width {get;set;}
-        public double Height {get;set;}
-
-        public Rectangle(double width, double height)
-        {
-            Width = width;
-            Height = height;
-        }
-
-        public double CalculateArea()
-        {
-            return Width * Height;
-        }
-
-        public double CalculateVolume()
-        {
-            return 0;
-        }
-    }
-
-    public class Triangle : IShape, IVolume
-    {
-        public double A {get;set;}
-        public double B {get;set;}
-        public double C {get;set;}
-        public double H {get;set;}
-
-        public Triangle(double a, double b, double c, double h)
-        {
-            A = a;
-            B = b;
-            C = c;
-            H = h;
-        }
-
-        public double CalculateArea()
-        {
-            double P = (A + B + C)/2;
-            return Math.Sqrt(P * (P - A) * (P - B) * (P - C));
-        }
-
-        public double CalculateVolume()
-        {
-            return 0;
-        }
-    }
-
-    public class Cuboid : IVolume
-    {
-        public double Width {get;set;}
-        public double Height {get;set;}
-        public double Length {get;set;}
-
-        public Cuboid(double width, double height, double length)
-        {
-            Width = width;
-            Height = height;
-            Length = length;
-        }
-        public double CalculateVolume()
-        {
-            return Width * Height * Length;
-        }
-    }
-}
-
-namespace Name
-{
-    public interface IDocument
-    {
-        void Type();
-    }
-
-    public class PDF : IDocument
-    {
-        public void Type()
-        {
-            Console.WriteLine("Type of document - PDF");
-        }
-    }
-
-    public class Word : IDocument
-    {
-        public void Type()
-        {
-            Console.WriteLine("Type of document - Word");
-        }
-    }
-    public class Excel : IDocument
-    {
-        public void Type()
-        {
-            Console.WriteLine("Type of document - Excel");
-        }
-    }
-
-    abstract class DocumentProcessor
-    {
-        public void PlanDocument()
-        {
-            IDocument document = CreateDocument();
-            document.Type();
-        }
-        
-        protected abstract IDocument CreateDocument();
-    }
-
-    class PagePDF : DocumentProcessor
-    {
-        protected override IDocument CreateDocument()
-        {
-            return new PDF();
-        }
-    }
-
-    class PageWord : DocumentProcessor
-    {
-        protected override IDocument CreateDocument()
-        {
-            return new Word();
-        }
-    }
-    class PageExcel : DocumentProcessor
-    {
-        protected override IDocument CreateDocument()
-        {
-            return new Excel();
-        }
-    }
-}
-
-namespace Name
-{
-    // Абстрактний клас для гарячого напою
-    public abstract class HotDrink
-    {
-    public abstract void Prepare();
-    }
-
-    // Конкретний продукт - чай
-    public class Tea : HotDrink
-    {
-        public override void Prepare()
-        {
-            Console.WriteLine("Prepare Tea");
-        }
-    }
-
-    // Конкретний продукт - кава
-    public class Coffee : HotDrink
-    {
-        public override void Prepare()
-        {
-            Console.WriteLine("Prepare Coffee");
-        }
-    }
-
-    // Абстрактний клас для холодного напою
-    public abstract class ColdDrink
-    {
-        public abstract void Serve();
-    }
-
-    // Конкретний продукт - сік
-    public class Juice : ColdDrink
-    {
-        public override void Serve()
-        {
-            Console.WriteLine("Serve Juice");
-        }
-    }
-
-    public class Lemonade : ColdDrink
-    {
-        public override void Serve()
-        {
-            Console.WriteLine("Serve Lemonade");
-        }
-    }
-
-    public abstract class AbstractFactory
-    {
-        public abstract HotDrink CreateHotDrink();
-        public abstract ColdDrink CreateColdDrink();
-    }
-
-    public class MenuDrink1 : AbstractFactory
-    {
-        public override HotDrink CreateHotDrink()
-        {
-            return new Tea();
-        }
-        public override ColdDrink CreateColdDrink()
-        {
-            return new Lemonade();
-        }
-    }
-
-    public class MenuDrink2 : AbstractFactory
-    {
-        public override HotDrink CreateHotDrink()
-        {
-            return new Coffee();
-        }
-
-        public override ColdDrink CreateColdDrink()
-        {
-            return new Juice();
-        }
-    }
-    
-}
-
-// class Program 
+// namespace ConsoleApp
 // {
-//     static void Main()
+//     public interface IElectronicDevice
 //     {
-//         int i = 42;       // значимий тип
-//         object obj = i;   // boxing: int перетворено в object
-//         int j = (int)obj; // unboxing: object перетворено в int
+//         void TurnOn();
+//         void TurnOff();
+//         string GetInfo();
+//     }
+
+//     public class Television : IElectronicDevice
+//     {
+//         public string Brand { get; set; }
+//         public Television(string brand)
+//         {
+//             Brand = brand;
+//         }
+//         public void ChangeChannel(){}
+//         public void TurnOff(){}
+//         public void TurnOn(){}
+//         public string GetInfo()
+//         {
+//             return Brand;
+//         }
+//     }
+
+//     public class Smartphone : IElectronicDevice
+//     {
+//         public string Manufacturer { get; set; }
+//         public Smartphone(string manufacturer)
+//         {
+//             Manufacturer = manufacturer;
+//         }
+//         public void MakeCall(){}
+//         public void TurnOff(){}
+//         public void TurnOn(){}
+//         public string GetInfo()
+//         {
+//             return Manufacturer;
+//         }
+
 //     }
 // }
 
 
-// Generic
+// namespace Name
+// {
+//     public interface IShape
+//     {
+//         double CalculateArea();
+//     }
 
-namespace Name
-{
-    public class Pair<T>
-    {
-        public T Item1 { get; set; }
-        public T Item2 { get; set; }
+//     public interface IVolume
+//     {
+//         double CalculateVolume();
+//     }
 
-        public Pair(T item1, T item2)
-        {
-            Item1 = item1;
-            Item2 = item2;
-        }
-    }
+//     public class ShapeCalculator
+//     {
+//         public void PrintArea(IShape shape)
+//         {
+//             double area = shape.CalculateArea();
+//             Console.WriteLine($"Area: {area}");
+//         }
+
+//         public void PrintVolume(IVolume volume)
+//         {
+//             double number = volume.CalculateVolume();
+//             Console.WriteLine($"Volume: {number}");
+//         }
+//     }
+
+//     public class Circle : IShape, IVolume
+//     {
+//         public double Radius {get;set;}
+//         public Circle(double radius)
+//         {
+//             Radius = radius;
+//         }
+
+//         public double CalculateArea()
+//         {
+//             return Math.PI * Math.Pow(Radius, 2);
+//         }
+
+//         public double CalculateVolume()
+//         {
+//             return 0;
+//         }
+//     }
+
+//     public class Rectangle : IShape, IVolume
+//     {
+//         public double Width {get;set;}
+//         public double Height {get;set;}
+
+//         public Rectangle(double width, double height)
+//         {
+//             Width = width;
+//             Height = height;
+//         }
+
+//         public double CalculateArea()
+//         {
+//             return Width * Height;
+//         }
+
+//         public double CalculateVolume()
+//         {
+//             return 0;
+//         }
+//     }
+
+//     public class Triangle : IShape, IVolume
+//     {
+//         public double A {get;set;}
+//         public double B {get;set;}
+//         public double C {get;set;}
+//         public double H {get;set;}
+
+//         public Triangle(double a, double b, double c, double h)
+//         {
+//             A = a;
+//             B = b;
+//             C = c;
+//             H = h;
+//         }
+
+//         public double CalculateArea()
+//         {
+//             double P = (A + B + C)/2;
+//             return Math.Sqrt(P * (P - A) * (P - B) * (P - C));
+//         }
+
+//         public double CalculateVolume()
+//         {
+//             return 0;
+//         }
+//     }
+
+//     public class Cuboid : IVolume
+//     {
+//         public double Width {get;set;}
+//         public double Height {get;set;}
+//         public double Length {get;set;}
+
+//         public Cuboid(double width, double height, double length)
+//         {
+//             Width = width;
+//             Height = height;
+//             Length = length;
+//         }
+//         public double CalculateVolume()
+//         {
+//             return Width * Height * Length;
+//         }
+//     }
+// }
+
+// namespace Name
+// {
+//     public interface IDocument
+//     {
+//         void Type();
+//     }
+
+//     public class PDF : IDocument
+//     {
+//         public void Type()
+//         {
+//             Console.WriteLine("Type of document - PDF");
+//         }
+//     }
+
+//     public class Word : IDocument
+//     {
+//         public void Type()
+//         {
+//             Console.WriteLine("Type of document - Word");
+//         }
+//     }
+//     public class Excel : IDocument
+//     {
+//         public void Type()
+//         {
+//             Console.WriteLine("Type of document - Excel");
+//         }
+//     }
+
+//     abstract class DocumentProcessor
+//     {
+//         public void PlanDocument()
+//         {
+//             IDocument document = CreateDocument();
+//             document.Type();
+//         }
+        
+//         protected abstract IDocument CreateDocument();
+//     }
+
+//     class PagePDF : DocumentProcessor
+//     {
+//         protected override IDocument CreateDocument()
+//         {
+//             return new PDF();
+//         }
+//     }
+
+//     class PageWord : DocumentProcessor
+//     {
+//         protected override IDocument CreateDocument()
+//         {
+//             return new Word();
+//         }
+//     }
+//     class PageExcel : DocumentProcessor
+//     {
+//         protected override IDocument CreateDocument()
+//         {
+//             return new Excel();
+//         }
+//     }
+// }
+
+// namespace Name
+// {
+//     // Абстрактний клас для гарячого напою
+//     public abstract class HotDrink
+//     {
+//     public abstract void Prepare();
+//     }
+
+//     // Конкретний продукт - чай
+//     public class Tea : HotDrink
+//     {
+//         public override void Prepare()
+//         {
+//             Console.WriteLine("Prepare Tea");
+//         }
+//     }
+
+//     // Конкретний продукт - кава
+//     public class Coffee : HotDrink
+//     {
+//         public override void Prepare()
+//         {
+//             Console.WriteLine("Prepare Coffee");
+//         }
+//     }
+
+//     // Абстрактний клас для холодного напою
+//     public abstract class ColdDrink
+//     {
+//         public abstract void Serve();
+//     }
+
+//     // Конкретний продукт - сік
+//     public class Juice : ColdDrink
+//     {
+//         public override void Serve()
+//         {
+//             Console.WriteLine("Serve Juice");
+//         }
+//     }
+
+//     public class Lemonade : ColdDrink
+//     {
+//         public override void Serve()
+//         {
+//             Console.WriteLine("Serve Lemonade");
+//         }
+//     }
+
+//     public abstract class AbstractFactory
+//     {
+//         public abstract HotDrink CreateHotDrink();
+//         public abstract ColdDrink CreateColdDrink();
+//     }
+
+//     public class MenuDrink1 : AbstractFactory
+//     {
+//         public override HotDrink CreateHotDrink()
+//         {
+//             return new Tea();
+//         }
+//         public override ColdDrink CreateColdDrink()
+//         {
+//             return new Lemonade();
+//         }
+//     }
+
+//     public class MenuDrink2 : AbstractFactory
+//     {
+//         public override HotDrink CreateHotDrink()
+//         {
+//             return new Coffee();
+//         }
+
+//         public override ColdDrink CreateColdDrink()
+//         {
+//             return new Juice();
+//         }
+//     }
+    
+// }
+
+// // class Program 
+// // {
+// //     static void Main()
+// //     {
+// //         int i = 42;       // значимий тип
+// //         object obj = i;   // boxing: int перетворено в object
+// //         int j = (int)obj; // unboxing: object перетворено в int
+// //     }
+// // }
+
+
+// // Generic
+
+// namespace Name
+// {
+//     public class Pair<T>
+//     {
+//         public T Item1 { get; set; }
+//         public T Item2 { get; set; }
+
+//         public Pair(T item1, T item2)
+//         {
+//             Item1 = item1;
+//             Item2 = item2;
+//         }
+//     }
 
     // class Program
     // {
@@ -345,7 +342,7 @@ namespace Name
     //         Pair<string> stringPair = new Pair<string>("Hello", "World");
     //     }
     // }
-}
+//}
 
 // namespace Generics
 // {
@@ -483,85 +480,85 @@ namespace Name
 //     }
 // }
 
+            // Stack<int> intStack = new Stack<int>();
+            // intStack.Push(1);
+            // intStack.Push(2);
+            // intStack.Push(3);
+            // intStack.Pop();
 
-namespace Name
+            // Console.WriteLine("Current Stack:");
+
+            // while (intStack.Count > 0)
+            // {
+            //     Console.WriteLine($"Peek: {intStack.Peek()}");
+            //     Console.WriteLine($"Pop: {intStack.Pop()}");
+            // }
+
+            // Stack<string> stringStack = new Stack<string>();
+            // stringStack.Push("Hello");
+            // stringStack.Push("World");
+            // stringStack.Push("!");
+
+            // Console.WriteLine("\nCurrent Stack:");
+
+            // while (stringStack.Count > 0)
+            // {
+            //     Console.WriteLine($"Peek: {stringStack.Peek()}");
+            //     Console.WriteLine($"Pop: {stringStack.Pop()}");
+            // }
+
+
+namespace Math
 {
-    public class Stack<T>
+    public class MinMaxFinder<T>
     {
-        private class StackItem
+        public void FindMin(T[] array)
         {
-            public T Value { get; init; }
-            public StackItem Next { get; init; }
+            T min = array.Min();
         }
 
-        private StackItem _stackItem;
-        public int Count { get; private set; }
-
-        public void Push(T value)
+        public void FindMax(T[] array)
         {
-            StackItem stackItem = new()
-            {
-                Value = value,
-                Next = _stackItem
-            };
-            _stackItem = stackItem;
-            ++Count;
-        }
-
-        public T Pop()
-        {
-            if (Count == 0)
-            {
-                throw new InvalidOperationException("Stack is empty");
-            }
-
-            StackItem item = _stackItem;
-            _stackItem = _stackItem.Next;
-            --Count;
-
-            return item.Value;
-        }
-
-        public T Peek()
-        {
-            if (Count == 0)
-            {
-                throw new InvalidOperationException("Stack is empty");
-            }
-
-            return _stackItem.Value;
-        }
-    }
-
-    class Program
-    {
-        static void Main()
-        {
-            Stack<int> intStack = new Stack<int>();
-            intStack.Push(1);
-            intStack.Push(2);
-            intStack.Push(3);
-
-            Console.WriteLine("Current Stack:");
-
-            while (intStack.Count > 0)
-            {
-                Console.WriteLine($"Peek: {intStack.Peek()}");
-                Console.WriteLine($"Pop: {intStack.Pop()}");
-            }
-
-            Stack<string> stringStack = new Stack<string>();
-            stringStack.Push("Hello");
-            stringStack.Push("World");
-            stringStack.Push("!");
-
-            Console.WriteLine("\nCurrent Stack:");
-
-            while (stringStack.Count > 0)
-            {
-                Console.WriteLine($"Peek: {stringStack.Peek()}");
-                Console.WriteLine($"Pop: {stringStack.Pop()}");
-            }
+            T max = array.Max();
         }
     }
 }
+public void checkContactLookupForDublicates(Entity importPerson, string policyNumber, string policyId)
+        {
+			UserConnection userConnection = importPerson.UserConnection;
+			string getContact = importPerson.GetTypedColumnValue<string>("TbiPersonsImportContactLookupId");
+			if (getContact.IsEmpty())
+            {
+				string tableNamePersonImport= "TbiPersonsTempImport";
+				EntitySchemaQuery esqResultPersonImport = new EntitySchemaQuery(userConnection.EntitySchemaManager, tableNamePersonImport);
+				esqResultPersonImport.AddColumn("TbiPersonsImportTempPolicyLookup");
+				esqResultPersonImport.AddColumn("TbiInsuredPersonName");
+				esqResultPersonImport.AddColumn("TbiEGN");
+				esqResultPersonImport.AddColumn("TbiBirthdate");
+				esqResultPersonImport.AddColumn("TbiPersonsImportTempGenderLookup");
+
+				var filterGroupImport = new EntitySchemaQueryFilterCollection(esqResultPersonImport, LogicalOperationStrict.And);
+				filterGroupImport.Add(new EntitySchemaQueryFilterCollection(esqResultPersonImport, LogicalOperationStrict.Or) {
+				esqResultPersonImport.CreateFilterWithParameters(FilterComparisonType.Equal, "TbiPersonsImportTempPolicyLookup", policyNumber),
+				esqResultPersonImport.CreateFilterWithParameters(FilterComparisonType.Equal, "TbiPersonsImportTempPolicyLookup", policyId)
+			});
+
+				filterGroupImport.Add(esqResultPersonImport.CreateFilterWithParameters(FilterComparisonType.Equal, "TbiInsuredPersonName", importPerson.GetTypedColumnValue<string>("TbiInsuredPersonName")));
+				filterGroupImport.Add(esqResultPersonImport.CreateFilterWithParameters(FilterComparisonType.Equal, "TbiEGN", importPerson.GetTypedColumnValue<string>("TbiEGN")));
+				filterGroupImport.Add(esqResultPersonImport.CreateFilterWithParameters(FilterComparisonType.Equal, "TbiBirthdate", importPerson.GetTypedColumnValue<DateTime>("TbiBirthdate")));
+				filterGroupImport.Add(esqResultPersonImport.CreateFilterWithParameters(FilterComparisonType.NotEqual, "Id", importPerson.GetTypedColumnValue<Guid>("Id")));
+
+				esqResultPersonImport.Filters.Add(filterGroupImport);
+
+
+				Select getPersonImportTempRecord = new Select(importPerson.UserConnection)
+				//.Column("pit", "TbiPersonsImportTempPolicyLookupId")
+				//.Column("pit", "TbiGroupNumber")
+				.Column("pit", "TbiInsuredPersonName")
+				.Column("pit", "TbiEGN")
+				.Column("pit", "TbiBirthdate")
+				.Column("pit", "TbiPersonsImportTempGenderLookupId")
+				.From("TbiPersonsTempImport").As("pit")
+				.Where("Id").IsEqual(Column.Parameter(importPerson)) as Select;
+			}
+        }
