@@ -1,6 +1,9 @@
 ﻿using ConsoleApp;
 using System.Linq;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using GenericContainer;
 
 // namespace ConsoleApp
 // {
@@ -197,7 +200,7 @@ using System;
 //             IDocument document = CreateDocument();
 //             document.Type();
 //         }
-        
+
 //         protected abstract IDocument CreateDocument();
 //     }
 
@@ -304,7 +307,7 @@ using System;
 //             return new Juice();
 //         }
 //     }
-    
+
 // }
 
 // // class Program 
@@ -334,14 +337,14 @@ using System;
 //         }
 //     }
 
-    // class Program
-    // {
-    //     static void Main()
-    //     {
-    //         Pair<int> intPair = new Pair<int>(10, 20);
-    //         Pair<string> stringPair = new Pair<string>("Hello", "World");
-    //     }
-    // }
+// class Program
+// {
+//     static void Main()
+//     {
+//         Pair<int> intPair = new Pair<int>(10, 20);
+//         Pair<string> stringPair = new Pair<string>("Hello", "World");
+//     }
+// }
 //}
 
 // namespace Generics
@@ -356,7 +359,7 @@ using System;
 //         }
 //         public void Remove()
 //         {
-            
+
 //         }
 //         public T Get()
 //         {
@@ -457,7 +460,7 @@ using System;
 //         }
 //     }
 // }
-        
+
 // namespace Name1
 // {
 //     public class Pair<T>
@@ -480,85 +483,123 @@ using System;
 //     }
 // }
 
-            // Stack<int> intStack = new Stack<int>();
-            // intStack.Push(1);
-            // intStack.Push(2);
-            // intStack.Push(3);
-            // intStack.Pop();
+// Stack<int> intStack = new Stack<int>();
+// intStack.Push(1);
+// intStack.Push(2);
+// intStack.Push(3);
+// intStack.Pop();
 
-            // Console.WriteLine("Current Stack:");
+// Console.WriteLine("Current Stack:");
 
-            // while (intStack.Count > 0)
-            // {
-            //     Console.WriteLine($"Peek: {intStack.Peek()}");
-            //     Console.WriteLine($"Pop: {intStack.Pop()}");
-            // }
+// while (intStack.Count > 0)
+// {
+//     Console.WriteLine($"Peek: {intStack.Peek()}");
+//     Console.WriteLine($"Pop: {intStack.Pop()}");
+// }
 
-            // Stack<string> stringStack = new Stack<string>();
-            // stringStack.Push("Hello");
-            // stringStack.Push("World");
-            // stringStack.Push("!");
+// Stack<string> stringStack = new Stack<string>();
+// stringStack.Push("Hello");
+// stringStack.Push("World");
+// stringStack.Push("!");
 
-            // Console.WriteLine("\nCurrent Stack:");
+// Console.WriteLine("\nCurrent Stack:");
 
-            // while (stringStack.Count > 0)
-            // {
-            //     Console.WriteLine($"Peek: {stringStack.Peek()}");
-            //     Console.WriteLine($"Pop: {stringStack.Pop()}");
-            // }
-
-
-namespace Math
-{
-    public class MinMaxFinder<T>
-    {
-        public void FindMin(T[] array)
-        {
-            T min = array.Min();
-        }
-
-        public void FindMax(T[] array)
-        {
-            T max = array.Max();
-        }
-    }
-}
-public void checkContactLookupForDublicates(Entity importPerson, string policyNumber, string policyId)
-        {
-			UserConnection userConnection = importPerson.UserConnection;
-			string getContact = importPerson.GetTypedColumnValue<string>("TbiPersonsImportContactLookupId");
-			if (getContact.IsEmpty())
-            {
-				string tableNamePersonImport= "TbiPersonsTempImport";
-				EntitySchemaQuery esqResultPersonImport = new EntitySchemaQuery(userConnection.EntitySchemaManager, tableNamePersonImport);
-				esqResultPersonImport.AddColumn("TbiPersonsImportTempPolicyLookup");
-				esqResultPersonImport.AddColumn("TbiInsuredPersonName");
-				esqResultPersonImport.AddColumn("TbiEGN");
-				esqResultPersonImport.AddColumn("TbiBirthdate");
-				esqResultPersonImport.AddColumn("TbiPersonsImportTempGenderLookup");
-
-				var filterGroupImport = new EntitySchemaQueryFilterCollection(esqResultPersonImport, LogicalOperationStrict.And);
-				filterGroupImport.Add(new EntitySchemaQueryFilterCollection(esqResultPersonImport, LogicalOperationStrict.Or) {
-				esqResultPersonImport.CreateFilterWithParameters(FilterComparisonType.Equal, "TbiPersonsImportTempPolicyLookup", policyNumber),
-				esqResultPersonImport.CreateFilterWithParameters(FilterComparisonType.Equal, "TbiPersonsImportTempPolicyLookup", policyId)
-			});
-
-				filterGroupImport.Add(esqResultPersonImport.CreateFilterWithParameters(FilterComparisonType.Equal, "TbiInsuredPersonName", importPerson.GetTypedColumnValue<string>("TbiInsuredPersonName")));
-				filterGroupImport.Add(esqResultPersonImport.CreateFilterWithParameters(FilterComparisonType.Equal, "TbiEGN", importPerson.GetTypedColumnValue<string>("TbiEGN")));
-				filterGroupImport.Add(esqResultPersonImport.CreateFilterWithParameters(FilterComparisonType.Equal, "TbiBirthdate", importPerson.GetTypedColumnValue<DateTime>("TbiBirthdate")));
-				filterGroupImport.Add(esqResultPersonImport.CreateFilterWithParameters(FilterComparisonType.NotEqual, "Id", importPerson.GetTypedColumnValue<Guid>("Id")));
-
-				esqResultPersonImport.Filters.Add(filterGroupImport);
+// while (stringStack.Count > 0)
+// {
+//     Console.WriteLine($"Peek: {stringStack.Peek()}");
+//     Console.WriteLine($"Pop: {stringStack.Pop()}");
+// }
 
 
-				Select getPersonImportTempRecord = new Select(importPerson.UserConnection)
-				//.Column("pit", "TbiPersonsImportTempPolicyLookupId")
-				//.Column("pit", "TbiGroupNumber")
-				.Column("pit", "TbiInsuredPersonName")
-				.Column("pit", "TbiEGN")
-				.Column("pit", "TbiBirthdate")
-				.Column("pit", "TbiPersonsImportTempGenderLookupId")
-				.From("TbiPersonsTempImport").As("pit")
-				.Where("Id").IsEqual(Column.Parameter(importPerson)) as Select;
-			}
-        }
+// namespace Math
+// {
+//     public class MinMaxFinder<T>
+//     {
+//         public void FindMin(T[] array)
+//         {
+//             T min = array.Min();
+//         }
+
+//         public void FindMax(T[] array)
+//         {
+//             T max = array.Max();
+//         }
+//     }
+// }
+
+
+// static void WriteLineElements<T>(IEnumerable<T> collection)
+// {
+//     Console.WriteLine(string.Join(",", collection));
+// }
+
+// public class StudentEnumerable : IEnumerable<int>
+//     {
+//         private readonly IEnumerable<int> _collection;
+
+//         public StudentEnumerable(IEnumerable<int> collection)
+//         {
+//             _collection = collection;
+//         }
+
+//         private class StudentEnumerator : IEnumerator<int>
+//         {
+//             private readonly IEnumerator<int> _enumerator;
+
+//             public StudentEnumerator(IEnumerator<int> enumerator)
+//             {
+//                 _enumerator = enumerator;
+//             }
+
+//             public int Current { get; private set; }
+
+//             object IEnumerator.Current => Current;
+
+//             public void Dispose()
+//             {
+//                 _enumerator.Dispose();
+//             }
+
+//             public bool MoveNext()
+//             {
+//                 return _enumerator.MoveNext();
+//             }
+
+//         public void Reset()
+//             {
+//                 _enumerator.Reset();
+//             }
+//         }
+
+//         public IEnumerator<int> GetEnumerator()
+//         {
+//             return new StudentEnumerator(_collection.GetEnumerator());
+//         }
+
+//         IEnumerator IEnumerable.GetEnumerator()
+//         {
+//             return GetEnumerator();
+//         }
+//     }
+// public class Student : IEnumerable<int>
+// {
+//     public List<int> Grades { get; set; }
+
+//     public Student(List<int> grades)
+//     {
+//         Grades = grades;
+//     }
+
+//     public IEnumerator<int> GetEnumerator()
+//     {
+//         return Grades.GetEnumerator();
+//     }
+
+//     IEnumerator IEnumerable.GetEnumerator()
+//     {
+//         return GetEnumerator();
+//     }
+//}
+
+
+
